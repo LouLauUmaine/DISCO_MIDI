@@ -47,7 +47,7 @@ DMA_HandleTypeDef hdma_spi1_tx;
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
-
+uint8_t TX_Buffer[]; //buffer for i2c data
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,13 +99,30 @@ int main(void)
   MX_I2C1_Init();
   MX_USB_OTG_FS_PCD_Init();
   /* USER CODE BEGIN 2 */
-
+  uint8_t slave_address = 0b01011010;
+  TX_Buffer[0] = 0b01011010; // set slave address to AD0 -- put in header file!
+  HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+  HAL_Delay(100);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    HAL_Delay(100);
+    TX_Buffer[0] = 0b11111111; // send data byte, full VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    HAL_Delay(100);
+
+    TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    HAL_Delay(100);
+    TX_Buffer[0] = 0b10000000; // send data byte, half VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    HAL_Delay(100);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
