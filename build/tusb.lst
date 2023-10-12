@@ -1,0 +1,3565 @@
+ARM GAS  /tmp/ccchXe7g.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"tusb.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.tusb_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	tusb_init
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	tusb_init:
+  27              	.LFB79:
+  28              		.file 1 "tinyusb/src/tusb.c"
+   1:tinyusb/src/tusb.c **** /*
+   2:tinyusb/src/tusb.c ****  * The MIT License (MIT)
+   3:tinyusb/src/tusb.c ****  *
+   4:tinyusb/src/tusb.c ****  * Copyright (c) 2019 Ha Thach (tinyusb.org)
+   5:tinyusb/src/tusb.c ****  *
+   6:tinyusb/src/tusb.c ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   7:tinyusb/src/tusb.c ****  * of this software and associated documentation files (the "Software"), to deal
+   8:tinyusb/src/tusb.c ****  * in the Software without restriction, including without limitation the rights
+   9:tinyusb/src/tusb.c ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  10:tinyusb/src/tusb.c ****  * copies of the Software, and to permit persons to whom the Software is
+  11:tinyusb/src/tusb.c ****  * furnished to do so, subject to the following conditions:
+  12:tinyusb/src/tusb.c ****  *
+  13:tinyusb/src/tusb.c ****  * The above copyright notice and this permission notice shall be included in
+  14:tinyusb/src/tusb.c ****  * all copies or substantial portions of the Software.
+  15:tinyusb/src/tusb.c ****  *
+  16:tinyusb/src/tusb.c ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  17:tinyusb/src/tusb.c ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  18:tinyusb/src/tusb.c ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  19:tinyusb/src/tusb.c ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  20:tinyusb/src/tusb.c ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  21:tinyusb/src/tusb.c ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  22:tinyusb/src/tusb.c ****  * THE SOFTWARE.
+  23:tinyusb/src/tusb.c ****  *
+  24:tinyusb/src/tusb.c ****  * This file is part of the TinyUSB stack.
+  25:tinyusb/src/tusb.c ****  */
+  26:tinyusb/src/tusb.c **** 
+  27:tinyusb/src/tusb.c **** #include "tusb_option.h"
+  28:tinyusb/src/tusb.c **** 
+  29:tinyusb/src/tusb.c **** #if CFG_TUH_ENABLED || CFG_TUD_ENABLED
+  30:tinyusb/src/tusb.c **** 
+ARM GAS  /tmp/ccchXe7g.s 			page 2
+
+
+  31:tinyusb/src/tusb.c **** #include "tusb.h"
+  32:tinyusb/src/tusb.c **** #include "common/tusb_private.h"
+  33:tinyusb/src/tusb.c **** 
+  34:tinyusb/src/tusb.c **** #if CFG_TUD_ENABLED
+  35:tinyusb/src/tusb.c **** #include "device/usbd_pvt.h"
+  36:tinyusb/src/tusb.c **** #endif
+  37:tinyusb/src/tusb.c **** 
+  38:tinyusb/src/tusb.c **** #if CFG_TUH_ENABLED
+  39:tinyusb/src/tusb.c **** #include "host/usbh_pvt.h"
+  40:tinyusb/src/tusb.c **** #endif
+  41:tinyusb/src/tusb.c **** 
+  42:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+  43:tinyusb/src/tusb.c **** // Public API
+  44:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+  45:tinyusb/src/tusb.c **** 
+  46:tinyusb/src/tusb.c **** bool tusb_init(void)
+  47:tinyusb/src/tusb.c **** {
+  29              		.loc 1 47 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  48:tinyusb/src/tusb.c **** #if CFG_TUD_ENABLED && defined(TUD_OPT_RHPORT)
+  49:tinyusb/src/tusb.c ****   // init device stack CFG_TUSB_RHPORTx_MODE must be defined
+  50:tinyusb/src/tusb.c ****   TU_ASSERT ( tud_init(TUD_OPT_RHPORT) );
+  51:tinyusb/src/tusb.c **** #endif
+  52:tinyusb/src/tusb.c **** 
+  53:tinyusb/src/tusb.c **** #if CFG_TUH_ENABLED && defined(TUH_OPT_RHPORT)
+  54:tinyusb/src/tusb.c ****   // init host stack CFG_TUSB_RHPORTx_MODE must be defined
+  55:tinyusb/src/tusb.c ****   TU_ASSERT( tuh_init(TUH_OPT_RHPORT) );
+  56:tinyusb/src/tusb.c **** #endif
+  57:tinyusb/src/tusb.c **** 
+  58:tinyusb/src/tusb.c ****   return true;
+  34              		.loc 1 58 3 view .LVU1
+  59:tinyusb/src/tusb.c **** }
+  35              		.loc 1 59 1 is_stmt 0 view .LVU2
+  36 0000 0120     		movs	r0, #1
+  37 0002 7047     		bx	lr
+  38              		.cfi_endproc
+  39              	.LFE79:
+  41              		.section	.text.tusb_inited,"ax",%progbits
+  42              		.align	1
+  43              		.global	tusb_inited
+  44              		.syntax unified
+  45              		.thumb
+  46              		.thumb_func
+  47              		.fpu fpv4-sp-d16
+  49              	tusb_inited:
+  50              	.LFB80:
+  60:tinyusb/src/tusb.c **** 
+  61:tinyusb/src/tusb.c **** bool tusb_inited(void)
+  62:tinyusb/src/tusb.c **** {
+  51              		.loc 1 62 1 is_stmt 1 view -0
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55 0000 08B5     		push	{r3, lr}
+ARM GAS  /tmp/ccchXe7g.s 			page 3
+
+
+  56              	.LCFI0:
+  57              		.cfi_def_cfa_offset 8
+  58              		.cfi_offset 3, -8
+  59              		.cfi_offset 14, -4
+  63:tinyusb/src/tusb.c ****   bool ret = false;
+  60              		.loc 1 63 3 view .LVU4
+  61              	.LVL0:
+  64:tinyusb/src/tusb.c **** 
+  65:tinyusb/src/tusb.c **** #if CFG_TUD_ENABLED
+  66:tinyusb/src/tusb.c ****   ret = ret || tud_inited();
+  62              		.loc 1 66 3 view .LVU5
+  63              		.loc 1 66 16 is_stmt 0 view .LVU6
+  64 0002 FFF7FEFF 		bl	tud_inited
+  65              	.LVL1:
+  66              		.loc 1 66 13 view .LVU7
+  67 0006 00B1     		cbz	r0, .L3
+  68 0008 0120     		movs	r0, #1
+  69              	.L3:
+  70              	.LVL2:
+  67:tinyusb/src/tusb.c **** #endif
+  68:tinyusb/src/tusb.c **** 
+  69:tinyusb/src/tusb.c **** #if CFG_TUH_ENABLED
+  70:tinyusb/src/tusb.c ****   ret = ret || tuh_inited();
+  71:tinyusb/src/tusb.c **** #endif
+  72:tinyusb/src/tusb.c **** 
+  73:tinyusb/src/tusb.c ****   return ret;
+  71              		.loc 1 73 3 is_stmt 1 discriminator 6 view .LVU8
+  74:tinyusb/src/tusb.c **** }
+  72              		.loc 1 74 1 is_stmt 0 discriminator 6 view .LVU9
+  73 000a 08BD     		pop	{r3, pc}
+  74              		.cfi_endproc
+  75              	.LFE80:
+  77              		.section	.text.tu_desc_find,"ax",%progbits
+  78              		.align	1
+  79              		.global	tu_desc_find
+  80              		.syntax unified
+  81              		.thumb
+  82              		.thumb_func
+  83              		.fpu fpv4-sp-d16
+  85              	tu_desc_find:
+  86              	.LVL3:
+  87              	.LFB81:
+  75:tinyusb/src/tusb.c **** 
+  76:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+  77:tinyusb/src/tusb.c **** // Descriptor helper
+  78:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+  79:tinyusb/src/tusb.c **** 
+  80:tinyusb/src/tusb.c **** uint8_t const * tu_desc_find(uint8_t const* desc, uint8_t const* end, uint8_t byte1)
+  81:tinyusb/src/tusb.c **** {
+  88              		.loc 1 81 1 is_stmt 1 view -0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  82:tinyusb/src/tusb.c ****   while(desc+1 < end)
+  93              		.loc 1 82 3 view .LVU11
+  94              		.loc 1 82 8 is_stmt 0 view .LVU12
+ARM GAS  /tmp/ccchXe7g.s 			page 4
+
+
+  95 0000 01E0     		b	.L7
+  96              	.L12:
+  83:tinyusb/src/tusb.c ****   {
+  84:tinyusb/src/tusb.c ****     if ( desc[1] == byte1 ) return desc;
+  85:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+  97              		.loc 1 85 5 is_stmt 1 view .LVU13
+  98              		.loc 1 85 17 is_stmt 0 view .LVU14
+  99 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 100              		.loc 1 85 10 view .LVU15
+ 101 0004 1844     		add	r0, r0, r3
+ 102              	.LVL4:
+ 103              	.L7:
+  82:tinyusb/src/tusb.c ****   while(desc+1 < end)
+ 104              		.loc 1 82 8 is_stmt 1 view .LVU16
+  82:tinyusb/src/tusb.c ****   while(desc+1 < end)
+ 105              		.loc 1 82 13 is_stmt 0 view .LVU17
+ 106 0006 431C     		adds	r3, r0, #1
+  82:tinyusb/src/tusb.c ****   while(desc+1 < end)
+ 107              		.loc 1 82 8 view .LVU18
+ 108 0008 8B42     		cmp	r3, r1
+ 109 000a 03D2     		bcs	.L11
+  84:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 110              		.loc 1 84 5 is_stmt 1 view .LVU19
+  84:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 111              		.loc 1 84 14 is_stmt 0 view .LVU20
+ 112 000c 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+  84:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 113              		.loc 1 84 8 view .LVU21
+ 114 000e 9342     		cmp	r3, r2
+ 115 0010 F7D1     		bne	.L12
+ 116 0012 00E0     		b	.L6
+ 117              	.L11:
+  86:tinyusb/src/tusb.c ****   }
+  87:tinyusb/src/tusb.c ****   return NULL;
+ 118              		.loc 1 87 10 view .LVU22
+ 119 0014 0020     		movs	r0, #0
+ 120              	.LVL5:
+ 121              	.L6:
+  88:tinyusb/src/tusb.c **** }
+ 122              		.loc 1 88 1 view .LVU23
+ 123 0016 7047     		bx	lr
+ 124              		.cfi_endproc
+ 125              	.LFE81:
+ 127              		.section	.text.tu_desc_find2,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	tu_desc_find2
+ 130              		.syntax unified
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.fpu fpv4-sp-d16
+ 135              	tu_desc_find2:
+ 136              	.LVL6:
+ 137              	.LFB82:
+  89:tinyusb/src/tusb.c **** 
+  90:tinyusb/src/tusb.c **** uint8_t const * tu_desc_find2(uint8_t const* desc, uint8_t const* end, uint8_t byte1, uint8_t byte2
+  91:tinyusb/src/tusb.c **** {
+ 138              		.loc 1 91 1 is_stmt 1 view -0
+ARM GAS  /tmp/ccchXe7g.s 			page 5
+
+
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+  92:tinyusb/src/tusb.c ****   while(desc+2 < end)
+ 143              		.loc 1 92 3 view .LVU25
+ 144              		.loc 1 92 8 is_stmt 0 view .LVU26
+ 145 0000 02E0     		b	.L14
+ 146              	.L15:
+  93:tinyusb/src/tusb.c ****   {
+  94:tinyusb/src/tusb.c ****     if ( desc[1] == byte1 && desc[2] == byte2) return desc;
+  95:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 147              		.loc 1 95 5 is_stmt 1 view .LVU27
+ 148              		.loc 1 95 17 is_stmt 0 view .LVU28
+ 149 0002 90F800C0 		ldrb	ip, [r0]	@ zero_extendqisi2
+ 150              		.loc 1 95 10 view .LVU29
+ 151 0006 6044     		add	r0, r0, ip
+ 152              	.LVL7:
+ 153              	.L14:
+  92:tinyusb/src/tusb.c ****   while(desc+2 < end)
+ 154              		.loc 1 92 8 is_stmt 1 view .LVU30
+  92:tinyusb/src/tusb.c ****   while(desc+2 < end)
+ 155              		.loc 1 92 13 is_stmt 0 view .LVU31
+ 156 0008 00F1020C 		add	ip, r0, #2
+  92:tinyusb/src/tusb.c ****   while(desc+2 < end)
+ 157              		.loc 1 92 8 view .LVU32
+ 158 000c 8C45     		cmp	ip, r1
+ 159 000e 08D2     		bcs	.L19
+  94:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 160              		.loc 1 94 5 is_stmt 1 view .LVU33
+  94:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 161              		.loc 1 94 14 is_stmt 0 view .LVU34
+ 162 0010 90F801C0 		ldrb	ip, [r0, #1]	@ zero_extendqisi2
+  94:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 163              		.loc 1 94 8 view .LVU35
+ 164 0014 9445     		cmp	ip, r2
+ 165 0016 F4D1     		bne	.L15
+  94:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 166              		.loc 1 94 34 discriminator 1 view .LVU36
+ 167 0018 90F802C0 		ldrb	ip, [r0, #2]	@ zero_extendqisi2
+  94:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 168              		.loc 1 94 27 discriminator 1 view .LVU37
+ 169 001c 9C45     		cmp	ip, r3
+ 170 001e F0D1     		bne	.L15
+ 171 0020 00E0     		b	.L13
+ 172              	.L19:
+  96:tinyusb/src/tusb.c ****   }
+  97:tinyusb/src/tusb.c ****   return NULL;
+ 173              		.loc 1 97 10 view .LVU38
+ 174 0022 0020     		movs	r0, #0
+ 175              	.LVL8:
+ 176              	.L13:
+  98:tinyusb/src/tusb.c **** }
+ 177              		.loc 1 98 1 view .LVU39
+ 178 0024 7047     		bx	lr
+ 179              		.cfi_endproc
+ 180              	.LFE82:
+ARM GAS  /tmp/ccchXe7g.s 			page 6
+
+
+ 182              		.section	.text.tu_desc_find3,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	tu_desc_find3
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 188              		.fpu fpv4-sp-d16
+ 190              	tu_desc_find3:
+ 191              	.LVL9:
+ 192              	.LFB83:
+  99:tinyusb/src/tusb.c **** 
+ 100:tinyusb/src/tusb.c **** uint8_t const * tu_desc_find3(uint8_t const* desc, uint8_t const* end, uint8_t byte1, uint8_t byte2
+ 101:tinyusb/src/tusb.c **** {
+ 193              		.loc 1 101 1 is_stmt 1 view -0
+ 194              		.cfi_startproc
+ 195              		@ args = 4, pretend = 0, frame = 0
+ 196              		@ frame_needed = 0, uses_anonymous_args = 0
+ 197              		.loc 1 101 1 is_stmt 0 view .LVU41
+ 198 0000 00B5     		push	{lr}
+ 199              	.LCFI1:
+ 200              		.cfi_def_cfa_offset 4
+ 201              		.cfi_offset 14, -4
+ 202 0002 9DF804E0 		ldrb	lr, [sp, #4]	@ zero_extendqisi2
+ 102:tinyusb/src/tusb.c ****   while(desc+3 < end)
+ 203              		.loc 1 102 3 is_stmt 1 view .LVU42
+ 204              		.loc 1 102 8 is_stmt 0 view .LVU43
+ 205 0006 02E0     		b	.L21
+ 206              	.L22:
+ 103:tinyusb/src/tusb.c ****   {
+ 104:tinyusb/src/tusb.c ****     if (desc[1] == byte1 && desc[2] == byte2 && desc[3] == byte3) return desc;
+ 105:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 207              		.loc 1 105 5 is_stmt 1 view .LVU44
+ 208              		.loc 1 105 17 is_stmt 0 view .LVU45
+ 209 0008 90F800C0 		ldrb	ip, [r0]	@ zero_extendqisi2
+ 210              		.loc 1 105 10 view .LVU46
+ 211 000c 6044     		add	r0, r0, ip
+ 212              	.LVL10:
+ 213              	.L21:
+ 102:tinyusb/src/tusb.c ****   while(desc+3 < end)
+ 214              		.loc 1 102 8 is_stmt 1 view .LVU47
+ 102:tinyusb/src/tusb.c ****   while(desc+3 < end)
+ 215              		.loc 1 102 13 is_stmt 0 view .LVU48
+ 216 000e 00F1030C 		add	ip, r0, #3
+ 102:tinyusb/src/tusb.c ****   while(desc+3 < end)
+ 217              		.loc 1 102 8 view .LVU49
+ 218 0012 8C45     		cmp	ip, r1
+ 219 0014 0CD2     		bcs	.L27
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 220              		.loc 1 104 5 is_stmt 1 view .LVU50
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 221              		.loc 1 104 13 is_stmt 0 view .LVU51
+ 222 0016 90F801C0 		ldrb	ip, [r0, #1]	@ zero_extendqisi2
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 223              		.loc 1 104 8 view .LVU52
+ 224 001a 9445     		cmp	ip, r2
+ 225 001c F4D1     		bne	.L22
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ARM GAS  /tmp/ccchXe7g.s 			page 7
+
+
+ 226              		.loc 1 104 33 discriminator 1 view .LVU53
+ 227 001e 90F802C0 		ldrb	ip, [r0, #2]	@ zero_extendqisi2
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 228              		.loc 1 104 26 discriminator 1 view .LVU54
+ 229 0022 9C45     		cmp	ip, r3
+ 230 0024 F0D1     		bne	.L22
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 231              		.loc 1 104 53 discriminator 2 view .LVU55
+ 232 0026 90F803C0 		ldrb	ip, [r0, #3]	@ zero_extendqisi2
+ 104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
+ 233              		.loc 1 104 46 discriminator 2 view .LVU56
+ 234 002a F445     		cmp	ip, lr
+ 235 002c ECD1     		bne	.L22
+ 236 002e 00E0     		b	.L20
+ 237              	.L27:
+ 106:tinyusb/src/tusb.c ****   }
+ 107:tinyusb/src/tusb.c ****   return NULL;
+ 238              		.loc 1 107 10 view .LVU57
+ 239 0030 0020     		movs	r0, #0
+ 240              	.LVL11:
+ 241              	.L20:
+ 108:tinyusb/src/tusb.c **** }
+ 242              		.loc 1 108 1 view .LVU58
+ 243 0032 5DF804FB 		ldr	pc, [sp], #4
+ 244              		.loc 1 108 1 view .LVU59
+ 245              		.cfi_endproc
+ 246              	.LFE83:
+ 248              		.section	.text.tu_edpt_claim,"ax",%progbits
+ 249              		.align	1
+ 250              		.global	tu_edpt_claim
+ 251              		.syntax unified
+ 252              		.thumb
+ 253              		.thumb_func
+ 254              		.fpu fpv4-sp-d16
+ 256              	tu_edpt_claim:
+ 257              	.LVL12:
+ 258              	.LFB84:
+ 109:tinyusb/src/tusb.c **** 
+ 110:tinyusb/src/tusb.c **** 
+ 111:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 112:tinyusb/src/tusb.c **** // Endpoint Helper for both Host and Device stack
+ 113:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 114:tinyusb/src/tusb.c **** 
+ 115:tinyusb/src/tusb.c **** bool tu_edpt_claim(tu_edpt_state_t* ep_state, osal_mutex_t mutex)
+ 116:tinyusb/src/tusb.c **** {
+ 259              		.loc 1 116 1 is_stmt 1 view -0
+ 260              		.cfi_startproc
+ 261              		@ args = 0, pretend = 0, frame = 0
+ 262              		@ frame_needed = 0, uses_anonymous_args = 0
+ 263              		@ link register save eliminated.
+ 264              		.loc 1 116 1 is_stmt 0 view .LVU61
+ 265 0000 0246     		mov	r2, r0
+ 117:tinyusb/src/tusb.c ****   (void) mutex;
+ 266              		.loc 1 117 3 is_stmt 1 view .LVU62
+ 118:tinyusb/src/tusb.c **** 
+ 119:tinyusb/src/tusb.c ****   // pre-check to help reducing mutex lock
+ 120:tinyusb/src/tusb.c ****   TU_VERIFY((ep_state->busy == 0) && (ep_state->claimed == 0));
+ARM GAS  /tmp/ccchXe7g.s 			page 8
+
+
+ 267              		.loc 1 120 3 view .LVU63
+ 268              		.loc 1 120 3 view .LVU64
+ 269 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 270 0004 13F00100 		ands	r0, r3, #1
+ 271              	.LVL13:
+ 272              		.loc 1 120 3 is_stmt 0 view .LVU65
+ 273 0008 17D1     		bne	.L31
+ 274              		.loc 1 120 3 discriminator 2 view .LVU66
+ 275 000a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 276 000c 13F0040F 		tst	r3, #4
+ 277 0010 14D1     		bne	.L29
+ 278              		.loc 1 120 3 is_stmt 1 discriminator 4 view .LVU67
+ 121:tinyusb/src/tusb.c ****   (void) osal_mutex_lock(mutex, OSAL_TIMEOUT_WAIT_FOREVER);
+ 279              		.loc 1 121 3 discriminator 4 view .LVU68
+ 122:tinyusb/src/tusb.c **** 
+ 123:tinyusb/src/tusb.c ****   // can only claim the endpoint if it is not busy and not claimed yet.
+ 124:tinyusb/src/tusb.c ****   bool const available = (ep_state->busy == 0) && (ep_state->claimed == 0);
+ 280              		.loc 1 124 3 discriminator 4 view .LVU69
+ 281              		.loc 1 124 35 is_stmt 0 discriminator 4 view .LVU70
+ 282 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 283              		.loc 1 124 48 discriminator 4 view .LVU71
+ 284 0014 13F0010F 		tst	r3, #1
+ 285 0018 05D1     		bne	.L32
+ 286              		.loc 1 124 60 discriminator 1 view .LVU72
+ 287 001a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 288              		.loc 1 124 48 discriminator 1 view .LVU73
+ 289 001c 13F0040F 		tst	r3, #4
+ 290 0020 09D0     		beq	.L33
+ 291              		.loc 1 124 48 view .LVU74
+ 292 0022 0023     		movs	r3, #0
+ 293 0024 00E0     		b	.L30
+ 294              	.L32:
+ 295 0026 0023     		movs	r3, #0
+ 296              	.L30:
+ 297              	.LVL14:
+ 125:tinyusb/src/tusb.c ****   if (available)
+ 298              		.loc 1 125 3 is_stmt 1 discriminator 6 view .LVU75
+ 299              		.loc 1 125 6 is_stmt 0 discriminator 6 view .LVU76
+ 300 0028 1846     		mov	r0, r3
+ 301 002a 3BB1     		cbz	r3, .L29
+ 126:tinyusb/src/tusb.c ****   {
+ 127:tinyusb/src/tusb.c ****     ep_state->claimed = 1;
+ 302              		.loc 1 127 5 is_stmt 1 view .LVU77
+ 303              		.loc 1 127 23 is_stmt 0 view .LVU78
+ 304 002c 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 305              	.LVL15:
+ 306              		.loc 1 127 23 view .LVU79
+ 307 002e 43F00403 		orr	r3, r3, #4
+ 308 0032 1370     		strb	r3, [r2]
+ 309 0034 7047     		bx	lr
+ 310              	.L33:
+ 124:tinyusb/src/tusb.c ****   if (available)
+ 311              		.loc 1 124 48 view .LVU80
+ 312 0036 0123     		movs	r3, #1
+ 313 0038 F6E7     		b	.L30
+ 314              	.L31:
+ 120:tinyusb/src/tusb.c ****   (void) osal_mutex_lock(mutex, OSAL_TIMEOUT_WAIT_FOREVER);
+ARM GAS  /tmp/ccchXe7g.s 			page 9
+
+
+ 315              		.loc 1 120 3 view .LVU81
+ 316 003a 0020     		movs	r0, #0
+ 317              	.L29:
+ 128:tinyusb/src/tusb.c ****   }
+ 129:tinyusb/src/tusb.c **** 
+ 130:tinyusb/src/tusb.c ****   (void) osal_mutex_unlock(mutex);
+ 131:tinyusb/src/tusb.c **** 
+ 132:tinyusb/src/tusb.c ****   return available;
+ 133:tinyusb/src/tusb.c **** }
+ 318              		.loc 1 133 1 view .LVU82
+ 319 003c 7047     		bx	lr
+ 320              		.cfi_endproc
+ 321              	.LFE84:
+ 323              		.section	.text.tu_edpt_release,"ax",%progbits
+ 324              		.align	1
+ 325              		.global	tu_edpt_release
+ 326              		.syntax unified
+ 327              		.thumb
+ 328              		.thumb_func
+ 329              		.fpu fpv4-sp-d16
+ 331              	tu_edpt_release:
+ 332              	.LVL16:
+ 333              	.LFB85:
+ 134:tinyusb/src/tusb.c **** 
+ 135:tinyusb/src/tusb.c **** bool tu_edpt_release(tu_edpt_state_t* ep_state, osal_mutex_t mutex)
+ 136:tinyusb/src/tusb.c **** {
+ 334              		.loc 1 136 1 is_stmt 1 view -0
+ 335              		.cfi_startproc
+ 336              		@ args = 0, pretend = 0, frame = 0
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ 338              		@ link register save eliminated.
+ 339              		.loc 1 136 1 is_stmt 0 view .LVU84
+ 340 0000 0346     		mov	r3, r0
+ 137:tinyusb/src/tusb.c ****   (void) mutex;
+ 341              		.loc 1 137 3 is_stmt 1 view .LVU85
+ 138:tinyusb/src/tusb.c **** 
+ 139:tinyusb/src/tusb.c ****   (void) osal_mutex_lock(mutex, OSAL_TIMEOUT_WAIT_FOREVER);
+ 342              		.loc 1 139 3 view .LVU86
+ 140:tinyusb/src/tusb.c **** 
+ 141:tinyusb/src/tusb.c ****   // can only release the endpoint if it is claimed and not busy
+ 142:tinyusb/src/tusb.c ****   bool const ret = (ep_state->claimed == 1) && (ep_state->busy == 0);
+ 343              		.loc 1 142 3 view .LVU87
+ 344              		.loc 1 142 29 is_stmt 0 view .LVU88
+ 345 0002 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 346              		.loc 1 142 45 view .LVU89
+ 347 0004 12F0040F 		tst	r2, #4
+ 348 0008 07D1     		bne	.L39
+ 349 000a 0022     		movs	r2, #0
+ 350              	.L35:
+ 351              	.LVL17:
+ 143:tinyusb/src/tusb.c ****   if (ret)
+ 352              		.loc 1 143 3 is_stmt 1 discriminator 6 view .LVU90
+ 353              		.loc 1 143 6 is_stmt 0 discriminator 6 view .LVU91
+ 354 000c 1046     		mov	r0, r2
+ 355              	.LVL18:
+ 356              		.loc 1 143 6 discriminator 6 view .LVU92
+ 357 000e 1AB1     		cbz	r2, .L36
+ARM GAS  /tmp/ccchXe7g.s 			page 10
+
+
+ 144:tinyusb/src/tusb.c ****   {
+ 145:tinyusb/src/tusb.c ****     ep_state->claimed = 0;
+ 358              		.loc 1 145 5 is_stmt 1 view .LVU93
+ 359              		.loc 1 145 23 is_stmt 0 view .LVU94
+ 360 0010 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 361              	.LVL19:
+ 362              		.loc 1 145 23 view .LVU95
+ 363 0012 6FF38202 		bfc	r2, #2, #1
+ 364 0016 1A70     		strb	r2, [r3]
+ 365              	.L36:
+ 146:tinyusb/src/tusb.c ****   }
+ 147:tinyusb/src/tusb.c **** 
+ 148:tinyusb/src/tusb.c ****   (void) osal_mutex_unlock(mutex);
+ 366              		.loc 1 148 3 is_stmt 1 view .LVU96
+ 149:tinyusb/src/tusb.c **** 
+ 150:tinyusb/src/tusb.c ****   return ret;
+ 367              		.loc 1 150 3 view .LVU97
+ 151:tinyusb/src/tusb.c **** }
+ 368              		.loc 1 151 1 is_stmt 0 view .LVU98
+ 369 0018 7047     		bx	lr
+ 370              	.LVL20:
+ 371              	.L39:
+ 142:tinyusb/src/tusb.c ****   if (ret)
+ 372              		.loc 1 142 57 discriminator 1 view .LVU99
+ 373 001a 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 142:tinyusb/src/tusb.c ****   if (ret)
+ 374              		.loc 1 142 45 discriminator 1 view .LVU100
+ 375 001c 12F0010F 		tst	r2, #1
+ 376 0020 01D0     		beq	.L38
+ 142:tinyusb/src/tusb.c ****   if (ret)
+ 377              		.loc 1 142 45 view .LVU101
+ 378 0022 0022     		movs	r2, #0
+ 379 0024 F2E7     		b	.L35
+ 380              	.L38:
+ 381 0026 0122     		movs	r2, #1
+ 382 0028 F0E7     		b	.L35
+ 383              		.cfi_endproc
+ 384              	.LFE85:
+ 386              		.section	.text.tu_edpt_validate,"ax",%progbits
+ 387              		.align	1
+ 388              		.global	tu_edpt_validate
+ 389              		.syntax unified
+ 390              		.thumb
+ 391              		.thumb_func
+ 392              		.fpu fpv4-sp-d16
+ 394              	tu_edpt_validate:
+ 395              	.LVL21:
+ 396              	.LFB86:
+ 152:tinyusb/src/tusb.c **** 
+ 153:tinyusb/src/tusb.c **** bool tu_edpt_validate(tusb_desc_endpoint_t const * desc_ep, tusb_speed_t speed)
+ 154:tinyusb/src/tusb.c **** {
+ 397              		.loc 1 154 1 is_stmt 1 view -0
+ 398              		.cfi_startproc
+ 399              		@ args = 0, pretend = 0, frame = 0
+ 400              		@ frame_needed = 0, uses_anonymous_args = 0
+ 401              		@ link register save eliminated.
+ 155:tinyusb/src/tusb.c ****   uint16_t const max_packet_size = tu_edpt_packet_size(desc_ep);
+ARM GAS  /tmp/ccchXe7g.s 			page 11
+
+
+ 402              		.loc 1 155 3 view .LVU103
+ 403              	.LBB55:
+ 404              	.LBI55:
+ 405              		.file 2 "tinyusb/src/common/tusb_types.h"
+   1:tinyusb/src/common/tusb_types.h **** /*
+   2:tinyusb/src/common/tusb_types.h ****  * The MIT License (MIT)
+   3:tinyusb/src/common/tusb_types.h ****  *
+   4:tinyusb/src/common/tusb_types.h ****  * Copyright (c) 2019 Ha Thach (tinyusb.org)
+   5:tinyusb/src/common/tusb_types.h ****  *
+   6:tinyusb/src/common/tusb_types.h ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   7:tinyusb/src/common/tusb_types.h ****  * of this software and associated documentation files (the "Software"), to deal
+   8:tinyusb/src/common/tusb_types.h ****  * in the Software without restriction, including without limitation the rights
+   9:tinyusb/src/common/tusb_types.h ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  10:tinyusb/src/common/tusb_types.h ****  * copies of the Software, and to permit persons to whom the Software is
+  11:tinyusb/src/common/tusb_types.h ****  * furnished to do so, subject to the following conditions:
+  12:tinyusb/src/common/tusb_types.h ****  *
+  13:tinyusb/src/common/tusb_types.h ****  * The above copyright notice and this permission notice shall be included in
+  14:tinyusb/src/common/tusb_types.h ****  * all copies or substantial portions of the Software.
+  15:tinyusb/src/common/tusb_types.h ****  *
+  16:tinyusb/src/common/tusb_types.h ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  17:tinyusb/src/common/tusb_types.h ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  18:tinyusb/src/common/tusb_types.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  19:tinyusb/src/common/tusb_types.h ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  20:tinyusb/src/common/tusb_types.h ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  21:tinyusb/src/common/tusb_types.h ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  22:tinyusb/src/common/tusb_types.h ****  * THE SOFTWARE.
+  23:tinyusb/src/common/tusb_types.h ****  *
+  24:tinyusb/src/common/tusb_types.h ****  * This file is part of the TinyUSB stack.
+  25:tinyusb/src/common/tusb_types.h ****  */
+  26:tinyusb/src/common/tusb_types.h **** 
+  27:tinyusb/src/common/tusb_types.h **** /** \ingroup group_usb_definitions
+  28:tinyusb/src/common/tusb_types.h ****  *  \defgroup USBDef_Type USB Types
+  29:tinyusb/src/common/tusb_types.h ****  *  @{ */
+  30:tinyusb/src/common/tusb_types.h **** 
+  31:tinyusb/src/common/tusb_types.h **** #ifndef _TUSB_TYPES_H_
+  32:tinyusb/src/common/tusb_types.h **** #define _TUSB_TYPES_H_
+  33:tinyusb/src/common/tusb_types.h **** 
+  34:tinyusb/src/common/tusb_types.h **** #include <stdbool.h>
+  35:tinyusb/src/common/tusb_types.h **** #include <stdint.h>
+  36:tinyusb/src/common/tusb_types.h **** #include "tusb_compiler.h"
+  37:tinyusb/src/common/tusb_types.h **** 
+  38:tinyusb/src/common/tusb_types.h **** #ifdef __cplusplus
+  39:tinyusb/src/common/tusb_types.h ****  extern "C" {
+  40:tinyusb/src/common/tusb_types.h **** #endif
+  41:tinyusb/src/common/tusb_types.h **** 
+  42:tinyusb/src/common/tusb_types.h **** /*------------------------------------------------------------------*/
+  43:tinyusb/src/common/tusb_types.h **** /* CONSTANTS
+  44:tinyusb/src/common/tusb_types.h ****  *------------------------------------------------------------------*/
+  45:tinyusb/src/common/tusb_types.h **** 
+  46:tinyusb/src/common/tusb_types.h **** /// defined base on EHCI specs value for Endpoint Speed
+  47:tinyusb/src/common/tusb_types.h **** typedef enum
+  48:tinyusb/src/common/tusb_types.h **** {
+  49:tinyusb/src/common/tusb_types.h ****   TUSB_SPEED_FULL = 0,
+  50:tinyusb/src/common/tusb_types.h ****   TUSB_SPEED_LOW  = 1,
+  51:tinyusb/src/common/tusb_types.h ****   TUSB_SPEED_HIGH = 2,
+  52:tinyusb/src/common/tusb_types.h ****   TUSB_SPEED_INVALID = 0xff,
+  53:tinyusb/src/common/tusb_types.h **** }tusb_speed_t;
+ARM GAS  /tmp/ccchXe7g.s 			page 12
+
+
+  54:tinyusb/src/common/tusb_types.h **** 
+  55:tinyusb/src/common/tusb_types.h **** /// defined base on USB Specs Endpoint's bmAttributes
+  56:tinyusb/src/common/tusb_types.h **** typedef enum
+  57:tinyusb/src/common/tusb_types.h **** {
+  58:tinyusb/src/common/tusb_types.h ****   TUSB_XFER_CONTROL = 0 ,
+  59:tinyusb/src/common/tusb_types.h ****   TUSB_XFER_ISOCHRONOUS ,
+  60:tinyusb/src/common/tusb_types.h ****   TUSB_XFER_BULK        ,
+  61:tinyusb/src/common/tusb_types.h ****   TUSB_XFER_INTERRUPT
+  62:tinyusb/src/common/tusb_types.h **** }tusb_xfer_type_t;
+  63:tinyusb/src/common/tusb_types.h **** 
+  64:tinyusb/src/common/tusb_types.h **** typedef enum
+  65:tinyusb/src/common/tusb_types.h **** {
+  66:tinyusb/src/common/tusb_types.h ****   TUSB_DIR_OUT = 0,
+  67:tinyusb/src/common/tusb_types.h ****   TUSB_DIR_IN  = 1,
+  68:tinyusb/src/common/tusb_types.h **** 
+  69:tinyusb/src/common/tusb_types.h ****   TUSB_DIR_IN_MASK = 0x80
+  70:tinyusb/src/common/tusb_types.h **** }tusb_dir_t;
+  71:tinyusb/src/common/tusb_types.h **** 
+  72:tinyusb/src/common/tusb_types.h **** enum
+  73:tinyusb/src/common/tusb_types.h **** {
+  74:tinyusb/src/common/tusb_types.h ****   TUSB_EPSIZE_BULK_FS = 64,
+  75:tinyusb/src/common/tusb_types.h ****   TUSB_EPSIZE_BULK_HS= 512,
+  76:tinyusb/src/common/tusb_types.h **** 
+  77:tinyusb/src/common/tusb_types.h ****   TUSB_EPSIZE_ISO_FS_MAX = 1023,
+  78:tinyusb/src/common/tusb_types.h ****   TUSB_EPSIZE_ISO_HS_MAX = 1024,
+  79:tinyusb/src/common/tusb_types.h **** };
+  80:tinyusb/src/common/tusb_types.h **** 
+  81:tinyusb/src/common/tusb_types.h **** /// Isochronous End Point Attributes
+  82:tinyusb/src/common/tusb_types.h **** typedef enum
+  83:tinyusb/src/common/tusb_types.h **** {
+  84:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_NO_SYNC         = 0x00,
+  85:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_ASYNCHRONOUS    = 0x04,
+  86:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_ADAPTIVE        = 0x08,
+  87:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_SYNCHRONOUS     = 0x0C,
+  88:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_DATA            = 0x00, ///< Data End Point
+  89:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_EXPLICIT_FB     = 0x10, ///< Feedback End Point
+  90:tinyusb/src/common/tusb_types.h ****   TUSB_ISO_EP_ATT_IMPLICIT_FB     = 0x20, ///< Data endpoint that also serves as an implicit feedba
+  91:tinyusb/src/common/tusb_types.h **** }tusb_iso_ep_attribute_t;
+  92:tinyusb/src/common/tusb_types.h **** 
+  93:tinyusb/src/common/tusb_types.h **** /// USB Descriptor Types
+  94:tinyusb/src/common/tusb_types.h **** typedef enum
+  95:tinyusb/src/common/tusb_types.h **** {
+  96:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_DEVICE                = 0x01,
+  97:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CONFIGURATION         = 0x02,
+  98:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_STRING                = 0x03,
+  99:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_INTERFACE             = 0x04,
+ 100:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_ENDPOINT              = 0x05,
+ 101:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_DEVICE_QUALIFIER      = 0x06,
+ 102:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_OTHER_SPEED_CONFIG    = 0x07,
+ 103:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_INTERFACE_POWER       = 0x08,
+ 104:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_OTG                   = 0x09,
+ 105:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_DEBUG                 = 0x0A,
+ 106:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_INTERFACE_ASSOCIATION = 0x0B,
+ 107:tinyusb/src/common/tusb_types.h **** 
+ 108:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_BOS                   = 0x0F,
+ 109:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_DEVICE_CAPABILITY     = 0x10,
+ 110:tinyusb/src/common/tusb_types.h **** 
+ARM GAS  /tmp/ccchXe7g.s 			page 13
+
+
+ 111:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_FUNCTIONAL            = 0x21,
+ 112:tinyusb/src/common/tusb_types.h **** 
+ 113:tinyusb/src/common/tusb_types.h ****   // Class Specific Descriptor
+ 114:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CS_DEVICE             = 0x21,
+ 115:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CS_CONFIGURATION      = 0x22,
+ 116:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CS_STRING             = 0x23,
+ 117:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CS_INTERFACE          = 0x24,
+ 118:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CS_ENDPOINT           = 0x25,
+ 119:tinyusb/src/common/tusb_types.h **** 
+ 120:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_SUPERSPEED_ENDPOINT_COMPANION     = 0x30,
+ 121:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_SUPERSPEED_ISO_ENDPOINT_COMPANION = 0x31
+ 122:tinyusb/src/common/tusb_types.h **** }tusb_desc_type_t;
+ 123:tinyusb/src/common/tusb_types.h **** 
+ 124:tinyusb/src/common/tusb_types.h **** typedef enum
+ 125:tinyusb/src/common/tusb_types.h **** {
+ 126:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_GET_STATUS        = 0  ,
+ 127:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_CLEAR_FEATURE     = 1  ,
+ 128:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RESERVED          = 2  ,
+ 129:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_FEATURE       = 3  ,
+ 130:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RESERVED2         = 4  ,
+ 131:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_ADDRESS       = 5  ,
+ 132:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_GET_DESCRIPTOR    = 6  ,
+ 133:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_DESCRIPTOR    = 7  ,
+ 134:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_GET_CONFIGURATION = 8  ,
+ 135:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_CONFIGURATION = 9  ,
+ 136:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_GET_INTERFACE     = 10 ,
+ 137:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_INTERFACE     = 11 ,
+ 138:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SYNCH_FRAME       = 12
+ 139:tinyusb/src/common/tusb_types.h **** }tusb_request_code_t;
+ 140:tinyusb/src/common/tusb_types.h **** 
+ 141:tinyusb/src/common/tusb_types.h **** typedef enum
+ 142:tinyusb/src/common/tusb_types.h **** {
+ 143:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_FEATURE_EDPT_HALT     = 0,
+ 144:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_FEATURE_REMOTE_WAKEUP = 1,
+ 145:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_FEATURE_TEST_MODE     = 2
+ 146:tinyusb/src/common/tusb_types.h **** }tusb_request_feature_selector_t;
+ 147:tinyusb/src/common/tusb_types.h **** 
+ 148:tinyusb/src/common/tusb_types.h **** typedef enum
+ 149:tinyusb/src/common/tusb_types.h **** {
+ 150:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_STANDARD = 0,
+ 151:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_CLASS,
+ 152:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_VENDOR,
+ 153:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_INVALID
+ 154:tinyusb/src/common/tusb_types.h **** } tusb_request_type_t;
+ 155:tinyusb/src/common/tusb_types.h **** 
+ 156:tinyusb/src/common/tusb_types.h **** typedef enum
+ 157:tinyusb/src/common/tusb_types.h **** {
+ 158:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RCPT_DEVICE =0,
+ 159:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RCPT_INTERFACE,
+ 160:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RCPT_ENDPOINT,
+ 161:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RCPT_OTHER
+ 162:tinyusb/src/common/tusb_types.h **** } tusb_request_recipient_t;
+ 163:tinyusb/src/common/tusb_types.h **** 
+ 164:tinyusb/src/common/tusb_types.h **** // https://www.usb.org/defined-class-codes
+ 165:tinyusb/src/common/tusb_types.h **** typedef enum
+ 166:tinyusb/src/common/tusb_types.h **** {
+ 167:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_UNSPECIFIED          = 0    ,
+ARM GAS  /tmp/ccchXe7g.s 			page 14
+
+
+ 168:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_AUDIO                = 1    ,
+ 169:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_CDC                  = 2    ,
+ 170:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_HID                  = 3    ,
+ 171:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_RESERVED_4           = 4    ,
+ 172:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_PHYSICAL             = 5    ,
+ 173:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_IMAGE                = 6    ,
+ 174:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_PRINTER              = 7    ,
+ 175:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_MSC                  = 8    ,
+ 176:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_HUB                  = 9    ,
+ 177:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_CDC_DATA             = 10   ,
+ 178:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_SMART_CARD           = 11   ,
+ 179:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_RESERVED_12          = 12   ,
+ 180:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_CONTENT_SECURITY     = 13   ,
+ 181:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_VIDEO                = 14   ,
+ 182:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_PERSONAL_HEALTHCARE  = 15   ,
+ 183:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_AUDIO_VIDEO          = 16   ,
+ 184:tinyusb/src/common/tusb_types.h **** 
+ 185:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_DIAGNOSTIC           = 0xDC ,
+ 186:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_WIRELESS_CONTROLLER  = 0xE0 ,
+ 187:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_MISC                 = 0xEF ,
+ 188:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_APPLICATION_SPECIFIC = 0xFE ,
+ 189:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_VENDOR_SPECIFIC      = 0xFF
+ 190:tinyusb/src/common/tusb_types.h **** }tusb_class_code_t;
+ 191:tinyusb/src/common/tusb_types.h **** 
+ 192:tinyusb/src/common/tusb_types.h **** typedef enum
+ 193:tinyusb/src/common/tusb_types.h **** {
+ 194:tinyusb/src/common/tusb_types.h ****   MISC_SUBCLASS_COMMON = 2
+ 195:tinyusb/src/common/tusb_types.h **** }misc_subclass_type_t;
+ 196:tinyusb/src/common/tusb_types.h **** 
+ 197:tinyusb/src/common/tusb_types.h **** typedef enum
+ 198:tinyusb/src/common/tusb_types.h **** {
+ 199:tinyusb/src/common/tusb_types.h ****   MISC_PROTOCOL_IAD = 1
+ 200:tinyusb/src/common/tusb_types.h **** }misc_protocol_type_t;
+ 201:tinyusb/src/common/tusb_types.h **** 
+ 202:tinyusb/src/common/tusb_types.h **** typedef enum
+ 203:tinyusb/src/common/tusb_types.h **** {
+ 204:tinyusb/src/common/tusb_types.h ****   APP_SUBCLASS_USBTMC = 0x03,
+ 205:tinyusb/src/common/tusb_types.h ****   APP_SUBCLASS_DFU_RUNTIME = 0x01
+ 206:tinyusb/src/common/tusb_types.h **** } app_subclass_type_t;
+ 207:tinyusb/src/common/tusb_types.h **** 
+ 208:tinyusb/src/common/tusb_types.h **** typedef enum
+ 209:tinyusb/src/common/tusb_types.h **** {
+ 210:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_WIRELESS_USB               = 0x01,
+ 211:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_USB20_EXTENSION            = 0x02,
+ 212:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_SUPERSPEED_USB             = 0x03,
+ 213:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_CONTAINER_id               = 0x04,
+ 214:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_PLATFORM                   = 0x05,
+ 215:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_POWER_DELIVERY             = 0x06,
+ 216:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_BATTERY_INFO               = 0x07,
+ 217:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_PD_CONSUMER_PORT           = 0x08,
+ 218:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_PD_PROVIDER_PORT           = 0x09,
+ 219:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_SUPERSPEED_PLUS            = 0x0A,
+ 220:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_PRECESION_TIME_MEASUREMENT = 0x0B,
+ 221:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_WIRELESS_USB_EXT           = 0x0C,
+ 222:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_BILLBOARD                  = 0x0D,
+ 223:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_AUTHENTICATION             = 0x0E,
+ 224:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_BILLBOARD_EX               = 0x0F,
+ARM GAS  /tmp/ccchXe7g.s 			page 15
+
+
+ 225:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_CONFIGURATION_SUMMARY      = 0x10
+ 226:tinyusb/src/common/tusb_types.h **** }device_capability_type_t;
+ 227:tinyusb/src/common/tusb_types.h **** 
+ 228:tinyusb/src/common/tusb_types.h **** enum {
+ 229:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP = TU_BIT(5),
+ 230:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_CONFIG_ATT_SELF_POWERED  = TU_BIT(6),
+ 231:tinyusb/src/common/tusb_types.h **** };
+ 232:tinyusb/src/common/tusb_types.h **** 
+ 233:tinyusb/src/common/tusb_types.h **** #define TUSB_DESC_CONFIG_POWER_MA(x)  ((x)/2)
+ 234:tinyusb/src/common/tusb_types.h **** 
+ 235:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 236:tinyusb/src/common/tusb_types.h **** //
+ 237:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 238:tinyusb/src/common/tusb_types.h **** typedef enum
+ 239:tinyusb/src/common/tusb_types.h **** {
+ 240:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_SUCCESS = 0,
+ 241:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_FAILED,
+ 242:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_STALLED,
+ 243:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_TIMEOUT,
+ 244:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_INVALID
+ 245:tinyusb/src/common/tusb_types.h **** }xfer_result_t;
+ 246:tinyusb/src/common/tusb_types.h **** 
+ 247:tinyusb/src/common/tusb_types.h **** enum // TODO remove
+ 248:tinyusb/src/common/tusb_types.h **** {
+ 249:tinyusb/src/common/tusb_types.h ****   DESC_OFFSET_LEN  = 0,
+ 250:tinyusb/src/common/tusb_types.h ****   DESC_OFFSET_TYPE = 1
+ 251:tinyusb/src/common/tusb_types.h **** };
+ 252:tinyusb/src/common/tusb_types.h **** 
+ 253:tinyusb/src/common/tusb_types.h **** enum
+ 254:tinyusb/src/common/tusb_types.h **** {
+ 255:tinyusb/src/common/tusb_types.h ****   INTERFACE_INVALID_NUMBER = 0xff
+ 256:tinyusb/src/common/tusb_types.h **** };
+ 257:tinyusb/src/common/tusb_types.h **** 
+ 258:tinyusb/src/common/tusb_types.h **** typedef enum
+ 259:tinyusb/src/common/tusb_types.h **** {
+ 260:tinyusb/src/common/tusb_types.h ****   MS_OS_20_SET_HEADER_DESCRIPTOR       = 0x00,
+ 261:tinyusb/src/common/tusb_types.h ****   MS_OS_20_SUBSET_HEADER_CONFIGURATION = 0x01,
+ 262:tinyusb/src/common/tusb_types.h ****   MS_OS_20_SUBSET_HEADER_FUNCTION      = 0x02,
+ 263:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_COMPATBLE_ID        = 0x03,
+ 264:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_REG_PROPERTY        = 0x04,
+ 265:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_MIN_RESUME_TIME     = 0x05,
+ 266:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_MODEL_ID            = 0x06,
+ 267:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_CCGP_DEVICE         = 0x07,
+ 268:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_VENDOR_REVISION     = 0x08
+ 269:tinyusb/src/common/tusb_types.h **** } microsoft_os_20_type_t;
+ 270:tinyusb/src/common/tusb_types.h **** 
+ 271:tinyusb/src/common/tusb_types.h **** enum
+ 272:tinyusb/src/common/tusb_types.h **** {
+ 273:tinyusb/src/common/tusb_types.h ****   CONTROL_STAGE_IDLE,
+ 274:tinyusb/src/common/tusb_types.h ****   CONTROL_STAGE_SETUP,
+ 275:tinyusb/src/common/tusb_types.h ****   CONTROL_STAGE_DATA,
+ 276:tinyusb/src/common/tusb_types.h ****   CONTROL_STAGE_ACK
+ 277:tinyusb/src/common/tusb_types.h **** };
+ 278:tinyusb/src/common/tusb_types.h **** 
+ 279:tinyusb/src/common/tusb_types.h **** enum
+ 280:tinyusb/src/common/tusb_types.h **** {
+ 281:tinyusb/src/common/tusb_types.h ****   TUSB_INDEX_INVALID_8 = 0xFFu
+ARM GAS  /tmp/ccchXe7g.s 			page 16
+
+
+ 282:tinyusb/src/common/tusb_types.h **** };
+ 283:tinyusb/src/common/tusb_types.h **** 
+ 284:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 285:tinyusb/src/common/tusb_types.h **** // USB Descriptors
+ 286:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 287:tinyusb/src/common/tusb_types.h **** 
+ 288:tinyusb/src/common/tusb_types.h **** // Start of all packed definitions for compiler without per-type packed
+ 289:tinyusb/src/common/tusb_types.h **** TU_ATTR_PACKED_BEGIN
+ 290:tinyusb/src/common/tusb_types.h **** TU_ATTR_BIT_FIELD_ORDER_BEGIN
+ 291:tinyusb/src/common/tusb_types.h **** 
+ 292:tinyusb/src/common/tusb_types.h **** /// USB Device Descriptor
+ 293:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 294:tinyusb/src/common/tusb_types.h **** {
+ 295:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength            ; ///< Size of this descriptor in bytes.
+ 296:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType    ; ///< DEVICE Descriptor Type.
+ 297:tinyusb/src/common/tusb_types.h ****   uint16_t bcdUSB             ; ///< BUSB Specification Release Number in Binary-Coded Decimal (i.e
+ 298:tinyusb/src/common/tusb_types.h **** 
+ 299:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceClass       ; ///< Class code (assigned by the USB-IF). \li If this field is rese
+ 300:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceSubClass    ; ///< Subclass code (assigned by the USB-IF). These codes are qualif
+ 301:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceProtocol    ; ///< Protocol code (assigned by the USB-IF). These codes are qualif
+ 302:tinyusb/src/common/tusb_types.h ****   uint8_t  bMaxPacketSize0    ; ///< Maximum packet size for endpoint zero (only 8, 16, 32, or 64 a
+ 303:tinyusb/src/common/tusb_types.h **** 
+ 304:tinyusb/src/common/tusb_types.h ****   uint16_t idVendor           ; ///< Vendor ID (assigned by the USB-IF).
+ 305:tinyusb/src/common/tusb_types.h ****   uint16_t idProduct          ; ///< Product ID (assigned by the manufacturer).
+ 306:tinyusb/src/common/tusb_types.h ****   uint16_t bcdDevice          ; ///< Device release number in binary-coded decimal.
+ 307:tinyusb/src/common/tusb_types.h ****   uint8_t  iManufacturer      ; ///< Index of string descriptor describing manufacturer.
+ 308:tinyusb/src/common/tusb_types.h ****   uint8_t  iProduct           ; ///< Index of string descriptor describing product.
+ 309:tinyusb/src/common/tusb_types.h ****   uint8_t  iSerialNumber      ; ///< Index of string descriptor describing the device's serial numb
+ 310:tinyusb/src/common/tusb_types.h **** 
+ 311:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumConfigurations ; ///< Number of possible configurations.
+ 312:tinyusb/src/common/tusb_types.h **** } tusb_desc_device_t;
+ 313:tinyusb/src/common/tusb_types.h **** 
+ 314:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_device_t) == 18, "size is not correct");
+ 315:tinyusb/src/common/tusb_types.h **** 
+ 316:tinyusb/src/common/tusb_types.h **** // USB Binary Device Object Store (BOS) Descriptor
+ 317:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 318:tinyusb/src/common/tusb_types.h **** {
+ 319:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength         ; ///< Size of this descriptor in bytes
+ 320:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType ; ///< CONFIGURATION Descriptor Type
+ 321:tinyusb/src/common/tusb_types.h ****   uint16_t wTotalLength    ; ///< Total length of data returned for this descriptor
+ 322:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumDeviceCaps  ; ///< Number of device capability descriptors in the BOS
+ 323:tinyusb/src/common/tusb_types.h **** } tusb_desc_bos_t;
+ 324:tinyusb/src/common/tusb_types.h **** 
+ 325:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_bos_t) == 5, "size is not correct");
+ 326:tinyusb/src/common/tusb_types.h **** 
+ 327:tinyusb/src/common/tusb_types.h **** /// USB Configuration Descriptor
+ 328:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 329:tinyusb/src/common/tusb_types.h **** {
+ 330:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength             ; ///< Size of this descriptor in bytes
+ 331:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType     ; ///< CONFIGURATION Descriptor Type
+ 332:tinyusb/src/common/tusb_types.h ****   uint16_t wTotalLength        ; ///< Total length of data returned for this configuration. Include
+ 333:tinyusb/src/common/tusb_types.h **** 
+ 334:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumInterfaces      ; ///< Number of interfaces supported by this configuration
+ 335:tinyusb/src/common/tusb_types.h ****   uint8_t  bConfigurationValue ; ///< Value to use as an argument to the SetConfiguration() request
+ 336:tinyusb/src/common/tusb_types.h ****   uint8_t  iConfiguration      ; ///< Index of string descriptor describing this configuration
+ 337:tinyusb/src/common/tusb_types.h ****   uint8_t  bmAttributes        ; ///< Configuration characteristics \n D7: Reserved (set to one)\n 
+ 338:tinyusb/src/common/tusb_types.h ****   uint8_t  bMaxPower           ; ///< Maximum power consumption of the USB device from the bus in t
+ARM GAS  /tmp/ccchXe7g.s 			page 17
+
+
+ 339:tinyusb/src/common/tusb_types.h **** } tusb_desc_configuration_t;
+ 340:tinyusb/src/common/tusb_types.h **** 
+ 341:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_configuration_t) == 9, "size is not correct");
+ 342:tinyusb/src/common/tusb_types.h **** 
+ 343:tinyusb/src/common/tusb_types.h **** /// USB Interface Descriptor
+ 344:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 345:tinyusb/src/common/tusb_types.h **** {
+ 346:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength            ; ///< Size of this descriptor in bytes
+ 347:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType    ; ///< INTERFACE Descriptor Type
+ 348:tinyusb/src/common/tusb_types.h **** 
+ 349:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterfaceNumber   ; ///< Number of this interface. Zero-based value identifying the ind
+ 350:tinyusb/src/common/tusb_types.h ****   uint8_t  bAlternateSetting  ; ///< Value used to select this alternate setting for the interface 
+ 351:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumEndpoints      ; ///< Number of endpoints used by this interface (excluding endpoint
+ 352:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterfaceClass    ; ///< Class code (assigned by the USB-IF). \li A value of zero is re
+ 353:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterfaceSubClass ; ///< Subclass code (assigned by the USB-IF). \n These codes are qua
+ 354:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterfaceProtocol ; ///< Protocol code (assigned by the USB). \n These codes are qualif
+ 355:tinyusb/src/common/tusb_types.h ****   uint8_t  iInterface         ; ///< Index of string descriptor describing this interface
+ 356:tinyusb/src/common/tusb_types.h **** } tusb_desc_interface_t;
+ 357:tinyusb/src/common/tusb_types.h **** 
+ 358:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_interface_t) == 9, "size is not correct");
+ 359:tinyusb/src/common/tusb_types.h **** 
+ 360:tinyusb/src/common/tusb_types.h **** /// USB Endpoint Descriptor
+ 361:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 362:tinyusb/src/common/tusb_types.h **** {
+ 363:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength          ; // Size of this descriptor in bytes
+ 364:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType  ; // ENDPOINT Descriptor Type
+ 365:tinyusb/src/common/tusb_types.h **** 
+ 366:tinyusb/src/common/tusb_types.h ****   uint8_t  bEndpointAddress ; // The address of the endpoint
+ 367:tinyusb/src/common/tusb_types.h **** 
+ 368:tinyusb/src/common/tusb_types.h ****   struct TU_ATTR_PACKED {
+ 369:tinyusb/src/common/tusb_types.h ****     uint8_t xfer  : 2;        // Control, ISO, Bulk, Interrupt
+ 370:tinyusb/src/common/tusb_types.h ****     uint8_t sync  : 2;        // None, Asynchronous, Adaptive, Synchronous
+ 371:tinyusb/src/common/tusb_types.h ****     uint8_t usage : 2;        // Data, Feedback, Implicit feedback
+ 372:tinyusb/src/common/tusb_types.h ****     uint8_t       : 2;
+ 373:tinyusb/src/common/tusb_types.h ****   } bmAttributes;
+ 374:tinyusb/src/common/tusb_types.h **** 
+ 375:tinyusb/src/common/tusb_types.h ****   uint16_t wMaxPacketSize   ; // Bit 10..0 : max packet size, bit 12..11 additional transaction per
+ 376:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterval        ; // Polling interval, in frames or microframes depending on the operat
+ 377:tinyusb/src/common/tusb_types.h **** } tusb_desc_endpoint_t;
+ 378:tinyusb/src/common/tusb_types.h **** 
+ 379:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_endpoint_t) == 7, "size is not correct");
+ 380:tinyusb/src/common/tusb_types.h **** 
+ 381:tinyusb/src/common/tusb_types.h **** /// USB Other Speed Configuration Descriptor
+ 382:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 383:tinyusb/src/common/tusb_types.h **** {
+ 384:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength             ; ///< Size of descriptor
+ 385:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType     ; ///< Other_speed_Configuration Type
+ 386:tinyusb/src/common/tusb_types.h ****   uint16_t wTotalLength        ; ///< Total length of data returned
+ 387:tinyusb/src/common/tusb_types.h **** 
+ 388:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumInterfaces      ; ///< Number of interfaces supported by this speed configuration
+ 389:tinyusb/src/common/tusb_types.h ****   uint8_t  bConfigurationValue ; ///< Value to use to select configuration
+ 390:tinyusb/src/common/tusb_types.h ****   uint8_t  iConfiguration      ; ///< Index of string descriptor
+ 391:tinyusb/src/common/tusb_types.h ****   uint8_t  bmAttributes        ; ///< Same as Configuration descriptor
+ 392:tinyusb/src/common/tusb_types.h ****   uint8_t  bMaxPower           ; ///< Same as Configuration descriptor
+ 393:tinyusb/src/common/tusb_types.h **** } tusb_desc_other_speed_t;
+ 394:tinyusb/src/common/tusb_types.h **** 
+ 395:tinyusb/src/common/tusb_types.h **** /// USB Device Qualifier Descriptor
+ARM GAS  /tmp/ccchXe7g.s 			page 18
+
+
+ 396:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 397:tinyusb/src/common/tusb_types.h **** {
+ 398:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength            ; ///< Size of descriptor
+ 399:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType    ; ///< Device Qualifier Type
+ 400:tinyusb/src/common/tusb_types.h ****   uint16_t bcdUSB             ; ///< USB specification version number (e.g., 0200H for V2.00)
+ 401:tinyusb/src/common/tusb_types.h **** 
+ 402:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceClass       ; ///< Class Code
+ 403:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceSubClass    ; ///< SubClass Code
+ 404:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceProtocol    ; ///< Protocol Code
+ 405:tinyusb/src/common/tusb_types.h **** 
+ 406:tinyusb/src/common/tusb_types.h ****   uint8_t  bMaxPacketSize0    ; ///< Maximum packet size for other speed
+ 407:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumConfigurations ; ///< Number of Other-speed Configurations
+ 408:tinyusb/src/common/tusb_types.h ****   uint8_t  bReserved          ; ///< Reserved for future use, must be zero
+ 409:tinyusb/src/common/tusb_types.h **** } tusb_desc_device_qualifier_t;
+ 410:tinyusb/src/common/tusb_types.h **** 
+ 411:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_device_qualifier_t) == 10, "size is not correct");
+ 412:tinyusb/src/common/tusb_types.h **** 
+ 413:tinyusb/src/common/tusb_types.h **** /// USB Interface Association Descriptor (IAD ECN)
+ 414:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 415:tinyusb/src/common/tusb_types.h **** {
+ 416:tinyusb/src/common/tusb_types.h ****   uint8_t bLength           ; ///< Size of descriptor
+ 417:tinyusb/src/common/tusb_types.h ****   uint8_t bDescriptorType   ; ///< Other_speed_Configuration Type
+ 418:tinyusb/src/common/tusb_types.h **** 
+ 419:tinyusb/src/common/tusb_types.h ****   uint8_t bFirstInterface   ; ///< Index of the first associated interface.
+ 420:tinyusb/src/common/tusb_types.h ****   uint8_t bInterfaceCount   ; ///< Total number of associated interfaces.
+ 421:tinyusb/src/common/tusb_types.h **** 
+ 422:tinyusb/src/common/tusb_types.h ****   uint8_t bFunctionClass    ; ///< Interface class ID.
+ 423:tinyusb/src/common/tusb_types.h ****   uint8_t bFunctionSubClass ; ///< Interface subclass ID.
+ 424:tinyusb/src/common/tusb_types.h ****   uint8_t bFunctionProtocol ; ///< Interface protocol ID.
+ 425:tinyusb/src/common/tusb_types.h **** 
+ 426:tinyusb/src/common/tusb_types.h ****   uint8_t iFunction         ; ///< Index of the string descriptor describing the interface associat
+ 427:tinyusb/src/common/tusb_types.h **** } tusb_desc_interface_assoc_t;
+ 428:tinyusb/src/common/tusb_types.h **** 
+ 429:tinyusb/src/common/tusb_types.h **** // USB String Descriptor
+ 430:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 431:tinyusb/src/common/tusb_types.h **** {
+ 432:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength         ; ///< Size of this descriptor in bytes
+ 433:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType ; ///< Descriptor Type
+ 434:tinyusb/src/common/tusb_types.h ****   uint16_t unicode_string[];
+ 435:tinyusb/src/common/tusb_types.h **** } tusb_desc_string_t;
+ 436:tinyusb/src/common/tusb_types.h **** 
+ 437:tinyusb/src/common/tusb_types.h **** // USB Binary Device Object Store (BOS)
+ 438:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 439:tinyusb/src/common/tusb_types.h **** {
+ 440:tinyusb/src/common/tusb_types.h ****   uint8_t bLength;
+ 441:tinyusb/src/common/tusb_types.h ****   uint8_t bDescriptorType ;
+ 442:tinyusb/src/common/tusb_types.h ****   uint8_t bDevCapabilityType;
+ 443:tinyusb/src/common/tusb_types.h ****   uint8_t bReserved;
+ 444:tinyusb/src/common/tusb_types.h ****   uint8_t PlatformCapabilityUUID[16];
+ 445:tinyusb/src/common/tusb_types.h ****   uint8_t CapabilityData[];
+ 446:tinyusb/src/common/tusb_types.h **** } tusb_desc_bos_platform_t;
+ 447:tinyusb/src/common/tusb_types.h **** 
+ 448:tinyusb/src/common/tusb_types.h **** // USB WebuSB URL Descriptor
+ 449:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 450:tinyusb/src/common/tusb_types.h **** {
+ 451:tinyusb/src/common/tusb_types.h ****   uint8_t bLength;
+ 452:tinyusb/src/common/tusb_types.h ****   uint8_t bDescriptorType;
+ARM GAS  /tmp/ccchXe7g.s 			page 19
+
+
+ 453:tinyusb/src/common/tusb_types.h ****   uint8_t bScheme;
+ 454:tinyusb/src/common/tusb_types.h ****   char    url[];
+ 455:tinyusb/src/common/tusb_types.h **** } tusb_desc_webusb_url_t;
+ 456:tinyusb/src/common/tusb_types.h **** 
+ 457:tinyusb/src/common/tusb_types.h **** // DFU Functional Descriptor
+ 458:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
+ 459:tinyusb/src/common/tusb_types.h **** {
+ 460:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength;
+ 461:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType;
+ 462:tinyusb/src/common/tusb_types.h **** 
+ 463:tinyusb/src/common/tusb_types.h ****   union {
+ 464:tinyusb/src/common/tusb_types.h ****     struct TU_ATTR_PACKED {
+ 465:tinyusb/src/common/tusb_types.h ****       uint8_t bitCanDnload             : 1;
+ 466:tinyusb/src/common/tusb_types.h ****       uint8_t bitCanUpload             : 1;
+ 467:tinyusb/src/common/tusb_types.h ****       uint8_t bitManifestationTolerant : 1;
+ 468:tinyusb/src/common/tusb_types.h ****       uint8_t bitWillDetach            : 1;
+ 469:tinyusb/src/common/tusb_types.h ****       uint8_t reserved                 : 4;
+ 470:tinyusb/src/common/tusb_types.h ****     } bmAttributes;
+ 471:tinyusb/src/common/tusb_types.h **** 
+ 472:tinyusb/src/common/tusb_types.h ****     uint8_t bAttributes;
+ 473:tinyusb/src/common/tusb_types.h ****   };
+ 474:tinyusb/src/common/tusb_types.h **** 
+ 475:tinyusb/src/common/tusb_types.h ****   uint16_t wDetachTimeOut;
+ 476:tinyusb/src/common/tusb_types.h ****   uint16_t wTransferSize;
+ 477:tinyusb/src/common/tusb_types.h ****   uint16_t bcdDFUVersion;
+ 478:tinyusb/src/common/tusb_types.h **** } tusb_desc_dfu_functional_t;
+ 479:tinyusb/src/common/tusb_types.h **** 
+ 480:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 481:tinyusb/src/common/tusb_types.h **** //
+ 482:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 483:tinyusb/src/common/tusb_types.h **** 
+ 484:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED{
+ 485:tinyusb/src/common/tusb_types.h ****   union {
+ 486:tinyusb/src/common/tusb_types.h ****     struct TU_ATTR_PACKED {
+ 487:tinyusb/src/common/tusb_types.h ****       uint8_t recipient :  5; ///< Recipient type tusb_request_recipient_t.
+ 488:tinyusb/src/common/tusb_types.h ****       uint8_t type      :  2; ///< Request type tusb_request_type_t.
+ 489:tinyusb/src/common/tusb_types.h ****       uint8_t direction :  1; ///< Direction type. tusb_dir_t
+ 490:tinyusb/src/common/tusb_types.h ****     } bmRequestType_bit;
+ 491:tinyusb/src/common/tusb_types.h **** 
+ 492:tinyusb/src/common/tusb_types.h ****     uint8_t bmRequestType;
+ 493:tinyusb/src/common/tusb_types.h ****   };
+ 494:tinyusb/src/common/tusb_types.h **** 
+ 495:tinyusb/src/common/tusb_types.h ****   uint8_t  bRequest;
+ 496:tinyusb/src/common/tusb_types.h ****   uint16_t wValue;
+ 497:tinyusb/src/common/tusb_types.h ****   uint16_t wIndex;
+ 498:tinyusb/src/common/tusb_types.h ****   uint16_t wLength;
+ 499:tinyusb/src/common/tusb_types.h **** } tusb_control_request_t;
+ 500:tinyusb/src/common/tusb_types.h **** 
+ 501:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_control_request_t) == 8, "size is not correct");
+ 502:tinyusb/src/common/tusb_types.h **** 
+ 503:tinyusb/src/common/tusb_types.h **** 
+ 504:tinyusb/src/common/tusb_types.h **** TU_ATTR_PACKED_END  // End of all packed definitions
+ 505:tinyusb/src/common/tusb_types.h **** TU_ATTR_BIT_FIELD_ORDER_END
+ 506:tinyusb/src/common/tusb_types.h **** 
+ 507:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 508:tinyusb/src/common/tusb_types.h **** // Endpoint helper
+ 509:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ARM GAS  /tmp/ccchXe7g.s 			page 20
+
+
+ 510:tinyusb/src/common/tusb_types.h **** 
+ 511:tinyusb/src/common/tusb_types.h **** // Get direction from Endpoint address
+ 512:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline tusb_dir_t tu_edpt_dir(uint8_t addr)
+ 513:tinyusb/src/common/tusb_types.h **** {
+ 514:tinyusb/src/common/tusb_types.h ****   return (addr & TUSB_DIR_IN_MASK) ? TUSB_DIR_IN : TUSB_DIR_OUT;
+ 515:tinyusb/src/common/tusb_types.h **** }
+ 516:tinyusb/src/common/tusb_types.h **** 
+ 517:tinyusb/src/common/tusb_types.h **** // Get Endpoint number from address
+ 518:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_edpt_number(uint8_t addr)
+ 519:tinyusb/src/common/tusb_types.h **** {
+ 520:tinyusb/src/common/tusb_types.h ****   return (uint8_t)(addr & (~TUSB_DIR_IN_MASK));
+ 521:tinyusb/src/common/tusb_types.h **** }
+ 522:tinyusb/src/common/tusb_types.h **** 
+ 523:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_edpt_addr(uint8_t num, uint8_t dir)
+ 524:tinyusb/src/common/tusb_types.h **** {
+ 525:tinyusb/src/common/tusb_types.h ****   return (uint8_t)(num | (dir ? TUSB_DIR_IN_MASK : 0));
+ 526:tinyusb/src/common/tusb_types.h **** }
+ 527:tinyusb/src/common/tusb_types.h **** 
+ 528:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint16_t tu_edpt_packet_size(tusb_desc_endpoint_t const* desc_e
+ 406              		.loc 2 528 46 view .LVU104
+ 407              	.LBB56:
+ 529:tinyusb/src/common/tusb_types.h **** {
+ 530:tinyusb/src/common/tusb_types.h ****   return tu_le16toh(desc_ep->wMaxPacketSize) & TU_GENMASK(10, 0);
+ 408              		.loc 2 530 3 view .LVU105
+ 409              		.loc 2 530 10 is_stmt 0 view .LVU106
+ 410 0000 8388     		ldrh	r3, [r0, #4]	@ unaligned
+ 411              		.loc 2 530 46 view .LVU107
+ 412 0002 C3F30A02 		ubfx	r2, r3, #0, #11
+ 413              	.LVL22:
+ 414              		.loc 2 530 46 view .LVU108
+ 415              	.LBE56:
+ 416              	.LBE55:
+ 156:tinyusb/src/tusb.c ****   TU_LOG2("  Open EP %02X with Size = %u\r\n", desc_ep->bEndpointAddress, max_packet_size);
+ 417              		.loc 1 156 91 is_stmt 1 view .LVU109
+ 157:tinyusb/src/tusb.c **** 
+ 158:tinyusb/src/tusb.c ****   switch (desc_ep->bmAttributes.xfer)
+ 418              		.loc 1 158 3 view .LVU110
+ 419              		.loc 1 158 32 is_stmt 0 view .LVU111
+ 420 0006 C378     		ldrb	r3, [r0, #3]	@ zero_extendqisi2
+ 421 0008 03F00303 		and	r3, r3, #3
+ 422              		.loc 1 158 3 view .LVU112
+ 423 000c 022B     		cmp	r3, #2
+ 424 000e 1AD0     		beq	.L41
+ 425 0010 032B     		cmp	r3, #3
+ 426 0012 35D0     		beq	.L42
+ 427 0014 012B     		cmp	r3, #1
+ 428 0016 01D0     		beq	.L58
+ 429 0018 0020     		movs	r0, #0
+ 430              	.LVL23:
+ 431              		.loc 1 158 3 view .LVU113
+ 432 001a 7047     		bx	lr
+ 433              	.LVL24:
+ 434              	.L58:
+ 435              	.LBB57:
+ 159:tinyusb/src/tusb.c ****   {
+ 160:tinyusb/src/tusb.c ****     case TUSB_XFER_ISOCHRONOUS:
+ 161:tinyusb/src/tusb.c ****     {
+ARM GAS  /tmp/ccchXe7g.s 			page 21
+
+
+ 162:tinyusb/src/tusb.c ****       uint16_t const spec_size = (speed == TUSB_SPEED_HIGH ? 1024 : 1023);
+ 436              		.loc 1 162 7 is_stmt 1 view .LVU114
+ 437              		.loc 1 162 22 is_stmt 0 view .LVU115
+ 438 001c 0229     		cmp	r1, #2
+ 439 001e 05D0     		beq	.L59
+ 440 0020 40F2FF33 		movw	r3, #1023
+ 441              	.L44:
+ 442              	.LVL25:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 443              		.loc 1 163 7 is_stmt 1 discriminator 4 view .LVU116
+ 444              		.loc 1 163 7 discriminator 4 view .LVU117
+ 445 0024 9342     		cmp	r3, r2
+ 446 0026 04D3     		bcc	.L60
+ 447              	.LBE57:
+ 164:tinyusb/src/tusb.c ****     }
+ 165:tinyusb/src/tusb.c ****     break;
+ 166:tinyusb/src/tusb.c **** 
+ 167:tinyusb/src/tusb.c ****     case TUSB_XFER_BULK:
+ 168:tinyusb/src/tusb.c ****       if (speed == TUSB_SPEED_HIGH)
+ 169:tinyusb/src/tusb.c ****       {
+ 170:tinyusb/src/tusb.c ****         // Bulk highspeed must be EXACTLY 512
+ 171:tinyusb/src/tusb.c ****         TU_ASSERT(max_packet_size == 512);
+ 172:tinyusb/src/tusb.c ****       }else
+ 173:tinyusb/src/tusb.c ****       {
+ 174:tinyusb/src/tusb.c ****         // TODO Bulk fullspeed can only be 8, 16, 32, 64
+ 175:tinyusb/src/tusb.c ****         TU_ASSERT(max_packet_size <= 64);
+ 176:tinyusb/src/tusb.c ****       }
+ 177:tinyusb/src/tusb.c ****     break;
+ 178:tinyusb/src/tusb.c **** 
+ 179:tinyusb/src/tusb.c ****     case TUSB_XFER_INTERRUPT:
+ 180:tinyusb/src/tusb.c ****     {
+ 181:tinyusb/src/tusb.c ****       uint16_t const spec_size = (speed == TUSB_SPEED_HIGH ? 1024 : 64);
+ 182:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 183:tinyusb/src/tusb.c ****     }
+ 184:tinyusb/src/tusb.c ****     break;
+ 185:tinyusb/src/tusb.c **** 
+ 186:tinyusb/src/tusb.c ****     default: return false;
+ 187:tinyusb/src/tusb.c ****   }
+ 188:tinyusb/src/tusb.c **** 
+ 189:tinyusb/src/tusb.c ****   return true;
+ 448              		.loc 1 189 10 is_stmt 0 view .LVU118
+ 449 0028 0120     		movs	r0, #1
+ 450              	.LVL26:
+ 451              		.loc 1 189 10 view .LVU119
+ 452 002a 7047     		bx	lr
+ 453              	.LVL27:
+ 454              	.L59:
+ 455              	.LBB59:
+ 162:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 456              		.loc 1 162 22 view .LVU120
+ 457 002c 4FF48063 		mov	r3, #1024
+ 458 0030 F8E7     		b	.L44
+ 459              	.LVL28:
+ 460              	.L60:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 461              		.loc 1 163 7 is_stmt 1 discriminator 1 view .LVU121
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ARM GAS  /tmp/ccchXe7g.s 			page 22
+
+
+ 462              		.loc 1 163 7 discriminator 1 view .LVU122
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 463              		.loc 1 163 7 discriminator 1 view .LVU123
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 464              		.loc 1 163 7 discriminator 1 view .LVU124
+ 465              	.LBB58:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 466              		.loc 1 163 7 discriminator 1 view .LVU125
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 467              		.loc 1 163 7 discriminator 1 view .LVU126
+ 468 0032 4FF0E023 		mov	r3, #-536813568
+ 469              	.LVL29:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 470              		.loc 1 163 7 is_stmt 0 discriminator 1 view .LVU127
+ 471 0036 D3F8F03D 		ldr	r3, [r3, #3568]
+ 472 003a 13F0010F 		tst	r3, #1
+ 473 003e 00D0     		beq	.L45
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 474              		.loc 1 163 7 is_stmt 1 discriminator 3 view .LVU128
+ 475              		.syntax unified
+ 476              	@ 163 "tinyusb/src/tusb.c" 1
+ 477 0040 00BE     		BKPT #0
+ 478              	
+ 479              	@ 0 "" 2
+ 480              		.thumb
+ 481              		.syntax unified
+ 482              	.L45:
+ 483              	.LBE58:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 484              		.loc 1 163 7 discriminator 5 view .LVU129
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 485              		.loc 1 163 7 discriminator 5 view .LVU130
+ 486 0042 0020     		movs	r0, #0
+ 487              	.LVL30:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 488              		.loc 1 163 7 is_stmt 0 discriminator 5 view .LVU131
+ 489 0044 7047     		bx	lr
+ 490              	.LVL31:
+ 491              	.L41:
+ 163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 492              		.loc 1 163 7 discriminator 5 view .LVU132
+ 493              	.LBE59:
+ 168:tinyusb/src/tusb.c ****       {
+ 494              		.loc 1 168 7 is_stmt 1 view .LVU133
+ 168:tinyusb/src/tusb.c ****       {
+ 495              		.loc 1 168 10 is_stmt 0 view .LVU134
+ 496 0046 0229     		cmp	r1, #2
+ 497 0048 03D0     		beq	.L61
+ 175:tinyusb/src/tusb.c ****       }
+ 498              		.loc 1 175 9 is_stmt 1 discriminator 2 view .LVU135
+ 175:tinyusb/src/tusb.c ****       }
+ 499              		.loc 1 175 9 discriminator 2 view .LVU136
+ 500 004a 402A     		cmp	r2, #64
+ 501 004c 0ED8     		bhi	.L62
+ 502              		.loc 1 189 10 is_stmt 0 view .LVU137
+ 503 004e 0120     		movs	r0, #1
+ 504              	.LVL32:
+ARM GAS  /tmp/ccchXe7g.s 			page 23
+
+
+ 505              		.loc 1 189 10 view .LVU138
+ 506 0050 7047     		bx	lr
+ 507              	.LVL33:
+ 508              	.L61:
+ 171:tinyusb/src/tusb.c ****       }else
+ 509              		.loc 1 171 9 is_stmt 1 view .LVU139
+ 171:tinyusb/src/tusb.c ****       }else
+ 510              		.loc 1 171 9 view .LVU140
+ 511 0052 B2F5007F 		cmp	r2, #512
+ 512 0056 27D0     		beq	.L54
+ 171:tinyusb/src/tusb.c ****       }else
+ 513              		.loc 1 171 9 discriminator 1 view .LVU141
+ 171:tinyusb/src/tusb.c ****       }else
+ 514              		.loc 1 171 9 discriminator 1 view .LVU142
+ 171:tinyusb/src/tusb.c ****       }else
+ 515              		.loc 1 171 9 discriminator 1 view .LVU143
+ 171:tinyusb/src/tusb.c ****       }else
+ 516              		.loc 1 171 9 discriminator 1 view .LVU144
+ 517              	.LBB60:
+ 171:tinyusb/src/tusb.c ****       }else
+ 518              		.loc 1 171 9 discriminator 1 view .LVU145
+ 519              	.LVL34:
+ 171:tinyusb/src/tusb.c ****       }else
+ 520              		.loc 1 171 9 discriminator 1 view .LVU146
+ 521 0058 4FF0E023 		mov	r3, #-536813568
+ 522 005c D3F8F03D 		ldr	r3, [r3, #3568]
+ 523 0060 13F0010F 		tst	r3, #1
+ 524 0064 00D0     		beq	.L47
+ 171:tinyusb/src/tusb.c ****       }else
+ 525              		.loc 1 171 9 discriminator 3 view .LVU147
+ 526              		.syntax unified
+ 527              	@ 171 "tinyusb/src/tusb.c" 1
+ 528 0066 00BE     		BKPT #0
+ 529              	
+ 530              	@ 0 "" 2
+ 531              		.thumb
+ 532              		.syntax unified
+ 533              	.L47:
+ 534              	.LBE60:
+ 171:tinyusb/src/tusb.c ****       }else
+ 535              		.loc 1 171 9 discriminator 5 view .LVU148
+ 171:tinyusb/src/tusb.c ****       }else
+ 536              		.loc 1 171 9 discriminator 5 view .LVU149
+ 537 0068 0020     		movs	r0, #0
+ 538              	.LVL35:
+ 171:tinyusb/src/tusb.c ****       }else
+ 539              		.loc 1 171 9 is_stmt 0 discriminator 5 view .LVU150
+ 540 006a 7047     		bx	lr
+ 541              	.LVL36:
+ 542              	.L62:
+ 175:tinyusb/src/tusb.c ****       }
+ 543              		.loc 1 175 9 is_stmt 1 discriminator 1 view .LVU151
+ 175:tinyusb/src/tusb.c ****       }
+ 544              		.loc 1 175 9 discriminator 1 view .LVU152
+ 175:tinyusb/src/tusb.c ****       }
+ 545              		.loc 1 175 9 discriminator 1 view .LVU153
+ 175:tinyusb/src/tusb.c ****       }
+ARM GAS  /tmp/ccchXe7g.s 			page 24
+
+
+ 546              		.loc 1 175 9 discriminator 1 view .LVU154
+ 547              	.LBB61:
+ 175:tinyusb/src/tusb.c ****       }
+ 548              		.loc 1 175 9 discriminator 1 view .LVU155
+ 175:tinyusb/src/tusb.c ****       }
+ 549              		.loc 1 175 9 discriminator 1 view .LVU156
+ 550 006c 4FF0E023 		mov	r3, #-536813568
+ 551 0070 D3F8F03D 		ldr	r3, [r3, #3568]
+ 552 0074 13F0010F 		tst	r3, #1
+ 553 0078 00D0     		beq	.L48
+ 175:tinyusb/src/tusb.c ****       }
+ 554              		.loc 1 175 9 discriminator 3 view .LVU157
+ 555              		.syntax unified
+ 556              	@ 175 "tinyusb/src/tusb.c" 1
+ 557 007a 00BE     		BKPT #0
+ 558              	
+ 559              	@ 0 "" 2
+ 560              		.thumb
+ 561              		.syntax unified
+ 562              	.L48:
+ 563              	.LBE61:
+ 175:tinyusb/src/tusb.c ****       }
+ 564              		.loc 1 175 9 discriminator 5 view .LVU158
+ 175:tinyusb/src/tusb.c ****       }
+ 565              		.loc 1 175 9 discriminator 5 view .LVU159
+ 566 007c 0020     		movs	r0, #0
+ 567              	.LVL37:
+ 175:tinyusb/src/tusb.c ****       }
+ 568              		.loc 1 175 9 is_stmt 0 discriminator 5 view .LVU160
+ 569 007e 7047     		bx	lr
+ 570              	.LVL38:
+ 571              	.L42:
+ 572              	.LBB62:
+ 181:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 573              		.loc 1 181 7 is_stmt 1 view .LVU161
+ 181:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 574              		.loc 1 181 22 is_stmt 0 view .LVU162
+ 575 0080 0229     		cmp	r1, #2
+ 576 0082 04D0     		beq	.L63
+ 577 0084 4023     		movs	r3, #64
+ 578              	.L49:
+ 579              	.LVL39:
+ 182:tinyusb/src/tusb.c ****     }
+ 580              		.loc 1 182 7 is_stmt 1 discriminator 4 view .LVU163
+ 182:tinyusb/src/tusb.c ****     }
+ 581              		.loc 1 182 7 discriminator 4 view .LVU164
+ 582 0086 9342     		cmp	r3, r2
+ 583 0088 04D3     		bcc	.L64
+ 584              	.LBE62:
+ 585              		.loc 1 189 10 is_stmt 0 view .LVU165
+ 586 008a 0120     		movs	r0, #1
+ 587              	.LVL40:
+ 190:tinyusb/src/tusb.c **** }
+ 588              		.loc 1 190 1 view .LVU166
+ 589 008c 7047     		bx	lr
+ 590              	.LVL41:
+ 591              	.L63:
+ARM GAS  /tmp/ccchXe7g.s 			page 25
+
+
+ 592              	.LBB64:
+ 181:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
+ 593              		.loc 1 181 22 view .LVU167
+ 594 008e 4FF48063 		mov	r3, #1024
+ 595 0092 F8E7     		b	.L49
+ 596              	.LVL42:
+ 597              	.L64:
+ 182:tinyusb/src/tusb.c ****     }
+ 598              		.loc 1 182 7 is_stmt 1 discriminator 1 view .LVU168
+ 182:tinyusb/src/tusb.c ****     }
+ 599              		.loc 1 182 7 discriminator 1 view .LVU169
+ 182:tinyusb/src/tusb.c ****     }
+ 600              		.loc 1 182 7 discriminator 1 view .LVU170
+ 182:tinyusb/src/tusb.c ****     }
+ 601              		.loc 1 182 7 discriminator 1 view .LVU171
+ 602              	.LBB63:
+ 182:tinyusb/src/tusb.c ****     }
+ 603              		.loc 1 182 7 discriminator 1 view .LVU172
+ 182:tinyusb/src/tusb.c ****     }
+ 604              		.loc 1 182 7 discriminator 1 view .LVU173
+ 605 0094 4FF0E023 		mov	r3, #-536813568
+ 606              	.LVL43:
+ 182:tinyusb/src/tusb.c ****     }
+ 607              		.loc 1 182 7 is_stmt 0 discriminator 1 view .LVU174
+ 608 0098 D3F8F03D 		ldr	r3, [r3, #3568]
+ 609 009c 13F0010F 		tst	r3, #1
+ 610 00a0 00D0     		beq	.L50
+ 182:tinyusb/src/tusb.c ****     }
+ 611              		.loc 1 182 7 is_stmt 1 discriminator 3 view .LVU175
+ 612              		.syntax unified
+ 613              	@ 182 "tinyusb/src/tusb.c" 1
+ 614 00a2 00BE     		BKPT #0
+ 615              	
+ 616              	@ 0 "" 2
+ 617              		.thumb
+ 618              		.syntax unified
+ 619              	.L50:
+ 620              	.LBE63:
+ 182:tinyusb/src/tusb.c ****     }
+ 621              		.loc 1 182 7 discriminator 5 view .LVU176
+ 182:tinyusb/src/tusb.c ****     }
+ 622              		.loc 1 182 7 discriminator 5 view .LVU177
+ 623 00a4 0020     		movs	r0, #0
+ 624              	.LVL44:
+ 182:tinyusb/src/tusb.c ****     }
+ 625              		.loc 1 182 7 is_stmt 0 discriminator 5 view .LVU178
+ 626 00a6 7047     		bx	lr
+ 627              	.LVL45:
+ 628              	.L54:
+ 182:tinyusb/src/tusb.c ****     }
+ 629              		.loc 1 182 7 discriminator 5 view .LVU179
+ 630              	.LBE64:
+ 189:tinyusb/src/tusb.c **** }
+ 631              		.loc 1 189 10 view .LVU180
+ 632 00a8 0120     		movs	r0, #1
+ 633              	.LVL46:
+ 189:tinyusb/src/tusb.c **** }
+ARM GAS  /tmp/ccchXe7g.s 			page 26
+
+
+ 634              		.loc 1 189 10 view .LVU181
+ 635 00aa 7047     		bx	lr
+ 636              		.cfi_endproc
+ 637              	.LFE86:
+ 639              		.section	.text.tu_edpt_bind_driver,"ax",%progbits
+ 640              		.align	1
+ 641              		.global	tu_edpt_bind_driver
+ 642              		.syntax unified
+ 643              		.thumb
+ 644              		.thumb_func
+ 645              		.fpu fpv4-sp-d16
+ 647              	tu_edpt_bind_driver:
+ 648              	.LVL47:
+ 649              	.LFB87:
+ 191:tinyusb/src/tusb.c **** 
+ 192:tinyusb/src/tusb.c **** void tu_edpt_bind_driver(uint8_t ep2drv[][2], tusb_desc_interface_t const* desc_itf, uint16_t desc_
+ 193:tinyusb/src/tusb.c **** {
+ 650              		.loc 1 193 1 is_stmt 1 view -0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 0
+ 653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 194:tinyusb/src/tusb.c ****   uint8_t const* p_desc = (uint8_t const*) desc_itf;
+ 654              		.loc 1 194 3 view .LVU183
+ 195:tinyusb/src/tusb.c ****   uint8_t const* desc_end = p_desc + desc_len;
+ 655              		.loc 1 195 3 view .LVU184
+ 656              		.loc 1 195 18 is_stmt 0 view .LVU185
+ 657 0000 0A44     		add	r2, r2, r1
+ 658              	.LVL48:
+ 196:tinyusb/src/tusb.c **** 
+ 197:tinyusb/src/tusb.c ****   while( p_desc < desc_end )
+ 659              		.loc 1 197 3 is_stmt 1 view .LVU186
+ 660              		.loc 1 197 8 is_stmt 0 view .LVU187
+ 661 0002 04E0     		b	.L70
+ 662              	.LVL49:
+ 663              	.L77:
+ 664              	.LCFI2:
+ 665              		.cfi_def_cfa_offset 4
+ 666              		.cfi_offset 14, -4
+ 198:tinyusb/src/tusb.c ****   {
+ 199:tinyusb/src/tusb.c ****     if ( TUSB_DESC_ENDPOINT == tu_desc_type(p_desc) )
+ 200:tinyusb/src/tusb.c ****     {
+ 201:tinyusb/src/tusb.c ****       uint8_t const ep_addr = ((tusb_desc_endpoint_t const*) p_desc)->bEndpointAddress;
+ 202:tinyusb/src/tusb.c **** 
+ 203:tinyusb/src/tusb.c ****       TU_LOG(2, "  Bind EP %02x to driver id %u\r\n", ep_addr, driver_id);
+ 204:tinyusb/src/tusb.c ****       ep2drv[tu_edpt_number(ep_addr)][tu_edpt_dir(ep_addr)] = driver_id;
+ 205:tinyusb/src/tusb.c ****     }
+ 206:tinyusb/src/tusb.c **** 
+ 207:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
+ 208:tinyusb/src/tusb.c ****   }
+ 209:tinyusb/src/tusb.c **** }
+ 667              		.loc 1 209 1 view .LVU188
+ 668 0004 5DF804FB 		ldr	pc, [sp], #4
+ 669              	.L76:
+ 670              	.LCFI3:
+ 671              		.cfi_def_cfa_offset 0
+ 672              		.cfi_restore 14
+ 207:tinyusb/src/tusb.c ****   }
+ARM GAS  /tmp/ccchXe7g.s 			page 27
+
+
+ 673              		.loc 1 207 5 is_stmt 1 view .LVU189
+ 674              	.LVL50:
+ 675              	.LBB65:
+ 676              	.LBI65:
+ 531:tinyusb/src/common/tusb_types.h **** }
+ 532:tinyusb/src/common/tusb_types.h **** 
+ 533:tinyusb/src/common/tusb_types.h **** #if CFG_TUSB_DEBUG
+ 534:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline const char *tu_edpt_dir_str(tusb_dir_t dir)
+ 535:tinyusb/src/common/tusb_types.h **** {
+ 536:tinyusb/src/common/tusb_types.h ****   tu_static const char *str[] = {"out", "in"};
+ 537:tinyusb/src/common/tusb_types.h ****   return str[dir];
+ 538:tinyusb/src/common/tusb_types.h **** }
+ 539:tinyusb/src/common/tusb_types.h **** 
+ 540:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline const char *tu_edpt_type_str(tusb_xfer_type_t t)
+ 541:tinyusb/src/common/tusb_types.h **** {
+ 542:tinyusb/src/common/tusb_types.h ****   tu_static const char *str[] = {"control", "isochronous", "bulk", "interrupt"};
+ 543:tinyusb/src/common/tusb_types.h ****   return str[t];
+ 544:tinyusb/src/common/tusb_types.h **** }
+ 545:tinyusb/src/common/tusb_types.h **** #endif
+ 546:tinyusb/src/common/tusb_types.h **** 
+ 547:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 548:tinyusb/src/common/tusb_types.h **** // Descriptor helper
+ 549:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
+ 550:tinyusb/src/common/tusb_types.h **** 
+ 551:tinyusb/src/common/tusb_types.h **** // return next descriptor
+ 552:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t const * tu_desc_next(void const* desc)
+ 677              		.loc 2 552 53 view .LVU190
+ 678              	.LBB66:
+ 553:tinyusb/src/common/tusb_types.h **** {
+ 554:tinyusb/src/common/tusb_types.h ****   uint8_t const* desc8 = (uint8_t const*) desc;
+ 679              		.loc 2 554 3 view .LVU191
+ 555:tinyusb/src/common/tusb_types.h ****   return desc8 + desc8[DESC_OFFSET_LEN];
+ 680              		.loc 2 555 3 view .LVU192
+ 681              		.loc 2 555 23 is_stmt 0 view .LVU193
+ 682 0008 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 683              		.loc 2 555 16 view .LVU194
+ 684 000c 6144     		add	r1, r1, ip
+ 685              	.LVL51:
+ 686              	.L70:
+ 687              		.loc 2 555 16 view .LVU195
+ 688              	.LBE66:
+ 689              	.LBE65:
+ 197:tinyusb/src/tusb.c ****   {
+ 690              		.loc 1 197 8 is_stmt 1 view .LVU196
+ 691 000e 9142     		cmp	r1, r2
+ 692 0010 1AD2     		bcs	.L75
+ 199:tinyusb/src/tusb.c ****     {
+ 693              		.loc 1 199 5 view .LVU197
+ 694              	.LVL52:
+ 695              	.LBB68:
+ 696              	.LBI68:
+ 556:tinyusb/src/common/tusb_types.h **** }
+ 557:tinyusb/src/common/tusb_types.h **** 
+ 558:tinyusb/src/common/tusb_types.h **** // get descriptor type
+ 559:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_desc_type(void const* desc)
+ 697              		.loc 2 559 45 view .LVU198
+ 698              	.LBB69:
+ARM GAS  /tmp/ccchXe7g.s 			page 28
+
+
+ 560:tinyusb/src/common/tusb_types.h **** {
+ 561:tinyusb/src/common/tusb_types.h ****   return ((uint8_t const*) desc)[DESC_OFFSET_TYPE];
+ 699              		.loc 2 561 3 view .LVU199
+ 700              		.loc 2 561 33 is_stmt 0 view .LVU200
+ 701 0012 91F801C0 		ldrb	ip, [r1, #1]	@ zero_extendqisi2
+ 702              	.LVL53:
+ 703              		.loc 2 561 33 view .LVU201
+ 704              	.LBE69:
+ 705              	.LBE68:
+ 199:tinyusb/src/tusb.c ****     {
+ 706              		.loc 1 199 8 view .LVU202
+ 707 0016 BCF1050F 		cmp	ip, #5
+ 708 001a F5D1     		bne	.L76
+ 193:tinyusb/src/tusb.c ****   uint8_t const* p_desc = (uint8_t const*) desc_itf;
+ 709              		.loc 1 193 1 view .LVU203
+ 710 001c 00B5     		push	{lr}
+ 711              	.LCFI4:
+ 712              		.cfi_def_cfa_offset 4
+ 713              		.cfi_offset 14, -4
+ 714              	.L71:
+ 715              	.LBB71:
+ 201:tinyusb/src/tusb.c **** 
+ 716              		.loc 1 201 7 is_stmt 1 view .LVU204
+ 201:tinyusb/src/tusb.c **** 
+ 717              		.loc 1 201 21 is_stmt 0 view .LVU205
+ 718 001e 91F802C0 		ldrb	ip, [r1, #2]	@ zero_extendqisi2
+ 719              	.LVL54:
+ 203:tinyusb/src/tusb.c ****       ep2drv[tu_edpt_number(ep_addr)][tu_edpt_dir(ep_addr)] = driver_id;
+ 720              		.loc 1 203 74 is_stmt 1 view .LVU206
+ 204:tinyusb/src/tusb.c ****     }
+ 721              		.loc 1 204 7 view .LVU207
+ 722              	.LBB72:
+ 723              	.LBI72:
+ 518:tinyusb/src/common/tusb_types.h **** {
+ 724              		.loc 2 518 45 view .LVU208
+ 725              	.LBB73:
+ 520:tinyusb/src/common/tusb_types.h **** }
+ 726              		.loc 2 520 3 view .LVU209
+ 520:tinyusb/src/common/tusb_types.h **** }
+ 727              		.loc 2 520 10 is_stmt 0 view .LVU210
+ 728 0022 0CF07F0E 		and	lr, ip, #127
+ 729              	.LVL55:
+ 520:tinyusb/src/common/tusb_types.h **** }
+ 730              		.loc 2 520 10 view .LVU211
+ 731              	.LBE73:
+ 732              	.LBE72:
+ 204:tinyusb/src/tusb.c ****     }
+ 733              		.loc 1 204 13 view .LVU212
+ 734 0026 00EB4E0E 		add	lr, r0, lr, lsl #1
+ 735              	.LVL56:
+ 736              	.LBB74:
+ 737              	.LBI74:
+ 512:tinyusb/src/common/tusb_types.h **** {
+ 738              		.loc 2 512 48 is_stmt 1 view .LVU213
+ 739              	.LBB75:
+ 514:tinyusb/src/common/tusb_types.h **** }
+ 740              		.loc 2 514 3 view .LVU214
+ARM GAS  /tmp/ccchXe7g.s 			page 29
+
+
+ 514:tinyusb/src/common/tusb_types.h **** }
+ 741              		.loc 2 514 50 is_stmt 0 view .LVU215
+ 742 002a 4FEADC1C 		lsr	ip, ip, #7
+ 743              	.LVL57:
+ 514:tinyusb/src/common/tusb_types.h **** }
+ 744              		.loc 2 514 50 view .LVU216
+ 745              	.LBE75:
+ 746              	.LBE74:
+ 204:tinyusb/src/tusb.c ****     }
+ 747              		.loc 1 204 61 view .LVU217
+ 748 002e 0EF80C30 		strb	r3, [lr, ip]
+ 749              	.LVL58:
+ 750              	.L67:
+ 204:tinyusb/src/tusb.c ****     }
+ 751              		.loc 1 204 61 view .LVU218
+ 752              	.LBE71:
+ 207:tinyusb/src/tusb.c ****   }
+ 753              		.loc 1 207 5 is_stmt 1 view .LVU219
+ 754              	.LBB76:
+ 552:tinyusb/src/common/tusb_types.h **** {
+ 755              		.loc 2 552 53 view .LVU220
+ 756              	.LBB67:
+ 554:tinyusb/src/common/tusb_types.h ****   return desc8 + desc8[DESC_OFFSET_LEN];
+ 757              		.loc 2 554 3 view .LVU221
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 758              		.loc 2 555 3 view .LVU222
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 759              		.loc 2 555 23 is_stmt 0 view .LVU223
+ 760 0032 91F800C0 		ldrb	ip, [r1]	@ zero_extendqisi2
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 761              		.loc 2 555 16 view .LVU224
+ 762 0036 6144     		add	r1, r1, ip
+ 763              	.LVL59:
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 764              		.loc 2 555 16 view .LVU225
+ 765              	.LBE67:
+ 766              	.LBE76:
+ 197:tinyusb/src/tusb.c ****   {
+ 767              		.loc 1 197 8 is_stmt 1 view .LVU226
+ 768 0038 9142     		cmp	r1, r2
+ 769 003a E3D2     		bcs	.L77
+ 199:tinyusb/src/tusb.c ****     {
+ 770              		.loc 1 199 5 view .LVU227
+ 771              	.LVL60:
+ 772              	.LBB77:
+ 559:tinyusb/src/common/tusb_types.h **** {
+ 773              		.loc 2 559 45 view .LVU228
+ 774              	.LBB70:
+ 775              		.loc 2 561 3 view .LVU229
+ 776              		.loc 2 561 33 is_stmt 0 view .LVU230
+ 777 003c 91F801C0 		ldrb	ip, [r1, #1]	@ zero_extendqisi2
+ 778              	.LVL61:
+ 779              		.loc 2 561 33 view .LVU231
+ 780              	.LBE70:
+ 781              	.LBE77:
+ 199:tinyusb/src/tusb.c ****     {
+ 782              		.loc 1 199 8 view .LVU232
+ARM GAS  /tmp/ccchXe7g.s 			page 30
+
+
+ 783 0040 BCF1050F 		cmp	ip, #5
+ 784 0044 F5D1     		bne	.L67
+ 785 0046 EAE7     		b	.L71
+ 786              	.L75:
+ 787              	.LCFI5:
+ 788              		.cfi_def_cfa_offset 0
+ 789              		.cfi_restore 14
+ 199:tinyusb/src/tusb.c ****     {
+ 790              		.loc 1 199 8 view .LVU233
+ 791 0048 7047     		bx	lr
+ 792              		.cfi_endproc
+ 793              	.LFE87:
+ 795              		.section	.text.tu_desc_get_interface_total_len,"ax",%progbits
+ 796              		.align	1
+ 797              		.global	tu_desc_get_interface_total_len
+ 798              		.syntax unified
+ 799              		.thumb
+ 800              		.thumb_func
+ 801              		.fpu fpv4-sp-d16
+ 803              	tu_desc_get_interface_total_len:
+ 804              	.LVL62:
+ 805              	.LFB88:
+ 210:tinyusb/src/tusb.c **** 
+ 211:tinyusb/src/tusb.c **** uint16_t tu_desc_get_interface_total_len(tusb_desc_interface_t const* desc_itf, uint8_t itf_count, 
+ 212:tinyusb/src/tusb.c **** {
+ 806              		.loc 1 212 1 is_stmt 1 view -0
+ 807              		.cfi_startproc
+ 808              		@ args = 0, pretend = 0, frame = 0
+ 809              		@ frame_needed = 0, uses_anonymous_args = 0
+ 810              		.loc 1 212 1 is_stmt 0 view .LVU235
+ 811 0000 00B5     		push	{lr}
+ 812              	.LCFI6:
+ 813              		.cfi_def_cfa_offset 4
+ 814              		.cfi_offset 14, -4
+ 815 0002 8446     		mov	ip, r0
+ 213:tinyusb/src/tusb.c ****   uint8_t const* p_desc = (uint8_t const*) desc_itf;
+ 816              		.loc 1 213 3 is_stmt 1 view .LVU236
+ 817              	.LVL63:
+ 214:tinyusb/src/tusb.c ****   uint16_t len = 0;
+ 818              		.loc 1 214 3 view .LVU237
+ 215:tinyusb/src/tusb.c **** 
+ 216:tinyusb/src/tusb.c ****   while (itf_count--)
+ 819              		.loc 1 216 3 view .LVU238
+ 213:tinyusb/src/tusb.c ****   uint16_t len = 0;
+ 820              		.loc 1 213 18 is_stmt 0 view .LVU239
+ 821 0004 0346     		mov	r3, r0
+ 214:tinyusb/src/tusb.c ****   uint16_t len = 0;
+ 822              		.loc 1 214 12 view .LVU240
+ 823 0006 0020     		movs	r0, #0
+ 824              	.LVL64:
+ 825              		.loc 1 216 9 view .LVU241
+ 826 0008 0EE0     		b	.L79
+ 827              	.LVL65:
+ 828              	.L82:
+ 217:tinyusb/src/tusb.c ****   {
+ 218:tinyusb/src/tusb.c ****     // Next on interface desc
+ 219:tinyusb/src/tusb.c ****     len += tu_desc_len(desc_itf);
+ARM GAS  /tmp/ccchXe7g.s 			page 31
+
+
+ 220:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
+ 221:tinyusb/src/tusb.c **** 
+ 222:tinyusb/src/tusb.c ****     while (len < max_len)
+ 223:tinyusb/src/tusb.c ****     {
+ 224:tinyusb/src/tusb.c ****       // return on IAD regardless of itf count
+ 225:tinyusb/src/tusb.c ****       if ( tu_desc_type(p_desc) == TUSB_DESC_INTERFACE_ASSOCIATION ) return len;
+ 226:tinyusb/src/tusb.c **** 
+ 227:tinyusb/src/tusb.c ****       if ( (tu_desc_type(p_desc) == TUSB_DESC_INTERFACE) &&
+ 228:tinyusb/src/tusb.c ****            ((tusb_desc_interface_t const*) p_desc)->bAlternateSetting == 0 )
+ 229:tinyusb/src/tusb.c ****       {
+ 230:tinyusb/src/tusb.c ****         break;
+ 231:tinyusb/src/tusb.c ****       }
+ 232:tinyusb/src/tusb.c **** 
+ 233:tinyusb/src/tusb.c ****       len += tu_desc_len(p_desc);
+ 829              		.loc 1 233 7 is_stmt 1 view .LVU242
+ 830              	.LBB78:
+ 831              	.LBI78:
+ 562:tinyusb/src/common/tusb_types.h **** }
+ 563:tinyusb/src/common/tusb_types.h **** 
+ 564:tinyusb/src/common/tusb_types.h **** // get descriptor length
+ 565:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_desc_len(void const* desc)
+ 832              		.loc 2 565 45 view .LVU243
+ 833              	.LBB79:
+ 566:tinyusb/src/common/tusb_types.h **** {
+ 567:tinyusb/src/common/tusb_types.h ****   return ((uint8_t const*) desc)[DESC_OFFSET_LEN];
+ 834              		.loc 2 567 3 view .LVU244
+ 835              		.loc 2 567 33 is_stmt 0 view .LVU245
+ 836 000a 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 837              	.LVL66:
+ 838              		.loc 2 567 33 view .LVU246
+ 839              	.LBE79:
+ 840              	.LBE78:
+ 841              		.loc 1 233 11 view .LVU247
+ 842 000c 0844     		add	r0, r0, r1
+ 843              	.LVL67:
+ 844              		.loc 1 233 11 view .LVU248
+ 845 000e 80B2     		uxth	r0, r0
+ 846              	.LVL68:
+ 234:tinyusb/src/tusb.c ****       p_desc = tu_desc_next(p_desc);
+ 847              		.loc 1 234 7 is_stmt 1 view .LVU249
+ 848              	.LBB80:
+ 849              	.LBI80:
+ 552:tinyusb/src/common/tusb_types.h **** {
+ 850              		.loc 2 552 53 view .LVU250
+ 851              	.LBB81:
+ 554:tinyusb/src/common/tusb_types.h ****   return desc8 + desc8[DESC_OFFSET_LEN];
+ 852              		.loc 2 554 3 view .LVU251
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 853              		.loc 2 555 3 view .LVU252
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 854              		.loc 2 555 16 is_stmt 0 view .LVU253
+ 855 0010 0B44     		add	r3, r3, r1
+ 856              	.LVL69:
+ 857              	.L80:
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 858              		.loc 2 555 16 view .LVU254
+ 859              	.LBE81:
+ARM GAS  /tmp/ccchXe7g.s 			page 32
+
+
+ 860              	.LBE80:
+ 222:tinyusb/src/tusb.c ****     {
+ 861              		.loc 1 222 11 is_stmt 1 view .LVU255
+ 862 0012 9042     		cmp	r0, r2
+ 863 0014 07D2     		bcs	.L83
+ 225:tinyusb/src/tusb.c **** 
+ 864              		.loc 1 225 7 view .LVU256
+ 865              	.LVL70:
+ 866              	.LBB82:
+ 867              	.LBI82:
+ 559:tinyusb/src/common/tusb_types.h **** {
+ 868              		.loc 2 559 45 view .LVU257
+ 869              	.LBB83:
+ 561:tinyusb/src/common/tusb_types.h **** }
+ 870              		.loc 2 561 3 view .LVU258
+ 561:tinyusb/src/common/tusb_types.h **** }
+ 871              		.loc 2 561 33 is_stmt 0 view .LVU259
+ 872 0016 5978     		ldrb	r1, [r3, #1]	@ zero_extendqisi2
+ 873              	.LVL71:
+ 561:tinyusb/src/common/tusb_types.h **** }
+ 874              		.loc 2 561 33 view .LVU260
+ 875              	.LBE83:
+ 876              	.LBE82:
+ 225:tinyusb/src/tusb.c **** 
+ 877              		.loc 1 225 10 view .LVU261
+ 878 0018 0B29     		cmp	r1, #11
+ 879 001a 11D0     		beq	.L81
+ 227:tinyusb/src/tusb.c ****            ((tusb_desc_interface_t const*) p_desc)->bAlternateSetting == 0 )
+ 880              		.loc 1 227 7 is_stmt 1 view .LVU262
+ 881              	.LVL72:
+ 561:tinyusb/src/common/tusb_types.h **** }
+ 882              		.loc 2 561 3 view .LVU263
+ 227:tinyusb/src/tusb.c ****            ((tusb_desc_interface_t const*) p_desc)->bAlternateSetting == 0 )
+ 883              		.loc 1 227 10 is_stmt 0 view .LVU264
+ 884 001c 0429     		cmp	r1, #4
+ 885 001e F4D1     		bne	.L82
+ 228:tinyusb/src/tusb.c ****       {
+ 886              		.loc 1 228 51 discriminator 1 view .LVU265
+ 887 0020 D978     		ldrb	r1, [r3, #3]	@ zero_extendqisi2
+ 227:tinyusb/src/tusb.c ****            ((tusb_desc_interface_t const*) p_desc)->bAlternateSetting == 0 )
+ 888              		.loc 1 227 58 discriminator 1 view .LVU266
+ 889 0022 0029     		cmp	r1, #0
+ 890 0024 F1D1     		bne	.L82
+ 891              	.L83:
+ 212:tinyusb/src/tusb.c ****   uint8_t const* p_desc = (uint8_t const*) desc_itf;
+ 892              		.loc 1 212 1 view .LVU267
+ 893 0026 7146     		mov	r1, lr
+ 894              	.LVL73:
+ 895              	.L79:
+ 216:tinyusb/src/tusb.c ****   {
+ 896              		.loc 1 216 9 is_stmt 1 view .LVU268
+ 216:tinyusb/src/tusb.c ****   {
+ 897              		.loc 1 216 19 is_stmt 0 view .LVU269
+ 898 0028 01F1FF3E 		add	lr, r1, #-1
+ 899 002c 5FFA8EFE 		uxtb	lr, lr
+ 900              	.LVL74:
+ 216:tinyusb/src/tusb.c ****   {
+ARM GAS  /tmp/ccchXe7g.s 			page 33
+
+
+ 901              		.loc 1 216 9 view .LVU270
+ 902 0030 31B1     		cbz	r1, .L81
+ 219:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
+ 903              		.loc 1 219 5 is_stmt 1 view .LVU271
+ 904              	.LVL75:
+ 905              	.LBB84:
+ 906              	.LBI84:
+ 565:tinyusb/src/common/tusb_types.h **** {
+ 907              		.loc 2 565 45 view .LVU272
+ 908              	.LBB85:
+ 909              		.loc 2 567 3 view .LVU273
+ 910              		.loc 2 567 3 is_stmt 0 view .LVU274
+ 911              	.LBE85:
+ 912              	.LBE84:
+ 219:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
+ 913              		.loc 1 219 12 view .LVU275
+ 914 0032 9CF80010 		ldrb	r1, [ip]	@ zero_extendqisi2
+ 219:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
+ 915              		.loc 1 219 9 view .LVU276
+ 916 0036 0844     		add	r0, r0, r1
+ 917              	.LVL76:
+ 219:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
+ 918              		.loc 1 219 9 view .LVU277
+ 919 0038 80B2     		uxth	r0, r0
+ 920              	.LVL77:
+ 220:tinyusb/src/tusb.c **** 
+ 921              		.loc 1 220 5 is_stmt 1 view .LVU278
+ 922              	.LBB86:
+ 923              	.LBI86:
+ 552:tinyusb/src/common/tusb_types.h **** {
+ 924              		.loc 2 552 53 view .LVU279
+ 925              	.LBB87:
+ 554:tinyusb/src/common/tusb_types.h ****   return desc8 + desc8[DESC_OFFSET_LEN];
+ 926              		.loc 2 554 3 view .LVU280
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 927              		.loc 2 555 3 view .LVU281
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 928              		.loc 2 555 23 is_stmt 0 view .LVU282
+ 929 003a 1978     		ldrb	r1, [r3]	@ zero_extendqisi2
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 930              		.loc 2 555 16 view .LVU283
+ 931 003c 0B44     		add	r3, r3, r1
+ 932              	.LVL78:
+ 555:tinyusb/src/common/tusb_types.h **** }
+ 933              		.loc 2 555 16 view .LVU284
+ 934              	.LBE87:
+ 935              	.LBE86:
+ 222:tinyusb/src/tusb.c ****     {
+ 936              		.loc 1 222 5 is_stmt 1 view .LVU285
+ 222:tinyusb/src/tusb.c ****     {
+ 937              		.loc 1 222 11 is_stmt 0 view .LVU286
+ 938 003e E8E7     		b	.L80
+ 939              	.L81:
+ 235:tinyusb/src/tusb.c ****     }
+ 236:tinyusb/src/tusb.c ****   }
+ 237:tinyusb/src/tusb.c **** 
+ 238:tinyusb/src/tusb.c ****   return len;
+ARM GAS  /tmp/ccchXe7g.s 			page 34
+
+
+ 239:tinyusb/src/tusb.c **** }
+ 940              		.loc 1 239 1 view .LVU287
+ 941 0040 5DF804FB 		ldr	pc, [sp], #4
+ 942              		.cfi_endproc
+ 943              	.LFE88:
+ 945              		.section	.text.tu_edpt_stream_init,"ax",%progbits
+ 946              		.align	1
+ 947              		.global	tu_edpt_stream_init
+ 948              		.syntax unified
+ 949              		.thumb
+ 950              		.thumb_func
+ 951              		.fpu fpv4-sp-d16
+ 953              	tu_edpt_stream_init:
+ 954              	.LVL79:
+ 955              	.LFB89:
+ 240:tinyusb/src/tusb.c **** 
+ 241:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 242:tinyusb/src/tusb.c **** // Endpoint Stream Helper for both Host and Device stack
+ 243:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 244:tinyusb/src/tusb.c **** 
+ 245:tinyusb/src/tusb.c **** bool tu_edpt_stream_init(tu_edpt_stream_t* s, bool is_host, bool is_tx, bool overwritable,
+ 246:tinyusb/src/tusb.c ****                          void* ff_buf, uint16_t ff_bufsize, uint8_t* ep_buf, uint16_t ep_bufsize)
+ 247:tinyusb/src/tusb.c **** {
+ 956              		.loc 1 247 1 is_stmt 1 view -0
+ 957              		.cfi_startproc
+ 958              		@ args = 16, pretend = 0, frame = 0
+ 959              		@ frame_needed = 0, uses_anonymous_args = 0
+ 960              		.loc 1 247 1 is_stmt 0 view .LVU289
+ 961 0000 10B5     		push	{r4, lr}
+ 962              	.LCFI7:
+ 963              		.cfi_def_cfa_offset 8
+ 964              		.cfi_offset 4, -8
+ 965              		.cfi_offset 14, -4
+ 966 0002 82B0     		sub	sp, sp, #8
+ 967              	.LCFI8:
+ 968              		.cfi_def_cfa_offset 16
+ 969 0004 0446     		mov	r4, r0
+ 248:tinyusb/src/tusb.c ****   osal_mutex_t new_mutex = osal_mutex_create(&s->ff_mutex);
+ 970              		.loc 1 248 3 is_stmt 1 view .LVU290
+ 971              	.LVL80:
+ 249:tinyusb/src/tusb.c ****   (void) new_mutex;
+ 972              		.loc 1 249 3 view .LVU291
+ 250:tinyusb/src/tusb.c ****   (void) is_tx;
+ 973              		.loc 1 250 3 view .LVU292
+ 251:tinyusb/src/tusb.c **** 
+ 252:tinyusb/src/tusb.c ****   s->is_host = is_host;
+ 974              		.loc 1 252 3 view .LVU293
+ 975              		.loc 1 252 14 is_stmt 0 view .LVU294
+ 976 0006 00F80C1B 		strb	r1, [r0], #12
+ 977              	.LVL81:
+ 253:tinyusb/src/tusb.c ****   tu_fifo_config(&s->ff, ff_buf, ff_bufsize, 1, overwritable);
+ 978              		.loc 1 253 3 is_stmt 1 view .LVU295
+ 979 000a 0093     		str	r3, [sp]
+ 980 000c 0123     		movs	r3, #1
+ 981              	.LVL82:
+ 982              		.loc 1 253 3 is_stmt 0 view .LVU296
+ 983 000e BDF81420 		ldrh	r2, [sp, #20]
+ARM GAS  /tmp/ccchXe7g.s 			page 35
+
+
+ 984              	.LVL83:
+ 985              		.loc 1 253 3 view .LVU297
+ 986 0012 0499     		ldr	r1, [sp, #16]
+ 987              	.LVL84:
+ 988              		.loc 1 253 3 view .LVU298
+ 989 0014 FFF7FEFF 		bl	tu_fifo_config
+ 990              	.LVL85:
+ 254:tinyusb/src/tusb.c ****   tu_fifo_config_mutex(&s->ff, is_tx ? new_mutex : NULL, is_tx ? NULL : new_mutex);
+ 991              		.loc 1 254 83 is_stmt 1 view .LVU299
+ 255:tinyusb/src/tusb.c **** 
+ 256:tinyusb/src/tusb.c ****   s->ep_buf = ep_buf;
+ 992              		.loc 1 256 3 view .LVU300
+ 993              		.loc 1 256 13 is_stmt 0 view .LVU301
+ 994 0018 069B     		ldr	r3, [sp, #24]
+ 995 001a A360     		str	r3, [r4, #8]
+ 257:tinyusb/src/tusb.c ****   s->ep_bufsize = ep_bufsize;
+ 996              		.loc 1 257 3 is_stmt 1 view .LVU302
+ 997              		.loc 1 257 17 is_stmt 0 view .LVU303
+ 998 001c BDF81C30 		ldrh	r3, [sp, #28]
+ 999 0020 E380     		strh	r3, [r4, #6]	@ movhi
+ 258:tinyusb/src/tusb.c **** 
+ 259:tinyusb/src/tusb.c ****   return true;
+ 1000              		.loc 1 259 3 is_stmt 1 view .LVU304
+ 260:tinyusb/src/tusb.c **** }
+ 1001              		.loc 1 260 1 is_stmt 0 view .LVU305
+ 1002 0022 0120     		movs	r0, #1
+ 1003 0024 02B0     		add	sp, sp, #8
+ 1004              	.LCFI9:
+ 1005              		.cfi_def_cfa_offset 8
+ 1006              		@ sp needed
+ 1007 0026 10BD     		pop	{r4, pc}
+ 1008              		.loc 1 260 1 view .LVU306
+ 1009              		.cfi_endproc
+ 1010              	.LFE89:
+ 1012              		.section	.text.tu_edpt_stream_write_zlp_if_needed,"ax",%progbits
+ 1013              		.align	1
+ 1014              		.global	tu_edpt_stream_write_zlp_if_needed
+ 1015              		.syntax unified
+ 1016              		.thumb
+ 1017              		.thumb_func
+ 1018              		.fpu fpv4-sp-d16
+ 1020              	tu_edpt_stream_write_zlp_if_needed:
+ 1021              	.LVL86:
+ 1022              	.LFB93:
+ 261:tinyusb/src/tusb.c **** 
+ 262:tinyusb/src/tusb.c **** TU_ATTR_ALWAYS_INLINE static inline
+ 263:tinyusb/src/tusb.c **** bool stream_claim(tu_edpt_stream_t* s)
+ 264:tinyusb/src/tusb.c **** {
+ 265:tinyusb/src/tusb.c ****   if (s->is_host)
+ 266:tinyusb/src/tusb.c ****   {
+ 267:tinyusb/src/tusb.c ****     #if CFG_TUH_ENABLED
+ 268:tinyusb/src/tusb.c ****     return usbh_edpt_claim(s->daddr, s->ep_addr);
+ 269:tinyusb/src/tusb.c ****     #endif
+ 270:tinyusb/src/tusb.c ****   }else
+ 271:tinyusb/src/tusb.c ****   {
+ 272:tinyusb/src/tusb.c ****     #if CFG_TUD_ENABLED
+ 273:tinyusb/src/tusb.c ****     return usbd_edpt_claim(s->rhport, s->ep_addr);
+ARM GAS  /tmp/ccchXe7g.s 			page 36
+
+
+ 274:tinyusb/src/tusb.c ****     #endif
+ 275:tinyusb/src/tusb.c ****   }
+ 276:tinyusb/src/tusb.c **** 
+ 277:tinyusb/src/tusb.c ****   return false;
+ 278:tinyusb/src/tusb.c **** }
+ 279:tinyusb/src/tusb.c **** 
+ 280:tinyusb/src/tusb.c **** TU_ATTR_ALWAYS_INLINE static inline
+ 281:tinyusb/src/tusb.c **** bool stream_xfer(tu_edpt_stream_t* s, uint16_t count)
+ 282:tinyusb/src/tusb.c **** {
+ 283:tinyusb/src/tusb.c ****   if (s->is_host)
+ 284:tinyusb/src/tusb.c ****   {
+ 285:tinyusb/src/tusb.c ****     #if CFG_TUH_ENABLED
+ 286:tinyusb/src/tusb.c ****     return usbh_edpt_xfer(s->daddr, s->ep_addr, count ? s->ep_buf : NULL, count);
+ 287:tinyusb/src/tusb.c ****     #endif
+ 288:tinyusb/src/tusb.c ****   }else
+ 289:tinyusb/src/tusb.c ****   {
+ 290:tinyusb/src/tusb.c ****     #if CFG_TUD_ENABLED
+ 291:tinyusb/src/tusb.c ****     return usbd_edpt_xfer(s->rhport, s->ep_addr, count ? s->ep_buf : NULL, count);
+ 292:tinyusb/src/tusb.c ****     #endif
+ 293:tinyusb/src/tusb.c ****   }
+ 294:tinyusb/src/tusb.c **** 
+ 295:tinyusb/src/tusb.c ****   return false;
+ 296:tinyusb/src/tusb.c **** }
+ 297:tinyusb/src/tusb.c **** 
+ 298:tinyusb/src/tusb.c **** TU_ATTR_ALWAYS_INLINE static inline
+ 299:tinyusb/src/tusb.c **** bool stream_release(tu_edpt_stream_t* s)
+ 300:tinyusb/src/tusb.c **** {
+ 301:tinyusb/src/tusb.c ****   if (s->is_host)
+ 302:tinyusb/src/tusb.c ****   {
+ 303:tinyusb/src/tusb.c ****     #if CFG_TUH_ENABLED
+ 304:tinyusb/src/tusb.c ****     return usbh_edpt_release(s->daddr, s->ep_addr);
+ 305:tinyusb/src/tusb.c ****     #endif
+ 306:tinyusb/src/tusb.c ****   }else
+ 307:tinyusb/src/tusb.c ****   {
+ 308:tinyusb/src/tusb.c ****     #if CFG_TUD_ENABLED
+ 309:tinyusb/src/tusb.c ****     return usbd_edpt_release(s->rhport, s->ep_addr);
+ 310:tinyusb/src/tusb.c ****     #endif
+ 311:tinyusb/src/tusb.c ****   }
+ 312:tinyusb/src/tusb.c **** 
+ 313:tinyusb/src/tusb.c ****   return false;
+ 314:tinyusb/src/tusb.c **** }
+ 315:tinyusb/src/tusb.c **** 
+ 316:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 317:tinyusb/src/tusb.c **** // Stream Write
+ 318:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 319:tinyusb/src/tusb.c **** 
+ 320:tinyusb/src/tusb.c **** bool tu_edpt_stream_write_zlp_if_needed(tu_edpt_stream_t* s, uint32_t last_xferred_bytes)
+ 321:tinyusb/src/tusb.c **** {
+ 1023              		.loc 1 321 1 is_stmt 1 view -0
+ 1024              		.cfi_startproc
+ 1025              		@ args = 0, pretend = 0, frame = 0
+ 1026              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1027              		.loc 1 321 1 is_stmt 0 view .LVU308
+ 1028 0000 38B5     		push	{r3, r4, r5, lr}
+ 1029              	.LCFI10:
+ 1030              		.cfi_def_cfa_offset 16
+ 1031              		.cfi_offset 3, -16
+ARM GAS  /tmp/ccchXe7g.s 			page 37
+
+
+ 1032              		.cfi_offset 4, -12
+ 1033              		.cfi_offset 5, -8
+ 1034              		.cfi_offset 14, -4
+ 1035 0002 0446     		mov	r4, r0
+ 1036 0004 0D46     		mov	r5, r1
+ 322:tinyusb/src/tusb.c ****   // ZLP condition: no pending data, last transferred bytes is multiple of packet size
+ 323:tinyusb/src/tusb.c ****   TU_VERIFY( !tu_fifo_count(&s->ff) && last_xferred_bytes && (0 == (last_xferred_bytes & (s->ep_pac
+ 1037              		.loc 1 323 3 is_stmt 1 view .LVU309
+ 1038              		.loc 1 323 3 view .LVU310
+ 1039 0006 0C30     		adds	r0, r0, #12
+ 1040              	.LVL87:
+ 1041              		.loc 1 323 3 is_stmt 0 view .LVU311
+ 1042 0008 FFF7FEFF 		bl	tu_fifo_count
+ 1043              	.LVL88:
+ 1044              		.loc 1 323 3 view .LVU312
+ 1045 000c 10BB     		cbnz	r0, .L95
+ 1046              		.loc 1 323 3 discriminator 2 view .LVU313
+ 1047 000e 25B3     		cbz	r5, .L96
+ 1048              		.loc 1 323 3 discriminator 4 view .LVU314
+ 1049 0010 A388     		ldrh	r3, [r4, #4]
+ 1050 0012 013B     		subs	r3, r3, #1
+ 1051 0014 2B42     		tst	r3, r5
+ 1052 0016 22D1     		bne	.L97
+ 1053              		.loc 1 323 3 is_stmt 1 view .LVU315
+ 324:tinyusb/src/tusb.c **** 
+ 325:tinyusb/src/tusb.c ****   TU_VERIFY( stream_claim(s) );
+ 1054              		.loc 1 325 3 view .LVU316
+ 1055              		.loc 1 325 3 view .LVU317
+ 1056              	.LVL89:
+ 1057              	.LBB88:
+ 1058              	.LBI88:
+ 263:tinyusb/src/tusb.c **** {
+ 1059              		.loc 1 263 6 view .LVU318
+ 1060              	.LBB89:
+ 265:tinyusb/src/tusb.c ****   {
+ 1061              		.loc 1 265 3 view .LVU319
+ 265:tinyusb/src/tusb.c ****   {
+ 1062              		.loc 1 265 8 is_stmt 0 view .LVU320
+ 1063 0018 2578     		ldrb	r5, [r4]	@ zero_extendqisi2
+ 1064              	.LVL90:
+ 265:tinyusb/src/tusb.c ****   {
+ 1065              		.loc 1 265 6 view .LVU321
+ 1066 001a 0DB1     		cbz	r5, .L100
+ 1067              	.LVL91:
+ 1068              	.L91:
+ 265:tinyusb/src/tusb.c ****   {
+ 1069              		.loc 1 265 6 view .LVU322
+ 1070              	.LBE89:
+ 1071              	.LBE88:
+ 1072              		.loc 1 325 3 is_stmt 1 discriminator 1 view .LVU323
+ 1073 001c 0025     		movs	r5, #0
+ 1074 001e 1AE0     		b	.L90
+ 1075              	.LVL92:
+ 1076              	.L100:
+ 1077              	.LBB91:
+ 1078              	.LBB90:
+ 273:tinyusb/src/tusb.c ****     #endif
+ARM GAS  /tmp/ccchXe7g.s 			page 38
+
+
+ 1079              		.loc 1 273 5 view .LVU324
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1080              		.loc 1 273 12 is_stmt 0 view .LVU325
+ 1081 0020 A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1082 0022 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1083 0024 FFF7FEFF 		bl	usbd_edpt_claim
+ 1084              	.LVL93:
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1085              		.loc 1 273 12 view .LVU326
+ 1086              	.LBE90:
+ 1087              	.LBE91:
+ 1088              		.loc 1 325 3 view .LVU327
+ 1089 0028 0028     		cmp	r0, #0
+ 1090 002a F7D0     		beq	.L91
+ 1091              		.loc 1 325 3 is_stmt 1 view .LVU328
+ 326:tinyusb/src/tusb.c ****   TU_ASSERT( stream_xfer(s, 0) );
+ 1092              		.loc 1 326 3 view .LVU329
+ 1093              		.loc 1 326 3 view .LVU330
+ 1094              	.LVL94:
+ 1095              	.LBB92:
+ 1096              	.LBI92:
+ 281:tinyusb/src/tusb.c **** {
+ 1097              		.loc 1 281 6 view .LVU331
+ 1098              	.LBB93:
+ 283:tinyusb/src/tusb.c ****   {
+ 1099              		.loc 1 283 3 view .LVU332
+ 283:tinyusb/src/tusb.c ****   {
+ 1100              		.loc 1 283 8 is_stmt 0 view .LVU333
+ 1101 002c 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 283:tinyusb/src/tusb.c ****   {
+ 1102              		.loc 1 283 6 view .LVU334
+ 1103 002e 43B1     		cbz	r3, .L101
+ 1104              	.LVL95:
+ 1105              	.L93:
+ 283:tinyusb/src/tusb.c ****   {
+ 1106              		.loc 1 283 6 view .LVU335
+ 1107              	.LBE93:
+ 1108              	.LBE92:
+ 1109              		.loc 1 326 3 is_stmt 1 discriminator 1 view .LVU336
+ 1110              		.loc 1 326 3 discriminator 1 view .LVU337
+ 1111              		.loc 1 326 3 discriminator 1 view .LVU338
+ 1112              		.loc 1 326 3 discriminator 1 view .LVU339
+ 1113              	.LBB95:
+ 1114              		.loc 1 326 3 discriminator 1 view .LVU340
+ 1115              		.loc 1 326 3 discriminator 1 view .LVU341
+ 1116 0030 4FF0E023 		mov	r3, #-536813568
+ 1117 0034 D3F8F03D 		ldr	r3, [r3, #3568]
+ 1118 0038 13F0010F 		tst	r3, #1
+ 1119 003c 0BD0     		beq	.L90
+ 1120              		.loc 1 326 3 discriminator 3 view .LVU342
+ 1121              		.syntax unified
+ 1122              	@ 326 "tinyusb/src/tusb.c" 1
+ 1123 003e 00BE     		BKPT #0
+ 1124              	
+ 1125              	@ 0 "" 2
+ 1126              		.thumb
+ 1127              		.syntax unified
+ARM GAS  /tmp/ccchXe7g.s 			page 39
+
+
+ 1128              	.LBE95:
+ 1129              		.loc 1 326 3 discriminator 3 view .LVU343
+ 1130              		.loc 1 326 3 discriminator 3 view .LVU344
+ 1131 0040 09E0     		b	.L90
+ 1132              	.LVL96:
+ 1133              	.L101:
+ 1134              	.LBB96:
+ 1135              	.LBB94:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1136              		.loc 1 291 5 view .LVU345
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1137              		.loc 1 291 12 is_stmt 0 view .LVU346
+ 1138 0042 1A46     		mov	r2, r3
+ 1139 0044 A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1140 0046 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1141 0048 FFF7FEFF 		bl	usbd_edpt_xfer
+ 1142              	.LVL97:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1143              		.loc 1 291 12 view .LVU347
+ 1144              	.LBE94:
+ 1145              	.LBE96:
+ 1146              		.loc 1 326 3 view .LVU348
+ 1147 004c 0028     		cmp	r0, #0
+ 1148 004e EFD0     		beq	.L93
+ 327:tinyusb/src/tusb.c **** 
+ 328:tinyusb/src/tusb.c ****   return true;
+ 1149              		.loc 1 328 10 view .LVU349
+ 1150 0050 0546     		mov	r5, r0
+ 1151 0052 00E0     		b	.L90
+ 1152              	.LVL98:
+ 1153              	.L95:
+ 323:tinyusb/src/tusb.c **** 
+ 1154              		.loc 1 323 3 view .LVU350
+ 1155 0054 0025     		movs	r5, #0
+ 1156              	.LVL99:
+ 1157              	.L90:
+ 329:tinyusb/src/tusb.c **** }
+ 1158              		.loc 1 329 1 view .LVU351
+ 1159 0056 2846     		mov	r0, r5
+ 1160 0058 38BD     		pop	{r3, r4, r5, pc}
+ 1161              	.LVL100:
+ 1162              	.L96:
+ 323:tinyusb/src/tusb.c **** 
+ 1163              		.loc 1 323 3 view .LVU352
+ 1164 005a 0025     		movs	r5, #0
+ 1165              	.LVL101:
+ 323:tinyusb/src/tusb.c **** 
+ 1166              		.loc 1 323 3 view .LVU353
+ 1167 005c FBE7     		b	.L90
+ 1168              	.LVL102:
+ 1169              	.L97:
+ 323:tinyusb/src/tusb.c **** 
+ 1170              		.loc 1 323 3 view .LVU354
+ 1171 005e 0025     		movs	r5, #0
+ 1172              	.LVL103:
+ 323:tinyusb/src/tusb.c **** 
+ 1173              		.loc 1 323 3 view .LVU355
+ARM GAS  /tmp/ccchXe7g.s 			page 40
+
+
+ 1174 0060 F9E7     		b	.L90
+ 1175              		.cfi_endproc
+ 1176              	.LFE93:
+ 1178              		.section	.text.tu_edpt_stream_write_xfer,"ax",%progbits
+ 1179              		.align	1
+ 1180              		.global	tu_edpt_stream_write_xfer
+ 1181              		.syntax unified
+ 1182              		.thumb
+ 1183              		.thumb_func
+ 1184              		.fpu fpv4-sp-d16
+ 1186              	tu_edpt_stream_write_xfer:
+ 1187              	.LVL104:
+ 1188              	.LFB94:
+ 330:tinyusb/src/tusb.c **** 
+ 331:tinyusb/src/tusb.c **** uint32_t tu_edpt_stream_write_xfer(tu_edpt_stream_t* s)
+ 332:tinyusb/src/tusb.c **** {
+ 1189              		.loc 1 332 1 is_stmt 1 view -0
+ 1190              		.cfi_startproc
+ 1191              		@ args = 0, pretend = 0, frame = 0
+ 1192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1193              		.loc 1 332 1 is_stmt 0 view .LVU357
+ 1194 0000 38B5     		push	{r3, r4, r5, lr}
+ 1195              	.LCFI11:
+ 1196              		.cfi_def_cfa_offset 16
+ 1197              		.cfi_offset 3, -16
+ 1198              		.cfi_offset 4, -12
+ 1199              		.cfi_offset 5, -8
+ 1200              		.cfi_offset 14, -4
+ 1201 0002 0446     		mov	r4, r0
+ 333:tinyusb/src/tusb.c ****   // skip if no data
+ 334:tinyusb/src/tusb.c ****   TU_VERIFY( tu_fifo_count(&s->ff), 0 );
+ 1202              		.loc 1 334 3 is_stmt 1 view .LVU358
+ 1203              		.loc 1 334 3 view .LVU359
+ 1204 0004 00F10C05 		add	r5, r0, #12
+ 1205 0008 2846     		mov	r0, r5
+ 1206              	.LVL105:
+ 1207              		.loc 1 334 3 is_stmt 0 view .LVU360
+ 1208 000a FFF7FEFF 		bl	tu_fifo_count
+ 1209              	.LVL106:
+ 1210 000e 0028     		cmp	r0, #0
+ 1211 0010 2FD0     		beq	.L111
+ 1212              		.loc 1 334 3 is_stmt 1 view .LVU361
+ 335:tinyusb/src/tusb.c **** 
+ 336:tinyusb/src/tusb.c ****   // Claim the endpoint
+ 337:tinyusb/src/tusb.c ****   TU_VERIFY( stream_claim(s), 0 );
+ 1213              		.loc 1 337 3 view .LVU362
+ 1214              		.loc 1 337 3 view .LVU363
+ 1215              	.LVL107:
+ 1216              	.LBB97:
+ 1217              	.LBI97:
+ 263:tinyusb/src/tusb.c **** {
+ 1218              		.loc 1 263 6 view .LVU364
+ 1219              	.LBB98:
+ 265:tinyusb/src/tusb.c ****   {
+ 1220              		.loc 1 265 3 view .LVU365
+ 265:tinyusb/src/tusb.c ****   {
+ 1221              		.loc 1 265 8 is_stmt 0 view .LVU366
+ARM GAS  /tmp/ccchXe7g.s 			page 41
+
+
+ 1222 0012 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 265:tinyusb/src/tusb.c ****   {
+ 1223              		.loc 1 265 6 view .LVU367
+ 1224 0014 0BB1     		cbz	r3, .L113
+ 1225              	.LVL108:
+ 1226              	.L104:
+ 265:tinyusb/src/tusb.c ****   {
+ 1227              		.loc 1 265 6 view .LVU368
+ 1228              	.LBE98:
+ 1229              	.LBE97:
+ 1230              		.loc 1 337 3 is_stmt 1 discriminator 1 view .LVU369
+ 1231 0016 0020     		movs	r0, #0
+ 1232              	.L102:
+ 338:tinyusb/src/tusb.c **** 
+ 339:tinyusb/src/tusb.c ****   // Pull data from FIFO -> EP buf
+ 340:tinyusb/src/tusb.c ****   uint16_t const count = tu_fifo_read_n(&s->ff, s->ep_buf, s->ep_bufsize);
+ 341:tinyusb/src/tusb.c **** 
+ 342:tinyusb/src/tusb.c ****   if ( count )
+ 343:tinyusb/src/tusb.c ****   {
+ 344:tinyusb/src/tusb.c ****     TU_ASSERT( stream_xfer(s, count), 0 );
+ 345:tinyusb/src/tusb.c ****     return count;
+ 346:tinyusb/src/tusb.c ****   }else
+ 347:tinyusb/src/tusb.c ****   {
+ 348:tinyusb/src/tusb.c ****     // Release endpoint since we don't make any transfer
+ 349:tinyusb/src/tusb.c ****     // Note: data is dropped if terminal is not connected
+ 350:tinyusb/src/tusb.c ****     stream_release(s);
+ 351:tinyusb/src/tusb.c ****     return 0;
+ 352:tinyusb/src/tusb.c ****   }
+ 353:tinyusb/src/tusb.c **** }
+ 1233              		.loc 1 353 1 is_stmt 0 view .LVU370
+ 1234 0018 38BD     		pop	{r3, r4, r5, pc}
+ 1235              	.LVL109:
+ 1236              	.L113:
+ 1237              	.LBB100:
+ 1238              	.LBB99:
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1239              		.loc 1 273 5 is_stmt 1 view .LVU371
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1240              		.loc 1 273 12 is_stmt 0 view .LVU372
+ 1241 001a A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1242 001c 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1243 001e FFF7FEFF 		bl	usbd_edpt_claim
+ 1244              	.LVL110:
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1245              		.loc 1 273 12 view .LVU373
+ 1246              	.LBE99:
+ 1247              	.LBE100:
+ 337:tinyusb/src/tusb.c **** 
+ 1248              		.loc 1 337 3 view .LVU374
+ 1249 0022 0028     		cmp	r0, #0
+ 1250 0024 F7D0     		beq	.L104
+ 337:tinyusb/src/tusb.c **** 
+ 1251              		.loc 1 337 3 is_stmt 1 discriminator 2 view .LVU375
+ 340:tinyusb/src/tusb.c **** 
+ 1252              		.loc 1 340 3 discriminator 2 view .LVU376
+ 340:tinyusb/src/tusb.c **** 
+ 1253              		.loc 1 340 26 is_stmt 0 discriminator 2 view .LVU377
+ARM GAS  /tmp/ccchXe7g.s 			page 42
+
+
+ 1254 0026 E288     		ldrh	r2, [r4, #6]
+ 1255 0028 A168     		ldr	r1, [r4, #8]
+ 1256 002a 2846     		mov	r0, r5
+ 1257 002c FFF7FEFF 		bl	tu_fifo_read_n
+ 1258              	.LVL111:
+ 342:tinyusb/src/tusb.c ****   {
+ 1259              		.loc 1 342 3 is_stmt 1 discriminator 2 view .LVU378
+ 342:tinyusb/src/tusb.c ****   {
+ 1260              		.loc 1 342 6 is_stmt 0 discriminator 2 view .LVU379
+ 1261 0030 0546     		mov	r5, r0
+ 1262 0032 A8B1     		cbz	r0, .L106
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1263              		.loc 1 344 5 is_stmt 1 view .LVU380
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1264              		.loc 1 344 5 view .LVU381
+ 1265              	.LVL112:
+ 1266              	.LBB101:
+ 1267              	.LBI101:
+ 281:tinyusb/src/tusb.c **** {
+ 1268              		.loc 1 281 6 view .LVU382
+ 1269              	.LBB102:
+ 283:tinyusb/src/tusb.c ****   {
+ 1270              		.loc 1 283 3 view .LVU383
+ 283:tinyusb/src/tusb.c ****   {
+ 1271              		.loc 1 283 8 is_stmt 0 view .LVU384
+ 1272 0034 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 283:tinyusb/src/tusb.c ****   {
+ 1273              		.loc 1 283 6 view .LVU385
+ 1274 0036 4BB1     		cbz	r3, .L114
+ 1275              	.LVL113:
+ 1276              	.L107:
+ 283:tinyusb/src/tusb.c ****   {
+ 1277              		.loc 1 283 6 view .LVU386
+ 1278              	.LBE102:
+ 1279              	.LBE101:
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1280              		.loc 1 344 5 is_stmt 1 discriminator 1 view .LVU387
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1281              		.loc 1 344 5 discriminator 1 view .LVU388
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1282              		.loc 1 344 5 discriminator 1 view .LVU389
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1283              		.loc 1 344 5 discriminator 1 view .LVU390
+ 1284              	.LBB104:
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1285              		.loc 1 344 5 discriminator 1 view .LVU391
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1286              		.loc 1 344 5 discriminator 1 view .LVU392
+ 1287 0038 4FF0E023 		mov	r3, #-536813568
+ 1288 003c D3F8F03D 		ldr	r3, [r3, #3568]
+ 1289 0040 13F0010F 		tst	r3, #1
+ 1290 0044 00D0     		beq	.L109
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1291              		.loc 1 344 5 discriminator 3 view .LVU393
+ 1292              		.syntax unified
+ 1293              	@ 344 "tinyusb/src/tusb.c" 1
+ 1294 0046 00BE     		BKPT #0
+ARM GAS  /tmp/ccchXe7g.s 			page 43
+
+
+ 1295              	
+ 1296              	@ 0 "" 2
+ 1297              		.thumb
+ 1298              		.syntax unified
+ 1299              	.L109:
+ 1300              	.LBE104:
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1301              		.loc 1 344 5 discriminator 5 view .LVU394
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1302              		.loc 1 344 5 discriminator 5 view .LVU395
+ 1303 0048 0020     		movs	r0, #0
+ 1304 004a E5E7     		b	.L102
+ 1305              	.LVL114:
+ 1306              	.L114:
+ 1307              	.LBB105:
+ 1308              	.LBB103:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1309              		.loc 1 291 5 view .LVU396
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1310              		.loc 1 291 12 is_stmt 0 view .LVU397
+ 1311 004c 0346     		mov	r3, r0
+ 1312 004e A268     		ldr	r2, [r4, #8]
+ 1313 0050 A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1314 0052 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1315              	.LVL115:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1316              		.loc 1 291 12 view .LVU398
+ 1317 0054 FFF7FEFF 		bl	usbd_edpt_xfer
+ 1318              	.LVL116:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1319              		.loc 1 291 12 view .LVU399
+ 1320              	.LBE103:
+ 1321              	.LBE105:
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1322              		.loc 1 344 5 view .LVU400
+ 1323 0058 0028     		cmp	r0, #0
+ 1324 005a EDD0     		beq	.L107
+ 344:tinyusb/src/tusb.c ****     return count;
+ 1325              		.loc 1 344 5 is_stmt 1 discriminator 2 view .LVU401
+ 345:tinyusb/src/tusb.c ****   }else
+ 1326              		.loc 1 345 5 discriminator 2 view .LVU402
+ 345:tinyusb/src/tusb.c ****   }else
+ 1327              		.loc 1 345 12 is_stmt 0 discriminator 2 view .LVU403
+ 1328 005c 2846     		mov	r0, r5
+ 1329 005e DBE7     		b	.L102
+ 1330              	.LVL117:
+ 1331              	.L106:
+ 350:tinyusb/src/tusb.c ****     return 0;
+ 1332              		.loc 1 350 5 is_stmt 1 view .LVU404
+ 1333              	.LBB106:
+ 1334              	.LBI106:
+ 299:tinyusb/src/tusb.c **** {
+ 1335              		.loc 1 299 6 view .LVU405
+ 1336              	.LBB107:
+ 301:tinyusb/src/tusb.c ****   {
+ 1337              		.loc 1 301 3 view .LVU406
+ 301:tinyusb/src/tusb.c ****   {
+ARM GAS  /tmp/ccchXe7g.s 			page 44
+
+
+ 1338              		.loc 1 301 8 is_stmt 0 view .LVU407
+ 1339 0060 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 301:tinyusb/src/tusb.c ****   {
+ 1340              		.loc 1 301 6 view .LVU408
+ 1341 0062 0BB1     		cbz	r3, .L115
+ 1342              	.LVL118:
+ 1343              	.L110:
+ 301:tinyusb/src/tusb.c ****   {
+ 1344              		.loc 1 301 6 view .LVU409
+ 1345              	.LBE107:
+ 1346              	.LBE106:
+ 351:tinyusb/src/tusb.c ****   }
+ 1347              		.loc 1 351 5 is_stmt 1 view .LVU410
+ 351:tinyusb/src/tusb.c ****   }
+ 1348              		.loc 1 351 12 is_stmt 0 view .LVU411
+ 1349 0064 0020     		movs	r0, #0
+ 1350 0066 D7E7     		b	.L102
+ 1351              	.LVL119:
+ 1352              	.L115:
+ 1353              	.LBB109:
+ 1354              	.LBB108:
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1355              		.loc 1 309 5 is_stmt 1 view .LVU412
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1356              		.loc 1 309 12 is_stmt 0 view .LVU413
+ 1357 0068 A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1358 006a 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1359              	.LVL120:
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1360              		.loc 1 309 12 view .LVU414
+ 1361 006c FFF7FEFF 		bl	usbd_edpt_release
+ 1362              	.LVL121:
+ 1363 0070 F8E7     		b	.L110
+ 1364              	.LVL122:
+ 1365              	.L111:
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1366              		.loc 1 309 12 view .LVU415
+ 1367              	.LBE108:
+ 1368              	.LBE109:
+ 334:tinyusb/src/tusb.c **** 
+ 1369              		.loc 1 334 3 view .LVU416
+ 1370 0072 0020     		movs	r0, #0
+ 1371 0074 D0E7     		b	.L102
+ 1372              		.cfi_endproc
+ 1373              	.LFE94:
+ 1375              		.section	.text.tu_edpt_stream_write,"ax",%progbits
+ 1376              		.align	1
+ 1377              		.global	tu_edpt_stream_write
+ 1378              		.syntax unified
+ 1379              		.thumb
+ 1380              		.thumb_func
+ 1381              		.fpu fpv4-sp-d16
+ 1383              	tu_edpt_stream_write:
+ 1384              	.LVL123:
+ 1385              	.LFB95:
+ 354:tinyusb/src/tusb.c **** 
+ 355:tinyusb/src/tusb.c **** uint32_t tu_edpt_stream_write(tu_edpt_stream_t* s, void const *buffer, uint32_t bufsize)
+ARM GAS  /tmp/ccchXe7g.s 			page 45
+
+
+ 356:tinyusb/src/tusb.c **** {
+ 1386              		.loc 1 356 1 is_stmt 1 view -0
+ 1387              		.cfi_startproc
+ 1388              		@ args = 0, pretend = 0, frame = 0
+ 1389              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1390              		.loc 1 356 1 is_stmt 0 view .LVU418
+ 1391 0000 70B5     		push	{r4, r5, r6, lr}
+ 1392              	.LCFI12:
+ 1393              		.cfi_def_cfa_offset 16
+ 1394              		.cfi_offset 4, -16
+ 1395              		.cfi_offset 5, -12
+ 1396              		.cfi_offset 6, -8
+ 1397              		.cfi_offset 14, -4
+ 1398 0002 0546     		mov	r5, r0
+ 357:tinyusb/src/tusb.c ****   TU_VERIFY(bufsize); // TODO support ZLP
+ 1399              		.loc 1 357 3 is_stmt 1 view .LVU419
+ 1400              		.loc 1 357 3 view .LVU420
+ 1401 0004 1046     		mov	r0, r2
+ 1402              	.LVL124:
+ 1403              		.loc 1 357 3 is_stmt 0 view .LVU421
+ 1404 0006 02B9     		cbnz	r2, .L121
+ 1405              	.LVL125:
+ 1406              	.L117:
+ 358:tinyusb/src/tusb.c **** 
+ 359:tinyusb/src/tusb.c ****   uint16_t ret = tu_fifo_write_n(&s->ff, buffer, (uint16_t) bufsize);
+ 360:tinyusb/src/tusb.c **** 
+ 361:tinyusb/src/tusb.c ****   // flush if fifo has more than packet size or
+ 362:tinyusb/src/tusb.c ****   // in rare case: fifo depth is configured too small (which never reach packet size)
+ 363:tinyusb/src/tusb.c ****   if ( (tu_fifo_count(&s->ff) >= s->ep_packetsize) || (tu_fifo_depth(&s->ff) < s->ep_packetsize) )
+ 364:tinyusb/src/tusb.c ****   {
+ 365:tinyusb/src/tusb.c ****     tu_edpt_stream_write_xfer(s);
+ 366:tinyusb/src/tusb.c ****   }
+ 367:tinyusb/src/tusb.c **** 
+ 368:tinyusb/src/tusb.c ****   return ret;
+ 369:tinyusb/src/tusb.c **** }
+ 1407              		.loc 1 369 1 view .LVU422
+ 1408 0008 70BD     		pop	{r4, r5, r6, pc}
+ 1409              	.LVL126:
+ 1410              	.L121:
+ 357:tinyusb/src/tusb.c ****   TU_VERIFY(bufsize); // TODO support ZLP
+ 1411              		.loc 1 357 3 is_stmt 1 discriminator 2 view .LVU423
+ 359:tinyusb/src/tusb.c **** 
+ 1412              		.loc 1 359 3 discriminator 2 view .LVU424
+ 359:tinyusb/src/tusb.c **** 
+ 1413              		.loc 1 359 18 is_stmt 0 discriminator 2 view .LVU425
+ 1414 000a 05F10C06 		add	r6, r5, #12
+ 1415 000e 92B2     		uxth	r2, r2
+ 1416 0010 3046     		mov	r0, r6
+ 1417              	.LVL127:
+ 359:tinyusb/src/tusb.c **** 
+ 1418              		.loc 1 359 18 discriminator 2 view .LVU426
+ 1419 0012 FFF7FEFF 		bl	tu_fifo_write_n
+ 1420              	.LVL128:
+ 359:tinyusb/src/tusb.c **** 
+ 1421              		.loc 1 359 18 discriminator 2 view .LVU427
+ 1422 0016 0446     		mov	r4, r0
+ 1423              	.LVL129:
+ARM GAS  /tmp/ccchXe7g.s 			page 46
+
+
+ 363:tinyusb/src/tusb.c ****   {
+ 1424              		.loc 1 363 3 is_stmt 1 discriminator 2 view .LVU428
+ 363:tinyusb/src/tusb.c ****   {
+ 1425              		.loc 1 363 9 is_stmt 0 discriminator 2 view .LVU429
+ 1426 0018 3046     		mov	r0, r6
+ 1427 001a FFF7FEFF 		bl	tu_fifo_count
+ 1428              	.LVL130:
+ 363:tinyusb/src/tusb.c ****   {
+ 1429              		.loc 1 363 35 discriminator 2 view .LVU430
+ 1430 001e AB88     		ldrh	r3, [r5, #4]
+ 363:tinyusb/src/tusb.c ****   {
+ 1431              		.loc 1 363 6 discriminator 2 view .LVU431
+ 1432 0020 9842     		cmp	r0, r3
+ 1433 0022 02D2     		bcs	.L118
+ 1434              	.LVL131:
+ 1435              	.LBB110:
+ 1436              	.LBI110:
+ 1437              		.file 3 "tinyusb/src/common/tusb_fifo.h"
+   1:tinyusb/src/common/tusb_fifo.h **** /*
+   2:tinyusb/src/common/tusb_fifo.h ****  * The MIT License (MIT)
+   3:tinyusb/src/common/tusb_fifo.h ****  *
+   4:tinyusb/src/common/tusb_fifo.h ****  * Copyright (c) 2019 Ha Thach (tinyusb.org)
+   5:tinyusb/src/common/tusb_fifo.h ****  * Copyright (c) 2020 Reinhard Panhuber - rework to unmasked pointers
+   6:tinyusb/src/common/tusb_fifo.h ****  *
+   7:tinyusb/src/common/tusb_fifo.h ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   8:tinyusb/src/common/tusb_fifo.h ****  * of this software and associated documentation files (the "Software"), to deal
+   9:tinyusb/src/common/tusb_fifo.h ****  * in the Software without restriction, including without limitation the rights
+  10:tinyusb/src/common/tusb_fifo.h ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  11:tinyusb/src/common/tusb_fifo.h ****  * copies of the Software, and to permit persons to whom the Software is
+  12:tinyusb/src/common/tusb_fifo.h ****  * furnished to do so, subject to the following conditions:
+  13:tinyusb/src/common/tusb_fifo.h ****  *
+  14:tinyusb/src/common/tusb_fifo.h ****  * The above copyright notice and this permission notice shall be included in
+  15:tinyusb/src/common/tusb_fifo.h ****  * all copies or substantial portions of the Software.
+  16:tinyusb/src/common/tusb_fifo.h ****  *
+  17:tinyusb/src/common/tusb_fifo.h ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  18:tinyusb/src/common/tusb_fifo.h ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  19:tinyusb/src/common/tusb_fifo.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  20:tinyusb/src/common/tusb_fifo.h ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  21:tinyusb/src/common/tusb_fifo.h ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  22:tinyusb/src/common/tusb_fifo.h ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  23:tinyusb/src/common/tusb_fifo.h ****  * THE SOFTWARE.
+  24:tinyusb/src/common/tusb_fifo.h ****  *
+  25:tinyusb/src/common/tusb_fifo.h ****  * This file is part of the TinyUSB stack.
+  26:tinyusb/src/common/tusb_fifo.h ****  */
+  27:tinyusb/src/common/tusb_fifo.h **** 
+  28:tinyusb/src/common/tusb_fifo.h **** #ifndef _TUSB_FIFO_H_
+  29:tinyusb/src/common/tusb_fifo.h **** #define _TUSB_FIFO_H_
+  30:tinyusb/src/common/tusb_fifo.h **** 
+  31:tinyusb/src/common/tusb_fifo.h **** #ifdef __cplusplus
+  32:tinyusb/src/common/tusb_fifo.h **** extern "C" {
+  33:tinyusb/src/common/tusb_fifo.h **** #endif
+  34:tinyusb/src/common/tusb_fifo.h **** 
+  35:tinyusb/src/common/tusb_fifo.h **** // Due to the use of unmasked pointers, this FIFO does not suffer from losing
+  36:tinyusb/src/common/tusb_fifo.h **** // one item slice. Furthermore, write and read operations are completely
+  37:tinyusb/src/common/tusb_fifo.h **** // decoupled as write and read functions do not modify a common state. Henceforth,
+  38:tinyusb/src/common/tusb_fifo.h **** // writing or reading from the FIFO within an ISR is safe as long as no other
+  39:tinyusb/src/common/tusb_fifo.h **** // process (thread or ISR) interferes.
+ARM GAS  /tmp/ccchXe7g.s 			page 47
+
+
+  40:tinyusb/src/common/tusb_fifo.h **** // Also, this FIFO is ready to be used in combination with a DMA as the write and
+  41:tinyusb/src/common/tusb_fifo.h **** // read pointers can be updated from within a DMA ISR. Overflows are detectable
+  42:tinyusb/src/common/tusb_fifo.h **** // within a certain number (see tu_fifo_overflow()).
+  43:tinyusb/src/common/tusb_fifo.h **** 
+  44:tinyusb/src/common/tusb_fifo.h **** #include "common/tusb_common.h"
+  45:tinyusb/src/common/tusb_fifo.h **** #include "osal/osal.h"
+  46:tinyusb/src/common/tusb_fifo.h **** 
+  47:tinyusb/src/common/tusb_fifo.h **** // mutex is only needed for RTOS
+  48:tinyusb/src/common/tusb_fifo.h **** // for OS None, we don't get preempted
+  49:tinyusb/src/common/tusb_fifo.h **** #define CFG_FIFO_MUTEX      OSAL_MUTEX_REQUIRED
+  50:tinyusb/src/common/tusb_fifo.h **** 
+  51:tinyusb/src/common/tusb_fifo.h **** /* Write/Read index is always in the range of:
+  52:tinyusb/src/common/tusb_fifo.h ****  *      0 .. 2*depth-1
+  53:tinyusb/src/common/tusb_fifo.h ****  * The extra window allow us to determine the fifo state of empty or full with only 2 indices
+  54:tinyusb/src/common/tusb_fifo.h ****  * Following are examples with depth = 3
+  55:tinyusb/src/common/tusb_fifo.h ****  *
+  56:tinyusb/src/common/tusb_fifo.h ****  * - empty: W = R
+  57:tinyusb/src/common/tusb_fifo.h ****  *                |
+  58:tinyusb/src/common/tusb_fifo.h ****  *    -------------------------
+  59:tinyusb/src/common/tusb_fifo.h ****  *    | 0 | RW| 2 | 3 | 4 | 5 |
+  60:tinyusb/src/common/tusb_fifo.h ****  *
+  61:tinyusb/src/common/tusb_fifo.h ****  * - full 1: W > R
+  62:tinyusb/src/common/tusb_fifo.h ****  *                |
+  63:tinyusb/src/common/tusb_fifo.h ****  *    -------------------------
+  64:tinyusb/src/common/tusb_fifo.h ****  *    | 0 | R | 2 | 3 | W | 5 |
+  65:tinyusb/src/common/tusb_fifo.h ****  *
+  66:tinyusb/src/common/tusb_fifo.h ****  * - full 2: W < R
+  67:tinyusb/src/common/tusb_fifo.h ****  *                |
+  68:tinyusb/src/common/tusb_fifo.h ****  *    -------------------------
+  69:tinyusb/src/common/tusb_fifo.h ****  *    | 0 | 1 | W | 3 | 4 | R |
+  70:tinyusb/src/common/tusb_fifo.h ****  *
+  71:tinyusb/src/common/tusb_fifo.h ****  * - Number of items in the fifo can be determined in either cases:
+  72:tinyusb/src/common/tusb_fifo.h ****  *    - case W >= R: Count = W - R
+  73:tinyusb/src/common/tusb_fifo.h ****  *    - case W <  R: Count = 2*depth - (R - W)
+  74:tinyusb/src/common/tusb_fifo.h ****  *
+  75:tinyusb/src/common/tusb_fifo.h ****  * In non-overwritable mode, computed Count (in above 2 cases) is at most equal to depth.
+  76:tinyusb/src/common/tusb_fifo.h ****  * However, in over-writable mode, write index can be repeatedly increased and count can be
+  77:tinyusb/src/common/tusb_fifo.h ****  * temporarily larger than depth (overflowed condition) e.g
+  78:tinyusb/src/common/tusb_fifo.h ****  *
+  79:tinyusb/src/common/tusb_fifo.h ****  *  - Overflowed 1: write(3), write(1)
+  80:tinyusb/src/common/tusb_fifo.h ****  *    In this case we will adjust Read index when read()/peek() is called so that count = depth.
+  81:tinyusb/src/common/tusb_fifo.h ****  *                  |
+  82:tinyusb/src/common/tusb_fifo.h ****  *      -------------------------
+  83:tinyusb/src/common/tusb_fifo.h ****  *      | R | 1 | 2 | 3 | W | 5 |
+  84:tinyusb/src/common/tusb_fifo.h ****  *
+  85:tinyusb/src/common/tusb_fifo.h ****  *  - Double Overflowed i.e index is out of allowed range [0,2*depth)
+  86:tinyusb/src/common/tusb_fifo.h ****  *    This occurs when we continue to write after 1st overflowed to 2nd overflowed. e.g:
+  87:tinyusb/src/common/tusb_fifo.h ****  *      write(3), write(1), write(2)
+  88:tinyusb/src/common/tusb_fifo.h ****  *    This must be prevented since it will cause unrecoverable state, in above example
+  89:tinyusb/src/common/tusb_fifo.h ****  *    if not handled the fifo will be empty instead of continue-to-be full. Since we must not modif
+  90:tinyusb/src/common/tusb_fifo.h ****  *    read index in write() function, which cause race condition. We will re-position write index s
+  91:tinyusb/src/common/tusb_fifo.h ****  *    after data is written it is a full fifo i.e W = depth - R
+  92:tinyusb/src/common/tusb_fifo.h ****  *
+  93:tinyusb/src/common/tusb_fifo.h ****  *      re-position W = 1 before write(2)
+  94:tinyusb/src/common/tusb_fifo.h ****  *      Note: we should also move data from mem[3] to read index as well, but deliberately skipped 
+  95:tinyusb/src/common/tusb_fifo.h ****  *      since it is an expensive operation !!!
+  96:tinyusb/src/common/tusb_fifo.h ****  *                  |
+ARM GAS  /tmp/ccchXe7g.s 			page 48
+
+
+  97:tinyusb/src/common/tusb_fifo.h ****  *      -------------------------
+  98:tinyusb/src/common/tusb_fifo.h ****  *      | R | W | 2 | 3 | 4 | 5 |
+  99:tinyusb/src/common/tusb_fifo.h ****  *
+ 100:tinyusb/src/common/tusb_fifo.h ****  *      perform write(2), result is still a full fifo.
+ 101:tinyusb/src/common/tusb_fifo.h ****  *
+ 102:tinyusb/src/common/tusb_fifo.h ****  *                  |
+ 103:tinyusb/src/common/tusb_fifo.h ****  *      -------------------------
+ 104:tinyusb/src/common/tusb_fifo.h ****  *      | R | 1 | 2 | W | 4 | 5 |
+ 105:tinyusb/src/common/tusb_fifo.h **** 
+ 106:tinyusb/src/common/tusb_fifo.h ****  */
+ 107:tinyusb/src/common/tusb_fifo.h **** typedef struct
+ 108:tinyusb/src/common/tusb_fifo.h **** {
+ 109:tinyusb/src/common/tusb_fifo.h ****   uint8_t* buffer          ; // buffer pointer
+ 110:tinyusb/src/common/tusb_fifo.h ****   uint16_t depth           ; // max items
+ 111:tinyusb/src/common/tusb_fifo.h **** 
+ 112:tinyusb/src/common/tusb_fifo.h ****   struct TU_ATTR_PACKED {
+ 113:tinyusb/src/common/tusb_fifo.h ****     uint16_t item_size : 15; // size of each item
+ 114:tinyusb/src/common/tusb_fifo.h ****     bool overwritable  : 1 ; // ovwerwritable when full
+ 115:tinyusb/src/common/tusb_fifo.h ****   };
+ 116:tinyusb/src/common/tusb_fifo.h **** 
+ 117:tinyusb/src/common/tusb_fifo.h ****   volatile uint16_t wr_idx ; // write index
+ 118:tinyusb/src/common/tusb_fifo.h ****   volatile uint16_t rd_idx ; // read index
+ 119:tinyusb/src/common/tusb_fifo.h **** 
+ 120:tinyusb/src/common/tusb_fifo.h **** #if OSAL_MUTEX_REQUIRED
+ 121:tinyusb/src/common/tusb_fifo.h ****   osal_mutex_t mutex_wr;
+ 122:tinyusb/src/common/tusb_fifo.h ****   osal_mutex_t mutex_rd;
+ 123:tinyusb/src/common/tusb_fifo.h **** #endif
+ 124:tinyusb/src/common/tusb_fifo.h **** 
+ 125:tinyusb/src/common/tusb_fifo.h **** } tu_fifo_t;
+ 126:tinyusb/src/common/tusb_fifo.h **** 
+ 127:tinyusb/src/common/tusb_fifo.h **** typedef struct
+ 128:tinyusb/src/common/tusb_fifo.h **** {
+ 129:tinyusb/src/common/tusb_fifo.h ****   uint16_t len_lin  ; ///< linear length in item size
+ 130:tinyusb/src/common/tusb_fifo.h ****   uint16_t len_wrap ; ///< wrapped length in item size
+ 131:tinyusb/src/common/tusb_fifo.h ****   void * ptr_lin    ; ///< linear part start pointer
+ 132:tinyusb/src/common/tusb_fifo.h ****   void * ptr_wrap   ; ///< wrapped part start pointer
+ 133:tinyusb/src/common/tusb_fifo.h **** } tu_fifo_buffer_info_t;
+ 134:tinyusb/src/common/tusb_fifo.h **** 
+ 135:tinyusb/src/common/tusb_fifo.h **** #define TU_FIFO_INIT(_buffer, _depth, _type, _overwritable) \
+ 136:tinyusb/src/common/tusb_fifo.h **** {                                                           \
+ 137:tinyusb/src/common/tusb_fifo.h ****   .buffer               = _buffer,                          \
+ 138:tinyusb/src/common/tusb_fifo.h ****   .depth                = _depth,                           \
+ 139:tinyusb/src/common/tusb_fifo.h ****   .item_size            = sizeof(_type),                    \
+ 140:tinyusb/src/common/tusb_fifo.h ****   .overwritable         = _overwritable,                    \
+ 141:tinyusb/src/common/tusb_fifo.h **** }
+ 142:tinyusb/src/common/tusb_fifo.h **** 
+ 143:tinyusb/src/common/tusb_fifo.h **** #define TU_FIFO_DEF(_name, _depth, _type, _overwritable)                      \
+ 144:tinyusb/src/common/tusb_fifo.h ****     uint8_t _name##_buf[_depth*sizeof(_type)];                                \
+ 145:tinyusb/src/common/tusb_fifo.h ****     tu_fifo_t _name = TU_FIFO_INIT(_name##_buf, _depth, _type, _overwritable)
+ 146:tinyusb/src/common/tusb_fifo.h **** 
+ 147:tinyusb/src/common/tusb_fifo.h **** 
+ 148:tinyusb/src/common/tusb_fifo.h **** bool tu_fifo_set_overwritable(tu_fifo_t *f, bool overwritable);
+ 149:tinyusb/src/common/tusb_fifo.h **** bool tu_fifo_clear(tu_fifo_t *f);
+ 150:tinyusb/src/common/tusb_fifo.h **** bool tu_fifo_config(tu_fifo_t *f, void* buffer, uint16_t depth, uint16_t item_size, bool overwritab
+ 151:tinyusb/src/common/tusb_fifo.h **** 
+ 152:tinyusb/src/common/tusb_fifo.h **** #if OSAL_MUTEX_REQUIRED
+ 153:tinyusb/src/common/tusb_fifo.h **** TU_ATTR_ALWAYS_INLINE static inline
+ARM GAS  /tmp/ccchXe7g.s 			page 49
+
+
+ 154:tinyusb/src/common/tusb_fifo.h **** void tu_fifo_config_mutex(tu_fifo_t *f, osal_mutex_t wr_mutex, osal_mutex_t rd_mutex)
+ 155:tinyusb/src/common/tusb_fifo.h **** {
+ 156:tinyusb/src/common/tusb_fifo.h ****   f->mutex_wr = wr_mutex;
+ 157:tinyusb/src/common/tusb_fifo.h ****   f->mutex_rd = rd_mutex;
+ 158:tinyusb/src/common/tusb_fifo.h **** }
+ 159:tinyusb/src/common/tusb_fifo.h **** 
+ 160:tinyusb/src/common/tusb_fifo.h **** #else
+ 161:tinyusb/src/common/tusb_fifo.h **** 
+ 162:tinyusb/src/common/tusb_fifo.h **** #define tu_fifo_config_mutex(_f, _wr_mutex, _rd_mutex)
+ 163:tinyusb/src/common/tusb_fifo.h **** 
+ 164:tinyusb/src/common/tusb_fifo.h **** #endif
+ 165:tinyusb/src/common/tusb_fifo.h **** 
+ 166:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_write                  (tu_fifo_t* f, void const * p_data);
+ 167:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_write_n                (tu_fifo_t* f, void const * p_data, uint16_t n);
+ 168:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_write_n_const_addr_full_words    (tu_fifo_t* f, const void * data, uint16_t n);
+ 169:tinyusb/src/common/tusb_fifo.h **** 
+ 170:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_read                   (tu_fifo_t* f, void * p_buffer);
+ 171:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_read_n                 (tu_fifo_t* f, void * p_buffer, uint16_t n);
+ 172:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_read_n_const_addr_full_words     (tu_fifo_t* f, void * buffer, uint16_t n);
+ 173:tinyusb/src/common/tusb_fifo.h **** 
+ 174:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_peek                   (tu_fifo_t* f, void * p_buffer);
+ 175:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_peek_n                 (tu_fifo_t* f, void * p_buffer, uint16_t n);
+ 176:tinyusb/src/common/tusb_fifo.h **** 
+ 177:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_count                  (tu_fifo_t* f);
+ 178:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_remaining              (tu_fifo_t* f);
+ 179:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_empty                  (tu_fifo_t* f);
+ 180:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_full                   (tu_fifo_t* f);
+ 181:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_overflowed             (tu_fifo_t* f);
+ 182:tinyusb/src/common/tusb_fifo.h **** void     tu_fifo_correct_read_pointer   (tu_fifo_t* f);
+ 183:tinyusb/src/common/tusb_fifo.h **** 
+ 184:tinyusb/src/common/tusb_fifo.h **** TU_ATTR_ALWAYS_INLINE static inline
+ 185:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_depth(tu_fifo_t* f)
+ 1438              		.loc 3 185 10 is_stmt 1 discriminator 1 view .LVU432
+ 1439              	.LBB111:
+ 186:tinyusb/src/common/tusb_fifo.h **** {
+ 187:tinyusb/src/common/tusb_fifo.h ****   return f->depth;
+ 1440              		.loc 3 187 3 discriminator 1 view .LVU433
+ 1441              		.loc 3 187 11 is_stmt 0 discriminator 1 view .LVU434
+ 1442 0024 2A8A     		ldrh	r2, [r5, #16]
+ 1443              	.LVL132:
+ 1444              		.loc 3 187 11 discriminator 1 view .LVU435
+ 1445              	.LBE111:
+ 1446              	.LBE110:
+ 363:tinyusb/src/tusb.c ****   {
+ 1447              		.loc 1 363 52 discriminator 1 view .LVU436
+ 1448 0026 9342     		cmp	r3, r2
+ 1449 0028 02D9     		bls	.L119
+ 1450              	.L118:
+ 365:tinyusb/src/tusb.c ****   }
+ 1451              		.loc 1 365 5 is_stmt 1 view .LVU437
+ 1452 002a 2846     		mov	r0, r5
+ 1453 002c FFF7FEFF 		bl	tu_edpt_stream_write_xfer
+ 1454              	.LVL133:
+ 1455              	.L119:
+ 368:tinyusb/src/tusb.c **** }
+ 1456              		.loc 1 368 3 view .LVU438
+ 368:tinyusb/src/tusb.c **** }
+ARM GAS  /tmp/ccchXe7g.s 			page 50
+
+
+ 1457              		.loc 1 368 10 is_stmt 0 view .LVU439
+ 1458 0030 2046     		mov	r0, r4
+ 1459 0032 E9E7     		b	.L117
+ 1460              		.cfi_endproc
+ 1461              	.LFE95:
+ 1463              		.section	.text.tu_edpt_stream_read_xfer,"ax",%progbits
+ 1464              		.align	1
+ 1465              		.global	tu_edpt_stream_read_xfer
+ 1466              		.syntax unified
+ 1467              		.thumb
+ 1468              		.thumb_func
+ 1469              		.fpu fpv4-sp-d16
+ 1471              	tu_edpt_stream_read_xfer:
+ 1472              	.LVL134:
+ 1473              	.LFB96:
+ 370:tinyusb/src/tusb.c **** 
+ 371:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 372:tinyusb/src/tusb.c **** // Stream Read
+ 373:tinyusb/src/tusb.c **** //--------------------------------------------------------------------+
+ 374:tinyusb/src/tusb.c **** 
+ 375:tinyusb/src/tusb.c **** uint32_t tu_edpt_stream_read_xfer(tu_edpt_stream_t* s)
+ 376:tinyusb/src/tusb.c **** {
+ 1474              		.loc 1 376 1 is_stmt 1 view -0
+ 1475              		.cfi_startproc
+ 1476              		@ args = 0, pretend = 0, frame = 0
+ 1477              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1478              		.loc 1 376 1 is_stmt 0 view .LVU441
+ 1479 0000 38B5     		push	{r3, r4, r5, lr}
+ 1480              	.LCFI13:
+ 1481              		.cfi_def_cfa_offset 16
+ 1482              		.cfi_offset 3, -16
+ 1483              		.cfi_offset 4, -12
+ 1484              		.cfi_offset 5, -8
+ 1485              		.cfi_offset 14, -4
+ 1486 0002 0446     		mov	r4, r0
+ 377:tinyusb/src/tusb.c ****   uint16_t available = tu_fifo_remaining(&s->ff);
+ 1487              		.loc 1 377 3 is_stmt 1 view .LVU442
+ 1488              		.loc 1 377 24 is_stmt 0 view .LVU443
+ 1489 0004 00F10C05 		add	r5, r0, #12
+ 1490 0008 2846     		mov	r0, r5
+ 1491              	.LVL135:
+ 1492              		.loc 1 377 24 view .LVU444
+ 1493 000a FFF7FEFF 		bl	tu_fifo_remaining
+ 1494              	.LVL136:
+ 378:tinyusb/src/tusb.c **** 
+ 379:tinyusb/src/tusb.c ****   // Prepare for incoming data but only allow what we can store in the ring buffer.
+ 380:tinyusb/src/tusb.c ****   // TODO Actually we can still carry out the transfer, keeping count of received bytes
+ 381:tinyusb/src/tusb.c ****   // and slowly move it to the FIFO when read().
+ 382:tinyusb/src/tusb.c ****   // This pre-check reduces endpoint claiming
+ 383:tinyusb/src/tusb.c ****   TU_VERIFY(available >= s->ep_packetsize);
+ 1495              		.loc 1 383 3 is_stmt 1 view .LVU445
+ 1496              		.loc 1 383 3 view .LVU446
+ 1497 000e A388     		ldrh	r3, [r4, #4]
+ 1498 0010 8342     		cmp	r3, r0
+ 1499 0012 39D8     		bhi	.L132
+ 1500              		.loc 1 383 3 view .LVU447
+ 384:tinyusb/src/tusb.c **** 
+ARM GAS  /tmp/ccchXe7g.s 			page 51
+
+
+ 385:tinyusb/src/tusb.c ****   // claim endpoint
+ 386:tinyusb/src/tusb.c ****   TU_VERIFY(stream_claim(s), 0);
+ 1501              		.loc 1 386 3 view .LVU448
+ 1502              		.loc 1 386 3 view .LVU449
+ 1503              	.LVL137:
+ 1504              	.LBB112:
+ 1505              	.LBI112:
+ 263:tinyusb/src/tusb.c **** {
+ 1506              		.loc 1 263 6 view .LVU450
+ 1507              	.LBB113:
+ 265:tinyusb/src/tusb.c ****   {
+ 1508              		.loc 1 265 3 view .LVU451
+ 265:tinyusb/src/tusb.c ****   {
+ 1509              		.loc 1 265 8 is_stmt 0 view .LVU452
+ 1510 0014 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 265:tinyusb/src/tusb.c ****   {
+ 1511              		.loc 1 265 6 view .LVU453
+ 1512 0016 0BB1     		cbz	r3, .L135
+ 1513              	.LVL138:
+ 1514              	.L124:
+ 265:tinyusb/src/tusb.c ****   {
+ 1515              		.loc 1 265 6 view .LVU454
+ 1516              	.LBE113:
+ 1517              	.LBE112:
+ 1518              		.loc 1 386 3 is_stmt 1 discriminator 1 view .LVU455
+ 1519 0018 0020     		movs	r0, #0
+ 1520              	.L122:
+ 387:tinyusb/src/tusb.c **** 
+ 388:tinyusb/src/tusb.c ****   // get available again since fifo can be changed before endpoint is claimed
+ 389:tinyusb/src/tusb.c ****   available = tu_fifo_remaining(&s->ff);
+ 390:tinyusb/src/tusb.c **** 
+ 391:tinyusb/src/tusb.c ****   if ( available >= s->ep_packetsize )
+ 392:tinyusb/src/tusb.c ****   {
+ 393:tinyusb/src/tusb.c ****     // multiple of packet size limit by ep bufsize
+ 394:tinyusb/src/tusb.c ****     uint16_t count = (uint16_t) (available & ~(s->ep_packetsize -1));
+ 395:tinyusb/src/tusb.c ****     count = tu_min16(count, s->ep_bufsize);
+ 396:tinyusb/src/tusb.c **** 
+ 397:tinyusb/src/tusb.c ****     TU_ASSERT( stream_xfer(s, count), 0 );
+ 398:tinyusb/src/tusb.c **** 
+ 399:tinyusb/src/tusb.c ****     return count;
+ 400:tinyusb/src/tusb.c ****   }else
+ 401:tinyusb/src/tusb.c ****   {
+ 402:tinyusb/src/tusb.c ****     // Release endpoint since we don't make any transfer
+ 403:tinyusb/src/tusb.c ****     stream_release(s);
+ 404:tinyusb/src/tusb.c ****     return 0;
+ 405:tinyusb/src/tusb.c ****   }
+ 406:tinyusb/src/tusb.c **** }
+ 1521              		.loc 1 406 1 is_stmt 0 view .LVU456
+ 1522 001a 38BD     		pop	{r3, r4, r5, pc}
+ 1523              	.LVL139:
+ 1524              	.L135:
+ 1525              	.LBB115:
+ 1526              	.LBB114:
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1527              		.loc 1 273 5 is_stmt 1 view .LVU457
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1528              		.loc 1 273 12 is_stmt 0 view .LVU458
+ARM GAS  /tmp/ccchXe7g.s 			page 52
+
+
+ 1529 001c A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1530 001e 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1531              	.LVL140:
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1532              		.loc 1 273 12 view .LVU459
+ 1533 0020 FFF7FEFF 		bl	usbd_edpt_claim
+ 1534              	.LVL141:
+ 273:tinyusb/src/tusb.c ****     #endif
+ 1535              		.loc 1 273 12 view .LVU460
+ 1536              	.LBE114:
+ 1537              	.LBE115:
+ 386:tinyusb/src/tusb.c **** 
+ 1538              		.loc 1 386 3 view .LVU461
+ 1539 0024 0028     		cmp	r0, #0
+ 1540 0026 F7D0     		beq	.L124
+ 386:tinyusb/src/tusb.c **** 
+ 1541              		.loc 1 386 3 is_stmt 1 discriminator 2 view .LVU462
+ 389:tinyusb/src/tusb.c **** 
+ 1542              		.loc 1 389 3 discriminator 2 view .LVU463
+ 389:tinyusb/src/tusb.c **** 
+ 1543              		.loc 1 389 15 is_stmt 0 discriminator 2 view .LVU464
+ 1544 0028 2846     		mov	r0, r5
+ 1545 002a FFF7FEFF 		bl	tu_fifo_remaining
+ 1546              	.LVL142:
+ 391:tinyusb/src/tusb.c ****   {
+ 1547              		.loc 1 391 3 is_stmt 1 discriminator 2 view .LVU465
+ 391:tinyusb/src/tusb.c ****   {
+ 1548              		.loc 1 391 22 is_stmt 0 discriminator 2 view .LVU466
+ 1549 002e A388     		ldrh	r3, [r4, #4]
+ 391:tinyusb/src/tusb.c ****   {
+ 1550              		.loc 1 391 6 discriminator 2 view .LVU467
+ 1551 0030 8342     		cmp	r3, r0
+ 1552 0032 20D8     		bhi	.L126
+ 1553              	.LBB116:
+ 394:tinyusb/src/tusb.c ****     count = tu_min16(count, s->ep_bufsize);
+ 1554              		.loc 1 394 5 is_stmt 1 view .LVU468
+ 394:tinyusb/src/tusb.c ****     count = tu_min16(count, s->ep_bufsize);
+ 1555              		.loc 1 394 44 is_stmt 0 view .LVU469
+ 1556 0034 5B42     		rsbs	r3, r3, #0
+ 1557 0036 03EA0005 		and	r5, r3, r0
+ 394:tinyusb/src/tusb.c ****     count = tu_min16(count, s->ep_bufsize);
+ 1558              		.loc 1 394 14 view .LVU470
+ 1559 003a ADB2     		uxth	r5, r5
+ 1560              	.LVL143:
+ 395:tinyusb/src/tusb.c **** 
+ 1561              		.loc 1 395 5 is_stmt 1 view .LVU471
+ 395:tinyusb/src/tusb.c **** 
+ 1562              		.loc 1 395 13 is_stmt 0 view .LVU472
+ 1563 003c E088     		ldrh	r0, [r4, #6]
+ 1564              	.LVL144:
+ 1565              	.LBB117:
+ 1566              	.LBI117:
+ 1567              		.file 4 "tinyusb/src/common/tusb_common.h"
+   1:tinyusb/src/common/tusb_common.h **** /*
+   2:tinyusb/src/common/tusb_common.h ****  * The MIT License (MIT)
+   3:tinyusb/src/common/tusb_common.h ****  *
+   4:tinyusb/src/common/tusb_common.h ****  * Copyright (c) 2019 Ha Thach (tinyusb.org)
+ARM GAS  /tmp/ccchXe7g.s 			page 53
+
+
+   5:tinyusb/src/common/tusb_common.h ****  *
+   6:tinyusb/src/common/tusb_common.h ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   7:tinyusb/src/common/tusb_common.h ****  * of this software and associated documentation files (the "Software"), to deal
+   8:tinyusb/src/common/tusb_common.h ****  * in the Software without restriction, including without limitation the rights
+   9:tinyusb/src/common/tusb_common.h ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  10:tinyusb/src/common/tusb_common.h ****  * copies of the Software, and to permit persons to whom the Software is
+  11:tinyusb/src/common/tusb_common.h ****  * furnished to do so, subject to the following conditions:
+  12:tinyusb/src/common/tusb_common.h ****  *
+  13:tinyusb/src/common/tusb_common.h ****  * The above copyright notice and this permission notice shall be included in
+  14:tinyusb/src/common/tusb_common.h ****  * all copies or substantial portions of the Software.
+  15:tinyusb/src/common/tusb_common.h ****  *
+  16:tinyusb/src/common/tusb_common.h ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  17:tinyusb/src/common/tusb_common.h ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  18:tinyusb/src/common/tusb_common.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  19:tinyusb/src/common/tusb_common.h ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  20:tinyusb/src/common/tusb_common.h ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  21:tinyusb/src/common/tusb_common.h ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  22:tinyusb/src/common/tusb_common.h ****  * THE SOFTWARE.
+  23:tinyusb/src/common/tusb_common.h ****  *
+  24:tinyusb/src/common/tusb_common.h ****  * This file is part of the TinyUSB stack.
+  25:tinyusb/src/common/tusb_common.h ****  */
+  26:tinyusb/src/common/tusb_common.h **** 
+  27:tinyusb/src/common/tusb_common.h **** #ifndef _TUSB_COMMON_H_
+  28:tinyusb/src/common/tusb_common.h **** #define _TUSB_COMMON_H_
+  29:tinyusb/src/common/tusb_common.h **** 
+  30:tinyusb/src/common/tusb_common.h **** #ifdef __cplusplus
+  31:tinyusb/src/common/tusb_common.h ****  extern "C" {
+  32:tinyusb/src/common/tusb_common.h **** #endif
+  33:tinyusb/src/common/tusb_common.h **** 
+  34:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  35:tinyusb/src/common/tusb_common.h **** // Macros Helper
+  36:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  37:tinyusb/src/common/tusb_common.h **** #define TU_ARRAY_SIZE(_arr)   ( sizeof(_arr) / sizeof(_arr[0]) )
+  38:tinyusb/src/common/tusb_common.h **** #define TU_MIN(_x, _y)        ( ( (_x) < (_y) ) ? (_x) : (_y) )
+  39:tinyusb/src/common/tusb_common.h **** #define TU_MAX(_x, _y)        ( ( (_x) > (_y) ) ? (_x) : (_y) )
+  40:tinyusb/src/common/tusb_common.h **** 
+  41:tinyusb/src/common/tusb_common.h **** #define TU_U16(_high, _low)   ((uint16_t) (((_high) << 8) | (_low)))
+  42:tinyusb/src/common/tusb_common.h **** #define TU_U16_HIGH(_u16)     ((uint8_t) (((_u16) >> 8) & 0x00ff))
+  43:tinyusb/src/common/tusb_common.h **** #define TU_U16_LOW(_u16)      ((uint8_t) ((_u16)       & 0x00ff))
+  44:tinyusb/src/common/tusb_common.h **** #define U16_TO_U8S_BE(_u16)   TU_U16_HIGH(_u16), TU_U16_LOW(_u16)
+  45:tinyusb/src/common/tusb_common.h **** #define U16_TO_U8S_LE(_u16)   TU_U16_LOW(_u16), TU_U16_HIGH(_u16)
+  46:tinyusb/src/common/tusb_common.h **** 
+  47:tinyusb/src/common/tusb_common.h **** #define TU_U32_BYTE3(_u32)    ((uint8_t) ((((uint32_t) _u32) >> 24) & 0x000000ff)) // MSB
+  48:tinyusb/src/common/tusb_common.h **** #define TU_U32_BYTE2(_u32)    ((uint8_t) ((((uint32_t) _u32) >> 16) & 0x000000ff))
+  49:tinyusb/src/common/tusb_common.h **** #define TU_U32_BYTE1(_u32)    ((uint8_t) ((((uint32_t) _u32) >>  8) & 0x000000ff))
+  50:tinyusb/src/common/tusb_common.h **** #define TU_U32_BYTE0(_u32)    ((uint8_t) (((uint32_t)  _u32)        & 0x000000ff)) // LSB
+  51:tinyusb/src/common/tusb_common.h **** 
+  52:tinyusb/src/common/tusb_common.h **** #define U32_TO_U8S_BE(_u32)   TU_U32_BYTE3(_u32), TU_U32_BYTE2(_u32), TU_U32_BYTE1(_u32), TU_U32_BY
+  53:tinyusb/src/common/tusb_common.h **** #define U32_TO_U8S_LE(_u32)   TU_U32_BYTE0(_u32), TU_U32_BYTE1(_u32), TU_U32_BYTE2(_u32), TU_U32_BY
+  54:tinyusb/src/common/tusb_common.h **** 
+  55:tinyusb/src/common/tusb_common.h **** #define TU_BIT(n)             (1UL << (n))
+  56:tinyusb/src/common/tusb_common.h **** 
+  57:tinyusb/src/common/tusb_common.h **** // Generate a mask with bit from high (31) to low (0) set, e.g TU_GENMASK(3, 0) = 0b1111
+  58:tinyusb/src/common/tusb_common.h **** #define TU_GENMASK(h, l)      ( (UINT32_MAX << (l)) & (UINT32_MAX >> (31 - (h))) )
+  59:tinyusb/src/common/tusb_common.h **** 
+  60:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  61:tinyusb/src/common/tusb_common.h **** // Includes
+ARM GAS  /tmp/ccchXe7g.s 			page 54
+
+
+  62:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  63:tinyusb/src/common/tusb_common.h **** 
+  64:tinyusb/src/common/tusb_common.h **** // Standard Headers
+  65:tinyusb/src/common/tusb_common.h **** #include <stdbool.h>
+  66:tinyusb/src/common/tusb_common.h **** #include <stdint.h>
+  67:tinyusb/src/common/tusb_common.h **** #include <stddef.h>
+  68:tinyusb/src/common/tusb_common.h **** #include <string.h>
+  69:tinyusb/src/common/tusb_common.h **** #include <stdio.h>
+  70:tinyusb/src/common/tusb_common.h **** 
+  71:tinyusb/src/common/tusb_common.h **** // Tinyusb Common Headers
+  72:tinyusb/src/common/tusb_common.h **** #include "tusb_option.h"
+  73:tinyusb/src/common/tusb_common.h **** #include "tusb_compiler.h"
+  74:tinyusb/src/common/tusb_common.h **** #include "tusb_verify.h"
+  75:tinyusb/src/common/tusb_common.h **** #include "tusb_types.h"
+  76:tinyusb/src/common/tusb_common.h **** #include "tusb_debug.h"
+  77:tinyusb/src/common/tusb_common.h **** 
+  78:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  79:tinyusb/src/common/tusb_common.h **** // Optional API implemented by application if needed
+  80:tinyusb/src/common/tusb_common.h **** // TODO move to a more ovious place/file
+  81:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  82:tinyusb/src/common/tusb_common.h **** 
+  83:tinyusb/src/common/tusb_common.h **** // flush data cache
+  84:tinyusb/src/common/tusb_common.h **** TU_ATTR_WEAK extern void tusb_app_dcache_flush(uintptr_t addr, uint32_t data_size);
+  85:tinyusb/src/common/tusb_common.h **** 
+  86:tinyusb/src/common/tusb_common.h **** // invalidate data cache
+  87:tinyusb/src/common/tusb_common.h **** TU_ATTR_WEAK extern void tusb_app_dcache_invalidate(uintptr_t addr, uint32_t data_size);
+  88:tinyusb/src/common/tusb_common.h **** 
+  89:tinyusb/src/common/tusb_common.h **** // Optional physical <-> virtual address translation
+  90:tinyusb/src/common/tusb_common.h **** TU_ATTR_WEAK extern void* tusb_app_virt_to_phys(void *virt_addr);
+  91:tinyusb/src/common/tusb_common.h **** TU_ATTR_WEAK extern void* tusb_app_phys_to_virt(void *phys_addr);
+  92:tinyusb/src/common/tusb_common.h **** 
+  93:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  94:tinyusb/src/common/tusb_common.h **** // Internal Inline Functions
+  95:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
+  96:tinyusb/src/common/tusb_common.h **** 
+  97:tinyusb/src/common/tusb_common.h **** //------------- Mem -------------//
+  98:tinyusb/src/common/tusb_common.h **** #define tu_memclr(buffer, size)  memset((buffer), 0, (size))
+  99:tinyusb/src/common/tusb_common.h **** #define tu_varclr(_var)          tu_memclr(_var, sizeof(*(_var)))
+ 100:tinyusb/src/common/tusb_common.h **** 
+ 101:tinyusb/src/common/tusb_common.h **** // This is a backport of memset_s from c11
+ 102:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline int tu_memset_s(void *dest, size_t destsz, int ch, size_t count
+ 103:tinyusb/src/common/tusb_common.h ****   // TODO may check if desst and src is not NULL
+ 104:tinyusb/src/common/tusb_common.h ****   if ( count > destsz ) {
+ 105:tinyusb/src/common/tusb_common.h ****     return -1;
+ 106:tinyusb/src/common/tusb_common.h ****   }
+ 107:tinyusb/src/common/tusb_common.h ****   memset(dest, ch, count);
+ 108:tinyusb/src/common/tusb_common.h ****   return 0;
+ 109:tinyusb/src/common/tusb_common.h **** }
+ 110:tinyusb/src/common/tusb_common.h **** 
+ 111:tinyusb/src/common/tusb_common.h **** // This is a backport of memcpy_s from c11
+ 112:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline int tu_memcpy_s(void *dest, size_t destsz, const void *src, siz
+ 113:tinyusb/src/common/tusb_common.h ****   // TODO may check if desst and src is not NULL
+ 114:tinyusb/src/common/tusb_common.h ****   if ( count > destsz ) {
+ 115:tinyusb/src/common/tusb_common.h ****     return -1;
+ 116:tinyusb/src/common/tusb_common.h ****   }
+ 117:tinyusb/src/common/tusb_common.h ****   memcpy(dest, src, count);
+ 118:tinyusb/src/common/tusb_common.h ****   return 0;
+ARM GAS  /tmp/ccchXe7g.s 			page 55
+
+
+ 119:tinyusb/src/common/tusb_common.h **** }
+ 120:tinyusb/src/common/tusb_common.h **** 
+ 121:tinyusb/src/common/tusb_common.h **** 
+ 122:tinyusb/src/common/tusb_common.h **** //------------- Bytes -------------//
+ 123:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint32_t tu_u32(uint8_t b3, uint8_t b2, uint8_t b1, uint8_t b0)
+ 124:tinyusb/src/common/tusb_common.h ****   return ( ((uint32_t) b3) << 24) | ( ((uint32_t) b2) << 16) | ( ((uint32_t) b1) << 8) | b0;
+ 125:tinyusb/src/common/tusb_common.h **** }
+ 126:tinyusb/src/common/tusb_common.h **** 
+ 127:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint16_t tu_u16(uint8_t high, uint8_t low) {
+ 128:tinyusb/src/common/tusb_common.h ****   return (uint16_t) ((((uint16_t) high) << 8) | low);
+ 129:tinyusb/src/common/tusb_common.h **** }
+ 130:tinyusb/src/common/tusb_common.h **** 
+ 131:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte3(uint32_t ui32) { return TU_U32_BYTE3(ui32)
+ 132:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte2(uint32_t ui32) { return TU_U32_BYTE2(ui32)
+ 133:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte1(uint32_t ui32) { return TU_U32_BYTE1(ui32)
+ 134:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte0(uint32_t ui32) { return TU_U32_BYTE0(ui32)
+ 135:tinyusb/src/common/tusb_common.h **** 
+ 136:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint16_t tu_u32_high16(uint32_t ui32) { return (uint16_t) (ui32
+ 137:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint16_t tu_u32_low16 (uint32_t ui32) { return (uint16_t) (ui32
+ 138:tinyusb/src/common/tusb_common.h **** 
+ 139:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u16_high(uint16_t ui16) { return TU_U16_HIGH(ui16); 
+ 140:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u16_low (uint16_t ui16) { return TU_U16_LOW(ui16); }
+ 141:tinyusb/src/common/tusb_common.h **** 
+ 142:tinyusb/src/common/tusb_common.h **** //------------- Bits -------------//
+ 143:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint32_t tu_bit_set  (uint32_t value, uint8_t pos) { return val
+ 144:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint32_t tu_bit_clear(uint32_t value, uint8_t pos) { return val
+ 145:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline bool     tu_bit_test (uint32_t value, uint8_t pos) { return (va
+ 146:tinyusb/src/common/tusb_common.h **** 
+ 147:tinyusb/src/common/tusb_common.h **** //------------- Min -------------//
+ 148:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t  tu_min8  (uint8_t  x, uint8_t y ) { return (x < y) ? x
+ 149:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint16_t tu_min16 (uint16_t x, uint16_t y) { return (x < y) ? x
+ 1568              		.loc 4 149 46 is_stmt 1 view .LVU473
+ 1569              	.LBB118:
+ 1570              		.loc 4 149 82 view .LVU474
+ 1571              		.loc 4 149 101 is_stmt 0 view .LVU475
+ 1572 003e 8542     		cmp	r5, r0
+ 1573 0040 28BF     		it	cs
+ 1574 0042 0546     		movcs	r5, r0
+ 1575              	.LVL145:
+ 1576              		.loc 4 149 101 view .LVU476
+ 1577              	.LBE118:
+ 1578              	.LBE117:
+ 397:tinyusb/src/tusb.c **** 
+ 1579              		.loc 1 397 5 is_stmt 1 view .LVU477
+ 397:tinyusb/src/tusb.c **** 
+ 1580              		.loc 1 397 5 view .LVU478
+ 1581              	.LBB119:
+ 1582              	.LBI119:
+ 281:tinyusb/src/tusb.c **** {
+ 1583              		.loc 1 281 6 view .LVU479
+ 1584              	.LBB120:
+ 283:tinyusb/src/tusb.c ****   {
+ 1585              		.loc 1 283 3 view .LVU480
+ 283:tinyusb/src/tusb.c ****   {
+ 1586              		.loc 1 283 8 is_stmt 0 view .LVU481
+ 1587 0044 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 283:tinyusb/src/tusb.c ****   {
+ARM GAS  /tmp/ccchXe7g.s 			page 56
+
+
+ 1588              		.loc 1 283 6 view .LVU482
+ 1589 0046 4BB1     		cbz	r3, .L136
+ 1590              	.LVL146:
+ 1591              	.L127:
+ 283:tinyusb/src/tusb.c ****   {
+ 1592              		.loc 1 283 6 view .LVU483
+ 1593              	.LBE120:
+ 1594              	.LBE119:
+ 397:tinyusb/src/tusb.c **** 
+ 1595              		.loc 1 397 5 is_stmt 1 discriminator 1 view .LVU484
+ 397:tinyusb/src/tusb.c **** 
+ 1596              		.loc 1 397 5 discriminator 1 view .LVU485
+ 397:tinyusb/src/tusb.c **** 
+ 1597              		.loc 1 397 5 discriminator 1 view .LVU486
+ 397:tinyusb/src/tusb.c **** 
+ 1598              		.loc 1 397 5 discriminator 1 view .LVU487
+ 1599              	.LBB122:
+ 397:tinyusb/src/tusb.c **** 
+ 1600              		.loc 1 397 5 discriminator 1 view .LVU488
+ 397:tinyusb/src/tusb.c **** 
+ 1601              		.loc 1 397 5 discriminator 1 view .LVU489
+ 1602 0048 4FF0E023 		mov	r3, #-536813568
+ 1603 004c D3F8F03D 		ldr	r3, [r3, #3568]
+ 1604 0050 13F0010F 		tst	r3, #1
+ 1605 0054 00D0     		beq	.L130
+ 397:tinyusb/src/tusb.c **** 
+ 1606              		.loc 1 397 5 discriminator 3 view .LVU490
+ 1607              		.syntax unified
+ 1608              	@ 397 "tinyusb/src/tusb.c" 1
+ 1609 0056 00BE     		BKPT #0
+ 1610              	
+ 1611              	@ 0 "" 2
+ 1612              		.thumb
+ 1613              		.syntax unified
+ 1614              	.L130:
+ 1615              	.LBE122:
+ 397:tinyusb/src/tusb.c **** 
+ 1616              		.loc 1 397 5 discriminator 5 view .LVU491
+ 397:tinyusb/src/tusb.c **** 
+ 1617              		.loc 1 397 5 discriminator 5 view .LVU492
+ 1618 0058 0020     		movs	r0, #0
+ 1619 005a DEE7     		b	.L122
+ 1620              	.LVL147:
+ 1621              	.L136:
+ 1622              	.LBB123:
+ 1623              	.LBB121:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1624              		.loc 1 291 5 view .LVU493
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1625              		.loc 1 291 12 is_stmt 0 view .LVU494
+ 1626 005c 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1627 005e A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1628 0060 0DB1     		cbz	r5, .L133
+ 1629 0062 A268     		ldr	r2, [r4, #8]
+ 1630 0064 00E0     		b	.L128
+ 1631              	.L133:
+ 1632 0066 0022     		movs	r2, #0
+ARM GAS  /tmp/ccchXe7g.s 			page 57
+
+
+ 1633              	.L128:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1634              		.loc 1 291 12 view .LVU495
+ 1635 0068 2B46     		mov	r3, r5
+ 1636 006a FFF7FEFF 		bl	usbd_edpt_xfer
+ 1637              	.LVL148:
+ 291:tinyusb/src/tusb.c ****     #endif
+ 1638              		.loc 1 291 12 view .LVU496
+ 1639              	.LBE121:
+ 1640              	.LBE123:
+ 397:tinyusb/src/tusb.c **** 
+ 1641              		.loc 1 397 5 view .LVU497
+ 1642 006e 0028     		cmp	r0, #0
+ 1643 0070 EAD0     		beq	.L127
+ 397:tinyusb/src/tusb.c **** 
+ 1644              		.loc 1 397 5 is_stmt 1 discriminator 2 view .LVU498
+ 399:tinyusb/src/tusb.c ****   }else
+ 1645              		.loc 1 399 5 discriminator 2 view .LVU499
+ 399:tinyusb/src/tusb.c ****   }else
+ 1646              		.loc 1 399 12 is_stmt 0 discriminator 2 view .LVU500
+ 1647 0072 2846     		mov	r0, r5
+ 1648 0074 D1E7     		b	.L122
+ 1649              	.LVL149:
+ 1650              	.L126:
+ 399:tinyusb/src/tusb.c ****   }else
+ 1651              		.loc 1 399 12 discriminator 2 view .LVU501
+ 1652              	.LBE116:
+ 403:tinyusb/src/tusb.c ****     return 0;
+ 1653              		.loc 1 403 5 is_stmt 1 view .LVU502
+ 1654              	.LBB124:
+ 1655              	.LBI124:
+ 299:tinyusb/src/tusb.c **** {
+ 1656              		.loc 1 299 6 view .LVU503
+ 1657              	.LBB125:
+ 301:tinyusb/src/tusb.c ****   {
+ 1658              		.loc 1 301 3 view .LVU504
+ 301:tinyusb/src/tusb.c ****   {
+ 1659              		.loc 1 301 8 is_stmt 0 view .LVU505
+ 1660 0076 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+ 301:tinyusb/src/tusb.c ****   {
+ 1661              		.loc 1 301 6 view .LVU506
+ 1662 0078 0BB1     		cbz	r3, .L137
+ 1663              	.LVL150:
+ 1664              	.L131:
+ 301:tinyusb/src/tusb.c ****   {
+ 1665              		.loc 1 301 6 view .LVU507
+ 1666              	.LBE125:
+ 1667              	.LBE124:
+ 404:tinyusb/src/tusb.c ****   }
+ 1668              		.loc 1 404 5 is_stmt 1 view .LVU508
+ 404:tinyusb/src/tusb.c ****   }
+ 1669              		.loc 1 404 12 is_stmt 0 view .LVU509
+ 1670 007a 0020     		movs	r0, #0
+ 1671 007c CDE7     		b	.L122
+ 1672              	.LVL151:
+ 1673              	.L137:
+ 1674              	.LBB127:
+ARM GAS  /tmp/ccchXe7g.s 			page 58
+
+
+ 1675              	.LBB126:
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1676              		.loc 1 309 5 is_stmt 1 view .LVU510
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1677              		.loc 1 309 12 is_stmt 0 view .LVU511
+ 1678 007e A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
+ 1679 0080 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 1680              	.LVL152:
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1681              		.loc 1 309 12 view .LVU512
+ 1682 0082 FFF7FEFF 		bl	usbd_edpt_release
+ 1683              	.LVL153:
+ 1684 0086 F8E7     		b	.L131
+ 1685              	.LVL154:
+ 1686              	.L132:
+ 309:tinyusb/src/tusb.c ****     #endif
+ 1687              		.loc 1 309 12 view .LVU513
+ 1688              	.LBE126:
+ 1689              	.LBE127:
+ 383:tinyusb/src/tusb.c **** 
+ 1690              		.loc 1 383 3 view .LVU514
+ 1691 0088 0020     		movs	r0, #0
+ 1692              	.LVL155:
+ 383:tinyusb/src/tusb.c **** 
+ 1693              		.loc 1 383 3 view .LVU515
+ 1694 008a C6E7     		b	.L122
+ 1695              		.cfi_endproc
+ 1696              	.LFE96:
+ 1698              		.section	.text.tu_edpt_stream_read,"ax",%progbits
+ 1699              		.align	1
+ 1700              		.global	tu_edpt_stream_read
+ 1701              		.syntax unified
+ 1702              		.thumb
+ 1703              		.thumb_func
+ 1704              		.fpu fpv4-sp-d16
+ 1706              	tu_edpt_stream_read:
+ 1707              	.LVL156:
+ 1708              	.LFB97:
+ 407:tinyusb/src/tusb.c **** 
+ 408:tinyusb/src/tusb.c **** uint32_t tu_edpt_stream_read(tu_edpt_stream_t* s, void* buffer, uint32_t bufsize)
+ 409:tinyusb/src/tusb.c **** {
+ 1709              		.loc 1 409 1 is_stmt 1 view -0
+ 1710              		.cfi_startproc
+ 1711              		@ args = 0, pretend = 0, frame = 0
+ 1712              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1713              		.loc 1 409 1 is_stmt 0 view .LVU517
+ 1714 0000 38B5     		push	{r3, r4, r5, lr}
+ 1715              	.LCFI14:
+ 1716              		.cfi_def_cfa_offset 16
+ 1717              		.cfi_offset 3, -16
+ 1718              		.cfi_offset 4, -12
+ 1719              		.cfi_offset 5, -8
+ 1720              		.cfi_offset 14, -4
+ 1721 0002 0446     		mov	r4, r0
+ 410:tinyusb/src/tusb.c ****   uint32_t num_read = tu_fifo_read_n(&s->ff, buffer, (uint16_t) bufsize);
+ 1722              		.loc 1 410 3 is_stmt 1 view .LVU518
+ 1723              		.loc 1 410 23 is_stmt 0 view .LVU519
+ARM GAS  /tmp/ccchXe7g.s 			page 59
+
+
+ 1724 0004 92B2     		uxth	r2, r2
+ 1725              	.LVL157:
+ 1726              		.loc 1 410 23 view .LVU520
+ 1727 0006 0C30     		adds	r0, r0, #12
+ 1728              	.LVL158:
+ 1729              		.loc 1 410 23 view .LVU521
+ 1730 0008 FFF7FEFF 		bl	tu_fifo_read_n
+ 1731              	.LVL159:
+ 1732              		.loc 1 410 23 view .LVU522
+ 1733 000c 0546     		mov	r5, r0
+ 1734              	.LVL160:
+ 411:tinyusb/src/tusb.c ****   tu_edpt_stream_read_xfer(s);
+ 1735              		.loc 1 411 3 is_stmt 1 view .LVU523
+ 1736 000e 2046     		mov	r0, r4
+ 1737              	.LVL161:
+ 1738              		.loc 1 411 3 is_stmt 0 view .LVU524
+ 1739 0010 FFF7FEFF 		bl	tu_edpt_stream_read_xfer
+ 1740              	.LVL162:
+ 412:tinyusb/src/tusb.c ****   return num_read;
+ 1741              		.loc 1 412 3 is_stmt 1 view .LVU525
+ 413:tinyusb/src/tusb.c **** }
+ 1742              		.loc 1 413 1 is_stmt 0 view .LVU526
+ 1743 0014 2846     		mov	r0, r5
+ 1744 0016 38BD     		pop	{r3, r4, r5, pc}
+ 1745              		.loc 1 413 1 view .LVU527
+ 1746              		.cfi_endproc
+ 1747              	.LFE97:
+ 1749              		.text
+ 1750              	.Letext0:
+ 1751              		.file 5 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 1752              		.file 6 "tinyusb/src/osal/osal_none.h"
+ 1753              		.file 7 "tinyusb/src/common/tusb_private.h"
+ 1754              		.file 8 "tinyusb/src/device/usbd_pvt.h"
+ 1755              		.file 9 "tinyusb/src/device/usbd.h"
+ARM GAS  /tmp/ccchXe7g.s 			page 60
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tusb.c
+     /tmp/ccchXe7g.s:18     .text.tusb_init:0000000000000000 $t
+     /tmp/ccchXe7g.s:26     .text.tusb_init:0000000000000000 tusb_init
+     /tmp/ccchXe7g.s:42     .text.tusb_inited:0000000000000000 $t
+     /tmp/ccchXe7g.s:49     .text.tusb_inited:0000000000000000 tusb_inited
+     /tmp/ccchXe7g.s:78     .text.tu_desc_find:0000000000000000 $t
+     /tmp/ccchXe7g.s:85     .text.tu_desc_find:0000000000000000 tu_desc_find
+     /tmp/ccchXe7g.s:128    .text.tu_desc_find2:0000000000000000 $t
+     /tmp/ccchXe7g.s:135    .text.tu_desc_find2:0000000000000000 tu_desc_find2
+     /tmp/ccchXe7g.s:183    .text.tu_desc_find3:0000000000000000 $t
+     /tmp/ccchXe7g.s:190    .text.tu_desc_find3:0000000000000000 tu_desc_find3
+     /tmp/ccchXe7g.s:249    .text.tu_edpt_claim:0000000000000000 $t
+     /tmp/ccchXe7g.s:256    .text.tu_edpt_claim:0000000000000000 tu_edpt_claim
+     /tmp/ccchXe7g.s:324    .text.tu_edpt_release:0000000000000000 $t
+     /tmp/ccchXe7g.s:331    .text.tu_edpt_release:0000000000000000 tu_edpt_release
+     /tmp/ccchXe7g.s:387    .text.tu_edpt_validate:0000000000000000 $t
+     /tmp/ccchXe7g.s:394    .text.tu_edpt_validate:0000000000000000 tu_edpt_validate
+     /tmp/ccchXe7g.s:640    .text.tu_edpt_bind_driver:0000000000000000 $t
+     /tmp/ccchXe7g.s:647    .text.tu_edpt_bind_driver:0000000000000000 tu_edpt_bind_driver
+     /tmp/ccchXe7g.s:796    .text.tu_desc_get_interface_total_len:0000000000000000 $t
+     /tmp/ccchXe7g.s:803    .text.tu_desc_get_interface_total_len:0000000000000000 tu_desc_get_interface_total_len
+     /tmp/ccchXe7g.s:946    .text.tu_edpt_stream_init:0000000000000000 $t
+     /tmp/ccchXe7g.s:953    .text.tu_edpt_stream_init:0000000000000000 tu_edpt_stream_init
+     /tmp/ccchXe7g.s:1013   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 $t
+     /tmp/ccchXe7g.s:1020   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 tu_edpt_stream_write_zlp_if_needed
+     /tmp/ccchXe7g.s:1179   .text.tu_edpt_stream_write_xfer:0000000000000000 $t
+     /tmp/ccchXe7g.s:1186   .text.tu_edpt_stream_write_xfer:0000000000000000 tu_edpt_stream_write_xfer
+     /tmp/ccchXe7g.s:1376   .text.tu_edpt_stream_write:0000000000000000 $t
+     /tmp/ccchXe7g.s:1383   .text.tu_edpt_stream_write:0000000000000000 tu_edpt_stream_write
+     /tmp/ccchXe7g.s:1464   .text.tu_edpt_stream_read_xfer:0000000000000000 $t
+     /tmp/ccchXe7g.s:1471   .text.tu_edpt_stream_read_xfer:0000000000000000 tu_edpt_stream_read_xfer
+     /tmp/ccchXe7g.s:1699   .text.tu_edpt_stream_read:0000000000000000 $t
+     /tmp/ccchXe7g.s:1706   .text.tu_edpt_stream_read:0000000000000000 tu_edpt_stream_read
+
+UNDEFINED SYMBOLS
+tud_inited
+tu_fifo_config
+tu_fifo_count
+usbd_edpt_claim
+usbd_edpt_xfer
+tu_fifo_read_n
+usbd_edpt_release
+tu_fifo_write_n
+tu_fifo_remaining

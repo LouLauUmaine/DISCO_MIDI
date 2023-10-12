@@ -1,0 +1,53 @@
+GENERAL COMMANDS:
+st-flash write build/DISCO_TEST.bin 0x08000000 -- write binary to device when connected with usbipd
+
+cannot find documentation for HAL_PCDEx_PMAConfig() function used in driver documentation
+
+usbipd wsl list
+usbipd wsl attach --busid=<BUSID> 
+
+//fix for if usbip version returns nothing/usbipd not working
+sudo update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-tools/*/usbip | tail -n1` 20 
+
+
+FOR TINYUSB INTEGRATION:
+    generate code for usb_otg_fs
+    make sure no middleware options are selected
+    copy usb_descriptors.c from midi example to core/src of MX project
+    add Core/Src/usb_descriptors.c to makefile
+    copy tusb_config.h to core/inc
+    #define CFG_TUSB_MCU OPT_MCU_STM32L4 in tusb_config.h
+    add -Itinyusb/src to C_INCLUDES in makefile
+    BELOW IS FAULTY, need only immediate .c files (no subdirs) from tinyusb/src
+        add $(wildcard tinyusb/src/*.c */*.c */*/*.c) to C_SOURCES in Makefiles
+            (all c files from three subdirectories deep)
+            THIS DOESNT WORK BUT I FEEL LIKE IT IS NECESSARY?
+            COMPILES WHEN THIS LINE COMMENTED OUT OF MAKEFILE
+    add $(wildcard tinyusb/src/*.c) to C_SOURCES in Makefiles
+    add #include "tusb.h" to main.c in core/src
+    add lots more to C_SOURCES due to compilation errors
+    DID NOT DO BELOW INSTRUCTION
+        comment out if (!(rhport == 1 && (CFG_TUSB_RHPORT1_MODE & OPT_MODE_HIGH_SPEED))) usb_otg->GCCFG |= USB_OTG_GCCFG_PWRDWN;
+            from tinyusb/src/portable/st/synopsys/dcd/synopsys.c line 528 -- will likely break things, check meaning of rhport!
+            also, search for CFG_TUSB_RHPORT1_MODE in changelog.rst for possible alternative
+
+    replace CFG_TUSB_RHPORT1_MODE with CFG_TUH_ENABLED in tinyusb/src/portable/st/synopsys/dcd/synopsys.c line 528
+    copy code from midi example into main.c --> define midi_task() & led() functions inside main.c just for testing
+    copy initialization code from midi example into /* USER CODE BEGIN PD */ of main.c
+    add code to IRQ handler in stm322l4xx.it as well as includes (see https://github.com/hathach/tinyusb/discussions/633)
+    consider using the built in functions from tinyusb/hw/bsp/stm32l4/family.c - will take some finagling
+
+    10.4.2023- version not currently registered as usb device-- look further into example, specifically the board_init()
+    function that intializes hardware on board-- will likely need to reimplement whatever that function is doing
+    add board_init code to src directory --> remove UART code for now
+    definitely doing things redundantly-- hardware is initialized by user defined board_init() as well as CubeMX generated code
+    --> clean this up
+    10.4.2023 my board_init() function breaks the board - look for redundancy 
+    --> give boot0 pin 3.3V to enter bootloader, can reflash board that way
+    go over USB_IRQ handler function
+    // L476Disco use general GPIO PC11 for VBUS sensing instead of dedicated PA9 as others -- keep in mind for custom pcb
+    instead of having separate board_init function just use USER CODE sections?
+    try not using board_init(), instead use builtin functions for stack init etc
+    --> added HAL stack init to USER CODE of MX_USB_OTG_FS_PCD_Init in main
+    NOTE: HAL usb init uses GPIOA for init code, TINYUSB uses GPIOB? DOES IT?
+    don't think i need board_init(), seems like its all handled by STM code --> add it anyways to show development?
