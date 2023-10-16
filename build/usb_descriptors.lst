@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccuNAyy6.s 			page 1
+ARM GAS  /tmp/ccBEnTZR.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -26,7 +26,7 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
   23              		.thumb_func
   24              		.fpu fpv4-sp-d16
   26              	tud_descriptor_device_cb:
-  27              	.LFB70:
+  27              	.LFB74:
   28              		.file 1 "Core/Src/usb_descriptors.c"
    1:Core/Src/usb_descriptors.c **** /*
    2:Core/Src/usb_descriptors.c ****  * The MIT License (MIT)
@@ -53,12 +53,12 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
   23:Core/Src/usb_descriptors.c ****  *
   24:Core/Src/usb_descriptors.c ****  */
   25:Core/Src/usb_descriptors.c **** 
-  26:Core/Src/usb_descriptors.c **** //#include "board_api.h"
+  26:Core/Src/usb_descriptors.c **** #include "board_api.h"
   27:Core/Src/usb_descriptors.c **** #include "tusb.h"
   28:Core/Src/usb_descriptors.c **** 
   29:Core/Src/usb_descriptors.c **** /* A combination of interfaces must have a unique product id, since PC will save device driver afte
   30:Core/Src/usb_descriptors.c ****  * Same VID/PID with different interface e.g MSC (first), then CDC (later) will possibly cause syst
-ARM GAS  /tmp/ccuNAyy6.s 			page 2
+ARM GAS  /tmp/ccBEnTZR.s 			page 2
 
 
   31:Core/Src/usb_descriptors.c ****  *
@@ -113,12 +113,12 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
   40              	.L2:
   41 0004 00000000 		.word	.LANCHOR0
   42              		.cfi_endproc
-  43              	.LFE70:
+  43              	.LFE74:
   45              		.section	.text.tud_descriptor_configuration_cb,"ax",%progbits
   46              		.align	1
   47              		.global	tud_descriptor_configuration_cb
   48              		.syntax unified
-ARM GAS  /tmp/ccuNAyy6.s 			page 3
+ARM GAS  /tmp/ccBEnTZR.s 			page 3
 
 
   49              		.thumb
@@ -126,7 +126,7 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
   51              		.fpu fpv4-sp-d16
   53              	tud_descriptor_configuration_cb:
   54              	.LVL0:
-  55              	.LFB71:
+  55              	.LFB75:
   69:Core/Src/usb_descriptors.c **** 
   70:Core/Src/usb_descriptors.c **** 
   71:Core/Src/usb_descriptors.c **** //--------------------------------------------------------------------+
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
  117:Core/Src/usb_descriptors.c **** 
  118:Core/Src/usb_descriptors.c **** // Invoked when received GET CONFIGURATION DESCRIPTOR
  119:Core/Src/usb_descriptors.c **** // Application return pointer to descriptor
-ARM GAS  /tmp/ccuNAyy6.s 			page 4
+ARM GAS  /tmp/ccBEnTZR.s 			page 4
 
 
  120:Core/Src/usb_descriptors.c **** // Descriptor contents must exist long enough for transfer to complete
@@ -210,17 +210,25 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
   70              	.L5:
   71 0004 00000000 		.word	.LANCHOR1
   72              		.cfi_endproc
-  73              	.LFE71:
-  75              		.section	.text.tud_descriptor_string_cb,"ax",%progbits
-  76              		.align	1
-  77              		.global	tud_descriptor_string_cb
-  78              		.syntax unified
-  79              		.thumb
-  80              		.thumb_func
-  81              		.fpu fpv4-sp-d16
-  83              	tud_descriptor_string_cb:
-  84              	.LVL2:
-  85              	.LFB72:
+  73              	.LFE75:
+  75              		.section	.rodata.tud_descriptor_string_cb.str1.4,"aMS",%progbits,1
+  76              		.align	2
+  77              	.LC0:
+  78 0000 30313233 		.ascii	"0123456789ABCDEF\000"
+  78      34353637 
+  78      38394142 
+  78      43444546 
+  78      00
+  79              		.section	.text.tud_descriptor_string_cb,"ax",%progbits
+  80              		.align	1
+  81              		.global	tud_descriptor_string_cb
+  82              		.syntax unified
+  83              		.thumb
+  84              		.thumb_func
+  85              		.fpu fpv4-sp-d16
+  87              	tud_descriptor_string_cb:
+  88              	.LVL2:
+  89              	.LFB76:
  132:Core/Src/usb_descriptors.c **** 
  133:Core/Src/usb_descriptors.c **** //--------------------------------------------------------------------+
  134:Core/Src/usb_descriptors.c **** // String Descriptors
@@ -230,6 +238,9 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
  138:Core/Src/usb_descriptors.c **** enum {
  139:Core/Src/usb_descriptors.c ****   STRID_LANGID = 0,
  140:Core/Src/usb_descriptors.c ****   STRID_MANUFACTURER,
+ARM GAS  /tmp/ccBEnTZR.s 			page 5
+
+
  141:Core/Src/usb_descriptors.c ****   STRID_PRODUCT,
  142:Core/Src/usb_descriptors.c ****   STRID_SERIAL,
  143:Core/Src/usb_descriptors.c **** };
@@ -238,9 +249,6 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
  146:Core/Src/usb_descriptors.c **** char const *string_desc_arr[] =
  147:Core/Src/usb_descriptors.c **** {
  148:Core/Src/usb_descriptors.c ****   (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
-ARM GAS  /tmp/ccuNAyy6.s 			page 5
-
-
  149:Core/Src/usb_descriptors.c ****   "TinyUSB",                     // 1: Manufacturer
  150:Core/Src/usb_descriptors.c ****   "TinyUSB Device",              // 2: Product
  151:Core/Src/usb_descriptors.c ****   NULL,                          // 3: Serials will use unique ID if possible
@@ -251,27 +259,31 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
  156:Core/Src/usb_descriptors.c **** // Invoked when received GET STRING DESCRIPTOR request
  157:Core/Src/usb_descriptors.c **** // Application return pointer to descriptor, whose contents must exist long enough for transfer to 
  158:Core/Src/usb_descriptors.c **** uint16_t const *tud_descriptor_string_cb(uint8_t index, uint16_t langid) {
-  86              		.loc 1 158 74 is_stmt 1 view -0
-  87              		.cfi_startproc
-  88              		@ args = 0, pretend = 0, frame = 0
-  89              		@ frame_needed = 0, uses_anonymous_args = 0
-  90              		.loc 1 158 74 is_stmt 0 view .LVU9
-  91 0000 10B5     		push	{r4, lr}
-  92              	.LCFI0:
-  93              		.cfi_def_cfa_offset 8
-  94              		.cfi_offset 4, -8
-  95              		.cfi_offset 14, -4
+  90              		.loc 1 158 74 is_stmt 1 view -0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 32
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              		.loc 1 158 74 is_stmt 0 view .LVU9
+  95 0000 30B5     		push	{r4, r5, lr}
+  96              	.LCFI0:
+  97              		.cfi_def_cfa_offset 12
+  98              		.cfi_offset 4, -12
+  99              		.cfi_offset 5, -8
+ 100              		.cfi_offset 14, -4
+ 101 0002 89B0     		sub	sp, sp, #36
+ 102              	.LCFI1:
+ 103              		.cfi_def_cfa_offset 48
  159:Core/Src/usb_descriptors.c ****   (void) langid;
-  96              		.loc 1 159 3 is_stmt 1 view .LVU10
+ 104              		.loc 1 159 3 is_stmt 1 view .LVU10
  160:Core/Src/usb_descriptors.c ****   size_t chr_count;
-  97              		.loc 1 160 3 view .LVU11
+ 105              		.loc 1 160 3 view .LVU11
  161:Core/Src/usb_descriptors.c **** 
  162:Core/Src/usb_descriptors.c ****   switch ( index ) {
-  98              		.loc 1 162 3 view .LVU12
-  99 0002 70B1     		cbz	r0, .L8
- 100 0004 0328     		cmp	r0, #3
- 101 0006 1AD0     		beq	.L9
- 102              	.LBB2:
+ 106              		.loc 1 162 3 view .LVU12
+ 107 0004 A8B1     		cbz	r0, .L8
+ 108 0006 0328     		cmp	r0, #3
+ 109 0008 22D0     		beq	.L9
+ 110              	.LBB10:
  163:Core/Src/usb_descriptors.c ****     case STRID_LANGID:
  164:Core/Src/usb_descriptors.c ****       memcpy(&_desc_str[1], string_desc_arr[0], 2);
  165:Core/Src/usb_descriptors.c ****       chr_count = 1;
@@ -286,305 +298,600 @@ ARM GAS  /tmp/ccuNAyy6.s 			page 1
  174:Core/Src/usb_descriptors.c ****       // https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/microsoft-defined-usb-des
  175:Core/Src/usb_descriptors.c **** 
  176:Core/Src/usb_descriptors.c ****       if ( !(index < sizeof(string_desc_arr) / sizeof(string_desc_arr[0])) ) return NULL;
- 103              		.loc 1 176 7 view .LVU13
- 104              		.loc 1 176 10 is_stmt 0 view .LVU14
- 105 0008 0328     		cmp	r0, #3
- 106 000a 25D8     		bhi	.L16
+ARM GAS  /tmp/ccBEnTZR.s 			page 6
+
+
+ 111              		.loc 1 176 7 view .LVU13
+ 112              		.loc 1 176 10 is_stmt 0 view .LVU14
+ 113 000a 0328     		cmp	r0, #3
+ 114 000c 5BD8     		bhi	.L24
  177:Core/Src/usb_descriptors.c **** 
  178:Core/Src/usb_descriptors.c ****       const char *str = string_desc_arr[index];
- 107              		.loc 1 178 7 is_stmt 1 view .LVU15
- 108              		.loc 1 178 19 is_stmt 0 view .LVU16
- 109 000c 134A     		ldr	r2, .L20
- 110 000e 52F82040 		ldr	r4, [r2, r0, lsl #2]
- 111              	.LVL3:
+ 115              		.loc 1 178 7 is_stmt 1 view .LVU15
+ 116              		.loc 1 178 19 is_stmt 0 view .LVU16
+ 117 000e 2F4A     		ldr	r2, .L30
+ 118 0010 52F82040 		ldr	r4, [r2, r0, lsl #2]
+ 119              	.LVL3:
  179:Core/Src/usb_descriptors.c **** 
-ARM GAS  /tmp/ccuNAyy6.s 			page 6
-
-
  180:Core/Src/usb_descriptors.c ****       // Cap at max char
  181:Core/Src/usb_descriptors.c ****       chr_count = strlen(str);
- 112              		.loc 1 181 7 is_stmt 1 view .LVU17
- 113              		.loc 1 181 19 is_stmt 0 view .LVU18
- 114 0012 2046     		mov	r0, r4
- 115              	.LVL4:
- 116              		.loc 1 181 19 view .LVU19
- 117 0014 FFF7FEFF 		bl	strlen
- 118              	.LVL5:
+ 120              		.loc 1 181 7 is_stmt 1 view .LVU17
+ 121              		.loc 1 181 19 is_stmt 0 view .LVU18
+ 122 0014 2046     		mov	r0, r4
+ 123              	.LVL4:
+ 124              		.loc 1 181 19 view .LVU19
+ 125 0016 FFF7FEFF 		bl	strlen
+ 126              	.LVL5:
  182:Core/Src/usb_descriptors.c ****       size_t const max_count = sizeof(_desc_str) / sizeof(_desc_str[0]) - 1; // -1 for string type
- 119              		.loc 1 182 7 is_stmt 1 view .LVU20
+ 127              		.loc 1 182 7 is_stmt 1 view .LVU20
  183:Core/Src/usb_descriptors.c ****       if ( chr_count > max_count ) chr_count = max_count;
- 120              		.loc 1 183 7 view .LVU21
- 121              		.loc 1 183 10 is_stmt 0 view .LVU22
- 122 0018 2028     		cmp	r0, #32
- 123 001a 00D9     		bls	.L13
- 124              		.loc 1 183 46 view .LVU23
- 125 001c 2020     		movs	r0, #32
- 126              	.LVL6:
- 127              	.L13:
+ 128              		.loc 1 183 7 view .LVU21
+ 129              		.loc 1 183 10 is_stmt 0 view .LVU22
+ 130 001a 2028     		cmp	r0, #32
+ 131 001c 00D9     		bls	.L19
+ 132              		.loc 1 183 46 view .LVU23
+ 133 001e 2020     		movs	r0, #32
+ 134              	.LVL6:
+ 135              	.L19:
  184:Core/Src/usb_descriptors.c **** 
  185:Core/Src/usb_descriptors.c ****       // Convert ASCII string into UTF-16
  186:Core/Src/usb_descriptors.c ****       for ( size_t i = 0; i < chr_count; i++ ) {
- 128              		.loc 1 186 7 is_stmt 1 view .LVU24
- 129              	.LBB3:
- 130              		.loc 1 186 13 view .LVU25
- 131              		.loc 1 186 20 is_stmt 0 view .LVU26
- 132 001e 0023     		movs	r3, #0
- 133              		.loc 1 186 7 view .LVU27
- 134 0020 17E0     		b	.L14
- 135              	.LVL7:
- 136              	.L8:
- 137              		.loc 1 186 7 view .LVU28
- 138              	.LBE3:
- 164:Core/Src/usb_descriptors.c ****       chr_count = 1;
- 139              		.loc 1 164 7 is_stmt 1 view .LVU29
- 164:Core/Src/usb_descriptors.c ****       chr_count = 1;
- 140              		.loc 1 164 44 is_stmt 0 view .LVU30
- 141 0022 0E4B     		ldr	r3, .L20
- 142 0024 1B68     		ldr	r3, [r3]
- 143 0026 1A88     		ldrh	r2, [r3]	@ unaligned
- 164:Core/Src/usb_descriptors.c ****       chr_count = 1;
- 144              		.loc 1 164 7 view .LVU31
- 145 0028 0D4B     		ldr	r3, .L20+4
- 146 002a 5A80     		strh	r2, [r3, #2]	@ movhi
- 165:Core/Src/usb_descriptors.c ****       break;
- 147              		.loc 1 165 7 is_stmt 1 view .LVU32
- 148              	.LVL8:
- 166:Core/Src/usb_descriptors.c **** 
- 149              		.loc 1 166 7 view .LVU33
- 165:Core/Src/usb_descriptors.c ****       break;
- 150              		.loc 1 165 17 is_stmt 0 view .LVU34
- 151 002c 0120     		movs	r0, #1
- 152              	.LVL9:
- 153              	.L11:
- 165:Core/Src/usb_descriptors.c ****       break;
- 154              		.loc 1 165 17 view .LVU35
-ARM GAS  /tmp/ccuNAyy6.s 			page 7
-
-
- 155              	.LBE2:
+ 136              		.loc 1 186 7 is_stmt 1 view .LVU24
+ 137              	.LBB11:
+ 138              		.loc 1 186 13 view .LVU25
+ 139              		.loc 1 186 20 is_stmt 0 view .LVU26
+ 140 0020 0023     		movs	r3, #0
+ 141              	.LVL7:
+ 142              	.L20:
+ 143              		.loc 1 186 27 is_stmt 1 discriminator 1 view .LVU27
+ 144              		.loc 1 186 7 is_stmt 0 discriminator 1 view .LVU28
+ 145 0022 9842     		cmp	r0, r3
+ 146 0024 0BD9     		bls	.L11
  187:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
+ 147              		.loc 1 187 9 is_stmt 1 discriminator 3 view .LVU29
+ 148              		.loc 1 187 31 is_stmt 0 discriminator 3 view .LVU30
+ 149 0026 E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
+ 150              		.loc 1 187 21 discriminator 3 view .LVU31
+ 151 0028 0133     		adds	r3, r3, #1
+ 152              	.LVL8:
+ 153              		.loc 1 187 26 discriminator 3 view .LVU32
+ 154 002a 294A     		ldr	r2, .L30+4
+ 155 002c 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+ 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
+ARM GAS  /tmp/ccBEnTZR.s 			page 7
+
+
+ 156              		.loc 1 186 42 is_stmt 1 discriminator 3 view .LVU33
+ 157              	.LVL9:
+ 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
+ 158              		.loc 1 186 42 is_stmt 0 discriminator 3 view .LVU34
+ 159 0030 F7E7     		b	.L20
+ 160              	.LVL10:
+ 161              	.L8:
+ 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
+ 162              		.loc 1 186 42 discriminator 3 view .LVU35
+ 163              	.LBE11:
+ 164:Core/Src/usb_descriptors.c ****       chr_count = 1;
+ 164              		.loc 1 164 7 is_stmt 1 view .LVU36
+ 164:Core/Src/usb_descriptors.c ****       chr_count = 1;
+ 165              		.loc 1 164 44 is_stmt 0 view .LVU37
+ 166 0032 264B     		ldr	r3, .L30
+ 167 0034 1B68     		ldr	r3, [r3]
+ 168 0036 1A88     		ldrh	r2, [r3]	@ unaligned
+ 164:Core/Src/usb_descriptors.c ****       chr_count = 1;
+ 169              		.loc 1 164 7 view .LVU38
+ 170 0038 254B     		ldr	r3, .L30+4
+ 171 003a 5A80     		strh	r2, [r3, #2]	@ movhi
+ 165:Core/Src/usb_descriptors.c ****       break;
+ 172              		.loc 1 165 7 is_stmt 1 view .LVU39
+ 173              	.LVL11:
+ 166:Core/Src/usb_descriptors.c **** 
+ 174              		.loc 1 166 7 view .LVU40
+ 165:Core/Src/usb_descriptors.c ****       break;
+ 175              		.loc 1 165 17 is_stmt 0 view .LVU41
+ 176 003c 0120     		movs	r0, #1
+ 177              	.LVL12:
+ 178              	.L11:
+ 165:Core/Src/usb_descriptors.c ****       break;
+ 179              		.loc 1 165 17 view .LVU42
+ 180              	.LBE10:
  188:Core/Src/usb_descriptors.c ****       }
  189:Core/Src/usb_descriptors.c ****       break;
  190:Core/Src/usb_descriptors.c ****   }
  191:Core/Src/usb_descriptors.c **** 
  192:Core/Src/usb_descriptors.c ****   // first byte is length (including header), second byte is string type
  193:Core/Src/usb_descriptors.c ****   _desc_str[0] = (uint16_t) ((TUSB_DESC_STRING << 8) | (2 * chr_count + 2));
- 156              		.loc 1 193 3 is_stmt 1 view .LVU36
- 157              		.loc 1 193 71 is_stmt 0 view .LVU37
- 158 002e 431C     		adds	r3, r0, #1
- 159 0030 5B00     		lsls	r3, r3, #1
- 160 0032 9BB2     		uxth	r3, r3
- 161              		.loc 1 193 18 view .LVU38
- 162 0034 43F44073 		orr	r3, r3, #768
- 163              		.loc 1 193 16 view .LVU39
- 164 0038 0948     		ldr	r0, .L20+4
- 165              	.LVL10:
- 166              		.loc 1 193 16 view .LVU40
- 167 003a 0380     		strh	r3, [r0]	@ movhi
+ 181              		.loc 1 193 3 is_stmt 1 view .LVU43
+ 182              		.loc 1 193 71 is_stmt 0 view .LVU44
+ 183 003e 431C     		adds	r3, r0, #1
+ 184 0040 5B00     		lsls	r3, r3, #1
+ 185 0042 9BB2     		uxth	r3, r3
+ 186              		.loc 1 193 18 view .LVU45
+ 187 0044 43F44073 		orr	r3, r3, #768
+ 188              		.loc 1 193 16 view .LVU46
+ 189 0048 2148     		ldr	r0, .L30+4
+ 190              	.LVL13:
+ 191              		.loc 1 193 16 view .LVU47
+ 192 004a 0380     		strh	r3, [r0]	@ movhi
  194:Core/Src/usb_descriptors.c **** 
  195:Core/Src/usb_descriptors.c ****   return _desc_str;
- 168              		.loc 1 195 3 is_stmt 1 view .LVU41
- 169              	.L7:
+ 193              		.loc 1 195 3 is_stmt 1 view .LVU48
+ 194              	.L7:
  196:Core/Src/usb_descriptors.c **** }
- 170              		.loc 1 196 1 is_stmt 0 view .LVU42
- 171 003c 10BD     		pop	{r4, pc}
- 172              	.LVL11:
- 173              	.L9:
- 174              	.LBB5:
+ARM GAS  /tmp/ccBEnTZR.s 			page 8
+
+
+ 195              		.loc 1 196 1 is_stmt 0 view .LVU49
+ 196 004c 09B0     		add	sp, sp, #36
+ 197              	.LCFI2:
+ 198              		.cfi_remember_state
+ 199              		.cfi_def_cfa_offset 12
+ 200              		@ sp needed
+ 201 004e 30BD     		pop	{r4, r5, pc}
+ 202              	.LVL14:
+ 203              	.L9:
+ 204              	.LCFI3:
+ 205              		.cfi_restore_state
+ 206              	.LBB19:
  169:Core/Src/usb_descriptors.c ****       break;
- 175              		.loc 1 169 7 is_stmt 1 view .LVU43
- 169:Core/Src/usb_descriptors.c ****       break;
- 176              		.loc 1 169 19 is_stmt 0 view .LVU44
- 177 003e 2021     		movs	r1, #32
- 178              	.LVL12:
- 169:Core/Src/usb_descriptors.c ****       break;
- 179              		.loc 1 169 19 view .LVU45
- 180 0040 0848     		ldr	r0, .L20+8
- 181              	.LVL13:
- 169:Core/Src/usb_descriptors.c ****       break;
- 182              		.loc 1 169 19 view .LVU46
- 183 0042 FFF7FEFF 		bl	board_usb_get_serial
- 184              	.LVL14:
+ 207              		.loc 1 169 7 is_stmt 1 view .LVU50
+ 208              	.LBB12:
+ 209              	.LBI12:
+ 210              		.file 2 "Core/Inc/board_api.h"
+   1:Core/Inc/board_api.h **** /*
+   2:Core/Inc/board_api.h ****  * The MIT License (MIT)
+   3:Core/Inc/board_api.h ****  *
+   4:Core/Inc/board_api.h ****  * Copyright (c) 2019 Ha Thach (tinyusb.org)
+   5:Core/Inc/board_api.h ****  *
+   6:Core/Inc/board_api.h ****  * Permission is hereby granted, free of charge, to any person obtaining a copy
+   7:Core/Inc/board_api.h ****  * of this software and associated documentation files (the "Software"), to deal
+   8:Core/Inc/board_api.h ****  * in the Software without restriction, including without limitation the rights
+   9:Core/Inc/board_api.h ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  10:Core/Inc/board_api.h ****  * copies of the Software, and to permit persons to whom the Software is
+  11:Core/Inc/board_api.h ****  * furnished to do so, subject to the following conditions:
+  12:Core/Inc/board_api.h ****  *
+  13:Core/Inc/board_api.h ****  * The above copyright notice and this permission notice shall be included in
+  14:Core/Inc/board_api.h ****  * all copies or substantial portions of the Software.
+  15:Core/Inc/board_api.h ****  *
+  16:Core/Inc/board_api.h ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  17:Core/Inc/board_api.h ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  18:Core/Inc/board_api.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  19:Core/Inc/board_api.h ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  20:Core/Inc/board_api.h ****  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  21:Core/Inc/board_api.h ****  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  22:Core/Inc/board_api.h ****  * THE SOFTWARE.
+  23:Core/Inc/board_api.h ****  *
+  24:Core/Inc/board_api.h ****  * This file is part of the TinyUSB stack.
+  25:Core/Inc/board_api.h ****  */
+  26:Core/Inc/board_api.h **** 
+  27:Core/Inc/board_api.h **** #ifndef _BOARD_API_H_
+  28:Core/Inc/board_api.h **** #define _BOARD_API_H_
+  29:Core/Inc/board_api.h **** 
+  30:Core/Inc/board_api.h **** #ifdef __cplusplus
+  31:Core/Inc/board_api.h **** extern "C" {
+  32:Core/Inc/board_api.h **** #endif
+  33:Core/Inc/board_api.h **** 
+  34:Core/Inc/board_api.h **** #include <stdint.h>
+  35:Core/Inc/board_api.h **** #include <stdbool.h>
+  36:Core/Inc/board_api.h **** 
+  37:Core/Inc/board_api.h **** #include "tusb.h"
+  38:Core/Inc/board_api.h **** 
+  39:Core/Inc/board_api.h **** // Define the default baudrate
+  40:Core/Inc/board_api.h **** #ifndef CFG_BOARD_UART_BAUDRATE
+ARM GAS  /tmp/ccBEnTZR.s 			page 9
+
+
+  41:Core/Inc/board_api.h **** #define CFG_BOARD_UART_BAUDRATE 115200   ///< Default baud rate
+  42:Core/Inc/board_api.h **** #endif
+  43:Core/Inc/board_api.h **** 
+  44:Core/Inc/board_api.h **** //--------------------------------------------------------------------+
+  45:Core/Inc/board_api.h **** // Board Porting API
+  46:Core/Inc/board_api.h **** // For simplicity, only one LED and one Button are used
+  47:Core/Inc/board_api.h **** //--------------------------------------------------------------------+
+  48:Core/Inc/board_api.h **** 
+  49:Core/Inc/board_api.h **** // Initialize on-board peripherals : led, button, uart and USB
+  50:Core/Inc/board_api.h **** void board_init(void);
+  51:Core/Inc/board_api.h **** 
+  52:Core/Inc/board_api.h **** // Init board after tinyusb is initialized
+  53:Core/Inc/board_api.h **** void board_init_after_tusb(void) TU_ATTR_WEAK;
+  54:Core/Inc/board_api.h **** 
+  55:Core/Inc/board_api.h **** // Turn LED on or off
+  56:Core/Inc/board_api.h **** void board_led_write(bool state);
+  57:Core/Inc/board_api.h **** 
+  58:Core/Inc/board_api.h **** // Control led pattern using phase duration in ms.
+  59:Core/Inc/board_api.h **** // For each phase, LED is toggle then repeated, board_led_task() is required to be called
+  60:Core/Inc/board_api.h **** //void board_led_pattern(uint32_t const phase_ms[], uint8_t count);
+  61:Core/Inc/board_api.h **** 
+  62:Core/Inc/board_api.h **** // Get the current state of button
+  63:Core/Inc/board_api.h **** // a '1' means active (pressed), a '0' means inactive.
+  64:Core/Inc/board_api.h **** uint32_t board_button_read(void);
+  65:Core/Inc/board_api.h **** 
+  66:Core/Inc/board_api.h **** // Get board unique ID for USB serial number. Return number of bytes. Note max_len is typically 16
+  67:Core/Inc/board_api.h **** TU_ATTR_WEAK size_t board_get_unique_id(uint8_t id[], size_t max_len);
+  68:Core/Inc/board_api.h **** 
+  69:Core/Inc/board_api.h **** // Get characters from UART. Return number of read bytes
+  70:Core/Inc/board_api.h **** int board_uart_read(uint8_t *buf, int len);
+  71:Core/Inc/board_api.h **** 
+  72:Core/Inc/board_api.h **** // Send characters to UART. Return number of sent bytes
+  73:Core/Inc/board_api.h **** int board_uart_write(void const *buf, int len);
+  74:Core/Inc/board_api.h **** 
+  75:Core/Inc/board_api.h **** #if CFG_TUSB_OS == OPT_OS_NONE
+  76:Core/Inc/board_api.h **** // Get current milliseconds, must be implemented when no RTOS is used
+  77:Core/Inc/board_api.h **** uint32_t board_millis(void);
+  78:Core/Inc/board_api.h **** 
+  79:Core/Inc/board_api.h **** #elif CFG_TUSB_OS == OPT_OS_FREERTOS
+  80:Core/Inc/board_api.h **** static inline uint32_t board_millis(void) {
+  81:Core/Inc/board_api.h ****   return ( ( ((uint64_t) xTaskGetTickCount()) * 1000) / configTICK_RATE_HZ );
+  82:Core/Inc/board_api.h **** }
+  83:Core/Inc/board_api.h **** 
+  84:Core/Inc/board_api.h **** #elif CFG_TUSB_OS == OPT_OS_MYNEWT
+  85:Core/Inc/board_api.h **** static inline uint32_t board_millis(void) {
+  86:Core/Inc/board_api.h ****   return os_time_ticks_to_ms32( os_time_get() );
+  87:Core/Inc/board_api.h **** }
+  88:Core/Inc/board_api.h **** 
+  89:Core/Inc/board_api.h **** #elif CFG_TUSB_OS == OPT_OS_PICO
+  90:Core/Inc/board_api.h **** #include "pico/time.h"
+  91:Core/Inc/board_api.h **** static inline uint32_t board_millis(void) {
+  92:Core/Inc/board_api.h ****   return to_ms_since_boot(get_absolute_time());
+  93:Core/Inc/board_api.h **** }
+  94:Core/Inc/board_api.h **** 
+  95:Core/Inc/board_api.h **** #elif CFG_TUSB_OS == OPT_OS_RTTHREAD
+  96:Core/Inc/board_api.h **** static inline uint32_t board_millis(void) {
+  97:Core/Inc/board_api.h ****   return (((uint64_t)rt_tick_get()) * 1000 / RT_TICK_PER_SECOND);
+ARM GAS  /tmp/ccBEnTZR.s 			page 10
+
+
+  98:Core/Inc/board_api.h **** }
+  99:Core/Inc/board_api.h **** 
+ 100:Core/Inc/board_api.h **** #else
+ 101:Core/Inc/board_api.h ****   #error "board_millis() is not implemented for this OS"
+ 102:Core/Inc/board_api.h **** #endif
+ 103:Core/Inc/board_api.h **** 
+ 104:Core/Inc/board_api.h **** //--------------------------------------------------------------------+
+ 105:Core/Inc/board_api.h **** // Helper functions
+ 106:Core/Inc/board_api.h **** //--------------------------------------------------------------------+
+ 107:Core/Inc/board_api.h **** static inline void board_led_on(void) {
+ 108:Core/Inc/board_api.h ****   board_led_write(true);
+ 109:Core/Inc/board_api.h **** }
+ 110:Core/Inc/board_api.h **** 
+ 111:Core/Inc/board_api.h **** static inline void board_led_off(void) {
+ 112:Core/Inc/board_api.h ****   board_led_write(false);
+ 113:Core/Inc/board_api.h **** }
+ 114:Core/Inc/board_api.h **** 
+ 115:Core/Inc/board_api.h **** // Get USB Serial number string from unique ID if available. Return number of character.
+ 116:Core/Inc/board_api.h **** // Input is string descriptor from index 1 (index 0 is type + len)
+ 117:Core/Inc/board_api.h **** static inline size_t board_usb_get_serial(uint16_t desc_str1[], size_t max_chars) {
+ 211              		.loc 2 117 22 view .LVU51
+ 212              	.LBB13:
+ 118:Core/Inc/board_api.h ****   uint8_t uid[16] TU_ATTR_ALIGNED(4);
+ 213              		.loc 2 118 3 view .LVU52
+ 119:Core/Inc/board_api.h ****   size_t uid_len;
+ 214              		.loc 2 119 3 view .LVU53
+ 120:Core/Inc/board_api.h **** 
+ 121:Core/Inc/board_api.h ****   if ( board_get_unique_id ) {
+ 215              		.loc 2 121 3 view .LVU54
+ 216              		.loc 2 121 6 is_stmt 0 view .LVU55
+ 217 0050 204B     		ldr	r3, .L30+8
+ 218 0052 53B1     		cbz	r3, .L12
+ 122:Core/Inc/board_api.h ****     uid_len = board_get_unique_id(uid, sizeof(uid));
+ 219              		.loc 2 122 5 is_stmt 1 view .LVU56
+ 220              		.loc 2 122 15 is_stmt 0 view .LVU57
+ 221 0054 1021     		movs	r1, #16
+ 222              	.LVL15:
+ 223              		.loc 2 122 15 view .LVU58
+ 224 0056 6846     		mov	r0, sp
+ 225              	.LVL16:
+ 226              		.loc 2 122 15 view .LVU59
+ 227 0058 FFF7FEFF 		bl	board_get_unique_id
+ 228              	.LVL17:
+ 229 005c 0446     		mov	r4, r0
+ 230              	.LVL18:
+ 231              	.L13:
+ 123:Core/Inc/board_api.h ****   }else {
+ 124:Core/Inc/board_api.h ****     // fixed serial string is 01234567889ABCDEF
+ 125:Core/Inc/board_api.h ****     uint32_t* uid32 = (uint32_t*) (uintptr_t) uid;
+ 126:Core/Inc/board_api.h ****     uid32[0] = 0x67452301;
+ 127:Core/Inc/board_api.h ****     uid32[1] = 0xEFCDAB89;
+ 128:Core/Inc/board_api.h ****     uid_len = 8;
+ 129:Core/Inc/board_api.h ****   }
+ 130:Core/Inc/board_api.h **** 
+ 131:Core/Inc/board_api.h ****   if ( uid_len > max_chars / 2 ) uid_len = max_chars / 2;
+ 232              		.loc 2 131 3 is_stmt 1 view .LVU60
+ 233              		.loc 2 131 6 is_stmt 0 view .LVU61
+ARM GAS  /tmp/ccBEnTZR.s 			page 11
+
+
+ 234 005e 102C     		cmp	r4, #16
+ 235 0060 00D9     		bls	.L14
+ 236              		.loc 2 131 42 view .LVU62
+ 237 0062 1024     		movs	r4, #16
+ 238              	.LVL19:
+ 239              	.L14:
+ 132:Core/Inc/board_api.h **** 
+ 133:Core/Inc/board_api.h ****   for ( size_t i = 0; i < uid_len; i++ ) {
+ 240              		.loc 2 133 3 is_stmt 1 view .LVU63
+ 241              	.LBB14:
+ 242              		.loc 2 133 9 view .LVU64
+ 243              		.loc 2 133 16 is_stmt 0 view .LVU65
+ 244 0064 4FF0000E 		mov	lr, #0
+ 245              		.loc 2 133 3 view .LVU66
+ 246 0068 08E0     		b	.L15
+ 247              	.LVL20:
+ 248              	.L12:
+ 249              		.loc 2 133 3 view .LVU67
+ 250              	.LBE14:
+ 251              	.LBB17:
+ 125:Core/Inc/board_api.h ****     uid32[0] = 0x67452301;
+ 252              		.loc 2 125 5 is_stmt 1 view .LVU68
+ 126:Core/Inc/board_api.h ****     uid32[1] = 0xEFCDAB89;
+ 253              		.loc 2 126 5 view .LVU69
+ 126:Core/Inc/board_api.h ****     uid32[1] = 0xEFCDAB89;
+ 254              		.loc 2 126 14 is_stmt 0 view .LVU70
+ 255 006a 1B4B     		ldr	r3, .L30+12
+ 256 006c 0093     		str	r3, [sp]
+ 127:Core/Inc/board_api.h ****     uid_len = 8;
+ 257              		.loc 2 127 5 is_stmt 1 view .LVU71
+ 127:Core/Inc/board_api.h ****     uid_len = 8;
+ 258              		.loc 2 127 14 is_stmt 0 view .LVU72
+ 259 006e 03F18833 		add	r3, r3, #-2004318072
+ 260 0072 0193     		str	r3, [sp, #4]
+ 128:Core/Inc/board_api.h ****   }
+ 261              		.loc 2 128 5 is_stmt 1 view .LVU73
+ 262              	.LVL21:
+ 128:Core/Inc/board_api.h ****   }
+ 263              		.loc 2 128 13 is_stmt 0 view .LVU74
+ 264 0074 0824     		movs	r4, #8
+ 265 0076 F2E7     		b	.L13
+ 266              	.LVL22:
+ 267              	.L29:
+ 128:Core/Inc/board_api.h ****   }
+ 268              		.loc 2 128 13 view .LVU75
+ 269              	.LBE17:
+ 270              	.LBB18:
+ 271              		.loc 2 133 36 is_stmt 1 view .LVU76
+ 272              		.loc 2 133 37 is_stmt 0 view .LVU77
+ 273 0078 0EF1010E 		add	lr, lr, #1
+ 274              	.LVL23:
+ 275              	.L15:
+ 276              		.loc 2 133 23 is_stmt 1 view .LVU78
+ 277              		.loc 2 133 3 is_stmt 0 view .LVU79
+ 278 007c A645     		cmp	lr, r4
+ 279 007e 20D2     		bcs	.L28
+ 280              	.LBB15:
+ARM GAS  /tmp/ccBEnTZR.s 			page 12
+
+
+ 134:Core/Inc/board_api.h ****     for ( size_t j = 0; j < 2; j++ ) {
+ 281              		.loc 2 134 18 view .LVU80
+ 282 0080 4FF0000C 		mov	ip, #0
+ 283              	.L17:
+ 284              	.LVL24:
+ 285              		.loc 2 134 25 is_stmt 1 view .LVU81
+ 286              		.loc 2 134 5 is_stmt 0 view .LVU82
+ 287 0084 BCF1010F 		cmp	ip, #1
+ 288 0088 F6D8     		bhi	.L29
+ 289              	.LBB16:
+ 135:Core/Inc/board_api.h ****       const char nibble_to_hex[16] = {
+ 290              		.loc 2 135 7 is_stmt 1 view .LVU83
+ 291              		.loc 2 135 18 is_stmt 0 view .LVU84
+ 292 008a 144B     		ldr	r3, .L30+16
+ 293 008c 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 294 008e 08AD     		add	r5, sp, #32
+ 295 0090 05E90F00 		stmdb	r5, {r0, r1, r2, r3}
+ 136:Core/Inc/board_api.h ****           '0', '1', '2', '3', '4', '5', '6', '7',
+ 137:Core/Inc/board_api.h ****           '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+ 138:Core/Inc/board_api.h ****       };
+ 139:Core/Inc/board_api.h ****       uint8_t const nibble = (uid[i] >> (j * 4)) & 0xf;
+ 296              		.loc 2 139 7 is_stmt 1 view .LVU85
+ 297              		.loc 2 139 34 is_stmt 0 view .LVU86
+ 298 0094 0EF12003 		add	r3, lr, #32
+ 299 0098 6B44     		add	r3, sp, r3
+ 300 009a 13F8203C 		ldrb	r3, [r3, #-32]	@ zero_extendqisi2
+ 301              		.loc 2 139 44 view .LVU87
+ 302 009e 4FEA8C02 		lsl	r2, ip, #2
+ 303              		.loc 2 139 38 view .LVU88
+ 304 00a2 1341     		asrs	r3, r3, r2
+ 305              		.loc 2 139 21 view .LVU89
+ 306 00a4 03F00F03 		and	r3, r3, #15
+ 307              	.LVL25:
+ 140:Core/Inc/board_api.h ****       desc_str1[i * 2 + (1 - j)] = nibble_to_hex[nibble]; // UTF-16-LE
+ 308              		.loc 2 140 7 is_stmt 1 view .LVU90
+ 309              		.loc 2 140 23 is_stmt 0 view .LVU91
+ 310 00a8 CCEB4E02 		rsb	r2, ip, lr, lsl #1
+ 311 00ac 0132     		adds	r2, r2, #1
+ 312              		.loc 2 140 49 view .LVU92
+ 313 00ae 2033     		adds	r3, r3, #32
+ 314              	.LVL26:
+ 315              		.loc 2 140 49 view .LVU93
+ 316 00b0 6B44     		add	r3, sp, r3
+ 317              	.LVL27:
+ 318              		.loc 2 140 49 view .LVU94
+ 319 00b2 13F8101C 		ldrb	r1, [r3, #-16]	@ zero_extendqisi2
+ 320              		.loc 2 140 34 view .LVU95
+ 321 00b6 0A4B     		ldr	r3, .L30+20
+ 322 00b8 23F81210 		strh	r1, [r3, r2, lsl #1]	@ movhi
+ 323              	.LBE16:
+ 134:Core/Inc/board_api.h ****       const char nibble_to_hex[16] = {
+ 324              		.loc 2 134 32 is_stmt 1 view .LVU96
+ 134:Core/Inc/board_api.h ****       const char nibble_to_hex[16] = {
+ 325              		.loc 2 134 33 is_stmt 0 view .LVU97
+ 326 00bc 0CF1010C 		add	ip, ip, #1
+ 327              	.LVL28:
+ 134:Core/Inc/board_api.h ****       const char nibble_to_hex[16] = {
+ARM GAS  /tmp/ccBEnTZR.s 			page 13
+
+
+ 328              		.loc 2 134 33 view .LVU98
+ 329 00c0 E0E7     		b	.L17
+ 330              	.LVL29:
+ 331              	.L28:
+ 134:Core/Inc/board_api.h ****       const char nibble_to_hex[16] = {
+ 332              		.loc 2 134 33 view .LVU99
+ 333              	.LBE15:
+ 334              	.LBE18:
+ 141:Core/Inc/board_api.h ****     }
+ 142:Core/Inc/board_api.h ****   }
+ 143:Core/Inc/board_api.h **** 
+ 144:Core/Inc/board_api.h ****   return 2 * uid_len;
+ 335              		.loc 2 144 3 is_stmt 1 view .LVU100
+ 336              		.loc 2 144 12 is_stmt 0 view .LVU101
+ 337 00c2 6000     		lsls	r0, r4, #1
+ 338              	.LVL30:
+ 339              		.loc 2 144 12 view .LVU102
+ 340              	.LBE13:
+ 341              	.LBE12:
  170:Core/Src/usb_descriptors.c **** 
- 185              		.loc 1 170 7 is_stmt 1 view .LVU47
- 186 0046 F2E7     		b	.L11
- 187              	.LVL15:
- 188              	.L15:
- 189              	.LBB4:
- 187:Core/Src/usb_descriptors.c ****       }
- 190              		.loc 1 187 9 discriminator 3 view .LVU48
- 187:Core/Src/usb_descriptors.c ****       }
- 191              		.loc 1 187 31 is_stmt 0 discriminator 3 view .LVU49
- 192 0048 E15C     		ldrb	r1, [r4, r3]	@ zero_extendqisi2
- 187:Core/Src/usb_descriptors.c ****       }
- 193              		.loc 1 187 21 discriminator 3 view .LVU50
-ARM GAS  /tmp/ccuNAyy6.s 			page 8
-
-
- 194 004a 0133     		adds	r3, r3, #1
- 195              	.LVL16:
- 187:Core/Src/usb_descriptors.c ****       }
- 196              		.loc 1 187 26 discriminator 3 view .LVU51
- 197 004c 044A     		ldr	r2, .L20+4
- 198 004e 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
- 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
- 199              		.loc 1 186 42 is_stmt 1 discriminator 3 view .LVU52
- 200              	.LVL17:
- 201              	.L14:
- 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
- 202              		.loc 1 186 27 discriminator 1 view .LVU53
- 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
- 203              		.loc 1 186 7 is_stmt 0 discriminator 1 view .LVU54
- 204 0052 9842     		cmp	r0, r3
- 205 0054 F8D8     		bhi	.L15
- 206 0056 EAE7     		b	.L11
- 207              	.LVL18:
- 208              	.L16:
- 186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
- 209              		.loc 1 186 7 discriminator 1 view .LVU55
- 210              	.LBE4:
+ 342              		.loc 1 170 7 is_stmt 1 view .LVU103
+ 343 00c4 BBE7     		b	.L11
+ 344              	.LVL31:
+ 345              	.L24:
  176:Core/Src/usb_descriptors.c **** 
- 211              		.loc 1 176 85 view .LVU56
- 212 0058 0020     		movs	r0, #0
- 213              	.LVL19:
+ 346              		.loc 1 176 85 is_stmt 0 view .LVU104
+ 347 00c6 0020     		movs	r0, #0
+ 348              	.LVL32:
  176:Core/Src/usb_descriptors.c **** 
- 214              		.loc 1 176 85 view .LVU57
- 215 005a EFE7     		b	.L7
- 216              	.L21:
- 217              		.align	2
- 218              	.L20:
- 219 005c 00000000 		.word	.LANCHOR3
- 220 0060 00000000 		.word	.LANCHOR2
- 221 0064 02000000 		.word	.LANCHOR2+2
- 222              	.LBE5:
- 223              		.cfi_endproc
- 224              	.LFE72:
- 226              		.global	string_desc_arr
- 227              		.section	.rodata.str1.4,"aMS",%progbits,1
- 228              		.align	2
- 229              	.LC0:
- 230 0000 54696E79 		.ascii	"TinyUSB\000"
- 230      55534200 
- 231              		.align	2
- 232              	.LC1:
- 233 0008 54696E79 		.ascii	"TinyUSB Device\000"
- 233      55534220 
- 233      44657669 
- 233      636500
- 234              		.global	desc_fs_configuration
- 235              		.global	desc_device
- 236              		.section	.bss._desc_str,"aw",%nobits
- 237              		.align	2
- 238              		.set	.LANCHOR2,. + 0
- 241              	_desc_str:
- 242 0000 00000000 		.space	66
-ARM GAS  /tmp/ccuNAyy6.s 			page 9
+ 349              		.loc 1 176 85 view .LVU105
+ 350 00c8 C0E7     		b	.L7
+ 351              	.L31:
+ 352 00ca 00BF     		.align	2
+ 353              	.L30:
+ 354 00cc 00000000 		.word	.LANCHOR3
+ 355 00d0 00000000 		.word	.LANCHOR2
+ 356 00d4 00000000 		.word	board_get_unique_id
+ 357 00d8 01234567 		.word	1732584193
+ 358 00dc 00000000 		.word	.LC0
+ 359 00e0 02000000 		.word	.LANCHOR2+2
+ 360              	.LBE19:
+ 361              		.cfi_endproc
+ 362              	.LFE76:
+ 364              		.global	string_desc_arr
+ 365              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 366              		.align	2
+ 367              	.LC1:
+ 368 0000 54696E79 		.ascii	"TinyUSB\000"
+ 368      55534200 
+ 369              		.align	2
+ 370              	.LC2:
+ 371 0008 54696E79 		.ascii	"TinyUSB Device\000"
+ 371      55534220 
+ 371      44657669 
+ 371      636500
+ 372              		.global	desc_fs_configuration
+ 373              		.global	desc_device
+ARM GAS  /tmp/ccBEnTZR.s 			page 14
 
 
- 242      00000000 
- 242      00000000 
- 242      00000000 
- 242      00000000 
- 243              		.section	.data.string_desc_arr,"aw"
- 244              		.align	2
- 245              		.set	.LANCHOR3,. + 0
- 248              	string_desc_arr:
- 249 0000 00000000 		.word	__compound_literal.0
- 250 0004 00000000 		.word	.LC0
- 251 0008 08000000 		.word	.LC1
- 252 000c 00000000 		.word	0
- 253              		.section	.rodata.__compound_literal.0,"a"
- 254              		.align	2
- 257              	__compound_literal.0:
- 258 0000 09       		.byte	9
- 259 0001 04       		.byte	4
- 260              		.section	.rodata.desc_device,"a"
- 261              		.align	2
- 262              		.set	.LANCHOR0,. + 0
- 265              	desc_device:
- 266 0000 12       		.byte	18
- 267 0001 01       		.byte	1
- 268 0002 0002     		.short	512
- 269 0004 00       		.byte	0
- 270 0005 00       		.byte	0
- 271 0006 00       		.byte	0
- 272 0007 40       		.byte	64
- 273 0008 FECA     		.short	-13570
- 274 000a 0840     		.short	16392
- 275 000c 0001     		.short	256
- 276 000e 01       		.byte	1
- 277 000f 02       		.byte	2
- 278 0010 03       		.byte	3
- 279 0011 01       		.byte	1
- 280              		.section	.rodata.desc_fs_configuration,"a"
- 281              		.align	2
- 282              		.set	.LANCHOR1,. + 0
- 285              	desc_fs_configuration:
- 286 0000 09026500 		.ascii	"\011\002e\000\002\001\000\2002\011\004\000\000\000\001"
- 286      02010080 
- 286      32090400 
- 286      000001
- 287 000f 01000009 		.ascii	"\001\000\000\011$\001\000\001\011\000\001\001\011\004"
- 287      24010001 
- 287      09000101 
- 287      0904
- 288 001d 01000201 		.ascii	"\001\000\002\001\003\000\000\007$\001\000\001A\000\006"
- 288      03000007 
- 288      24010001 
- 288      410006
- 289 002c 24020101 		.ascii	"$\002\001\001\000\006$\002\002\002\000\011$\003\001"
- 289      00062402 
- 289      02020009 
- 289      240301
- 290 003b 03010201 		.ascii	"\003\001\002\001\000\011$\003\002\004\001\001\001\000"
- 290      00092403 
-ARM GAS  /tmp/ccuNAyy6.s 			page 10
+ 374              		.section	.bss._desc_str,"aw",%nobits
+ 375              		.align	2
+ 376              		.set	.LANCHOR2,. + 0
+ 379              	_desc_str:
+ 380 0000 00000000 		.space	66
+ 380      00000000 
+ 380      00000000 
+ 380      00000000 
+ 380      00000000 
+ 381              		.section	.data.string_desc_arr,"aw"
+ 382              		.align	2
+ 383              		.set	.LANCHOR3,. + 0
+ 386              	string_desc_arr:
+ 387 0000 00000000 		.word	__compound_literal.0
+ 388 0004 00000000 		.word	.LC1
+ 389 0008 08000000 		.word	.LC2
+ 390 000c 00000000 		.word	0
+ 391              		.section	.rodata.__compound_literal.0,"a"
+ 392              		.align	2
+ 395              	__compound_literal.0:
+ 396 0000 09       		.byte	9
+ 397 0001 04       		.byte	4
+ 398              		.section	.rodata.desc_device,"a"
+ 399              		.align	2
+ 400              		.set	.LANCHOR0,. + 0
+ 403              	desc_device:
+ 404 0000 12       		.byte	18
+ 405 0001 01       		.byte	1
+ 406 0002 0002     		.short	512
+ 407 0004 00       		.byte	0
+ 408 0005 00       		.byte	0
+ 409 0006 00       		.byte	0
+ 410 0007 40       		.byte	64
+ 411 0008 FECA     		.short	-13570
+ 412 000a 0840     		.short	16392
+ 413 000c 0001     		.short	256
+ 414 000e 01       		.byte	1
+ 415 000f 02       		.byte	2
+ 416 0010 03       		.byte	3
+ 417 0011 01       		.byte	1
+ 418              		.section	.rodata.desc_fs_configuration,"a"
+ 419              		.align	2
+ 420              		.set	.LANCHOR1,. + 0
+ 423              	desc_fs_configuration:
+ 424 0000 09026500 		.ascii	"\011\002e\000\002\001\000\2002\011\004\000\000\000\001"
+ 424      02010080 
+ 424      32090400 
+ 424      000001
+ 425 000f 01000009 		.ascii	"\001\000\000\011$\001\000\001\011\000\001\001\011\004"
+ 425      24010001 
+ 425      09000101 
+ 425      0904
+ 426 001d 01000201 		.ascii	"\001\000\002\001\003\000\000\007$\001\000\001A\000\006"
+ 426      03000007 
+ 426      24010001 
+ 426      410006
+ 427 002c 24020101 		.ascii	"$\002\001\001\000\006$\002\002\002\000\011$\003\001"
+ARM GAS  /tmp/ccBEnTZR.s 			page 15
 
 
- 290      02040101 
- 290      0100
- 291 0049 09050102 		.ascii	"\011\005\001\002@\000\000\000\000\005%\001\001\001\011"
- 291      40000000 
- 291      00052501 
- 291      010109
- 292 0058 05810240 		.ascii	"\005\201\002@\000\000\000\000\005%\001\001\003"
- 292      00000000 
- 292      05250101 
- 292      03
- 293              		.text
- 294              	.Letext0:
- 295              		.file 2 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
- 296              		.file 3 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
- 297              		.file 4 "tinyusb/src/common/tusb_types.h"
- 298              		.file 5 "tinyusb/src/class/audio/audio.h"
- 299              		.file 6 "tinyusb/src/class/midi/midi.h"
- 300              		.file 7 "/usr/include/newlib/string.h"
-ARM GAS  /tmp/ccuNAyy6.s 			page 11
+ 427      00062402 
+ 427      02020009 
+ 427      240301
+ 428 003b 03010201 		.ascii	"\003\001\002\001\000\011$\003\002\004\001\001\001\000"
+ 428      00092403 
+ 428      02040101 
+ 428      0100
+ 429 0049 09050102 		.ascii	"\011\005\001\002@\000\000\000\000\005%\001\001\001\011"
+ 429      40000000 
+ 429      00052501 
+ 429      010109
+ 430 0058 05810240 		.ascii	"\005\201\002@\000\000\000\000\005%\001\001\003"
+ 430      00000000 
+ 430      05250101 
+ 430      03
+ 431              		.weak	board_get_unique_id
+ 432              		.text
+ 433              	.Letext0:
+ 434              		.file 3 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h"
+ 435              		.file 4 "/usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h"
+ 436              		.file 5 "tinyusb/src/common/tusb_types.h"
+ 437              		.file 6 "tinyusb/src/class/audio/audio.h"
+ 438              		.file 7 "tinyusb/src/class/midi/midi.h"
+ 439              		.file 8 "/usr/include/newlib/string.h"
+ARM GAS  /tmp/ccBEnTZR.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usb_descriptors.c
-     /tmp/ccuNAyy6.s:18     .text.tud_descriptor_device_cb:0000000000000000 $t
-     /tmp/ccuNAyy6.s:26     .text.tud_descriptor_device_cb:0000000000000000 tud_descriptor_device_cb
-     /tmp/ccuNAyy6.s:41     .text.tud_descriptor_device_cb:0000000000000004 $d
-     /tmp/ccuNAyy6.s:46     .text.tud_descriptor_configuration_cb:0000000000000000 $t
-     /tmp/ccuNAyy6.s:53     .text.tud_descriptor_configuration_cb:0000000000000000 tud_descriptor_configuration_cb
-     /tmp/ccuNAyy6.s:71     .text.tud_descriptor_configuration_cb:0000000000000004 $d
-     /tmp/ccuNAyy6.s:76     .text.tud_descriptor_string_cb:0000000000000000 $t
-     /tmp/ccuNAyy6.s:83     .text.tud_descriptor_string_cb:0000000000000000 tud_descriptor_string_cb
-     /tmp/ccuNAyy6.s:219    .text.tud_descriptor_string_cb:000000000000005c $d
-     /tmp/ccuNAyy6.s:248    .data.string_desc_arr:0000000000000000 string_desc_arr
-     /tmp/ccuNAyy6.s:228    .rodata.str1.4:0000000000000000 $d
-     /tmp/ccuNAyy6.s:285    .rodata.desc_fs_configuration:0000000000000000 desc_fs_configuration
-     /tmp/ccuNAyy6.s:265    .rodata.desc_device:0000000000000000 desc_device
-     /tmp/ccuNAyy6.s:237    .bss._desc_str:0000000000000000 $d
-     /tmp/ccuNAyy6.s:241    .bss._desc_str:0000000000000000 _desc_str
-     /tmp/ccuNAyy6.s:244    .data.string_desc_arr:0000000000000000 $d
-     /tmp/ccuNAyy6.s:257    .rodata.__compound_literal.0:0000000000000000 __compound_literal.0
-     /tmp/ccuNAyy6.s:254    .rodata.__compound_literal.0:0000000000000000 $d
-     /tmp/ccuNAyy6.s:261    .rodata.desc_device:0000000000000000 $d
-     /tmp/ccuNAyy6.s:281    .rodata.desc_fs_configuration:0000000000000000 $d
+     /tmp/ccBEnTZR.s:18     .text.tud_descriptor_device_cb:0000000000000000 $t
+     /tmp/ccBEnTZR.s:26     .text.tud_descriptor_device_cb:0000000000000000 tud_descriptor_device_cb
+     /tmp/ccBEnTZR.s:41     .text.tud_descriptor_device_cb:0000000000000004 $d
+     /tmp/ccBEnTZR.s:46     .text.tud_descriptor_configuration_cb:0000000000000000 $t
+     /tmp/ccBEnTZR.s:53     .text.tud_descriptor_configuration_cb:0000000000000000 tud_descriptor_configuration_cb
+     /tmp/ccBEnTZR.s:71     .text.tud_descriptor_configuration_cb:0000000000000004 $d
+     /tmp/ccBEnTZR.s:76     .rodata.tud_descriptor_string_cb.str1.4:0000000000000000 $d
+     /tmp/ccBEnTZR.s:80     .text.tud_descriptor_string_cb:0000000000000000 $t
+     /tmp/ccBEnTZR.s:87     .text.tud_descriptor_string_cb:0000000000000000 tud_descriptor_string_cb
+     /tmp/ccBEnTZR.s:354    .text.tud_descriptor_string_cb:00000000000000cc $d
+     /tmp/ccBEnTZR.s:386    .data.string_desc_arr:0000000000000000 string_desc_arr
+     /tmp/ccBEnTZR.s:366    .rodata.str1.4:0000000000000000 $d
+     /tmp/ccBEnTZR.s:423    .rodata.desc_fs_configuration:0000000000000000 desc_fs_configuration
+     /tmp/ccBEnTZR.s:403    .rodata.desc_device:0000000000000000 desc_device
+     /tmp/ccBEnTZR.s:375    .bss._desc_str:0000000000000000 $d
+     /tmp/ccBEnTZR.s:379    .bss._desc_str:0000000000000000 _desc_str
+     /tmp/ccBEnTZR.s:382    .data.string_desc_arr:0000000000000000 $d
+     /tmp/ccBEnTZR.s:395    .rodata.__compound_literal.0:0000000000000000 __compound_literal.0
+     /tmp/ccBEnTZR.s:392    .rodata.__compound_literal.0:0000000000000000 $d
+     /tmp/ccBEnTZR.s:399    .rodata.desc_device:0000000000000000 $d
+     /tmp/ccBEnTZR.s:419    .rodata.desc_fs_configuration:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 strlen
-board_usb_get_serial
+board_get_unique_id

@@ -35,6 +35,7 @@
 //--------------------------------------------------------------------+
 
 // RHPort number used for device can be defined by board.mk, default to port 0
+// CLARIFY WHICH RHPORT SHOULD BE USED
 #ifndef BOARD_TUD_RHPORT
 #define BOARD_TUD_RHPORT      0
 #endif

@@ -1,5 +1,5 @@
 GENERAL COMMANDS:
-st-flash write build/DISCO_TEST.bin 0x08000000 -- write binary to device when connected with usbipd
+st-flash write build/DISCO_MIDI.bin 0x08000000 -- write binary to device when connected with usbipd
 
 cannot find documentation for HAL_PCDEx_PMAConfig() function used in driver documentation
 
@@ -9,6 +9,9 @@ usbipd wsl attach --busid=<BUSID>
 //fix for if usbip version returns nothing/usbipd not working
 sudo update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-tools/*/usbip | tail -n1` 20 
 
+// HELPFUL LINKS
+https://community.st.com/t5/stm32-mcus-products/help-with-integrating-tinyusb-in-stm32cubeide/td-p/593695
+https://github.com/hathach/tinyusb/issues/1612
 
 FOR TINYUSB INTEGRATION:
     generate code for usb_otg_fs

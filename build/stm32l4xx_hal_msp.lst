@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cchNmzzG.s 			page 1
+ARM GAS  /tmp/cc6BWoPc.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
   28:Core/Src/stm32l4xx_hal_msp.c **** /* Private typedef -----------------------------------------------------------*/
   29:Core/Src/stm32l4xx_hal_msp.c **** /* USER CODE BEGIN TD */
   30:Core/Src/stm32l4xx_hal_msp.c **** 
-ARM GAS  /tmp/cchNmzzG.s 			page 2
+ARM GAS  /tmp/cc6BWoPc.s 			page 2
 
 
   31:Core/Src/stm32l4xx_hal_msp.c **** /* USER CODE END TD */
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
   43 0006 42F00102 		orr	r2, r2, #1
   44 000a 1A66     		str	r2, [r3, #96]
   45              		.loc 1 70 3 view .LVU4
-ARM GAS  /tmp/cchNmzzG.s 			page 3
+ARM GAS  /tmp/cc6BWoPc.s 			page 3
 
 
   46 000c 1A6E     		ldr	r2, [r3, #96]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
   81:Core/Src/stm32l4xx_hal_msp.c **** * @brief I2C MSP Initialization
   82:Core/Src/stm32l4xx_hal_msp.c **** * This function configures the hardware resources used in this example
   83:Core/Src/stm32l4xx_hal_msp.c **** * @param hi2c: I2C handle pointer
-ARM GAS  /tmp/cchNmzzG.s 			page 4
+ARM GAS  /tmp/cc6BWoPc.s 			page 4
 
 
   84:Core/Src/stm32l4xx_hal_msp.c **** * @retval None
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
   99:Core/Src/stm32l4xx_hal_msp.c ****     PeriphClkInit.I2c1ClockSelection = RCC_I2C1CLKSOURCE_PCLK1;
  100:Core/Src/stm32l4xx_hal_msp.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
  101:Core/Src/stm32l4xx_hal_msp.c ****     {
-ARM GAS  /tmp/cchNmzzG.s 			page 5
+ARM GAS  /tmp/cc6BWoPc.s 			page 5
 
 
  102:Core/Src/stm32l4xx_hal_msp.c ****       Error_Handler();
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  155              		.loc 1 105 5 is_stmt 1 view .LVU31
  156              	.LBB4:
  105:Core/Src/stm32l4xx_hal_msp.c ****     /**I2C1 GPIO Configuration
-ARM GAS  /tmp/cchNmzzG.s 			page 6
+ARM GAS  /tmp/cc6BWoPc.s 			page 6
 
 
  157              		.loc 1 105 5 view .LVU32
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  195 005c 0948     		ldr	r0, .L11+8
  196 005e FFF7FEFF 		bl	HAL_GPIO_Init
  197              	.LVL7:
-ARM GAS  /tmp/cchNmzzG.s 			page 7
+ARM GAS  /tmp/cc6BWoPc.s 			page 7
 
 
  118:Core/Src/stm32l4xx_hal_msp.c ****   /* USER CODE BEGIN I2C1_MspInit 1 */
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  131:Core/Src/stm32l4xx_hal_msp.c **** */
  132:Core/Src/stm32l4xx_hal_msp.c **** void HAL_I2C_MspDeInit(I2C_HandleTypeDef* hi2c)
  133:Core/Src/stm32l4xx_hal_msp.c **** {
-ARM GAS  /tmp/cchNmzzG.s 			page 8
+ARM GAS  /tmp/cc6BWoPc.s 			page 8
 
 
  241              		.loc 1 133 1 view -0
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  150:Core/Src/stm32l4xx_hal_msp.c ****   /* USER CODE BEGIN I2C1_MspDeInit 1 */
  151:Core/Src/stm32l4xx_hal_msp.c **** 
  152:Core/Src/stm32l4xx_hal_msp.c ****   /* USER CODE END I2C1_MspDeInit 1 */
-ARM GAS  /tmp/cchNmzzG.s 			page 9
+ARM GAS  /tmp/cc6BWoPc.s 			page 9
 
 
  153:Core/Src/stm32l4xx_hal_msp.c ****   }
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  166:Core/Src/stm32l4xx_hal_msp.c ****   if(hspi->Instance==SPI1)
  321              		.loc 1 166 3 is_stmt 1 view .LVU71
  322              		.loc 1 166 10 is_stmt 0 view .LVU72
-ARM GAS  /tmp/cchNmzzG.s 			page 10
+ARM GAS  /tmp/cc6BWoPc.s 			page 10
 
 
  323 0010 0268     		ldr	r2, [r0]
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  333              		.cfi_remember_state
  334              		.cfi_def_cfa_offset 8
  335              		@ sp needed
-ARM GAS  /tmp/cchNmzzG.s 			page 11
+ARM GAS  /tmp/cc6BWoPc.s 			page 11
 
 
  336 001a 10BD     		pop	{r4, pc}
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  376 0046 E023     		movs	r3, #224
  377 0048 0393     		str	r3, [sp, #12]
  181:Core/Src/stm32l4xx_hal_msp.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
-ARM GAS  /tmp/cchNmzzG.s 			page 12
+ARM GAS  /tmp/cc6BWoPc.s 			page 12
 
 
  378              		.loc 1 181 5 is_stmt 1 view .LVU90
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  415              		.loc 1 193 5 is_stmt 1 view .LVU107
  193:Core/Src/stm32l4xx_hal_msp.c ****     hdma_spi1_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
  416              		.loc 1 193 30 is_stmt 0 view .LVU108
-ARM GAS  /tmp/cchNmzzG.s 			page 13
+ARM GAS  /tmp/cc6BWoPc.s 			page 13
 
 
  417 0072 8022     		movs	r2, #128
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  455 0094 00300140 		.word	1073819648
  456 0098 00000000 		.word	hdma_spi1_tx
  457 009c 30000240 		.word	1073872944
-ARM GAS  /tmp/cchNmzzG.s 			page 14
+ARM GAS  /tmp/cc6BWoPc.s 			page 14
 
 
  458              		.cfi_endproc
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  227:Core/Src/stm32l4xx_hal_msp.c **** 
  228:Core/Src/stm32l4xx_hal_msp.c ****     /**SPI1 GPIO Configuration
  229:Core/Src/stm32l4xx_hal_msp.c ****     PA5     ------> SPI1_SCK
-ARM GAS  /tmp/cchNmzzG.s 			page 15
+ARM GAS  /tmp/cc6BWoPc.s 			page 15
 
 
  230:Core/Src/stm32l4xx_hal_msp.c ****     PA6     ------> SPI1_MISO
@@ -898,7 +898,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  531              		.loc 1 251 1 is_stmt 1 view -0
  532              		.cfi_startproc
  533              		@ args = 0, pretend = 0, frame = 168
-ARM GAS  /tmp/cchNmzzG.s 			page 16
+ARM GAS  /tmp/cc6BWoPc.s 			page 16
 
 
  534              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  271:Core/Src/stm32l4xx_hal_msp.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
  272:Core/Src/stm32l4xx_hal_msp.c ****     {
  273:Core/Src/stm32l4xx_hal_msp.c ****       Error_Handler();
-ARM GAS  /tmp/cchNmzzG.s 			page 17
+ARM GAS  /tmp/cc6BWoPc.s 			page 17
 
 
  274:Core/Src/stm32l4xx_hal_msp.c ****     }
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  583 002a 0393     		str	r3, [sp, #12]
  263:Core/Src/stm32l4xx_hal_msp.c ****     PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
  584              		.loc 1 263 5 is_stmt 1 view .LVU150
-ARM GAS  /tmp/cchNmzzG.s 			page 18
+ARM GAS  /tmp/cc6BWoPc.s 			page 18
 
 
  263:Core/Src/stm32l4xx_hal_msp.c ****     PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  621 0054 3ED1     		bne	.L46
  622              	.L41:
  276:Core/Src/stm32l4xx_hal_msp.c ****     /**USB_OTG_FS GPIO Configuration
-ARM GAS  /tmp/cchNmzzG.s 			page 19
+ARM GAS  /tmp/cc6BWoPc.s 			page 19
 
 
  623              		.loc 1 276 5 is_stmt 1 view .LVU169
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  287:Core/Src/stm32l4xx_hal_msp.c **** 
  661              		.loc 1 287 5 is_stmt 1 view .LVU186
  662 0080 25A9     		add	r1, sp, #148
-ARM GAS  /tmp/cchNmzzG.s 			page 20
+ARM GAS  /tmp/cc6BWoPc.s 			page 20
 
 
  663 0082 4FF09040 		mov	r0, #1207959552
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  296:Core/Src/stm32l4xx_hal_msp.c ****       __HAL_RCC_PWR_CLK_DISABLE();
  702              		.loc 1 296 7 view .LVU202
  703 00b6 FFF7FEFF 		bl	HAL_PWREx_EnableVddUSB
-ARM GAS  /tmp/cchNmzzG.s 			page 21
+ARM GAS  /tmp/cc6BWoPc.s 			page 21
 
 
  704              	.LVL34:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  315:Core/Src/stm32l4xx_hal_msp.c **** * This function freeze the hardware resources used in this example
  316:Core/Src/stm32l4xx_hal_msp.c **** * @param hpcd: PCD handle pointer
  317:Core/Src/stm32l4xx_hal_msp.c **** * @retval None
-ARM GAS  /tmp/cchNmzzG.s 			page 22
+ARM GAS  /tmp/cc6BWoPc.s 			page 22
 
 
  318:Core/Src/stm32l4xx_hal_msp.c **** */
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  337:Core/Src/stm32l4xx_hal_msp.c ****     if(__HAL_RCC_PWR_IS_CLK_DISABLED())
  786              		.loc 1 337 5 is_stmt 1 view .LVU218
  787              		.loc 1 337 8 is_stmt 0 view .LVU219
-ARM GAS  /tmp/cchNmzzG.s 			page 23
+ARM GAS  /tmp/cc6BWoPc.s 			page 23
 
 
  788 0024 A36D     		ldr	r3, [r4, #88]
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  824              		@ sp needed
  825 0052 10BD     		pop	{r4, pc}
  826              	.L51:
-ARM GAS  /tmp/cchNmzzG.s 			page 24
+ARM GAS  /tmp/cc6BWoPc.s 			page 24
 
 
  827              	.LCFI19:
@@ -1410,32 +1410,32 @@ ARM GAS  /tmp/cchNmzzG.s 			page 1
  853              		.file 13 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h"
  854              		.file 14 "Core/Inc/main.h"
  855              		.file 15 "<built-in>"
-ARM GAS  /tmp/cchNmzzG.s 			page 25
+ARM GAS  /tmp/cc6BWoPc.s 			page 25
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l4xx_hal_msp.c
-     /tmp/cchNmzzG.s:18     .text.HAL_MspInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:26     .text.HAL_MspInit:0000000000000000 HAL_MspInit
-     /tmp/cchNmzzG.s:77     .text.HAL_MspInit:000000000000002c $d
-     /tmp/cchNmzzG.s:82     .text.HAL_I2C_MspInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:89     .text.HAL_I2C_MspInit:0000000000000000 HAL_I2C_MspInit
-     /tmp/cchNmzzG.s:224    .text.HAL_I2C_MspInit:000000000000007c $d
-     /tmp/cchNmzzG.s:231    .text.HAL_I2C_MspDeInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:238    .text.HAL_I2C_MspDeInit:0000000000000000 HAL_I2C_MspDeInit
-     /tmp/cchNmzzG.s:283    .text.HAL_I2C_MspDeInit:000000000000002c $d
-     /tmp/cchNmzzG.s:290    .text.HAL_SPI_MspInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:297    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
-     /tmp/cchNmzzG.s:455    .text.HAL_SPI_MspInit:0000000000000094 $d
-     /tmp/cchNmzzG.s:462    .text.HAL_SPI_MspDeInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:469    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
-     /tmp/cchNmzzG.s:515    .text.HAL_SPI_MspDeInit:000000000000002c $d
-     /tmp/cchNmzzG.s:521    .text.HAL_PCD_MspInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:528    .text.HAL_PCD_MspInit:0000000000000000 HAL_PCD_MspInit
-     /tmp/cchNmzzG.s:737    .text.HAL_PCD_MspInit:00000000000000e0 $d
-     /tmp/cchNmzzG.s:742    .text.HAL_PCD_MspDeInit:0000000000000000 $t
-     /tmp/cchNmzzG.s:749    .text.HAL_PCD_MspDeInit:0000000000000000 HAL_PCD_MspDeInit
-     /tmp/cchNmzzG.s:836    .text.HAL_PCD_MspDeInit:000000000000005c $d
+     /tmp/cc6BWoPc.s:18     .text.HAL_MspInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:26     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+     /tmp/cc6BWoPc.s:77     .text.HAL_MspInit:000000000000002c $d
+     /tmp/cc6BWoPc.s:82     .text.HAL_I2C_MspInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:89     .text.HAL_I2C_MspInit:0000000000000000 HAL_I2C_MspInit
+     /tmp/cc6BWoPc.s:224    .text.HAL_I2C_MspInit:000000000000007c $d
+     /tmp/cc6BWoPc.s:231    .text.HAL_I2C_MspDeInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:238    .text.HAL_I2C_MspDeInit:0000000000000000 HAL_I2C_MspDeInit
+     /tmp/cc6BWoPc.s:283    .text.HAL_I2C_MspDeInit:000000000000002c $d
+     /tmp/cc6BWoPc.s:290    .text.HAL_SPI_MspInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:297    .text.HAL_SPI_MspInit:0000000000000000 HAL_SPI_MspInit
+     /tmp/cc6BWoPc.s:455    .text.HAL_SPI_MspInit:0000000000000094 $d
+     /tmp/cc6BWoPc.s:462    .text.HAL_SPI_MspDeInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:469    .text.HAL_SPI_MspDeInit:0000000000000000 HAL_SPI_MspDeInit
+     /tmp/cc6BWoPc.s:515    .text.HAL_SPI_MspDeInit:000000000000002c $d
+     /tmp/cc6BWoPc.s:521    .text.HAL_PCD_MspInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:528    .text.HAL_PCD_MspInit:0000000000000000 HAL_PCD_MspInit
+     /tmp/cc6BWoPc.s:737    .text.HAL_PCD_MspInit:00000000000000e0 $d
+     /tmp/cc6BWoPc.s:742    .text.HAL_PCD_MspDeInit:0000000000000000 $t
+     /tmp/cc6BWoPc.s:749    .text.HAL_PCD_MspDeInit:0000000000000000 HAL_PCD_MspDeInit
+     /tmp/cc6BWoPc.s:836    .text.HAL_PCD_MspDeInit:000000000000005c $d
 
 UNDEFINED SYMBOLS
 memset

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccchXe7g.s 			page 1
+ARM GAS  /tmp/cco94OUO.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   28:tinyusb/src/tusb.c **** 
   29:tinyusb/src/tusb.c **** #if CFG_TUH_ENABLED || CFG_TUD_ENABLED
   30:tinyusb/src/tusb.c **** 
-ARM GAS  /tmp/ccchXe7g.s 			page 2
+ARM GAS  /tmp/cco94OUO.s 			page 2
 
 
   31:tinyusb/src/tusb.c **** #include "tusb.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   53              		@ args = 0, pretend = 0, frame = 0
   54              		@ frame_needed = 0, uses_anonymous_args = 0
   55 0000 08B5     		push	{r3, lr}
-ARM GAS  /tmp/ccchXe7g.s 			page 3
+ARM GAS  /tmp/cco94OUO.s 			page 3
 
 
   56              	.LCFI0:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   82:tinyusb/src/tusb.c ****   while(desc+1 < end)
   93              		.loc 1 82 3 view .LVU11
   94              		.loc 1 82 8 is_stmt 0 view .LVU12
-ARM GAS  /tmp/ccchXe7g.s 			page 4
+ARM GAS  /tmp/cco94OUO.s 			page 4
 
 
   95 0000 01E0     		b	.L7
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   90:tinyusb/src/tusb.c **** uint8_t const * tu_desc_find2(uint8_t const* desc, uint8_t const* end, uint8_t byte1, uint8_t byte2
   91:tinyusb/src/tusb.c **** {
  138              		.loc 1 91 1 is_stmt 1 view -0
-ARM GAS  /tmp/ccchXe7g.s 			page 5
+ARM GAS  /tmp/cco94OUO.s 			page 5
 
 
  139              		.cfi_startproc
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  178 0024 7047     		bx	lr
  179              		.cfi_endproc
  180              	.LFE82:
-ARM GAS  /tmp/ccchXe7g.s 			page 6
+ARM GAS  /tmp/cco94OUO.s 			page 6
 
 
  182              		.section	.text.tu_desc_find3,"ax",%progbits
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  224 001a 9445     		cmp	ip, r2
  225 001c F4D1     		bne	.L22
  104:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
-ARM GAS  /tmp/ccchXe7g.s 			page 7
+ARM GAS  /tmp/cco94OUO.s 			page 7
 
 
  226              		.loc 1 104 33 discriminator 1 view .LVU53
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  118:tinyusb/src/tusb.c **** 
  119:tinyusb/src/tusb.c ****   // pre-check to help reducing mutex lock
  120:tinyusb/src/tusb.c ****   TU_VERIFY((ep_state->busy == 0) && (ep_state->claimed == 0));
-ARM GAS  /tmp/ccchXe7g.s 			page 8
+ARM GAS  /tmp/cco94OUO.s 			page 8
 
 
  267              		.loc 1 120 3 view .LVU63
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  313 0038 F6E7     		b	.L30
  314              	.L31:
  120:tinyusb/src/tusb.c ****   (void) osal_mutex_lock(mutex, OSAL_TIMEOUT_WAIT_FOREVER);
-ARM GAS  /tmp/ccchXe7g.s 			page 9
+ARM GAS  /tmp/cco94OUO.s 			page 9
 
 
  315              		.loc 1 120 3 view .LVU81
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  355              	.LVL18:
  356              		.loc 1 143 6 discriminator 6 view .LVU92
  357 000e 1AB1     		cbz	r2, .L36
-ARM GAS  /tmp/ccchXe7g.s 			page 10
+ARM GAS  /tmp/cco94OUO.s 			page 10
 
 
  144:tinyusb/src/tusb.c ****   {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  400              		@ frame_needed = 0, uses_anonymous_args = 0
  401              		@ link register save eliminated.
  155:tinyusb/src/tusb.c ****   uint16_t const max_packet_size = tu_edpt_packet_size(desc_ep);
-ARM GAS  /tmp/ccchXe7g.s 			page 11
+ARM GAS  /tmp/cco94OUO.s 			page 11
 
 
  402              		.loc 1 155 3 view .LVU103
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   51:tinyusb/src/common/tusb_types.h ****   TUSB_SPEED_HIGH = 2,
   52:tinyusb/src/common/tusb_types.h ****   TUSB_SPEED_INVALID = 0xff,
   53:tinyusb/src/common/tusb_types.h **** }tusb_speed_t;
-ARM GAS  /tmp/ccchXe7g.s 			page 12
+ARM GAS  /tmp/cco94OUO.s 			page 12
 
 
   54:tinyusb/src/common/tusb_types.h **** 
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  108:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_BOS                   = 0x0F,
  109:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_DEVICE_CAPABILITY     = 0x10,
  110:tinyusb/src/common/tusb_types.h **** 
-ARM GAS  /tmp/ccchXe7g.s 			page 13
+ARM GAS  /tmp/cco94OUO.s 			page 13
 
 
  111:tinyusb/src/common/tusb_types.h ****   TUSB_DESC_FUNCTIONAL            = 0x21,
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  165:tinyusb/src/common/tusb_types.h **** typedef enum
  166:tinyusb/src/common/tusb_types.h **** {
  167:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_UNSPECIFIED          = 0    ,
-ARM GAS  /tmp/ccchXe7g.s 			page 14
+ARM GAS  /tmp/cco94OUO.s 			page 14
 
 
  168:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_AUDIO                = 1    ,
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  222:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_BILLBOARD                  = 0x0D,
  223:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_AUTHENTICATION             = 0x0E,
  224:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_BILLBOARD_EX               = 0x0F,
-ARM GAS  /tmp/ccchXe7g.s 			page 15
+ARM GAS  /tmp/cco94OUO.s 			page 15
 
 
  225:tinyusb/src/common/tusb_types.h ****   DEVICE_CAPABILITY_CONFIGURATION_SUMMARY      = 0x10
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  279:tinyusb/src/common/tusb_types.h **** enum
  280:tinyusb/src/common/tusb_types.h **** {
  281:tinyusb/src/common/tusb_types.h ****   TUSB_INDEX_INVALID_8 = 0xFFu
-ARM GAS  /tmp/ccchXe7g.s 			page 16
+ARM GAS  /tmp/cco94OUO.s 			page 16
 
 
  282:tinyusb/src/common/tusb_types.h **** };
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  336:tinyusb/src/common/tusb_types.h ****   uint8_t  iConfiguration      ; ///< Index of string descriptor describing this configuration
  337:tinyusb/src/common/tusb_types.h ****   uint8_t  bmAttributes        ; ///< Configuration characteristics \n D7: Reserved (set to one)\n 
  338:tinyusb/src/common/tusb_types.h ****   uint8_t  bMaxPower           ; ///< Maximum power consumption of the USB device from the bus in t
-ARM GAS  /tmp/ccchXe7g.s 			page 17
+ARM GAS  /tmp/cco94OUO.s 			page 17
 
 
  339:tinyusb/src/common/tusb_types.h **** } tusb_desc_configuration_t;
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  393:tinyusb/src/common/tusb_types.h **** } tusb_desc_other_speed_t;
  394:tinyusb/src/common/tusb_types.h **** 
  395:tinyusb/src/common/tusb_types.h **** /// USB Device Qualifier Descriptor
-ARM GAS  /tmp/ccchXe7g.s 			page 18
+ARM GAS  /tmp/cco94OUO.s 			page 18
 
 
  396:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  450:tinyusb/src/common/tusb_types.h **** {
  451:tinyusb/src/common/tusb_types.h ****   uint8_t bLength;
  452:tinyusb/src/common/tusb_types.h ****   uint8_t bDescriptorType;
-ARM GAS  /tmp/ccchXe7g.s 			page 19
+ARM GAS  /tmp/cco94OUO.s 			page 19
 
 
  453:tinyusb/src/common/tusb_types.h ****   uint8_t bScheme;
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  507:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
  508:tinyusb/src/common/tusb_types.h **** // Endpoint helper
  509:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
-ARM GAS  /tmp/ccchXe7g.s 			page 20
+ARM GAS  /tmp/cco94OUO.s 			page 20
 
 
  510:tinyusb/src/common/tusb_types.h **** 
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  159:tinyusb/src/tusb.c ****   {
  160:tinyusb/src/tusb.c ****     case TUSB_XFER_ISOCHRONOUS:
  161:tinyusb/src/tusb.c ****     {
-ARM GAS  /tmp/ccchXe7g.s 			page 21
+ARM GAS  /tmp/cco94OUO.s 			page 21
 
 
  162:tinyusb/src/tusb.c ****       uint16_t const spec_size = (speed == TUSB_SPEED_HIGH ? 1024 : 1023);
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
  461              		.loc 1 163 7 is_stmt 1 discriminator 1 view .LVU121
  163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
-ARM GAS  /tmp/ccchXe7g.s 			page 22
+ARM GAS  /tmp/cco94OUO.s 			page 22
 
 
  462              		.loc 1 163 7 discriminator 1 view .LVU122
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  502              		.loc 1 189 10 is_stmt 0 view .LVU137
  503 004e 0120     		movs	r0, #1
  504              	.LVL32:
-ARM GAS  /tmp/ccchXe7g.s 			page 23
+ARM GAS  /tmp/cco94OUO.s 			page 23
 
 
  505              		.loc 1 189 10 view .LVU138
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  175:tinyusb/src/tusb.c ****       }
  545              		.loc 1 175 9 discriminator 1 view .LVU153
  175:tinyusb/src/tusb.c ****       }
-ARM GAS  /tmp/ccchXe7g.s 			page 24
+ARM GAS  /tmp/cco94OUO.s 			page 24
 
 
  546              		.loc 1 175 9 discriminator 1 view .LVU154
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  589 008c 7047     		bx	lr
  590              	.LVL41:
  591              	.L63:
-ARM GAS  /tmp/ccchXe7g.s 			page 25
+ARM GAS  /tmp/cco94OUO.s 			page 25
 
 
  592              	.LBB64:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  632 00a8 0120     		movs	r0, #1
  633              	.LVL46:
  189:tinyusb/src/tusb.c **** }
-ARM GAS  /tmp/ccchXe7g.s 			page 26
+ARM GAS  /tmp/cco94OUO.s 			page 26
 
 
  634              		.loc 1 189 10 view .LVU181
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  671              		.cfi_def_cfa_offset 0
  672              		.cfi_restore 14
  207:tinyusb/src/tusb.c ****   }
-ARM GAS  /tmp/ccchXe7g.s 			page 27
+ARM GAS  /tmp/cco94OUO.s 			page 27
 
 
  673              		.loc 1 207 5 is_stmt 1 view .LVU189
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  559:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_desc_type(void const* desc)
  697              		.loc 2 559 45 view .LVU198
  698              	.LBB69:
-ARM GAS  /tmp/ccchXe7g.s 			page 28
+ARM GAS  /tmp/cco94OUO.s 			page 28
 
 
  560:tinyusb/src/common/tusb_types.h **** {
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  739              	.LBB75:
  514:tinyusb/src/common/tusb_types.h **** }
  740              		.loc 2 514 3 view .LVU214
-ARM GAS  /tmp/ccchXe7g.s 			page 29
+ARM GAS  /tmp/cco94OUO.s 			page 29
 
 
  514:tinyusb/src/common/tusb_types.h **** }
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  781              	.LBE77:
  199:tinyusb/src/tusb.c ****     {
  782              		.loc 1 199 8 view .LVU232
-ARM GAS  /tmp/ccchXe7g.s 			page 30
+ARM GAS  /tmp/cco94OUO.s 			page 30
 
 
  783 0040 BCF1050F 		cmp	ip, #5
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  217:tinyusb/src/tusb.c ****   {
  218:tinyusb/src/tusb.c ****     // Next on interface desc
  219:tinyusb/src/tusb.c ****     len += tu_desc_len(desc_itf);
-ARM GAS  /tmp/ccchXe7g.s 			page 31
+ARM GAS  /tmp/cco94OUO.s 			page 31
 
 
  220:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  555:tinyusb/src/common/tusb_types.h **** }
  858              		.loc 2 555 16 view .LVU254
  859              	.LBE81:
-ARM GAS  /tmp/ccchXe7g.s 			page 32
+ARM GAS  /tmp/cco94OUO.s 			page 32
 
 
  860              	.LBE80:
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  899 002c 5FFA8EFE 		uxtb	lr, lr
  900              	.LVL74:
  216:tinyusb/src/tusb.c ****   {
-ARM GAS  /tmp/ccchXe7g.s 			page 33
+ARM GAS  /tmp/cco94OUO.s 			page 33
 
 
  901              		.loc 1 216 9 view .LVU270
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  236:tinyusb/src/tusb.c ****   }
  237:tinyusb/src/tusb.c **** 
  238:tinyusb/src/tusb.c ****   return len;
-ARM GAS  /tmp/ccchXe7g.s 			page 34
+ARM GAS  /tmp/cco94OUO.s 			page 34
 
 
  239:tinyusb/src/tusb.c **** }
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  981              	.LVL82:
  982              		.loc 1 253 3 is_stmt 0 view .LVU296
  983 000e BDF81420 		ldrh	r2, [sp, #20]
-ARM GAS  /tmp/ccchXe7g.s 			page 35
+ARM GAS  /tmp/cco94OUO.s 			page 35
 
 
  984              	.LVL83:
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  271:tinyusb/src/tusb.c ****   {
  272:tinyusb/src/tusb.c ****     #if CFG_TUD_ENABLED
  273:tinyusb/src/tusb.c ****     return usbd_edpt_claim(s->rhport, s->ep_addr);
-ARM GAS  /tmp/ccchXe7g.s 			page 36
+ARM GAS  /tmp/cco94OUO.s 			page 36
 
 
  274:tinyusb/src/tusb.c ****     #endif
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1029              	.LCFI10:
  1030              		.cfi_def_cfa_offset 16
  1031              		.cfi_offset 3, -16
-ARM GAS  /tmp/ccchXe7g.s 			page 37
+ARM GAS  /tmp/cco94OUO.s 			page 37
 
 
  1032              		.cfi_offset 4, -12
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1077              	.LBB91:
  1078              	.LBB90:
  273:tinyusb/src/tusb.c ****     #endif
-ARM GAS  /tmp/ccchXe7g.s 			page 38
+ARM GAS  /tmp/cco94OUO.s 			page 38
 
 
  1079              		.loc 1 273 5 view .LVU324
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1125              	@ 0 "" 2
  1126              		.thumb
  1127              		.syntax unified
-ARM GAS  /tmp/ccchXe7g.s 			page 39
+ARM GAS  /tmp/cco94OUO.s 			page 39
 
 
  1128              	.LBE95:
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1172              	.LVL103:
  323:tinyusb/src/tusb.c **** 
  1173              		.loc 1 323 3 view .LVU355
-ARM GAS  /tmp/ccchXe7g.s 			page 40
+ARM GAS  /tmp/cco94OUO.s 			page 40
 
 
  1174 0060 F9E7     		b	.L90
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1220              		.loc 1 265 3 view .LVU365
  265:tinyusb/src/tusb.c ****   {
  1221              		.loc 1 265 8 is_stmt 0 view .LVU366
-ARM GAS  /tmp/ccchXe7g.s 			page 41
+ARM GAS  /tmp/cco94OUO.s 			page 41
 
 
  1222 0012 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1252              		.loc 1 340 3 discriminator 2 view .LVU376
  340:tinyusb/src/tusb.c **** 
  1253              		.loc 1 340 26 is_stmt 0 discriminator 2 view .LVU377
-ARM GAS  /tmp/ccchXe7g.s 			page 42
+ARM GAS  /tmp/cco94OUO.s 			page 42
 
 
  1254 0026 E288     		ldrh	r2, [r4, #6]
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1292              		.syntax unified
  1293              	@ 344 "tinyusb/src/tusb.c" 1
  1294 0046 00BE     		BKPT #0
-ARM GAS  /tmp/ccchXe7g.s 			page 43
+ARM GAS  /tmp/cco94OUO.s 			page 43
 
 
  1295              	
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  301:tinyusb/src/tusb.c ****   {
  1337              		.loc 1 301 3 view .LVU406
  301:tinyusb/src/tusb.c ****   {
-ARM GAS  /tmp/ccchXe7g.s 			page 44
+ARM GAS  /tmp/cco94OUO.s 			page 44
 
 
  1338              		.loc 1 301 8 is_stmt 0 view .LVU407
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1385              	.LFB95:
  354:tinyusb/src/tusb.c **** 
  355:tinyusb/src/tusb.c **** uint32_t tu_edpt_stream_write(tu_edpt_stream_t* s, void const *buffer, uint32_t bufsize)
-ARM GAS  /tmp/ccchXe7g.s 			page 45
+ARM GAS  /tmp/cco94OUO.s 			page 45
 
 
  356:tinyusb/src/tusb.c **** {
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1421              		.loc 1 359 18 discriminator 2 view .LVU427
  1422 0016 0446     		mov	r4, r0
  1423              	.LVL129:
-ARM GAS  /tmp/ccchXe7g.s 			page 46
+ARM GAS  /tmp/cco94OUO.s 			page 46
 
 
  363:tinyusb/src/tusb.c ****   {
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   37:tinyusb/src/common/tusb_fifo.h **** // decoupled as write and read functions do not modify a common state. Henceforth,
   38:tinyusb/src/common/tusb_fifo.h **** // writing or reading from the FIFO within an ISR is safe as long as no other
   39:tinyusb/src/common/tusb_fifo.h **** // process (thread or ISR) interferes.
-ARM GAS  /tmp/ccchXe7g.s 			page 47
+ARM GAS  /tmp/cco94OUO.s 			page 47
 
 
   40:tinyusb/src/common/tusb_fifo.h **** // Also, this FIFO is ready to be used in combination with a DMA as the write and
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   94:tinyusb/src/common/tusb_fifo.h ****  *      Note: we should also move data from mem[3] to read index as well, but deliberately skipped 
   95:tinyusb/src/common/tusb_fifo.h ****  *      since it is an expensive operation !!!
   96:tinyusb/src/common/tusb_fifo.h ****  *                  |
-ARM GAS  /tmp/ccchXe7g.s 			page 48
+ARM GAS  /tmp/cco94OUO.s 			page 48
 
 
   97:tinyusb/src/common/tusb_fifo.h ****  *      -------------------------
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  151:tinyusb/src/common/tusb_fifo.h **** 
  152:tinyusb/src/common/tusb_fifo.h **** #if OSAL_MUTEX_REQUIRED
  153:tinyusb/src/common/tusb_fifo.h **** TU_ATTR_ALWAYS_INLINE static inline
-ARM GAS  /tmp/ccchXe7g.s 			page 49
+ARM GAS  /tmp/cco94OUO.s 			page 49
 
 
  154:tinyusb/src/common/tusb_fifo.h **** void tu_fifo_config_mutex(tu_fifo_t *f, osal_mutex_t wr_mutex, osal_mutex_t rd_mutex)
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  368:tinyusb/src/tusb.c **** }
  1456              		.loc 1 368 3 view .LVU438
  368:tinyusb/src/tusb.c **** }
-ARM GAS  /tmp/ccchXe7g.s 			page 50
+ARM GAS  /tmp/cco94OUO.s 			page 50
 
 
  1457              		.loc 1 368 10 is_stmt 0 view .LVU439
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1499 0012 39D8     		bhi	.L132
  1500              		.loc 1 383 3 view .LVU447
  384:tinyusb/src/tusb.c **** 
-ARM GAS  /tmp/ccchXe7g.s 			page 51
+ARM GAS  /tmp/cco94OUO.s 			page 51
 
 
  385:tinyusb/src/tusb.c ****   // claim endpoint
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1527              		.loc 1 273 5 is_stmt 1 view .LVU457
  273:tinyusb/src/tusb.c ****     #endif
  1528              		.loc 1 273 12 is_stmt 0 view .LVU458
-ARM GAS  /tmp/ccchXe7g.s 			page 52
+ARM GAS  /tmp/cco94OUO.s 			page 52
 
 
  1529 001c A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
    2:tinyusb/src/common/tusb_common.h ****  * The MIT License (MIT)
    3:tinyusb/src/common/tusb_common.h ****  *
    4:tinyusb/src/common/tusb_common.h ****  * Copyright (c) 2019 Ha Thach (tinyusb.org)
-ARM GAS  /tmp/ccchXe7g.s 			page 53
+ARM GAS  /tmp/cco94OUO.s 			page 53
 
 
    5:tinyusb/src/common/tusb_common.h ****  *
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
   59:tinyusb/src/common/tusb_common.h **** 
   60:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
   61:tinyusb/src/common/tusb_common.h **** // Includes
-ARM GAS  /tmp/ccchXe7g.s 			page 54
+ARM GAS  /tmp/cco94OUO.s 			page 54
 
 
   62:tinyusb/src/common/tusb_common.h **** //--------------------------------------------------------------------+
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  116:tinyusb/src/common/tusb_common.h ****   }
  117:tinyusb/src/common/tusb_common.h ****   memcpy(dest, src, count);
  118:tinyusb/src/common/tusb_common.h ****   return 0;
-ARM GAS  /tmp/ccchXe7g.s 			page 55
+ARM GAS  /tmp/cco94OUO.s 			page 55
 
 
  119:tinyusb/src/common/tusb_common.h **** }
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1586              		.loc 1 283 8 is_stmt 0 view .LVU481
  1587 0044 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
  283:tinyusb/src/tusb.c ****   {
-ARM GAS  /tmp/ccchXe7g.s 			page 56
+ARM GAS  /tmp/cco94OUO.s 			page 56
 
 
  1588              		.loc 1 283 6 view .LVU482
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1630 0064 00E0     		b	.L128
  1631              	.L133:
  1632 0066 0022     		movs	r2, #0
-ARM GAS  /tmp/ccchXe7g.s 			page 57
+ARM GAS  /tmp/cco94OUO.s 			page 57
 
 
  1633              	.L128:
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1672              	.LVL151:
  1673              	.L137:
  1674              	.LBB127:
-ARM GAS  /tmp/ccchXe7g.s 			page 58
+ARM GAS  /tmp/cco94OUO.s 			page 58
 
 
  1675              	.LBB126:
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  410:tinyusb/src/tusb.c ****   uint32_t num_read = tu_fifo_read_n(&s->ff, buffer, (uint16_t) bufsize);
  1722              		.loc 1 410 3 is_stmt 1 view .LVU518
  1723              		.loc 1 410 23 is_stmt 0 view .LVU519
-ARM GAS  /tmp/ccchXe7g.s 			page 59
+ARM GAS  /tmp/cco94OUO.s 			page 59
 
 
  1724 0004 92B2     		uxth	r2, r2
@@ -3515,43 +3515,43 @@ ARM GAS  /tmp/ccchXe7g.s 			page 1
  1753              		.file 7 "tinyusb/src/common/tusb_private.h"
  1754              		.file 8 "tinyusb/src/device/usbd_pvt.h"
  1755              		.file 9 "tinyusb/src/device/usbd.h"
-ARM GAS  /tmp/ccchXe7g.s 			page 60
+ARM GAS  /tmp/cco94OUO.s 			page 60
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 tusb.c
-     /tmp/ccchXe7g.s:18     .text.tusb_init:0000000000000000 $t
-     /tmp/ccchXe7g.s:26     .text.tusb_init:0000000000000000 tusb_init
-     /tmp/ccchXe7g.s:42     .text.tusb_inited:0000000000000000 $t
-     /tmp/ccchXe7g.s:49     .text.tusb_inited:0000000000000000 tusb_inited
-     /tmp/ccchXe7g.s:78     .text.tu_desc_find:0000000000000000 $t
-     /tmp/ccchXe7g.s:85     .text.tu_desc_find:0000000000000000 tu_desc_find
-     /tmp/ccchXe7g.s:128    .text.tu_desc_find2:0000000000000000 $t
-     /tmp/ccchXe7g.s:135    .text.tu_desc_find2:0000000000000000 tu_desc_find2
-     /tmp/ccchXe7g.s:183    .text.tu_desc_find3:0000000000000000 $t
-     /tmp/ccchXe7g.s:190    .text.tu_desc_find3:0000000000000000 tu_desc_find3
-     /tmp/ccchXe7g.s:249    .text.tu_edpt_claim:0000000000000000 $t
-     /tmp/ccchXe7g.s:256    .text.tu_edpt_claim:0000000000000000 tu_edpt_claim
-     /tmp/ccchXe7g.s:324    .text.tu_edpt_release:0000000000000000 $t
-     /tmp/ccchXe7g.s:331    .text.tu_edpt_release:0000000000000000 tu_edpt_release
-     /tmp/ccchXe7g.s:387    .text.tu_edpt_validate:0000000000000000 $t
-     /tmp/ccchXe7g.s:394    .text.tu_edpt_validate:0000000000000000 tu_edpt_validate
-     /tmp/ccchXe7g.s:640    .text.tu_edpt_bind_driver:0000000000000000 $t
-     /tmp/ccchXe7g.s:647    .text.tu_edpt_bind_driver:0000000000000000 tu_edpt_bind_driver
-     /tmp/ccchXe7g.s:796    .text.tu_desc_get_interface_total_len:0000000000000000 $t
-     /tmp/ccchXe7g.s:803    .text.tu_desc_get_interface_total_len:0000000000000000 tu_desc_get_interface_total_len
-     /tmp/ccchXe7g.s:946    .text.tu_edpt_stream_init:0000000000000000 $t
-     /tmp/ccchXe7g.s:953    .text.tu_edpt_stream_init:0000000000000000 tu_edpt_stream_init
-     /tmp/ccchXe7g.s:1013   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 $t
-     /tmp/ccchXe7g.s:1020   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 tu_edpt_stream_write_zlp_if_needed
-     /tmp/ccchXe7g.s:1179   .text.tu_edpt_stream_write_xfer:0000000000000000 $t
-     /tmp/ccchXe7g.s:1186   .text.tu_edpt_stream_write_xfer:0000000000000000 tu_edpt_stream_write_xfer
-     /tmp/ccchXe7g.s:1376   .text.tu_edpt_stream_write:0000000000000000 $t
-     /tmp/ccchXe7g.s:1383   .text.tu_edpt_stream_write:0000000000000000 tu_edpt_stream_write
-     /tmp/ccchXe7g.s:1464   .text.tu_edpt_stream_read_xfer:0000000000000000 $t
-     /tmp/ccchXe7g.s:1471   .text.tu_edpt_stream_read_xfer:0000000000000000 tu_edpt_stream_read_xfer
-     /tmp/ccchXe7g.s:1699   .text.tu_edpt_stream_read:0000000000000000 $t
-     /tmp/ccchXe7g.s:1706   .text.tu_edpt_stream_read:0000000000000000 tu_edpt_stream_read
+     /tmp/cco94OUO.s:18     .text.tusb_init:0000000000000000 $t
+     /tmp/cco94OUO.s:26     .text.tusb_init:0000000000000000 tusb_init
+     /tmp/cco94OUO.s:42     .text.tusb_inited:0000000000000000 $t
+     /tmp/cco94OUO.s:49     .text.tusb_inited:0000000000000000 tusb_inited
+     /tmp/cco94OUO.s:78     .text.tu_desc_find:0000000000000000 $t
+     /tmp/cco94OUO.s:85     .text.tu_desc_find:0000000000000000 tu_desc_find
+     /tmp/cco94OUO.s:128    .text.tu_desc_find2:0000000000000000 $t
+     /tmp/cco94OUO.s:135    .text.tu_desc_find2:0000000000000000 tu_desc_find2
+     /tmp/cco94OUO.s:183    .text.tu_desc_find3:0000000000000000 $t
+     /tmp/cco94OUO.s:190    .text.tu_desc_find3:0000000000000000 tu_desc_find3
+     /tmp/cco94OUO.s:249    .text.tu_edpt_claim:0000000000000000 $t
+     /tmp/cco94OUO.s:256    .text.tu_edpt_claim:0000000000000000 tu_edpt_claim
+     /tmp/cco94OUO.s:324    .text.tu_edpt_release:0000000000000000 $t
+     /tmp/cco94OUO.s:331    .text.tu_edpt_release:0000000000000000 tu_edpt_release
+     /tmp/cco94OUO.s:387    .text.tu_edpt_validate:0000000000000000 $t
+     /tmp/cco94OUO.s:394    .text.tu_edpt_validate:0000000000000000 tu_edpt_validate
+     /tmp/cco94OUO.s:640    .text.tu_edpt_bind_driver:0000000000000000 $t
+     /tmp/cco94OUO.s:647    .text.tu_edpt_bind_driver:0000000000000000 tu_edpt_bind_driver
+     /tmp/cco94OUO.s:796    .text.tu_desc_get_interface_total_len:0000000000000000 $t
+     /tmp/cco94OUO.s:803    .text.tu_desc_get_interface_total_len:0000000000000000 tu_desc_get_interface_total_len
+     /tmp/cco94OUO.s:946    .text.tu_edpt_stream_init:0000000000000000 $t
+     /tmp/cco94OUO.s:953    .text.tu_edpt_stream_init:0000000000000000 tu_edpt_stream_init
+     /tmp/cco94OUO.s:1013   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 $t
+     /tmp/cco94OUO.s:1020   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 tu_edpt_stream_write_zlp_if_needed
+     /tmp/cco94OUO.s:1179   .text.tu_edpt_stream_write_xfer:0000000000000000 $t
+     /tmp/cco94OUO.s:1186   .text.tu_edpt_stream_write_xfer:0000000000000000 tu_edpt_stream_write_xfer
+     /tmp/cco94OUO.s:1376   .text.tu_edpt_stream_write:0000000000000000 $t
+     /tmp/cco94OUO.s:1383   .text.tu_edpt_stream_write:0000000000000000 tu_edpt_stream_write
+     /tmp/cco94OUO.s:1464   .text.tu_edpt_stream_read_xfer:0000000000000000 $t
+     /tmp/cco94OUO.s:1471   .text.tu_edpt_stream_read_xfer:0000000000000000 tu_edpt_stream_read_xfer
+     /tmp/cco94OUO.s:1699   .text.tu_edpt_stream_read:0000000000000000 $t
+     /tmp/cco94OUO.s:1706   .text.tu_edpt_stream_read:0000000000000000 tu_edpt_stream_read
 
 UNDEFINED SYMBOLS
 tud_inited
