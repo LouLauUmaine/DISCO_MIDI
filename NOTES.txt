@@ -6,6 +6,12 @@ cannot find documentation for HAL_PCDEx_PMAConfig() function used in driver docu
 usbipd wsl list
 usbipd wsl attach --busid=<BUSID> 
 
+sudo openocd -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg
+
+gdb-multiarch DISCO_MIDI.elf
+set output-radix 16
+target extended-remote:3333
+
 //fix for if usbip version returns nothing/usbipd not working
 sudo update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-tools/*/usbip | tail -n1` 20 
 
@@ -54,3 +60,5 @@ FOR TINYUSB INTEGRATION:
     --> added HAL stack init to USER CODE of MX_USB_OTG_FS_PCD_Init in main
     NOTE: HAL usb init uses GPIOA for init code, TINYUSB uses GPIOB? DOES IT?
     don't think i need board_init(), seems like its all handled by STM code --> add it anyways to show development?
+
+    /* HAD TO REMOVE file from src/portable/st/synopsys for multiple define compilation error */

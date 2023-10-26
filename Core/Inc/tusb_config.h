@@ -41,9 +41,9 @@
 #endif
 
 // RHPort max operational speed can defined by board.mk
-#ifndef BOARD_TUD_MAX_SPEED
-#define BOARD_TUD_MAX_SPEED   OPT_MODE_DEFAULT_SPEED
-#endif
+//#ifndef BOARD_TUD_MAX_SPEED
+//#define BOARD_TUD_MAX_SPEED   OPT_MODE_DEFAULT_SPEED
+//#endif
 
 //--------------------------------------------------------------------
 // COMMON CONFIGURATION
@@ -67,7 +67,14 @@
 #define CFG_TUD_ENABLED       1
 
 // Default is max speed that hardware controller could support with on-chip PHY
-#define CFG_TUD_MAX_SPEED     BOARD_TUD_MAX_SPEED
+//#define CFG_TUD_MAX_SPEED     BOARD_TUD_MAX_SPEED
+
+//--------------------------------------------------------------------+
+// SELF ADDED -- NECESSARY??
+//--------------------------------------------------------------------+
+#define BOARD_DEVICE_RHPORT_NUM     0
+#define BOARD_DEVICE_RHPORT_SPEED    OPT_MODE_FULL_SPEED // COMMENTED ABOVE SPEED CODE FOR THIS
+#define CFG_TUSB_RHPORT0_MODE   (OPT_MODE_DEVICE | OPT_MODE_FULL_SPEED)
 
 /* USB DMA on some MCUs can only access a specific SRAM region with restriction on alignment.
  * Tinyusb use follows macros to declare transferring memory so that they can be put
