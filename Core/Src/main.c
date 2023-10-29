@@ -69,7 +69,8 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 
-uint8_t TX_Buffer[]; //buffer for i2c data
+//uint8_t TX_Buffer[]; //buffer for i2c data
+uint16_t TX_Buffer[]; //buffer for i2c data
 
 /* USER CODE END PV */
 
@@ -126,10 +127,20 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* INITIALIZE TINYUSB */
-  tusb_init();
+  //tusb_init();
   //tud_init(BOARD_TUD_RHPORT);
 
   uint8_t slave_address = 0b01011010;
+
+
+  //reset dac registers
+  /*
+  TX_Buffer[0] = slave_address; // set slave address to AD0 
+  HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+  TX_Buffer[0] = 0b00010000; // send command byte, select OUT0
+  HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+  */
+
   //TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
   //HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
   //HAL_Delay(100);
@@ -139,7 +150,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
+
+
+    /*
+    TX_Buffer[0] = slave_address; // set slave address to AD0 
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
     TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
@@ -149,7 +163,7 @@ int main(void)
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
     HAL_Delay(1000);
 
-    TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
+    TX_Buffer[0] = slave_address; // set slave address to AD0 
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
     TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
@@ -159,7 +173,7 @@ int main(void)
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
     HAL_Delay(1000);
 
-    TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
+    TX_Buffer[0] = slave_address; // set slave address to AD0 
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
     TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
@@ -168,7 +182,7 @@ int main(void)
     TX_Buffer[0] = 0b00000000; // send data byte, GND
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
     HAL_Delay(1000);
-
+  ` */
     //tud_task(); // tinyusb device task
     //midi_task();
     //HAL_Delay(1000);
@@ -578,6 +592,37 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+//--------------------------------------------------------------------+
+// Device callbacks
+//--------------------------------------------------------------------+
+
+// Invoked when device is mounted
+void tud_mount_cb(void)
+{
+  blink_interval_ms = BLINK_MOUNTED;
+}
+
+// Invoked when device is unmounted
+void tud_umount_cb(void)
+{
+  blink_interval_ms = BLINK_NOT_MOUNTED;
+}
+
+// Invoked when usb bus is suspended
+// remote_wakeup_en : if host allow us  to perform remote wakeup
+// Within 7ms, device must draw an average of current less than 2.5 mA from bus
+void tud_suspend_cb(bool remote_wakeup_en)
+{
+  (void) remote_wakeup_en;
+  blink_interval_ms = BLINK_SUSPENDED;
+}
+
+// Invoked when usb bus is resumed
+void tud_resume_cb(void)
+{
+  blink_interval_ms = tud_mounted() ? BLINK_MOUNTED : BLINK_NOT_MOUNTED;
+}
+
 void midi_task(void)
 {
   static uint32_t start_ms = 0;
@@ -621,6 +666,8 @@ void midi_task(void)
   // If we are at the end of the sequence, start over.
   if (note_pos >= sizeof(note_sequence)) note_pos = 0;
 }
+
+
 
 /* USER CODE END 4 */
 

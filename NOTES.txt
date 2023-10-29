@@ -62,3 +62,241 @@ FOR TINYUSB INTEGRATION:
     don't think i need board_init(), seems like its all handled by STM code --> add it anyways to show development?
 
     /* HAD TO REMOVE file from src/portable/st/synopsys for multiple define compilation error */
+
+
+    tusb_init() TREE: 
+
+    calls tud_init(TUD_OPT_RPHORT = 0 in this case)
+    calls tud_inited -- checks _usbd_rhport to see if it is already inited, in this case it is not
+    calls tu_varclr(&_usbd_dev) -- expands to memset((&_usbd_dev), 0, (sizeof(*(&_usbd_dev)))) -- allocate memory?
+    calls osal_queue_creaet(&_usbd_qdef) -- // Init device queue & task
+    calls tu_fifo_clear(&qdef->ff)
+    return (osal_queue_t) qdef -- what is this doing?
+    skips over // Get application driver if available code (usbd.c:404) -- should it do this?
+    go to //init class drivers
+    call usbd_class_driver_t const * driver = get_driver(i);
+    call to else condition in get_driver (usbd.c:253) -- set driver (what is in this struct?)
+    TU_ASSERT(driver) at tinyusb/src/device/usbd.c:414 -- what are all these ASSERT calls?
+    driver->init() 
+    jumps to midid_init(void) -- init code for midid //midi device-- seems correct?
+    tu_memclr(_midid_itf, sizeof(_midid_itf)) in midi -- expands to memset((_midid_itf), 0, (sizeof(_midid_itf)))
+    for(uint8_t i=0; i<CFG_TUD_MIDI; i++) // CFG_TUD_MIDI == 1
+    tu_fifo_config(&midi->rx_ff, midi->rx_ff_buf, CFG_TUD_MIDI_RX_BUFSIZE, 1, false); // config fifo for midi
+    calls to tinyusb/src/common/tusb_fifo.c:73 
+    if (depth > 0x8000) return false; // here depth == 0x40
+    modifies f object as so: -- what is this struct? passed as tu_fifo_t *f in config function call
+        f->buffer       = (uint8_t*) buffer;
+        f->depth        = depth;
+        f->item_size    = (uint16_t) (item_size & 0x7FFF);
+        f->overwritable = overwritable;
+        f->rd_idx       = 0;
+        f->wr_idx       = 0;
+    fifo config returns true (configured properly?)
+    above config code handles rx midi buffer -- need also tx buffer
+    call to tu_fifo_config(&midi->tx_ff, midi->tx_ff_buf, CFG_TUD_MIDI_TX_BUFSIZE, 1, false); // OBVS.
+    tinyusb/src/device/usbd.c:411 : now back to tud_init loop for configuring drivers - for (uint8_t i = 0; i < TOTAL_DRIVER_COUNT; i++)
+    -> only one driver, on to next init code
+    _usbd_rhport = rhport; -- presumably rhport should now be modified --> initially == 0xFF in tud_inited() function
+    -> gdb indicated rhport == 0 -- good?
+    now time for // Init device controller driver 
+    call to dcd_init(rhport) --- tinyusb/src/device/usbd.c:422
+    jump to tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:485 -- this is the updated driver code?? had to remove other dcd init code for compilation to work w/o multiple defines
+    -> POTENTIAL PROBLEM AREA -- check where how this call works with MIDI example code
+    // Programming model begins in the last section of the chapter on the USB peripheral in each Reference Manual. -- commented here, find these reference manuals??
+    dwc2_regs_t * dwc2 = DWC2_REG(rhport); -- figure out what this DOES -- defined as #define DWC2_REG(_port)       ((dwc2_regs_t*) _dwc2_controller[_port].reg_base) in dcd_dwc2.c:65
+    next TU_VERIFY(check_dwc2(dwc2), );
+    call to check_dwc2() -- 
+    -> uint32_t const gsnpsid = dwc2->gsnpsid & GSNPSID_ID_MASK; -- dwc2->gsnpsid == 0x4f54310a here, GSNPSID_ID_MASK == ( (0xffffffffUL << (16)) & (0xffffffffUL >> (31 - (31))) )
+    -> TU_ASSERT(gsnpsid == DWC2_OTG_ID || gsnpsid == DWC2_FS_IOT_ID || gsnpsid == DWC2_HS_IOT_ID); -- here gsnpsid == DWC2_OTG_ID -- configured as OTG??
+    dcd_init() seems to work correctly
+    next call dcd_disconnect(rhport) -- why disconnect?
+    next check if( phy_hs_supported(dwc2) ) -- tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:498
+    -> return TUD_OPT_HIGH_SPEED && dwc2->ghwcfg2_bm.hs_phy_type != HS_PHY_TYPE_NONE; -- should return false right?? it does, dwc2->ghwcfg2_bm.hs_phy_type == 0, HS_PHY_TYPE_NONE == 0, 
+    -> TUD_OPT_HIGH_SPEED == TUD_OPT_HIGH_SPEED (CFG_TUD_MAX_SPEED ? (CFG_TUD_MAX_SPEED & OPT_MODE_HIGH_SPEED) : TUP_RHPORT_HIGHSPEED) 
+        -> expands to ((((0x0001 | 0x0200)) & 0xff00) ? ((((0x0001 | 0x0200)) & 0xff00) & 0x0400) : 0) -- expand this, equals ?
+    returns false (phy_hs not supported)
+    call phy_fs_init(dwc2); -- at tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:380
+    -> dwc2->gusbcfg |= GUSBCFG_PHYSEL; // Select FS PHY -- review dwc2 structure
+    call dwc2_phy_init(dwc2, HS_PHY_TYPE_NONE) -- tinyusb/src/portable/synopsys/dwc2/dwc2_stm32.h:148
+    jumps to dwc2_phy_init (hs_phy_type=0 '\000', dwc2=0x50000000) at tinyusb/src/portable/synopsys/dwc2/dwc2_stm32.h:148
+    -> dwc2->stm32_gccfg |= STM32_GCCFG_PWRDWN; // Enable on-chip FS PHY -- problem area with STM code already initing?
+    back to phy_fs_init (dwc2=dwc2@entry=0x50000000) at tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:390
+    -> reset_core(dwc2); // Reset core after selecting PHY -- reset_core??
+    seems reset_core has some TODOs and unanswered questions at tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:357
+    from tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:392
+        // USB turnaround time is critical for certification where long cables and 5-Hubs are used.
+        // So if you need the AHB to run at less than 30 MHz, and if USB turnaround time is not critical,
+        // these bits can be programmed to a larger value. Default is 5
+        dwc2->gusbcfg = (dwc2->gusbcfg & ~GUSBCFG_TRDT_Msk) | (5u << GUSBCFG_TRDT_Pos);
+        -> potential problem area?? what is AHB running at for USB? WHICH CLOCK IS THIS?
+    dwc2_phy_update(dwc2, HS_PHY_TYPE_NONE); // MCU specific PHY update post reset
+        -> CHECK SYSTEM CORE CLOCK SPEED -- IS THIS THE SAME FOR THE MIDI EXAMPLE???
+        -> here the turnaround == 0x6u --> because conditional if (SystemCoreClock >= 32000000u)
+        -> dwc2->gusbcfg = (dwc2->gusbcfg & ~GUSBCFG_TRDT_Msk) | (turnaround << GUSBCFG_TRDT_Pos);
+    // NEED TO FIGURE OUT HOW MUCH THIS STUFF MESSES WITH ONBOARD HARDWARE AND MAKE SURE COMPATIBILITY EXISTS WITH HOW I HAVE CONFIGURED IN CubeMX
+    next dwc2->dcfg = (dwc2->dcfg & ~DCFG_DSPD_Msk) | (DCFG_DSPD_FS << DCFG_DSPD_Pos);  // set max speed
+    next dwc2->pcgctl &= ~(PCGCTL_STOPPCLK | PCGCTL_GATEHCLK | PCGCTL_PWRCLMP | PCGCTL_RSTPDWNMODULE); // Restart PHY clock
+    from tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:511 :
+    /* Set HS/FS Timeout Calibration to 7 (max available value).
+	 * The number of PHY clocks that the application programs in
+	 * this field is added to the high/full speed interpacket timeout
+	 * duration in the core to account for any additional delays
+	 * introduced by the PHY. This can be required, because the delay
+	 * introduced by the PHY in generating the linestate condition
+	 * can vary from one PHY to another.
+	 */
+    dwc2->gusbcfg |= (7ul << GUSBCFG_TOCAL_Pos);
+    dwc2->gusbcfg = (dwc2->gusbcfg & ~GUSBCFG_FHMOD) | GUSBCFG_FDMOD; // Force device mode
+    dwc2->gotgctl = (dwc2->gotgctl & ~GOTGCTL_AVALOEN) | GOTGCTL_BVALOEN | GOTGCTL_BVALOVAL;// Clear A override, force B Valid -- meaning??
+    // If USB host misbehaves during status portion of control xfer
+    // (non zero-length packet), send STALL back and discard.
+    dwc2->dcfg |= DCFG_NZLSOHSK;
+    // Clear all interrupts
+    uint32_t int_mask = dwc2->gintsts;
+    dwc2->gintsts |= int_mask;
+    int_mask = dwc2->gotgint;
+    dwc2->gotgint |= int_mask;
+    // Required as part of core initialization.
+    // TODO: How should mode mismatch be handled? It will cause
+    // the core to stop working/require reset.
+    dwc2->gintmsk = GINTMSK_OTGINT   | GINTMSK_MMISM  | GINTMSK_RXFLVLM  |
+                    GINTMSK_USBSUSPM | GINTMSK_USBRST | GINTMSK_ENUMDNEM | GINTMSK_WUIM;
+    //HOW MUCH CORE INITIALIZATION SHOULD BE DONE BY THESE FUNCITON CALLS VS MY OWN? SHOULD I NOT ENABLE USB_OTG_FS IN CubeMX?
+      // Enable global interrupt
+    dwc2->gahbcfg |= GAHBCFG_GINT;
+    FINALLY call dcd_connect(rhport); -- review this function 
+    back to tud_init() function -- at this point in debugging got "device not recognized" error from windows machine- due to code or debugging?
+    call to dcd_int_enable(rhport) at tinyusb/src/device/usbd.c:423
+    calls to dwc2_dcd_int_enable (rhport=rhport@entry=0x0) at tinyusb/src/portable/synopsys/dwc2/dwc2_stm32.h:125
+    calls NVIC_EnableIRQ((IRQn_Type)_dwc2_controller[rhport].irqnum); // IS THIS ALREADY CALLED BY OTHER INIT CODE?
+        -> _dwc2_controller[rhport].irqnum == 0x43 here
+    jumps to __NVIC_EnableIRQ (IRQn=OTG_FS_IRQn) at Drivers/CMSIS/Include/core_cm4.h:1681 
+        -> OTG_FS_IRQn == 67 == 0x43
+    FINALLY tud_init() returns true
+    jumps back to main here -- WHERE IS THE PROBLEM?
+
+    in main.c
+
+    tud_task() has to be called periodically -- this is the case for the first call to the function in the while loop
+    cannot set breakpoint at tud_task() at Core/Src/main.c:172 //why??
+    tud_task calls tud_task_ext (timeout_ms=timeout_ms@entry=0xffffffff, in_isr=in_isr@entry=0x0) at tinyusb/src/device/usbd.c:475
+    calls tud_inited () at tinyusb/src/device/usbd.c:379
+    -> return _usbd_rhport != RHPORT_INVALID; // here _usbd_rhport == 0 // this is what we want?
+    // Loop until there is no more events in the queue
+    in while loop in tinyusb/src/device/usbd.c:485: 
+        dcd_event_t event;
+        if ( !osal_queue_receive(_usbd_q, &event, timeout_ms) ) return;
+        --> IN THIS FUNCTION CALL:
+            _usbd_q == (osal_queue_t) 0x2000005c <_usbd_qdef>
+            &event == (dcd_event_t *) 0x20017fc4
+            timeout_ms == 0xffffffff
+        jumps to osal_queue_receive (msec=0xffffffff, data=0x20017fc4, qhdl=0x2000005c <_usbd_qdef>) at tinyusb/src/osal/osal_none.h:162
+        calls _osal_q_lock(qhdl); 
+        -> qhdl->interrupt_set(false); // disable dcd/hcd interrupt
+        calls void usbd_int_set(bool enabled) at tinyusb/src/device/usbd.c:1148
+        calls dcd_int_disable(_usbd_rhport);
+        -> calls NVIC_DisableIRQ((IRQn_Type)_dwc2_controller[rhport].irqnum);
+        -> jumps to __NVIC_DisableIRQ (IRQn=OTG_FS_IRQn) at Drivers/CMSIS/Include/core_cm4.h:1719
+        now bool success = tu_fifo_read(&qhdl->ff, data); at tinyusb/src/osal/osal_none.h:163
+        call to tu_fifo_read (f=f@entry=0x20000060 <_usbd_qdef+4>, buffer=buffer@entry=0x20017fc4) at tinyusb/src/common/tusb_fifo.c:694
+        -> call to bool ret = _tu_fifo_peek(f, buffer, f->wr_idx, f->rd_idx);   // Peek the data // f->rd_idx might get modified in case of an overflow so we can not use a local variable
+            -> here wr_idx=0x2, rd_idx=0x0 // meaning of these values?
+        review _tu_fifo_peek function, checks buffers & sets ptr
+        -> check values, calls __ff_pull(f, p_buffer, rd_ptr); // Peek data
+        -> // get one item from fifo WITHOUT updating read pointer
+        -> memcpy(app_buf, f->buffer + (rel * f->item_size), f->item_size);
+        _tu_fifo_peek at tinyusb/src/common/tusb_fifo.c:433 returns TRUE
+        now call f->rd_idx = advance_index(f->depth, f->rd_idx, ret); at tinyusb/src/common/tusb_fifo.c:702
+        now tu_fifo_read returns ret // cannot see value, optimized out-- what should value be??
+        back to osal_queue_receive -- now success == 1 (good?)
+        call to _osal_q_unlock(qhdl);
+        -> reenables interrupts 
+        in call to dcd_int_enable at tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:559:
+        --> debugger "warning: Source file is more recent than executable" worrysome?
+        now return success at tinyusb/src/osal/osal_none.h:166 -- == 1 I believe
+        now back to tud_task_ext loop at tinyusb/src/device/usbd.c:485
+        switch cases for switch ( event.event_id ) at tinyusb/src/device/usbd.c:492
+        -> here event.event_id == 0x1
+        invoke case for DCD_EVENT_BUS_RESET:
+        usbd_reset(event.rhport);
+        -> jumps to midid_reset at tinyusb/src/class/midi/midi_device.c:396
+        now sets _usbd_dev.speed = event.bus_reset.speed; // in this switch case
+        -> here event.bus_reset.speed == TUSB_SPEED_FULL
+        now jump back to top of while loop in tud_task_ext:
+        call again to if ( !osal_queue_receive(_usbd_q, &event, timeout_ms) ) return;
+        back to switch case:
+        *this time case DCD_EVENT_SETUP_RECEIVED: // good??
+            // Mark as connected after receiving 1st setup packet.
+            // But it is easier to set it every time instead of wasting time to check then set
+            _usbd_dev.connected = 1;
+            // mark both in & out control as free
+            _usbd_dev.ep_status[0][TUSB_DIR_OUT].busy = 0;
+            _usbd_dev.ep_status[0][TUSB_DIR_OUT].claimed = 0;
+            _usbd_dev.ep_status[0][TUSB_DIR_IN ].busy = 0;
+            _usbd_dev.ep_status[0][TUSB_DIR_IN ].claimed = 0;
+            now calls process control request:
+            if ( !process_control_request(event.rhport, &event.setup_received) ) at line 523 (if false process control request failed)
+            calls usbd_control_set_complete_callback (fp=fp@entry=0x0) at tinyusb/src/device/usbd_control.c:151 // Set complete callback
+            TU_ASSERT(p_request->bmRequestType_bit.type < TUSB_REQ_TYPE_INVALID) at tinyusb/src/device/usbd.c:621
+            now verify if ( p_request->bmRequestType_bit.type == TUSB_REQ_TYPE_VENDOR ) // Vendor request
+            -> here p_request->bmRequestType_bit.type == 0x0, TUSB_REQ_TYPE_VENDOR == 2 ?? not good? what is vendor request??
+            assuming vendor request either failed or not needed
+            now switch case switch ( p_request->bmRequestType_bit.recipient )
+            -> here p_request->bmRequestType_bit.recipient == 0x0
+            enters case TUSB_REQ_RCPT_DEVICE:
+            jumps to switch ( p_request->bRequest )
+            -> here p_request->bRequest == 0x6
+            enters case TUSB_REQ_GET_DESCRIPTOR:
+            calls TU_VERIFY( process_get_descriptor(rhport, p_request) ); //THIS SEEMS IMPORTANT GIVEN WINDOWS MESSAGE (Device Descriptor Request Failed)
+            -> function call on tinyusb/src/device/usbd.c:724
+            calls process_get_descriptor (rhport=rhport@entry=0x0, p_request=p_request@entry=0x20017fc8) at tinyusb/src/device/usbd.c:973
+            sets tusb_desc_type_t const desc_type = (tusb_desc_type_t) tu_u16_high(p_request->wValue);
+            -> here p_request->wVaule == 0x100
+            sets uint8_t const desc_index = tu_u16_low( p_request->wValue );
+            enter switch case switch(desc_type):
+            -> here desc_type == TUSB_DESC_DEVICE == 1
+            sets void* desc_device = (void*) (uintptr_t) tud_descriptor_device_cb();
+            jump to tud_descriptor_device_cb () at Core/Src/usb_descriptors.c:67
+            returns return (uint8_t const *) &desc_device;
+            -> here desc_device == : 
+                {bLength = 0x12, bDescriptorType = 0x1, bcdUSB = 0x200, bDeviceClass = 0x0, bDeviceSubClass = 0x0, bDeviceProtocol = 0x0, 
+                 bMaxPacketSize0 = 0x40, idVendor = 0xcafe, idProduct = 0x4008, bcdDevice = 0x100, iManufacturer = 0x1, iProduct = 0x2, 
+                 iSerialNumber = 0x3, bNumConfigurations = 0x1}
+            back to process_get_descriptor, return tud_control_xfer(rhport, p_request, desc_device, sizeof(tusb_desc_device_t));
+            call to tud_control_xfer (rhport=rhport@entry=0x0, request=request@entry=0x20017fc8, buffer=0x8005c30 <desc_device>, len=len@entry=0x12) at tinyusb/src/device/usbd_control.c:107
+            tud_control_xfer calls _data_stage_xact // data stage
+            call to usbd_edpt_xfer (rhport=rhport@entry=0x0, ep_addr=0x80, buffer=0x200007f4 <_usbd_ctrl_buf> "\022\001", total_bytes=total_bytes@entry=0x12) at tinyusb/src/device/usbd.c:1237 // from where??
+            call to tu_edpt_number (addr=0x80) at tinyusb/src/common/tusb_types.h:520
+            --> from usbd.c:1240
+            useful breakpoint at tinyusb/src/usbd.c:1255?? seems to be recursive, hard to track down return value
+            ERROR WHEN SETTING BREAKPOINT AT usbd.c:1261 :
+                Cannot insert hardware breakpoint 1.
+                Could not insert hardware breakpoints:
+                You may have requested too many hardware breakpoints/watchpoints.
+                //whats the meaning of this?
+        //device descriptor request failed !!!
+        PROBLEM -- usbd.c:1257 NEVER REACHED --  if ( dcd_edpt_xfer(rhport, ep_addr, buffer, total_bytes) ) returns FALSE -- WHY??
+        // IN THIS PROJECT THE else CONDITIONAL at usbd.c:1261 is used -- can set breakpoint there -- cannot in successful MIDI example
+        // I believe in both projects the function call to dcd_edpt_xfer is found at tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c:740 -- check?
+        // must be a DCD error
+        // next step is to check hardware init differences??
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
