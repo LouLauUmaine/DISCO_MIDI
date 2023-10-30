@@ -101,14 +101,6 @@ void Error_Handler(void);
 #define LD_G_GPIO_Port GPIOE
 #define QSPI_CS_Pin GPIO_PIN_11
 #define QSPI_CS_GPIO_Port GPIOE
-#define QSPI_D0_Pin GPIO_PIN_12
-#define QSPI_D0_GPIO_Port GPIOE
-#define QSPI_D1_Pin GPIO_PIN_13
-#define QSPI_D1_GPIO_Port GPIOE
-#define QSPI_D2_Pin GPIO_PIN_14
-#define QSPI_D2_GPIO_Port GPIOE
-#define QSPI_D3_Pin GPIO_PIN_15
-#define QSPI_D3_GPIO_Port GPIOE
 #define MFX_I2C_SLC_Pin GPIO_PIN_10
 #define MFX_I2C_SLC_GPIO_Port GPIOB
 #define MFX_I2C_SDA_Pin GPIO_PIN_11

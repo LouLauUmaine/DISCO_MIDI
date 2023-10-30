@@ -33,6 +33,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define SPI_LENGTH 3
+
 enum  {
   BLINK_NOT_MOUNTED = 250,
   BLINK_MOUNTED = 1000,
@@ -63,14 +65,26 @@ uint8_t note_sequence[] =
 I2C_HandleTypeDef hi2c1;
 
 SPI_HandleTypeDef hspi1;
+SPI_HandleTypeDef hspi2;
 DMA_HandleTypeDef hdma_spi1_tx;
+DMA_HandleTypeDef hdma_spi1_rx;
+DMA_HandleTypeDef hdma_spi2_rx;
+
+UART_HandleTypeDef huart2;
 
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
 
-//uint8_t TX_Buffer[]; //buffer for i2c data
-uint16_t TX_Buffer[]; //buffer for i2c data
+//uint16_t I2C_TX_Buffer[]; //buffer for i2c data (wrong?)
+uint8_t I2C_TX_Buffer[ 1 ]; //buffer for i2c data
+
+uint32_t adc_val = 0;
+
+uint8_t SPI_TX_Buffer[ SPI_LENGTH ];
+
+uint8_t SPI_RX_Buffer[ SPI_LENGTH ];
+
 
 /* USER CODE END PV */
 
@@ -81,6 +95,8 @@ static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
+static void MX_SPI2_Init(void);
+static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 void midi_task(void);
@@ -124,25 +140,36 @@ int main(void)
   MX_SPI1_Init();
   MX_I2C1_Init();
   MX_USB_OTG_FS_PCD_Init();
+  MX_SPI2_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* INITIALIZE TINYUSB */
   //tusb_init();
   //tud_init(BOARD_TUD_RHPORT);
 
+  // initialize transmit buffer for test case
+  // START BIT
+  SPI_TX_Buffer[0] = 0b00000001;
+  // CHANNEL SELECT (JUST CHECK CH0 FOR NOW)
+  SPI_TX_Buffer[1] = 0b10000000; // single ended, ch0 (top 4 bits)
+  // NEED TO SEND THIRD BYTE (FULL DUPLEX), DONT CARE
+  SPI_TX_Buffer[2] = 0b00000000;
+
+  // set slave address of i2c device
   uint8_t slave_address = 0b01011010;
 
 
   //reset dac registers
   /*
-  TX_Buffer[0] = slave_address; // set slave address to AD0 
-  HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
-  TX_Buffer[0] = 0b00010000; // send command byte, select OUT0
-  HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+  I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
+  HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
+  I2C_TX_Buffer[0] = 0b00010000; // send command byte, select OUT0
+  HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
   */
 
-  //TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
-  //HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+  //I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
+  //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
   //HAL_Delay(100);
   /* USER CODE END 2 */
 
@@ -150,37 +177,47 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    // SPI ADC TEST 
+
+    // default CS to be high
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
+    // pull CS low for selecting device (only using one ADC right now)
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
+    // one full duplex interaction
+    HAL_SPI_TransmitReceive (&hspi1, SPI_TX_Buffer, SPI_RX_Buffer, 3, 1000);
+    // now need to parse data
+    adc_val = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
 
 
     /*
-    TX_Buffer[0] = slave_address; // set slave address to AD0 
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
-    TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
-    TX_Buffer[0] = 0b11111111; // send data byte, full VREF
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = 0b11111111; // send data byte, full VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     HAL_Delay(1000);
 
-    TX_Buffer[0] = slave_address; // set slave address to AD0 
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
-    TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
-    TX_Buffer[0] = 0b10000000; // send data byte, half VREF
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = 0b10000000; // send data byte, half VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     HAL_Delay(1000);
 
-    TX_Buffer[0] = slave_address; // set slave address to AD0 
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
-    TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     //HAL_Delay(100);
-    TX_Buffer[0] = 0b00000000; // send data byte, GND
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,TX_Buffer,1,1000); //Sending in Blocking mode
+    I2C_TX_Buffer[0] = 0b00000000; // send data byte, GND
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
     HAL_Delay(1000);
   ` */
     //tud_task(); // tinyusb device task
@@ -315,13 +352,13 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_LSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi1.Init.CRCPolynomial = 7;
   hspi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi1.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
   if (HAL_SPI_Init(&hspi1) != HAL_OK)
   {
     Error_Handler();
@@ -329,6 +366,81 @@ static void MX_SPI1_Init(void)
   /* USER CODE BEGIN SPI1_Init 2 */
 
   /* USER CODE END SPI1_Init 2 */
+
+}
+
+/**
+  * @brief SPI2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI2_Init(void)
+{
+
+  /* USER CODE BEGIN SPI2_Init 0 */
+
+  /* USER CODE END SPI2_Init 0 */
+
+  /* USER CODE BEGIN SPI2_Init 1 */
+
+  /* USER CODE END SPI2_Init 1 */
+  /* SPI2 parameter configuration*/
+  hspi2.Instance = SPI2;
+  hspi2.Init.Mode = SPI_MODE_MASTER;
+  hspi2.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi2.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi2.Init.NSS = SPI_NSS_SOFT;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi2.Init.FirstBit = SPI_FIRSTBIT_LSB;
+  hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi2.Init.CRCPolynomial = 7;
+  hspi2.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
+  hspi2.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
+  if (HAL_SPI_Init(&hspi2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI2_Init 2 */
+
+  /* USER CODE END SPI2_Init 2 */
+
+}
+
+/**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART2_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART2_Init 0 */
+
+  /* USER CODE END USART2_Init 0 */
+
+  /* USER CODE BEGIN USART2_Init 1 */
+
+  /* USER CODE END USART2_Init 1 */
+  huart2.Instance = USART2;
+  huart2.Init.BaudRate = 115200;
+  huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.Parity = UART_PARITY_NONE;
+  huart2.Init.Mode = UART_MODE_TX_RX;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART2_Init 2 */
+
+  /* USER CODE END USART2_Init 2 */
 
 }
 
@@ -377,9 +489,15 @@ static void MX_DMA_Init(void)
   __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
+  /* DMA1_Channel2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel2_IRQn);
   /* DMA1_Channel3_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA1_Channel3_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(DMA1_Channel3_IRQn);
+  /* DMA1_Channel4_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel4_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel4_IRQn);
 
 }
 
@@ -402,7 +520,10 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, AUDIO_RST_Pin|LD_G_Pin|GPIO_PIN_9|GPIO_PIN_10
-                          |XL_CS_Pin, GPIO_PIN_RESET);
+                          |GPIO_PIN_12|XL_CS_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LD_R_Pin|M3V3_REG_ON_Pin, GPIO_PIN_RESET);
@@ -464,6 +585,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(MFX_WAKEUP_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : PA5 */
+  GPIO_InitStruct.Pin = GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : SEG21_Pin SEG2_Pin SEG20_Pin SEG3_Pin
                            SEG19_Pin SEG4_Pin SEG11_Pin SEG12_Pin
                            COM3_Pin */
@@ -490,22 +618,20 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(LD_G_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PE9 PE10 XL_CS_Pin */
-  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10|XL_CS_Pin;
+  /*Configure GPIO pins : PE9 PE10 PE12 XL_CS_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_12|XL_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : QSPI_CS_Pin QSPI_D0_Pin QSPI_D1_Pin QSPI_D2_Pin
-                           QSPI_D3_Pin */
-  GPIO_InitStruct.Pin = QSPI_CS_Pin|QSPI_D0_Pin|QSPI_D1_Pin|QSPI_D2_Pin
-                          |QSPI_D3_Pin;
+  /*Configure GPIO pin : QSPI_CS_Pin */
+  GPIO_InitStruct.Pin = QSPI_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF10_QUADSPI;
-  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  HAL_GPIO_Init(QSPI_CS_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MFX_I2C_SLC_Pin MFX_I2C_SDA_Pin */
   GPIO_InitStruct.Pin = MFX_I2C_SLC_Pin|MFX_I2C_SDA_Pin;
@@ -544,22 +670,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = EXT_RST_Pin|GYRO_INT1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : MEMS_SCK_Pin MEMS_MISO_Pin MEMS_MOSI_Pin */
-  GPIO_InitStruct.Pin = MEMS_SCK_Pin|MEMS_MISO_Pin|MEMS_MOSI_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : USART_TX_Pin USART_RX_Pin */
-  GPIO_InitStruct.Pin = USART_TX_Pin|USART_RX_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pin : GYRO_CS_Pin */

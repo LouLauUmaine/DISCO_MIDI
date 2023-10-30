@@ -36,7 +36,9 @@ build/dcd_dwc2.o: tinyusb/src/portable/synopsys/dwc2/dcd_dwc2.c \
  Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
  Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
- Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h
+ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
+ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
+ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h
 tinyusb/src/tusb_option.h:
 tinyusb/src/common/tusb_compiler.h:
 Core/Inc/tusb_config.h:
@@ -83,3 +85,5 @@ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h:
+Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
+Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:

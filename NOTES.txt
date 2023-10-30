@@ -1,5 +1,7 @@
 GENERAL COMMANDS:
 st-flash write build/DISCO_MIDI.bin 0x08000000 -- write binary to device when connected with usbipd
+NEED TO DISABLE QSPI INTERFACE TO ACCESS SPI PINS ON DISCO BOARD- HOPEFULLY WILL NOT INTERFERE WITH FLASHING BOARD
+VERIFY CLOCK/SAMPLING SPEEDS
 
 cannot find documentation for HAL_PCDEx_PMAConfig() function used in driver documentation
 
@@ -14,6 +16,12 @@ target extended-remote:3333
 
 //fix for if usbip version returns nothing/usbipd not working
 sudo update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux-tools/*/usbip | tail -n1` 20 
+
+
+// GENERAL COMMENTS / TODO
+TODO: add more error checking (status registers and HAL variable types)
+TODO: USE UART FOR PRINT DEBUGGING
+TODO: FUNCTIONS IN SEPARATE FILES FOR READ/WRITE TO PERIPHERALS (will eventually be error handlers/callback functions?)
 
 // HELPFUL LINKS
 https://community.st.com/t5/stm32-mcus-products/help-with-integrating-tinyusb-in-stm32cubeide/td-p/593695

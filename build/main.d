@@ -28,6 +28,8 @@ build/main.o: Core/Src/main.c Core/Inc/main.h \
  Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
  Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
+ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
+ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  tinyusb/src/tusb.h tinyusb/src/common/tusb_common.h \
  tinyusb/src/tusb_option.h tinyusb/src/common/tusb_compiler.h \
  Core/Inc/tusb_config.h tinyusb/src/common/tusb_mcu.h \
@@ -71,6 +73,8 @@ Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h:
+Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
+Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 tinyusb/src/tusb.h:
 tinyusb/src/common/tusb_common.h:
 tinyusb/src/tusb_option.h:
