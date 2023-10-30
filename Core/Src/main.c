@@ -77,7 +77,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 /* USER CODE BEGIN PV */
 
 //uint16_t I2C_TX_Buffer[]; //buffer for i2c data (wrong?)
-uint8_t I2C_TX_Buffer[ 1 ]; //buffer for i2c data
+uint8_t I2C_TX_Buffer[ 2 ]; //buffer for i2c data
 
 uint32_t adc_val = 0;
 
@@ -157,10 +157,14 @@ int main(void)
   SPI_TX_Buffer[2] = 0b00000000;
 
   // set slave address of i2c device
-  uint8_t slave_address = 0b01011010;
+  uint8_t slave_address = 0b01011000;
+
 
 
   //reset dac registers
+  I2C_TX_Buffer[0] = 0b00010000; // send command byte, select OUT0
+  HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
+  
   /*
   I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
   HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
@@ -177,7 +181,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    // SPI ADC TEST 
+    // SPI ADC TEST (IN BLOCKING MODE)
 
     // default CS to be high
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
@@ -188,6 +192,20 @@ int main(void)
     // now need to parse data
     adc_val = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
 
+    I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+    I2C_TX_Buffer[1] = 0xFF; // data byte, full VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    HAL_Delay(1000);
+
+    I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+    I2C_TX_Buffer[1] = 0x80; // data byte, half VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    HAL_Delay(1000);
+
+    I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+    I2C_TX_Buffer[1] = 0x0; // data byte, full VREF
+    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    HAL_Delay(1000);
 
     /*
     I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 

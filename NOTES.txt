@@ -22,6 +22,8 @@ sudo update-alternatives --install /usr/local/bin/usbip usbip `ls /usr/lib/linux
 TODO: add more error checking (status registers and HAL variable types)
 TODO: USE UART FOR PRINT DEBUGGING
 TODO: FUNCTIONS IN SEPARATE FILES FOR READ/WRITE TO PERIPHERALS (will eventually be error handlers/callback functions?)
+TODO: UPDATE GITIGNORE TO REMOVE BUILD DIRECTORY
+
 
 // HELPFUL LINKS
 https://community.st.com/t5/stm32-mcus-products/help-with-integrating-tinyusb-in-stm32cubeide/td-p/593695
