@@ -79,7 +79,8 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 //uint16_t I2C_TX_Buffer[]; //buffer for i2c data (wrong?)
 uint8_t I2C_TX_Buffer[ 2 ]; //buffer for i2c data
 
-uint32_t adc_val = 0;
+uint32_t adc_val[ 8 ]; // one element for each ADC channel (one device)
+//uint32_t adc_val;
 
 uint8_t SPI_TX_Buffer[ SPI_LENGTH ];
 
@@ -152,7 +153,7 @@ int main(void)
   // START BIT
   SPI_TX_Buffer[0] = 0b00000001;
   // CHANNEL SELECT (JUST CHECK CH0 FOR NOW)
-  SPI_TX_Buffer[1] = 0b10000000; // single ended, ch0 (top 4 bits)
+  SPI_TX_Buffer[1] = 0b11110000; // single ended, ch0 (top 4 bits)
   // NEED TO SEND THIRD BYTE (FULL DUPLEX), DONT CARE
   SPI_TX_Buffer[2] = 0b00000000;
 
@@ -175,6 +176,8 @@ int main(void)
   //I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 -- put in header file!
   //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
   //HAL_Delay(100);
+
+  //int i = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -182,15 +185,22 @@ int main(void)
   while (1)
   {
     // SPI ADC TEST (IN BLOCKING MODE)
-
+    for (int i = 0; i < 8; i++) {
+    SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
     // default CS to be high
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
+    HAL_Delay(100);
     // pull CS low for selecting device (only using one ADC right now)
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
     // one full duplex interaction
     HAL_SPI_TransmitReceive (&hspi1, SPI_TX_Buffer, SPI_RX_Buffer, 3, 1000);
     // now need to parse data
-    adc_val = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
+    adc_val[i] = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
+    //if(i == 7) i = 0;
+    //else i++; 
+    }
+
+    /* I2C protocol */
 
     I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
     I2C_TX_Buffer[1] = 0xFF; // data byte, full VREF
@@ -203,41 +213,10 @@ int main(void)
     HAL_Delay(1000);
 
     I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
-    I2C_TX_Buffer[1] = 0x0; // data byte, full VREF
+    I2C_TX_Buffer[1] = 0x0; // data byte, GND
     HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
     HAL_Delay(1000);
 
-    /*
-    I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    //HAL_Delay(100);
-    I2C_TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    //HAL_Delay(100);
-    I2C_TX_Buffer[0] = 0b11111111; // send data byte, full VREF
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    HAL_Delay(1000);
-
-    I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    //HAL_Delay(100);
-    I2C_TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    //HAL_Delay(100);
-    I2C_TX_Buffer[0] = 0b10000000; // send data byte, half VREF
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    HAL_Delay(1000);
-
-    I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    //HAL_Delay(100);
-    I2C_TX_Buffer[0] = 0b00000000; // send command byte, select OUT0
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    //HAL_Delay(100);
-    I2C_TX_Buffer[0] = 0b00000000; // send data byte, GND
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-    HAL_Delay(1000);
-  ` */
     //tud_task(); // tinyusb device task
     //midi_task();
     //HAL_Delay(1000);
@@ -370,8 +349,8 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
-  hspi1.Init.FirstBit = SPI_FIRSTBIT_LSB;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
+  hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi1.Init.CRCPolynomial = 7;

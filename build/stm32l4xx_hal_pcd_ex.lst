@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccswmGRQ.s 			page 1
+ARM GAS  /tmp/cc9h76BW.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
   27:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   * @{
   28:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   */
   29:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
-ARM GAS  /tmp/ccswmGRQ.s 			page 2
+ARM GAS  /tmp/cc9h76BW.s 			page 2
 
 
   30:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** /** @defgroup PCDEx PCDEx
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
   73:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   uint32_t Tx_Offset;
   41              		.loc 1 73 3 view .LVU3
   74:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
-ARM GAS  /tmp/ccswmGRQ.s 			page 3
+ARM GAS  /tmp/cc9h76BW.s 			page 3
 
 
   75:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   /*  TXn min size = 16 words. (n  : Transmit FIFO index)
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
   66              		.cfi_def_cfa_offset 0
   67 0014 7047     		bx	lr
   68              	.LVL4:
-ARM GAS  /tmp/ccswmGRQ.s 			page 4
+ARM GAS  /tmp/cc9h76BW.s 			page 4
 
 
   69              	.L2:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  108 003a F2D3     		bcc	.L5
  100:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   }
  109              		.loc 1 100 5 is_stmt 1 view .LVU30
-ARM GAS  /tmp/ccswmGRQ.s 			page 5
+ARM GAS  /tmp/cc9h76BW.s 			page 5
 
 
  100:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   }
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  152              		.align	1
  153              		.global	HAL_PCDEx_ActivateLPM
  154              		.syntax unified
-ARM GAS  /tmp/ccswmGRQ.s 			page 6
+ARM GAS  /tmp/cc9h76BW.s 			page 6
 
 
  155              		.thumb
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  132:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
  133:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   return HAL_OK;
  196              		.loc 1 133 3 is_stmt 1 view .LVU54
-ARM GAS  /tmp/ccswmGRQ.s 			page 7
+ARM GAS  /tmp/cc9h76BW.s 			page 7
 
 
  134:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** }
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  239 0012 536D     		ldr	r3, [r2, #84]
  240 0014 23F08053 		bic	r3, r3, #268435456
  241 0018 23F00303 		bic	r3, r3, #3
-ARM GAS  /tmp/ccswmGRQ.s 			page 8
+ARM GAS  /tmp/cc9h76BW.s 			page 8
 
 
  242 001c 5365     		str	r3, [r2, #84]
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  186:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   if ((USBx->GCCFG & USB_OTG_GCCFG_PDET) == 0U)
  187:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   {
  188:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****     /* Case of Standard Downstream Port */
-ARM GAS  /tmp/ccswmGRQ.s 			page 9
+ARM GAS  /tmp/cc9h76BW.s 			page 9
 
 
  189:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** #if (USE_HAL_PCD_REGISTER_CALLBACKS == 1U)
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  243:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   }
  244:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** }
  245:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
-ARM GAS  /tmp/ccswmGRQ.s 			page 10
+ARM GAS  /tmp/cc9h76BW.s 			page 10
 
 
  246:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** /**
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  265:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
  266:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   return HAL_OK;
  295              		.loc 1 266 3 is_stmt 1 view .LVU84
-ARM GAS  /tmp/ccswmGRQ.s 			page 11
+ARM GAS  /tmp/cc9h76BW.s 			page 11
 
 
  267:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** }
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  336              		.loc 1 282 3 is_stmt 1 view .LVU95
  337              		.loc 1 282 15 is_stmt 0 view .LVU96
  338 0014 996B     		ldr	r1, [r3, #56]
-ARM GAS  /tmp/ccswmGRQ.s 			page 12
+ARM GAS  /tmp/cc9h76BW.s 			page 12
 
 
  339 0016 21F40031 		bic	r1, r1, #131072
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  314:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   if ((0x80U & ep_addr) == 0x80U)
  315:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   {
  316:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****     ep = &hpcd->IN_ep[ep_addr & EP_ADDR_MSK];
-ARM GAS  /tmp/ccswmGRQ.s 			page 13
+ARM GAS  /tmp/cc9h76BW.s 			page 13
 
 
  317:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   }
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  371:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** HAL_StatusTypeDef HAL_PCDEx_DeActivateBCD(PCD_HandleTypeDef *hpcd)
  372:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** {
  373:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   USB_TypeDef *USBx = hpcd->Instance;
-ARM GAS  /tmp/ccswmGRQ.s 			page 14
+ARM GAS  /tmp/cc9h76BW.s 			page 14
 
 
  374:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   hpcd->battery_charging_active = 0U;
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  428:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****       HAL_PCDEx_BCD_Callback(hpcd, PCD_BCD_DEDICATED_CHARGING_PORT);
  429:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
  430:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****     }
-ARM GAS  /tmp/ccswmGRQ.s 			page 15
+ARM GAS  /tmp/cc9h76BW.s 			page 15
 
 
  431:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****     else
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  485:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
  486:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   USBx->LPMCSR |= USB_LPMCSR_LMPEN;
  487:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   USBx->LPMCSR |= USB_LPMCSR_LPMACK;
-ARM GAS  /tmp/ccswmGRQ.s 			page 16
+ARM GAS  /tmp/cc9h76BW.s 			page 16
 
 
  488:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  380              		.thumb
  381              		.thumb_func
  382              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/ccswmGRQ.s 			page 17
+ARM GAS  /tmp/cc9h76BW.s 			page 17
 
 
  384              	HAL_PCDEx_BCD_Callback:
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  421              		.cfi_offset 14, -4
  422 0002 0546     		mov	r5, r0
  160:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   uint32_t tickstart = HAL_GetTick();
-ARM GAS  /tmp/ccswmGRQ.s 			page 18
+ARM GAS  /tmp/cc9h76BW.s 			page 18
 
 
  423              		.loc 1 160 3 is_stmt 1 view .LVU112
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  183:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c ****   HAL_Delay(50U);
  462              		.loc 1 183 15 is_stmt 0 view .LVU128
  463 0032 A36B     		ldr	r3, [r4, #56]
-ARM GAS  /tmp/ccswmGRQ.s 			page 19
+ARM GAS  /tmp/cc9h76BW.s 			page 19
 
 
  464 0034 43F40023 		orr	r3, r3, #524288
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  505              	.L22:
  175:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
  506              		.loc 1 175 5 is_stmt 1 view .LVU142
-ARM GAS  /tmp/ccswmGRQ.s 			page 20
+ARM GAS  /tmp/cc9h76BW.s 			page 20
 
 
  507 006c FE21     		movs	r1, #254
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  550              	.L19:
  241:Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c **** #endif /* USE_HAL_PCD_REGISTER_CALLBACKS */
  551              		.loc 1 241 5 view .LVU154
-ARM GAS  /tmp/ccswmGRQ.s 			page 21
+ARM GAS  /tmp/cc9h76BW.s 			page 21
 
 
  552 00ae 0021     		movs	r1, #0
@@ -1218,29 +1218,29 @@ ARM GAS  /tmp/ccswmGRQ.s 			page 1
  566              		.file 5 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_ll_usb.h"
  567              		.file 6 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pcd.h"
  568              		.file 7 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h"
-ARM GAS  /tmp/ccswmGRQ.s 			page 22
+ARM GAS  /tmp/cc9h76BW.s 			page 22
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32l4xx_hal_pcd_ex.c
-     /tmp/ccswmGRQ.s:18     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 $t
-     /tmp/ccswmGRQ.s:26     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 HAL_PCDEx_SetTxFiFo
-     /tmp/ccswmGRQ.s:122    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 $t
-     /tmp/ccswmGRQ.s:129    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 HAL_PCDEx_SetRxFiFo
-     /tmp/ccswmGRQ.s:152    .text.HAL_PCDEx_ActivateLPM:0000000000000000 $t
-     /tmp/ccswmGRQ.s:159    .text.HAL_PCDEx_ActivateLPM:0000000000000000 HAL_PCDEx_ActivateLPM
-     /tmp/ccswmGRQ.s:203    .text.HAL_PCDEx_DeActivateLPM:0000000000000000 $t
-     /tmp/ccswmGRQ.s:210    .text.HAL_PCDEx_DeActivateLPM:0000000000000000 HAL_PCDEx_DeActivateLPM
-     /tmp/ccswmGRQ.s:250    .text.HAL_PCDEx_ActivateBCD:0000000000000000 $t
-     /tmp/ccswmGRQ.s:257    .text.HAL_PCDEx_ActivateBCD:0000000000000000 HAL_PCDEx_ActivateBCD
-     /tmp/ccswmGRQ.s:305    .text.HAL_PCDEx_DeActivateBCD:0000000000000000 $t
-     /tmp/ccswmGRQ.s:312    .text.HAL_PCDEx_DeActivateBCD:0000000000000000 HAL_PCDEx_DeActivateBCD
-     /tmp/ccswmGRQ.s:354    .text.HAL_PCDEx_LPM_Callback:0000000000000000 $t
-     /tmp/ccswmGRQ.s:361    .text.HAL_PCDEx_LPM_Callback:0000000000000000 HAL_PCDEx_LPM_Callback
-     /tmp/ccswmGRQ.s:377    .text.HAL_PCDEx_BCD_Callback:0000000000000000 $t
-     /tmp/ccswmGRQ.s:384    .text.HAL_PCDEx_BCD_Callback:0000000000000000 HAL_PCDEx_BCD_Callback
-     /tmp/ccswmGRQ.s:400    .text.HAL_PCDEx_BCD_VBUSDetect:0000000000000000 $t
-     /tmp/ccswmGRQ.s:407    .text.HAL_PCDEx_BCD_VBUSDetect:0000000000000000 HAL_PCDEx_BCD_VBUSDetect
+     /tmp/cc9h76BW.s:18     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 $t
+     /tmp/cc9h76BW.s:26     .text.HAL_PCDEx_SetTxFiFo:0000000000000000 HAL_PCDEx_SetTxFiFo
+     /tmp/cc9h76BW.s:122    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 $t
+     /tmp/cc9h76BW.s:129    .text.HAL_PCDEx_SetRxFiFo:0000000000000000 HAL_PCDEx_SetRxFiFo
+     /tmp/cc9h76BW.s:152    .text.HAL_PCDEx_ActivateLPM:0000000000000000 $t
+     /tmp/cc9h76BW.s:159    .text.HAL_PCDEx_ActivateLPM:0000000000000000 HAL_PCDEx_ActivateLPM
+     /tmp/cc9h76BW.s:203    .text.HAL_PCDEx_DeActivateLPM:0000000000000000 $t
+     /tmp/cc9h76BW.s:210    .text.HAL_PCDEx_DeActivateLPM:0000000000000000 HAL_PCDEx_DeActivateLPM
+     /tmp/cc9h76BW.s:250    .text.HAL_PCDEx_ActivateBCD:0000000000000000 $t
+     /tmp/cc9h76BW.s:257    .text.HAL_PCDEx_ActivateBCD:0000000000000000 HAL_PCDEx_ActivateBCD
+     /tmp/cc9h76BW.s:305    .text.HAL_PCDEx_DeActivateBCD:0000000000000000 $t
+     /tmp/cc9h76BW.s:312    .text.HAL_PCDEx_DeActivateBCD:0000000000000000 HAL_PCDEx_DeActivateBCD
+     /tmp/cc9h76BW.s:354    .text.HAL_PCDEx_LPM_Callback:0000000000000000 $t
+     /tmp/cc9h76BW.s:361    .text.HAL_PCDEx_LPM_Callback:0000000000000000 HAL_PCDEx_LPM_Callback
+     /tmp/cc9h76BW.s:377    .text.HAL_PCDEx_BCD_Callback:0000000000000000 $t
+     /tmp/cc9h76BW.s:384    .text.HAL_PCDEx_BCD_Callback:0000000000000000 HAL_PCDEx_BCD_Callback
+     /tmp/cc9h76BW.s:400    .text.HAL_PCDEx_BCD_VBUSDetect:0000000000000000 $t
+     /tmp/cc9h76BW.s:407    .text.HAL_PCDEx_BCD_VBUSDetect:0000000000000000 HAL_PCDEx_BCD_VBUSDetect
 
 UNDEFINED SYMBOLS
 HAL_GetTick
