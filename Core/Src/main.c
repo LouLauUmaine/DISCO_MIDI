@@ -72,8 +72,6 @@ DMA_HandleTypeDef hdma_spi2_rx;
 
 UART_HandleTypeDef huart2;
 
-PCD_HandleTypeDef hpcd_USB_OTG_FS;
-
 /* USER CODE BEGIN PV */
 
 //uint16_t I2C_TX_Buffer[]; //buffer for i2c data (wrong?)
@@ -91,11 +89,12 @@ uint8_t SPI_RX_Buffer[ SPI_LENGTH ];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void PeriphCommonClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_USB_OTG_FS_PCD_Init(void);
+static void MX_USB_OTG_FS_USB_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
@@ -131,6 +130,9 @@ int main(void)
   /* Configure the system clock */
   SystemClock_Config();
 
+/* Configure the peripherals common clocks */
+  PeriphCommonClock_Config();
+
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
@@ -140,7 +142,7 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   MX_I2C1_Init();
-  MX_USB_OTG_FS_PCD_Init();
+  MX_USB_OTG_FS_USB_Init();
   MX_SPI2_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
@@ -153,7 +155,7 @@ int main(void)
   // START BIT
   SPI_TX_Buffer[0] = 0b00000001;
   // CHANNEL SELECT (JUST CHECK CH0 FOR NOW)
-  SPI_TX_Buffer[1] = 0b11110000; // single ended, ch0 (top 4 bits)
+  SPI_TX_Buffer[1] = 0b10000000; // single ended, ch0 (top 4 bits)
   // NEED TO SEND THIRD BYTE (FULL DUPLEX), DONT CARE
   SPI_TX_Buffer[2] = 0b00000000;
 
@@ -189,7 +191,6 @@ int main(void)
     SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
     // default CS to be high
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
-    HAL_Delay(100);
     // pull CS low for selecting device (only using one ADC right now)
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
     // one full duplex interaction
@@ -200,23 +201,28 @@ int main(void)
     //else i++; 
     }
 
-    /* I2C protocol */
+    /* Read through all DAC channels in output buffer, set output on ADC accordingly */
+    
+      I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+      I2C_TX_Buffer[1] = adc_val[0]>>2; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
+      HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    /* I2C protocol test -- move test cases to auxiliary files */
+    
+    //I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+    //I2C_TX_Buffer[1] = 0xFF; // data byte, full VREF
+    //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    //HAL_Delay(1000);
 
-    I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
-    I2C_TX_Buffer[1] = 0xFF; // data byte, full VREF
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
-    HAL_Delay(1000);
+    //I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+    //I2C_TX_Buffer[1] = 0x80; // data byte, half VREF
+    //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    //HAL_Delay(1000);
 
-    I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
-    I2C_TX_Buffer[1] = 0x80; // data byte, half VREF
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
-    HAL_Delay(1000);
-
-    I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
-    I2C_TX_Buffer[1] = 0x0; // data byte, GND
-    HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
-    HAL_Delay(1000);
-
+    //I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+    //I2C_TX_Buffer[1] = 0x0; // data byte, GND
+    //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    //HAL_Delay(1000);
+    
     //tud_task(); // tinyusb device task
     //midi_task();
     //HAL_Delay(1000);
@@ -273,6 +279,31 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief Peripherals Common Clock Configuration
+  * @retval None
+  */
+void PeriphCommonClock_Config(void)
+{
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
+
+  /** Initializes the peripherals clock
+  */
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
+  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLLSAI1;
+  PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
+  PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
+  PeriphClkInit.PLLSAI1.PLLSAI1N = 24;
+  PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
+  PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
+  PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
+  PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_48M2CLK;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }
@@ -446,7 +477,7 @@ static void MX_USART2_UART_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USB_OTG_FS_PCD_Init(void)
+static void MX_USB_OTG_FS_USB_Init(void)
 {
 
   /* USER CODE BEGIN USB_OTG_FS_Init 0 */
@@ -456,20 +487,6 @@ static void MX_USB_OTG_FS_PCD_Init(void)
   /* USER CODE BEGIN USB_OTG_FS_Init 1 */
 
   /* USER CODE END USB_OTG_FS_Init 1 */
-  hpcd_USB_OTG_FS.Instance = USB_OTG_FS;
-  hpcd_USB_OTG_FS.Init.dev_endpoints = 6;
-  hpcd_USB_OTG_FS.Init.speed = PCD_SPEED_FULL;
-  hpcd_USB_OTG_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
-  hpcd_USB_OTG_FS.Init.Sof_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.low_power_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.lpm_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.battery_charging_enable = DISABLE;
-  hpcd_USB_OTG_FS.Init.use_dedicated_ep1 = DISABLE;
-  hpcd_USB_OTG_FS.Init.vbus_sensing_enable = DISABLE;
-  if (HAL_PCD_Init(&hpcd_USB_OTG_FS) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN USB_OTG_FS_Init 2 */
 
   /* USER CODE END USB_OTG_FS_Init 2 */
@@ -654,6 +671,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF11_LCD;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA10 OTG_FS_DM_Pin OTG_FS_DP_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_10|OTG_FS_DM_Pin|OTG_FS_DP_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : OTG_FS_VBUS_Pin */
