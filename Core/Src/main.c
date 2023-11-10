@@ -77,7 +77,8 @@ UART_HandleTypeDef huart2;
 //uint16_t I2C_TX_Buffer[]; //buffer for i2c data (wrong?)
 uint8_t I2C_TX_Buffer[ 2 ]; //buffer for i2c data
 
-uint32_t adc_val[ 8 ]; // one element for each ADC channel (one device)
+uint32_t ADC1_VAL[ 8 ]; // one element for each ADC channel (one device)
+uint32_t ADC2_VAL[ 8 ]; // one element for each ADC channel (one device)
 //uint32_t adc_val;
 
 uint8_t SPI_TX_Buffer[ SPI_LENGTH ];
@@ -167,7 +168,9 @@ int main(void)
   //reset dac registers
   I2C_TX_Buffer[0] = 0b00010000; // send command byte, select OUT0
   HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
-  
+  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
+
   /*
   I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
   HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
@@ -189,22 +192,34 @@ int main(void)
     // SPI ADC TEST (IN BLOCKING MODE)
     for (int i = 0; i < 8; i++) {
     SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
-    // default CS to be high
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
     // pull CS low for selecting device (only using one ADC right now)
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
     // one full duplex interaction
     HAL_SPI_TransmitReceive (&hspi1, SPI_TX_Buffer, SPI_RX_Buffer, 3, 1000);
     // now need to parse data
-    adc_val[i] = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
+    ADC1_VAL[i] = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
+    // default CS to be high
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
     //if(i == 7) i = 0;
     //else i++; 
+    }
+
+    for (int i = 0; i < 8; i++) {
+    SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
+    // pull CS low for selecting device (only using one ADC right now)
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);
+    // one full duplex interaction
+    HAL_SPI_TransmitReceive (&hspi1, SPI_TX_Buffer, SPI_RX_Buffer, 3, 1000);
+    // now need to parse data
+    ADC2_VAL[i] = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
+    // default CS to be high
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
     }
 
     /* Read through all DAC channels in output buffer, set output on ADC accordingly */
     
       I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
-      I2C_TX_Buffer[1] = adc_val[0]>>2; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
+      I2C_TX_Buffer[1] = ADC2_VAL[0]>>2; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
       HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
     /* I2C protocol test -- move test cases to auxiliary files */
     
@@ -534,7 +549,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, AUDIO_RST_Pin|LD_G_Pin|GPIO_PIN_9|GPIO_PIN_10
-                          |GPIO_PIN_12|XL_CS_Pin, GPIO_PIN_RESET);
+                          |GPIO_PIN_11|GPIO_PIN_12|XL_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
@@ -632,20 +647,14 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(LD_G_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PE9 PE10 PE12 XL_CS_Pin */
-  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_12|XL_CS_Pin;
+  /*Configure GPIO pins : PE9 PE10 PE11 PE12
+                           XL_CS_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12
+                          |XL_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : QSPI_CS_Pin */
-  GPIO_InitStruct.Pin = QSPI_CS_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF10_QUADSPI;
-  HAL_GPIO_Init(QSPI_CS_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : MFX_I2C_SLC_Pin MFX_I2C_SDA_Pin */
   GPIO_InitStruct.Pin = MFX_I2C_SLC_Pin|MFX_I2C_SDA_Pin;

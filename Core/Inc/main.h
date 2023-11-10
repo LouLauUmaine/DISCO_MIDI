@@ -99,8 +99,6 @@ void Error_Handler(void);
 #define AUDIO_DIN_GPIO_Port GPIOE
 #define LD_G_Pin GPIO_PIN_8
 #define LD_G_GPIO_Port GPIOE
-#define QSPI_CS_Pin GPIO_PIN_11
-#define QSPI_CS_GPIO_Port GPIOE
 #define MFX_I2C_SLC_Pin GPIO_PIN_10
 #define MFX_I2C_SLC_GPIO_Port GPIOB
 #define MFX_I2C_SDA_Pin GPIO_PIN_11

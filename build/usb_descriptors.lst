@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc0gGOxi.s 			page 1
+ARM GAS  /tmp/ccJqSoDx.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
   28:Core/Src/usb_descriptors.c **** 
   29:Core/Src/usb_descriptors.c **** /* A combination of interfaces must have a unique product id, since PC will save device driver afte
   30:Core/Src/usb_descriptors.c ****  * Same VID/PID with different interface e.g MSC (first), then CDC (later) will possibly cause syst
-ARM GAS  /tmp/cc0gGOxi.s 			page 2
+ARM GAS  /tmp/ccJqSoDx.s 			page 2
 
 
   31:Core/Src/usb_descriptors.c ****  *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
   46              		.align	1
   47              		.global	tud_descriptor_configuration_cb
   48              		.syntax unified
-ARM GAS  /tmp/cc0gGOxi.s 			page 3
+ARM GAS  /tmp/ccJqSoDx.s 			page 3
 
 
   49              		.thumb
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  117:Core/Src/usb_descriptors.c **** 
  118:Core/Src/usb_descriptors.c **** // Invoked when received GET CONFIGURATION DESCRIPTOR
  119:Core/Src/usb_descriptors.c **** // Application return pointer to descriptor
-ARM GAS  /tmp/cc0gGOxi.s 			page 4
+ARM GAS  /tmp/ccJqSoDx.s 			page 4
 
 
  120:Core/Src/usb_descriptors.c **** // Descriptor contents must exist long enough for transfer to complete
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  138:Core/Src/usb_descriptors.c **** enum {
  139:Core/Src/usb_descriptors.c ****   STRID_LANGID = 0,
  140:Core/Src/usb_descriptors.c ****   STRID_MANUFACTURER,
-ARM GAS  /tmp/cc0gGOxi.s 			page 5
+ARM GAS  /tmp/ccJqSoDx.s 			page 5
 
 
  141:Core/Src/usb_descriptors.c ****   STRID_PRODUCT,
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  174:Core/Src/usb_descriptors.c ****       // https://docs.microsoft.com/en-us/windows-hardware/drivers/usbcon/microsoft-defined-usb-des
  175:Core/Src/usb_descriptors.c **** 
  176:Core/Src/usb_descriptors.c ****       if ( !(index < sizeof(string_desc_arr) / sizeof(string_desc_arr[0])) ) return NULL;
-ARM GAS  /tmp/cc0gGOxi.s 			page 6
+ARM GAS  /tmp/ccJqSoDx.s 			page 6
 
 
  111              		.loc 1 176 7 view .LVU13
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  154 002a 294A     		ldr	r2, .L30+4
  155 002c 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
  186:Core/Src/usb_descriptors.c ****         _desc_str[1 + i] = str[i];
-ARM GAS  /tmp/cc0gGOxi.s 			page 7
+ARM GAS  /tmp/ccJqSoDx.s 			page 7
 
 
  156              		.loc 1 186 42 is_stmt 1 discriminator 3 view .LVU33
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  193              		.loc 1 195 3 is_stmt 1 view .LVU48
  194              	.L7:
  196:Core/Src/usb_descriptors.c **** }
-ARM GAS  /tmp/cc0gGOxi.s 			page 8
+ARM GAS  /tmp/ccJqSoDx.s 			page 8
 
 
  195              		.loc 1 196 1 is_stmt 0 view .LVU49
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
   38:Core/Inc/board_api.h **** 
   39:Core/Inc/board_api.h **** // Define the default baudrate
   40:Core/Inc/board_api.h **** #ifndef CFG_BOARD_UART_BAUDRATE
-ARM GAS  /tmp/cc0gGOxi.s 			page 9
+ARM GAS  /tmp/ccJqSoDx.s 			page 9
 
 
   41:Core/Inc/board_api.h **** #define CFG_BOARD_UART_BAUDRATE 115200   ///< Default baud rate
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
   95:Core/Inc/board_api.h **** #elif CFG_TUSB_OS == OPT_OS_RTTHREAD
   96:Core/Inc/board_api.h **** static inline uint32_t board_millis(void) {
   97:Core/Inc/board_api.h ****   return (((uint64_t)rt_tick_get()) * 1000 / RT_TICK_PER_SECOND);
-ARM GAS  /tmp/cc0gGOxi.s 			page 10
+ARM GAS  /tmp/ccJqSoDx.s 			page 10
 
 
   98:Core/Inc/board_api.h **** }
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  131:Core/Inc/board_api.h ****   if ( uid_len > max_chars / 2 ) uid_len = max_chars / 2;
  232              		.loc 2 131 3 is_stmt 1 view .LVU60
  233              		.loc 2 131 6 is_stmt 0 view .LVU61
-ARM GAS  /tmp/cc0gGOxi.s 			page 11
+ARM GAS  /tmp/ccJqSoDx.s 			page 11
 
 
  234 005e 102C     		cmp	r4, #16
@@ -658,7 +658,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  278 007c A645     		cmp	lr, r4
  279 007e 20D2     		bcs	.L28
  280              	.LBB15:
-ARM GAS  /tmp/cc0gGOxi.s 			page 12
+ARM GAS  /tmp/ccJqSoDx.s 			page 12
 
 
  134:Core/Inc/board_api.h ****     for ( size_t j = 0; j < 2; j++ ) {
@@ -718,7 +718,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  326 00bc 0CF1010C 		add	ip, ip, #1
  327              	.LVL28:
  134:Core/Inc/board_api.h ****       const char nibble_to_hex[16] = {
-ARM GAS  /tmp/cc0gGOxi.s 			page 13
+ARM GAS  /tmp/ccJqSoDx.s 			page 13
 
 
  328              		.loc 2 134 33 view .LVU98
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  371      636500
  372              		.global	desc_fs_configuration
  373              		.global	desc_device
-ARM GAS  /tmp/cc0gGOxi.s 			page 14
+ARM GAS  /tmp/ccJqSoDx.s 			page 14
 
 
  374              		.section	.bss._desc_str,"aw",%nobits
@@ -838,7 +838,7 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  426      24010001 
  426      410006
  427 002c 24020101 		.ascii	"$\002\001\001\000\006$\002\002\002\000\011$\003\001"
-ARM GAS  /tmp/cc0gGOxi.s 			page 15
+ARM GAS  /tmp/ccJqSoDx.s 			page 15
 
 
  427      00062402 
@@ -865,32 +865,32 @@ ARM GAS  /tmp/cc0gGOxi.s 			page 1
  437              		.file 6 "tinyusb/src/class/audio/audio.h"
  438              		.file 7 "tinyusb/src/class/midi/midi.h"
  439              		.file 8 "/usr/include/newlib/string.h"
-ARM GAS  /tmp/cc0gGOxi.s 			page 16
+ARM GAS  /tmp/ccJqSoDx.s 			page 16
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usb_descriptors.c
-     /tmp/cc0gGOxi.s:18     .text.tud_descriptor_device_cb:0000000000000000 $t
-     /tmp/cc0gGOxi.s:26     .text.tud_descriptor_device_cb:0000000000000000 tud_descriptor_device_cb
-     /tmp/cc0gGOxi.s:41     .text.tud_descriptor_device_cb:0000000000000004 $d
-     /tmp/cc0gGOxi.s:46     .text.tud_descriptor_configuration_cb:0000000000000000 $t
-     /tmp/cc0gGOxi.s:53     .text.tud_descriptor_configuration_cb:0000000000000000 tud_descriptor_configuration_cb
-     /tmp/cc0gGOxi.s:71     .text.tud_descriptor_configuration_cb:0000000000000004 $d
-     /tmp/cc0gGOxi.s:76     .rodata.tud_descriptor_string_cb.str1.4:0000000000000000 $d
-     /tmp/cc0gGOxi.s:80     .text.tud_descriptor_string_cb:0000000000000000 $t
-     /tmp/cc0gGOxi.s:87     .text.tud_descriptor_string_cb:0000000000000000 tud_descriptor_string_cb
-     /tmp/cc0gGOxi.s:354    .text.tud_descriptor_string_cb:00000000000000cc $d
-     /tmp/cc0gGOxi.s:386    .data.string_desc_arr:0000000000000000 string_desc_arr
-     /tmp/cc0gGOxi.s:366    .rodata.str1.4:0000000000000000 $d
-     /tmp/cc0gGOxi.s:423    .rodata.desc_fs_configuration:0000000000000000 desc_fs_configuration
-     /tmp/cc0gGOxi.s:403    .rodata.desc_device:0000000000000000 desc_device
-     /tmp/cc0gGOxi.s:375    .bss._desc_str:0000000000000000 $d
-     /tmp/cc0gGOxi.s:379    .bss._desc_str:0000000000000000 _desc_str
-     /tmp/cc0gGOxi.s:382    .data.string_desc_arr:0000000000000000 $d
-     /tmp/cc0gGOxi.s:395    .rodata.__compound_literal.0:0000000000000000 __compound_literal.0
-     /tmp/cc0gGOxi.s:392    .rodata.__compound_literal.0:0000000000000000 $d
-     /tmp/cc0gGOxi.s:399    .rodata.desc_device:0000000000000000 $d
-     /tmp/cc0gGOxi.s:419    .rodata.desc_fs_configuration:0000000000000000 $d
+     /tmp/ccJqSoDx.s:18     .text.tud_descriptor_device_cb:0000000000000000 $t
+     /tmp/ccJqSoDx.s:26     .text.tud_descriptor_device_cb:0000000000000000 tud_descriptor_device_cb
+     /tmp/ccJqSoDx.s:41     .text.tud_descriptor_device_cb:0000000000000004 $d
+     /tmp/ccJqSoDx.s:46     .text.tud_descriptor_configuration_cb:0000000000000000 $t
+     /tmp/ccJqSoDx.s:53     .text.tud_descriptor_configuration_cb:0000000000000000 tud_descriptor_configuration_cb
+     /tmp/ccJqSoDx.s:71     .text.tud_descriptor_configuration_cb:0000000000000004 $d
+     /tmp/ccJqSoDx.s:76     .rodata.tud_descriptor_string_cb.str1.4:0000000000000000 $d
+     /tmp/ccJqSoDx.s:80     .text.tud_descriptor_string_cb:0000000000000000 $t
+     /tmp/ccJqSoDx.s:87     .text.tud_descriptor_string_cb:0000000000000000 tud_descriptor_string_cb
+     /tmp/ccJqSoDx.s:354    .text.tud_descriptor_string_cb:00000000000000cc $d
+     /tmp/ccJqSoDx.s:386    .data.string_desc_arr:0000000000000000 string_desc_arr
+     /tmp/ccJqSoDx.s:366    .rodata.str1.4:0000000000000000 $d
+     /tmp/ccJqSoDx.s:423    .rodata.desc_fs_configuration:0000000000000000 desc_fs_configuration
+     /tmp/ccJqSoDx.s:403    .rodata.desc_device:0000000000000000 desc_device
+     /tmp/ccJqSoDx.s:375    .bss._desc_str:0000000000000000 $d
+     /tmp/ccJqSoDx.s:379    .bss._desc_str:0000000000000000 _desc_str
+     /tmp/ccJqSoDx.s:382    .data.string_desc_arr:0000000000000000 $d
+     /tmp/ccJqSoDx.s:395    .rodata.__compound_literal.0:0000000000000000 __compound_literal.0
+     /tmp/ccJqSoDx.s:392    .rodata.__compound_literal.0:0000000000000000 $d
+     /tmp/ccJqSoDx.s:399    .rodata.desc_device:0000000000000000 $d
+     /tmp/ccJqSoDx.s:419    .rodata.desc_fs_configuration:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 strlen
