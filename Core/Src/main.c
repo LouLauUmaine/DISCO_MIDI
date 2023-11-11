@@ -101,6 +101,7 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 void midi_task(void);
+uint8_t HALL_TO_DAC(uint32_t adc1_val[], uint32_t adc2_val[], int octave_num);
 
 /* USER CODE END PFP */
 
@@ -163,13 +164,20 @@ int main(void)
   // set slave address of i2c device
   uint8_t slave_address = 0b01011000;
 
-
-
   //reset dac registers
   I2C_TX_Buffer[0] = 0b00010000; // send command byte, select OUT0
   HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,1,1000); //Sending in Blocking mode
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
+
+  int octave_num = 2;
+  bool flag1 = false;
+  bool flag2 = false;
+
+  // MIDI == 0 , DAC == 1
+  bool output_state = 0;
+  //volatile int PA_1_VAL = 0;
+  //volatile int PA_2_VAL = 0;
 
   /*
   I2C_TX_Buffer[0] = slave_address; // set slave address to AD0 
@@ -187,8 +195,28 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
+  while (1) 
   {
+
+    //PA_1_VAL = HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1);
+    //PA_2_VAL = HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_2);
+
+    if (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) && !flag1){
+      octave_num = octave_num + 1;
+      if(octave_num > 4) octave_num = 4;
+      flag1 = true;
+    }
+
+    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1)) flag1 = false;
+
+    if (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2) && !flag2){
+      octave_num = octave_num - 1;
+      if(octave_num < 0) octave_num = 0;
+      flag2 = true;
+    }
+
+    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2)) flag2 = false;
+
     // SPI ADC TEST (IN BLOCKING MODE)
     for (int i = 0; i < 8; i++) {
     SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
@@ -216,11 +244,19 @@ int main(void)
     HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
     }
 
+    /* CHECK OUTPUT SWITCH, SEND 0x00 from DAC if in MIDI mode*/
+    if (!HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_8)){
     /* Read through all DAC channels in output buffer, set output on ADC accordingly */
-    
       I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
-      I2C_TX_Buffer[1] = ADC2_VAL[0]>>2; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
+      I2C_TX_Buffer[1] = HALL_TO_DAC(ADC1_VAL,ADC2_VAL,octave_num); // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
       HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    }
+    /* EVENTUALLY should send DAC = 0 (set gate also eventually) AND midi signal */
+    else{
+      I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
+      I2C_TX_Buffer[1] = 0x0; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
+      HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+    }
     /* I2C protocol test -- move test cases to auxiliary files */
     
     //I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
@@ -548,8 +584,8 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, AUDIO_RST_Pin|LD_G_Pin|GPIO_PIN_9|GPIO_PIN_10
-                          |GPIO_PIN_11|GPIO_PIN_12|XL_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, AUDIO_RST_Pin|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+                          |GPIO_PIN_12|XL_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
@@ -602,11 +638,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF11_LCD;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : JOY_CENTER_Pin JOY_LEFT_Pin JOY_RIGHT_Pin JOY_UP_Pin */
-  GPIO_InitStruct.Pin = JOY_CENTER_Pin|JOY_LEFT_Pin|JOY_RIGHT_Pin|JOY_UP_Pin;
+  /*Configure GPIO pins : PA0 PA1 PA2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : JOY_UP_Pin */
+  GPIO_InitStruct.Pin = JOY_UP_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(JOY_UP_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : MFX_WAKEUP_Pin */
   GPIO_InitStruct.Pin = MFX_WAKEUP_Pin;
@@ -640,12 +682,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(LD_R_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : LD_G_Pin */
-  GPIO_InitStruct.Pin = LD_G_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  /*Configure GPIO pin : PE8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  HAL_GPIO_Init(LD_G_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PE9 PE10 PE11 PE12
                            XL_CS_Pin */
@@ -764,6 +805,8 @@ void tud_resume_cb(void)
   blink_interval_ms = tud_mounted() ? BLINK_MOUNTED : BLINK_NOT_MOUNTED;
 }
 
+// MIDI TASK-- SEPARATE FILE
+
 void midi_task(void)
 {
   static uint32_t start_ms = 0;
@@ -808,6 +851,158 @@ void midi_task(void)
   if (note_pos >= sizeof(note_sequence)) note_pos = 0;
 }
 
+/* HALL EFFECT TO DAC OUTPUT CONVERSION */
+
+uint8_t HALL_TO_DAC(uint32_t adc1_val[], uint32_t adc2_val[], int octave_num) {
+    int channel_num = 12;
+    
+   for (int i = 0; i < 12; i++) {
+        if (i < 6) {
+            if (adc1_val[i] > 600) {
+                channel_num = i;
+                break;
+            }
+        } else {
+            if (adc2_val[i - 6] > 600) {
+                channel_num = i;
+                break;
+            }
+        }
+    }
+    
+    if (octave_num == 0) { // 0-50
+        if (channel_num == 0) {
+            return 3;
+        } else if (channel_num == 1) {
+            return 7;
+        } else if (channel_num == 2) {
+            return 11;
+        } else if (channel_num == 3) {
+            return 15;
+        } else if (channel_num == 4) {
+            return 19;
+        } else if (channel_num == 5) {
+            return 23;
+        } else if (channel_num == 6) {
+            return 27;
+        } else if (channel_num == 7) {
+            return 31;
+        } else if (channel_num == 8) {
+            return 35;
+        } else if (channel_num == 9) {
+            return 39;
+        } else if (channel_num == 10) {
+            return 43;
+        } else if (channel_num == 11) {
+            return 47;
+        }
+    } else if (octave_num == 1) { // 51-101
+        if (channel_num == 0) {
+            return 54;
+        } else if (channel_num == 1) {
+            return 58;
+        } else if (channel_num == 2) {
+            return 62;
+        } else if (channel_num == 3) {
+            return 66;
+        } else if (channel_num == 4) {
+            return 70;
+        } else if (channel_num == 5) {
+            return 74;
+        } else if (channel_num == 6) {
+            return 78;
+        } else if (channel_num == 7) {
+            return 82;
+        } else if (channel_num == 8) {
+            return 86;
+        } else if (channel_num == 9) {
+            return 90;
+        } else if (channel_num == 10) {
+            return 94;
+        } else if (channel_num == 11) {
+            return 98;
+        }
+    } else if (octave_num == 2) { // 102-152
+        if (channel_num == 0) {
+            return 105;
+        } else if (channel_num == 1) {
+            return 109;
+        } else if (channel_num == 2) {
+            return 113;
+        } else if (channel_num == 3) {
+            return 117;
+        } else if (channel_num == 4) {
+            return 121;
+        } else if (channel_num == 5) {
+            return 125;
+        } else if (channel_num == 6) {
+            return 129;
+        } else if (channel_num == 7) {
+            return 133;
+        } else if (channel_num == 8) {
+            return 137;
+        } else if (channel_num == 9) {
+            return 141;
+        } else if (channel_num == 10) {
+            return 145;
+        } else if (channel_num == 11) {
+            return 149;
+        }
+    } else if (octave_num == 3) { // 153-203
+        if (channel_num == 0) {
+            return 156;
+        } else if (channel_num == 1) {
+            return 160;
+        } else if (channel_num == 2) {
+            return 164;
+        } else if (channel_num == 3) {
+            return 168;
+        } else if (channel_num == 4) {
+            return 172;
+        } else if (channel_num == 5) {
+            return 176;
+        } else if (channel_num == 6) {
+            return 180;
+        } else if (channel_num == 7) {
+            return 184;
+        } else if (channel_num == 8) {
+            return 188;
+        } else if (channel_num == 9) {
+            return 192;
+        } else if (channel_num == 10) {
+            return 196;
+        } else if (channel_num == 11) {
+            return 200;
+        }
+    } else { // 204-255
+        if (channel_num == 0) {
+            return 207;
+        } else if (channel_num == 1) {
+            return 211;
+        } else if (channel_num == 2) {
+            return 215;
+        } else if (channel_num == 3) {
+            return 219;
+        } else if (channel_num == 4) {
+            return 223;
+        } else if (channel_num == 5) {
+            return 227;
+        } else if (channel_num == 6) {
+            return 231;
+        } else if (channel_num == 7) {
+            return 235;
+        } else if (channel_num == 8) {
+            return 239;
+        } else if (channel_num == 9) {
+            return 243;
+        } else if (channel_num == 10) {
+            return 247;
+        } else if (channel_num == 11) {
+            return 251;
+        }
+    }
+    return 0;
+}
 
 
 /* USER CODE END 4 */

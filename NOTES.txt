@@ -24,6 +24,14 @@ TODO: USE UART FOR PRINT DEBUGGING
 TODO: FUNCTIONS IN SEPARATE FILES FOR READ/WRITE TO PERIPHERALS (will eventually be error handlers/callback functions?)
 TODO: UPDATE GITIGNORE TO REMOVE BUILD DIRECTORY
 TODO: MAKE LABELS FOR MCU PINS IN CUBEMX -- WILL GENERATE CODE WITH USER LABELS
+TODO: ADD DEBOUNCING FOR OCTAVE SELECT
+
+
+// OTHER THINGS
+- button gpio configured as pull up, will ground current and go LOW when pressed
+- PA0 for mode select switch / PE8
+- PA1 and PA2 for octave switch
+- PE11(ADC1) and PE12(ADC2) chip select 
 
 
 // HELPFUL LINKS

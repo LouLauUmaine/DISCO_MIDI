@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccle82Yw.s 			page 1
+ARM GAS  /tmp/ccGzDbvP.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   28:tinyusb/src/tusb.c **** 
   29:tinyusb/src/tusb.c **** #if CFG_TUH_ENABLED || CFG_TUD_ENABLED
   30:tinyusb/src/tusb.c **** 
-ARM GAS  /tmp/ccle82Yw.s 			page 2
+ARM GAS  /tmp/ccGzDbvP.s 			page 2
 
 
   31:tinyusb/src/tusb.c **** #include "tusb.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   50:tinyusb/src/tusb.c **** #endif
   51              		.loc 1 50 3 discriminator 1 view .LVU7
   52              	.LBB55:
-ARM GAS  /tmp/ccle82Yw.s 			page 3
+ARM GAS  /tmp/ccGzDbvP.s 			page 3
 
 
   50:tinyusb/src/tusb.c **** #endif
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   97              		.loc 1 66 16 is_stmt 0 view .LVU16
   98 0002 FFF7FEFF 		bl	tud_inited
   99              	.LVL3:
-ARM GAS  /tmp/ccle82Yw.s 			page 4
+ARM GAS  /tmp/ccGzDbvP.s 			page 4
 
 
  100              		.loc 1 66 13 view .LVU17
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  137              	.L11:
   82:tinyusb/src/tusb.c ****   while(desc+1 < end)
  138              		.loc 1 82 8 is_stmt 1 view .LVU26
-ARM GAS  /tmp/ccle82Yw.s 			page 5
+ARM GAS  /tmp/ccGzDbvP.s 			page 5
 
 
   82:tinyusb/src/tusb.c ****   while(desc+1 < end)
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   95:tinyusb/src/tusb.c ****     desc += desc[DESC_OFFSET_LEN];
  181              		.loc 1 95 5 is_stmt 1 view .LVU37
  182              		.loc 1 95 17 is_stmt 0 view .LVU38
-ARM GAS  /tmp/ccle82Yw.s 			page 6
+ARM GAS  /tmp/ccGzDbvP.s 			page 6
 
 
  183 0002 90F800C0 		ldrb	ip, [r0]	@ zero_extendqisi2
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  100:tinyusb/src/tusb.c **** uint8_t const * tu_desc_find3(uint8_t const* desc, uint8_t const* end, uint8_t byte1, uint8_t byte2
  101:tinyusb/src/tusb.c **** {
  227              		.loc 1 101 1 is_stmt 1 view -0
-ARM GAS  /tmp/ccle82Yw.s 			page 7
+ARM GAS  /tmp/ccGzDbvP.s 			page 7
 
 
  228              		.cfi_startproc
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  268 002a F445     		cmp	ip, lr
  269 002c ECD1     		bne	.L26
  270 002e 00E0     		b	.L24
-ARM GAS  /tmp/ccle82Yw.s 			page 8
+ARM GAS  /tmp/ccGzDbvP.s 			page 8
 
 
  271              	.L31:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  312              		.loc 1 120 3 is_stmt 1 discriminator 4 view .LVU77
  121:tinyusb/src/tusb.c ****   (void) osal_mutex_lock(mutex, OSAL_TIMEOUT_WAIT_FOREVER);
  313              		.loc 1 121 3 discriminator 4 view .LVU78
-ARM GAS  /tmp/ccle82Yw.s 			page 9
+ARM GAS  /tmp/ccGzDbvP.s 			page 9
 
 
  122:tinyusb/src/tusb.c **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  354              		.cfi_endproc
  355              	.LFE84:
  357              		.section	.text.tu_edpt_release,"ax",%progbits
-ARM GAS  /tmp/ccle82Yw.s 			page 10
+ARM GAS  /tmp/ccGzDbvP.s 			page 10
 
 
  358              		.align	1
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  147:tinyusb/src/tusb.c **** 
  148:tinyusb/src/tusb.c ****   (void) osal_mutex_unlock(mutex);
  400              		.loc 1 148 3 is_stmt 1 view .LVU106
-ARM GAS  /tmp/ccle82Yw.s 			page 11
+ARM GAS  /tmp/ccGzDbvP.s 			page 11
 
 
  149:tinyusb/src/tusb.c **** 
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
    8:tinyusb/src/common/tusb_types.h ****  * in the Software without restriction, including without limitation the rights
    9:tinyusb/src/common/tusb_types.h ****  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
   10:tinyusb/src/common/tusb_types.h ****  * copies of the Software, and to permit persons to whom the Software is
-ARM GAS  /tmp/ccle82Yw.s 			page 12
+ARM GAS  /tmp/ccGzDbvP.s 			page 12
 
 
   11:tinyusb/src/common/tusb_types.h ****  * furnished to do so, subject to the following conditions:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   65:tinyusb/src/common/tusb_types.h **** {
   66:tinyusb/src/common/tusb_types.h ****   TUSB_DIR_OUT = 0,
   67:tinyusb/src/common/tusb_types.h ****   TUSB_DIR_IN  = 1,
-ARM GAS  /tmp/ccle82Yw.s 			page 13
+ARM GAS  /tmp/ccGzDbvP.s 			page 13
 
 
   68:tinyusb/src/common/tusb_types.h **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  122:tinyusb/src/common/tusb_types.h **** }tusb_desc_type_t;
  123:tinyusb/src/common/tusb_types.h **** 
  124:tinyusb/src/common/tusb_types.h **** typedef enum
-ARM GAS  /tmp/ccle82Yw.s 			page 14
+ARM GAS  /tmp/ccGzDbvP.s 			page 14
 
 
  125:tinyusb/src/common/tusb_types.h **** {
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  179:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_RESERVED_12          = 12   ,
  180:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_CONTENT_SECURITY     = 13   ,
  181:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_VIDEO                = 14   ,
-ARM GAS  /tmp/ccle82Yw.s 			page 15
+ARM GAS  /tmp/ccGzDbvP.s 			page 15
 
 
  182:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_PERSONAL_HEALTHCARE  = 15   ,
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  236:tinyusb/src/common/tusb_types.h **** //
  237:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
  238:tinyusb/src/common/tusb_types.h **** typedef enum
-ARM GAS  /tmp/ccle82Yw.s 			page 16
+ARM GAS  /tmp/ccGzDbvP.s 			page 16
 
 
  239:tinyusb/src/common/tusb_types.h **** {
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  293:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
  294:tinyusb/src/common/tusb_types.h **** {
  295:tinyusb/src/common/tusb_types.h ****   uint8_t  bLength            ; ///< Size of this descriptor in bytes.
-ARM GAS  /tmp/ccle82Yw.s 			page 17
+ARM GAS  /tmp/ccGzDbvP.s 			page 17
 
 
  296:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType    ; ///< DEVICE Descriptor Type.
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  350:tinyusb/src/common/tusb_types.h ****   uint8_t  bAlternateSetting  ; ///< Value used to select this alternate setting for the interface 
  351:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumEndpoints      ; ///< Number of endpoints used by this interface (excluding endpoint
  352:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterfaceClass    ; ///< Class code (assigned by the USB-IF). \li A value of zero is re
-ARM GAS  /tmp/ccle82Yw.s 			page 18
+ARM GAS  /tmp/ccGzDbvP.s 			page 18
 
 
  353:tinyusb/src/common/tusb_types.h ****   uint8_t  bInterfaceSubClass ; ///< Subclass code (assigned by the USB-IF). \n These codes are qua
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  407:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumConfigurations ; ///< Number of Other-speed Configurations
  408:tinyusb/src/common/tusb_types.h ****   uint8_t  bReserved          ; ///< Reserved for future use, must be zero
  409:tinyusb/src/common/tusb_types.h **** } tusb_desc_device_qualifier_t;
-ARM GAS  /tmp/ccle82Yw.s 			page 19
+ARM GAS  /tmp/ccGzDbvP.s 			page 19
 
 
  410:tinyusb/src/common/tusb_types.h **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  464:tinyusb/src/common/tusb_types.h ****     struct TU_ATTR_PACKED {
  465:tinyusb/src/common/tusb_types.h ****       uint8_t bitCanDnload             : 1;
  466:tinyusb/src/common/tusb_types.h ****       uint8_t bitCanUpload             : 1;
-ARM GAS  /tmp/ccle82Yw.s 			page 20
+ARM GAS  /tmp/ccGzDbvP.s 			page 20
 
 
  467:tinyusb/src/common/tusb_types.h ****       uint8_t bitManifestationTolerant : 1;
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  521:tinyusb/src/common/tusb_types.h **** }
  522:tinyusb/src/common/tusb_types.h **** 
  523:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_edpt_addr(uint8_t num, uint8_t dir)
-ARM GAS  /tmp/ccle82Yw.s 			page 21
+ARM GAS  /tmp/ccGzDbvP.s 			page 21
 
 
  524:tinyusb/src/common/tusb_types.h **** {
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  479 0024 9342     		cmp	r3, r2
  480 0026 04D3     		bcc	.L64
  481              	.LBE58:
-ARM GAS  /tmp/ccle82Yw.s 			page 22
+ARM GAS  /tmp/ccGzDbvP.s 			page 22
 
 
  164:tinyusb/src/tusb.c ****     }
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  503              	.LVL31:
  163:tinyusb/src/tusb.c ****       TU_ASSERT(max_packet_size <= spec_size);
  504              		.loc 1 163 7 is_stmt 0 discriminator 1 view .LVU137
-ARM GAS  /tmp/ccle82Yw.s 			page 23
+ARM GAS  /tmp/ccGzDbvP.s 			page 23
 
 
  505 0036 D3F8F03D 		ldr	r3, [r3, #3568]
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  547              		.loc 1 171 9 discriminator 1 view .LVU151
  171:tinyusb/src/tusb.c ****       }else
  548              		.loc 1 171 9 discriminator 1 view .LVU152
-ARM GAS  /tmp/ccle82Yw.s 			page 24
+ARM GAS  /tmp/ccGzDbvP.s 			page 24
 
 
  171:tinyusb/src/tusb.c ****       }else
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  588              		.loc 1 175 9 discriminator 3 view .LVU167
  589              		.syntax unified
  590              	@ 175 "tinyusb/src/tusb.c" 1
-ARM GAS  /tmp/ccle82Yw.s 			page 25
+ARM GAS  /tmp/ccGzDbvP.s 			page 25
 
 
  591 007a 00BE     		BKPT #0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  182:tinyusb/src/tusb.c ****     }
  634              		.loc 1 182 7 discriminator 1 view .LVU180
  182:tinyusb/src/tusb.c ****     }
-ARM GAS  /tmp/ccle82Yw.s 			page 26
+ARM GAS  /tmp/ccGzDbvP.s 			page 26
 
 
  635              		.loc 1 182 7 discriminator 1 view .LVU181
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  681              	tu_edpt_bind_driver:
  682              	.LVL49:
  683              	.LFB87:
-ARM GAS  /tmp/ccle82Yw.s 			page 27
+ARM GAS  /tmp/ccGzDbvP.s 			page 27
 
 
  191:tinyusb/src/tusb.c **** 
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  538:tinyusb/src/common/tusb_types.h **** }
  539:tinyusb/src/common/tusb_types.h **** 
  540:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline const char *tu_edpt_type_str(tusb_xfer_type_t t)
-ARM GAS  /tmp/ccle82Yw.s 			page 28
+ARM GAS  /tmp/ccGzDbvP.s 			page 28
 
 
  541:tinyusb/src/common/tusb_types.h **** {
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  741 0016 BCF1050F 		cmp	ip, #5
  742 001a F5D1     		bne	.L80
  193:tinyusb/src/tusb.c ****   uint8_t const* p_desc = (uint8_t const*) desc_itf;
-ARM GAS  /tmp/ccle82Yw.s 			page 29
+ARM GAS  /tmp/ccGzDbvP.s 			page 29
 
 
  743              		.loc 1 193 1 view .LVU213
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  783              	.LVL60:
  784              	.L71:
  204:tinyusb/src/tusb.c ****     }
-ARM GAS  /tmp/ccle82Yw.s 			page 30
+ARM GAS  /tmp/ccGzDbvP.s 			page 30
 
 
  785              		.loc 1 204 61 view .LVU228
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  827              	.LFE87:
  829              		.section	.text.tu_desc_get_interface_total_len,"ax",%progbits
  830              		.align	1
-ARM GAS  /tmp/ccle82Yw.s 			page 31
+ARM GAS  /tmp/ccGzDbvP.s 			page 31
 
 
  831              		.global	tu_desc_get_interface_total_len
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  231:tinyusb/src/tusb.c ****       }
  232:tinyusb/src/tusb.c **** 
  233:tinyusb/src/tusb.c ****       len += tu_desc_len(p_desc);
-ARM GAS  /tmp/ccle82Yw.s 			page 32
+ARM GAS  /tmp/ccGzDbvP.s 			page 32
 
 
  863              		.loc 1 233 7 is_stmt 1 view .LVU252
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  902              		.loc 2 559 45 view .LVU267
  903              	.LBB84:
  561:tinyusb/src/common/tusb_types.h **** }
-ARM GAS  /tmp/ccle82Yw.s 			page 33
+ARM GAS  /tmp/ccGzDbvP.s 			page 33
 
 
  904              		.loc 2 561 3 view .LVU268
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  944              		.loc 2 567 3 is_stmt 0 view .LVU284
  945              	.LBE86:
  946              	.LBE85:
-ARM GAS  /tmp/ccle82Yw.s 			page 34
+ARM GAS  /tmp/ccGzDbvP.s 			page 34
 
 
  219:tinyusb/src/tusb.c ****     p_desc = tu_desc_next(p_desc);
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  985              		.fpu fpv4-sp-d16
  987              	tu_edpt_stream_init:
  988              	.LVL81:
-ARM GAS  /tmp/ccle82Yw.s 			page 35
+ARM GAS  /tmp/ccGzDbvP.s 			page 35
 
 
  989              	.LFB89:
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1026              		.loc 1 256 3 view .LVU310
  1027              		.loc 1 256 13 is_stmt 0 view .LVU311
  1028 0018 069B     		ldr	r3, [sp, #24]
-ARM GAS  /tmp/ccle82Yw.s 			page 36
+ARM GAS  /tmp/ccGzDbvP.s 			page 36
 
 
  1029 001a A360     		str	r3, [r4, #8]
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  285:tinyusb/src/tusb.c ****     #if CFG_TUH_ENABLED
  286:tinyusb/src/tusb.c ****     return usbh_edpt_xfer(s->daddr, s->ep_addr, count ? s->ep_buf : NULL, count);
  287:tinyusb/src/tusb.c ****     #endif
-ARM GAS  /tmp/ccle82Yw.s 			page 37
+ARM GAS  /tmp/ccGzDbvP.s 			page 37
 
 
  288:tinyusb/src/tusb.c ****   }else
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1075              		.loc 1 323 3 is_stmt 0 view .LVU321
  1076 0008 FFF7FEFF 		bl	tu_fifo_count
  1077              	.LVL90:
-ARM GAS  /tmp/ccle82Yw.s 			page 38
+ARM GAS  /tmp/ccGzDbvP.s 			page 38
 
 
  1078              		.loc 1 323 3 view .LVU322
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1122              		.loc 1 325 3 view .LVU337
  1123 0028 0028     		cmp	r0, #0
  1124 002a F7D0     		beq	.L95
-ARM GAS  /tmp/ccle82Yw.s 			page 39
+ARM GAS  /tmp/ccGzDbvP.s 			page 39
 
 
  1125              		.loc 1 325 3 is_stmt 1 view .LVU338
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1171              		.loc 1 291 12 is_stmt 0 view .LVU356
  1172 0042 1A46     		mov	r2, r3
  1173 0044 A178     		ldrb	r1, [r4, #2]	@ zero_extendqisi2
-ARM GAS  /tmp/ccle82Yw.s 			page 40
+ARM GAS  /tmp/ccGzDbvP.s 			page 40
 
 
  1174 0046 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1221              	.LVL106:
  1222              	.LFB94:
  330:tinyusb/src/tusb.c **** 
-ARM GAS  /tmp/ccle82Yw.s 			page 41
+ARM GAS  /tmp/ccGzDbvP.s 			page 41
 
 
  331:tinyusb/src/tusb.c **** uint32_t tu_edpt_stream_write_xfer(tu_edpt_stream_t* s)
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1265 0016 0020     		movs	r0, #0
  1266              	.L106:
  338:tinyusb/src/tusb.c **** 
-ARM GAS  /tmp/ccle82Yw.s 			page 42
+ARM GAS  /tmp/ccGzDbvP.s 			page 42
 
 
  339:tinyusb/src/tusb.c ****   // Pull data from FIFO -> EP buf
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  344:tinyusb/src/tusb.c ****     return count;
  1297              		.loc 1 344 5 is_stmt 1 view .LVU390
  344:tinyusb/src/tusb.c ****     return count;
-ARM GAS  /tmp/ccle82Yw.s 			page 43
+ARM GAS  /tmp/ccGzDbvP.s 			page 43
 
 
  1298              		.loc 1 344 5 view .LVU391
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1338 004a E5E7     		b	.L106
  1339              	.LVL116:
  1340              	.L118:
-ARM GAS  /tmp/ccle82Yw.s 			page 44
+ARM GAS  /tmp/ccGzDbvP.s 			page 44
 
 
  1341              	.LBB106:
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  351:tinyusb/src/tusb.c ****   }
  1381              		.loc 1 351 5 is_stmt 1 view .LVU420
  351:tinyusb/src/tusb.c ****   }
-ARM GAS  /tmp/ccle82Yw.s 			page 45
+ARM GAS  /tmp/ccGzDbvP.s 			page 45
 
 
  1382              		.loc 1 351 12 is_stmt 0 view .LVU421
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1430              		.cfi_offset 6, -8
  1431              		.cfi_offset 14, -4
  1432 0002 0546     		mov	r5, r0
-ARM GAS  /tmp/ccle82Yw.s 			page 46
+ARM GAS  /tmp/ccGzDbvP.s 			page 46
 
 
  357:tinyusb/src/tusb.c ****   TU_VERIFY(bufsize); // TODO support ZLP
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1465              		.loc 1 363 6 discriminator 2 view .LVU441
  1466 0020 9842     		cmp	r0, r3
  1467 0022 02D2     		bcs	.L122
-ARM GAS  /tmp/ccle82Yw.s 			page 47
+ARM GAS  /tmp/ccGzDbvP.s 			page 47
 
 
  1468              	.LVL133:
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   51:tinyusb/src/common/tusb_fifo.h **** /* Write/Read index is always in the range of:
   52:tinyusb/src/common/tusb_fifo.h ****  *      0 .. 2*depth-1
   53:tinyusb/src/common/tusb_fifo.h ****  * The extra window allow us to determine the fifo state of empty or full with only 2 indices
-ARM GAS  /tmp/ccle82Yw.s 			page 48
+ARM GAS  /tmp/ccGzDbvP.s 			page 48
 
 
   54:tinyusb/src/common/tusb_fifo.h ****  * Following are examples with depth = 3
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  108:tinyusb/src/common/tusb_fifo.h **** {
  109:tinyusb/src/common/tusb_fifo.h ****   uint8_t* buffer          ; // buffer pointer
  110:tinyusb/src/common/tusb_fifo.h ****   uint16_t depth           ; // max items
-ARM GAS  /tmp/ccle82Yw.s 			page 49
+ARM GAS  /tmp/ccGzDbvP.s 			page 49
 
 
  111:tinyusb/src/common/tusb_fifo.h **** 
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  165:tinyusb/src/common/tusb_fifo.h **** 
  166:tinyusb/src/common/tusb_fifo.h **** bool     tu_fifo_write                  (tu_fifo_t* f, void const * p_data);
  167:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_write_n                (tu_fifo_t* f, void const * p_data, uint16_t n);
-ARM GAS  /tmp/ccle82Yw.s 			page 50
+ARM GAS  /tmp/ccGzDbvP.s 			page 50
 
 
  168:tinyusb/src/common/tusb_fifo.h **** uint16_t tu_fifo_write_n_const_addr_full_words    (tu_fifo_t* f, const void * data, uint16_t n);
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1503              		.fpu fpv4-sp-d16
  1505              	tu_edpt_stream_read_xfer:
  1506              	.LVL136:
-ARM GAS  /tmp/ccle82Yw.s 			page 51
+ARM GAS  /tmp/ccGzDbvP.s 			page 51
 
 
  1507              	.LFB96:
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1542              		.loc 1 265 3 view .LVU461
  265:tinyusb/src/tusb.c ****   {
  1543              		.loc 1 265 8 is_stmt 0 view .LVU462
-ARM GAS  /tmp/ccle82Yw.s 			page 52
+ARM GAS  /tmp/ccGzDbvP.s 			page 52
 
 
  1544 0014 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  386:tinyusb/src/tusb.c **** 
  1572              		.loc 1 386 3 view .LVU471
  1573 0024 0028     		cmp	r0, #0
-ARM GAS  /tmp/ccle82Yw.s 			page 53
+ARM GAS  /tmp/ccGzDbvP.s 			page 53
 
 
  1574 0026 F7D0     		beq	.L128
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   16:tinyusb/src/common/tusb_common.h ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   17:tinyusb/src/common/tusb_common.h ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
   18:tinyusb/src/common/tusb_common.h ****  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-ARM GAS  /tmp/ccle82Yw.s 			page 54
+ARM GAS  /tmp/ccGzDbvP.s 			page 54
 
 
   19:tinyusb/src/common/tusb_common.h ****  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
   73:tinyusb/src/common/tusb_common.h **** #include "tusb_compiler.h"
   74:tinyusb/src/common/tusb_common.h **** #include "tusb_verify.h"
   75:tinyusb/src/common/tusb_common.h **** #include "tusb_types.h"
-ARM GAS  /tmp/ccle82Yw.s 			page 55
+ARM GAS  /tmp/ccGzDbvP.s 			page 55
 
 
   76:tinyusb/src/common/tusb_common.h **** #include "tusb_debug.h"
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  130:tinyusb/src/common/tusb_common.h **** 
  131:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte3(uint32_t ui32) { return TU_U32_BYTE3(ui32)
  132:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte2(uint32_t ui32) { return TU_U32_BYTE2(ui32)
-ARM GAS  /tmp/ccle82Yw.s 			page 56
+ARM GAS  /tmp/ccGzDbvP.s 			page 56
 
 
  133:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint8_t tu_u32_byte1(uint32_t ui32) { return TU_U32_BYTE1(ui32)
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1630              		.loc 1 397 5 discriminator 1 view .LVU495
  397:tinyusb/src/tusb.c **** 
  1631              		.loc 1 397 5 discriminator 1 view .LVU496
-ARM GAS  /tmp/ccle82Yw.s 			page 57
+ARM GAS  /tmp/ccGzDbvP.s 			page 57
 
 
  397:tinyusb/src/tusb.c **** 
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1675              		.loc 1 397 5 view .LVU507
  1676 006e 0028     		cmp	r0, #0
  1677 0070 EAD0     		beq	.L131
-ARM GAS  /tmp/ccle82Yw.s 			page 58
+ARM GAS  /tmp/ccGzDbvP.s 			page 58
 
 
  397:tinyusb/src/tusb.c **** 
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1717              	.LVL155:
  1718 0086 F8E7     		b	.L135
  1719              	.LVL156:
-ARM GAS  /tmp/ccle82Yw.s 			page 59
+ARM GAS  /tmp/ccGzDbvP.s 			page 59
 
 
  1720              	.L136:
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  411:tinyusb/src/tusb.c ****   tu_edpt_stream_read_xfer(s);
  1769              		.loc 1 411 3 is_stmt 1 view .LVU533
  1770 000e 2046     		mov	r0, r4
-ARM GAS  /tmp/ccle82Yw.s 			page 60
+ARM GAS  /tmp/ccGzDbvP.s 			page 60
 
 
  1771              	.LVL163:
@@ -3561,43 +3561,43 @@ ARM GAS  /tmp/ccle82Yw.s 			page 1
  1787              		.file 7 "tinyusb/src/common/tusb_private.h"
  1788              		.file 8 "tinyusb/src/device/usbd_pvt.h"
  1789              		.file 9 "tinyusb/src/device/usbd.h"
-ARM GAS  /tmp/ccle82Yw.s 			page 61
+ARM GAS  /tmp/ccGzDbvP.s 			page 61
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 tusb.c
-     /tmp/ccle82Yw.s:18     .text.tusb_init:0000000000000000 $t
-     /tmp/ccle82Yw.s:26     .text.tusb_init:0000000000000000 tusb_init
-     /tmp/ccle82Yw.s:76     .text.tusb_inited:0000000000000000 $t
-     /tmp/ccle82Yw.s:83     .text.tusb_inited:0000000000000000 tusb_inited
-     /tmp/ccle82Yw.s:112    .text.tu_desc_find:0000000000000000 $t
-     /tmp/ccle82Yw.s:119    .text.tu_desc_find:0000000000000000 tu_desc_find
-     /tmp/ccle82Yw.s:162    .text.tu_desc_find2:0000000000000000 $t
-     /tmp/ccle82Yw.s:169    .text.tu_desc_find2:0000000000000000 tu_desc_find2
-     /tmp/ccle82Yw.s:217    .text.tu_desc_find3:0000000000000000 $t
-     /tmp/ccle82Yw.s:224    .text.tu_desc_find3:0000000000000000 tu_desc_find3
-     /tmp/ccle82Yw.s:283    .text.tu_edpt_claim:0000000000000000 $t
-     /tmp/ccle82Yw.s:290    .text.tu_edpt_claim:0000000000000000 tu_edpt_claim
-     /tmp/ccle82Yw.s:358    .text.tu_edpt_release:0000000000000000 $t
-     /tmp/ccle82Yw.s:365    .text.tu_edpt_release:0000000000000000 tu_edpt_release
-     /tmp/ccle82Yw.s:421    .text.tu_edpt_validate:0000000000000000 $t
-     /tmp/ccle82Yw.s:428    .text.tu_edpt_validate:0000000000000000 tu_edpt_validate
-     /tmp/ccle82Yw.s:674    .text.tu_edpt_bind_driver:0000000000000000 $t
-     /tmp/ccle82Yw.s:681    .text.tu_edpt_bind_driver:0000000000000000 tu_edpt_bind_driver
-     /tmp/ccle82Yw.s:830    .text.tu_desc_get_interface_total_len:0000000000000000 $t
-     /tmp/ccle82Yw.s:837    .text.tu_desc_get_interface_total_len:0000000000000000 tu_desc_get_interface_total_len
-     /tmp/ccle82Yw.s:980    .text.tu_edpt_stream_init:0000000000000000 $t
-     /tmp/ccle82Yw.s:987    .text.tu_edpt_stream_init:0000000000000000 tu_edpt_stream_init
-     /tmp/ccle82Yw.s:1047   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 $t
-     /tmp/ccle82Yw.s:1054   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 tu_edpt_stream_write_zlp_if_needed
-     /tmp/ccle82Yw.s:1213   .text.tu_edpt_stream_write_xfer:0000000000000000 $t
-     /tmp/ccle82Yw.s:1220   .text.tu_edpt_stream_write_xfer:0000000000000000 tu_edpt_stream_write_xfer
-     /tmp/ccle82Yw.s:1410   .text.tu_edpt_stream_write:0000000000000000 $t
-     /tmp/ccle82Yw.s:1417   .text.tu_edpt_stream_write:0000000000000000 tu_edpt_stream_write
-     /tmp/ccle82Yw.s:1498   .text.tu_edpt_stream_read_xfer:0000000000000000 $t
-     /tmp/ccle82Yw.s:1505   .text.tu_edpt_stream_read_xfer:0000000000000000 tu_edpt_stream_read_xfer
-     /tmp/ccle82Yw.s:1733   .text.tu_edpt_stream_read:0000000000000000 $t
-     /tmp/ccle82Yw.s:1740   .text.tu_edpt_stream_read:0000000000000000 tu_edpt_stream_read
+     /tmp/ccGzDbvP.s:18     .text.tusb_init:0000000000000000 $t
+     /tmp/ccGzDbvP.s:26     .text.tusb_init:0000000000000000 tusb_init
+     /tmp/ccGzDbvP.s:76     .text.tusb_inited:0000000000000000 $t
+     /tmp/ccGzDbvP.s:83     .text.tusb_inited:0000000000000000 tusb_inited
+     /tmp/ccGzDbvP.s:112    .text.tu_desc_find:0000000000000000 $t
+     /tmp/ccGzDbvP.s:119    .text.tu_desc_find:0000000000000000 tu_desc_find
+     /tmp/ccGzDbvP.s:162    .text.tu_desc_find2:0000000000000000 $t
+     /tmp/ccGzDbvP.s:169    .text.tu_desc_find2:0000000000000000 tu_desc_find2
+     /tmp/ccGzDbvP.s:217    .text.tu_desc_find3:0000000000000000 $t
+     /tmp/ccGzDbvP.s:224    .text.tu_desc_find3:0000000000000000 tu_desc_find3
+     /tmp/ccGzDbvP.s:283    .text.tu_edpt_claim:0000000000000000 $t
+     /tmp/ccGzDbvP.s:290    .text.tu_edpt_claim:0000000000000000 tu_edpt_claim
+     /tmp/ccGzDbvP.s:358    .text.tu_edpt_release:0000000000000000 $t
+     /tmp/ccGzDbvP.s:365    .text.tu_edpt_release:0000000000000000 tu_edpt_release
+     /tmp/ccGzDbvP.s:421    .text.tu_edpt_validate:0000000000000000 $t
+     /tmp/ccGzDbvP.s:428    .text.tu_edpt_validate:0000000000000000 tu_edpt_validate
+     /tmp/ccGzDbvP.s:674    .text.tu_edpt_bind_driver:0000000000000000 $t
+     /tmp/ccGzDbvP.s:681    .text.tu_edpt_bind_driver:0000000000000000 tu_edpt_bind_driver
+     /tmp/ccGzDbvP.s:830    .text.tu_desc_get_interface_total_len:0000000000000000 $t
+     /tmp/ccGzDbvP.s:837    .text.tu_desc_get_interface_total_len:0000000000000000 tu_desc_get_interface_total_len
+     /tmp/ccGzDbvP.s:980    .text.tu_edpt_stream_init:0000000000000000 $t
+     /tmp/ccGzDbvP.s:987    .text.tu_edpt_stream_init:0000000000000000 tu_edpt_stream_init
+     /tmp/ccGzDbvP.s:1047   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 $t
+     /tmp/ccGzDbvP.s:1054   .text.tu_edpt_stream_write_zlp_if_needed:0000000000000000 tu_edpt_stream_write_zlp_if_needed
+     /tmp/ccGzDbvP.s:1213   .text.tu_edpt_stream_write_xfer:0000000000000000 $t
+     /tmp/ccGzDbvP.s:1220   .text.tu_edpt_stream_write_xfer:0000000000000000 tu_edpt_stream_write_xfer
+     /tmp/ccGzDbvP.s:1410   .text.tu_edpt_stream_write:0000000000000000 $t
+     /tmp/ccGzDbvP.s:1417   .text.tu_edpt_stream_write:0000000000000000 tu_edpt_stream_write
+     /tmp/ccGzDbvP.s:1498   .text.tu_edpt_stream_read_xfer:0000000000000000 $t
+     /tmp/ccGzDbvP.s:1505   .text.tu_edpt_stream_read_xfer:0000000000000000 tu_edpt_stream_read_xfer
+     /tmp/ccGzDbvP.s:1733   .text.tu_edpt_stream_read:0000000000000000 $t
+     /tmp/ccGzDbvP.s:1740   .text.tu_edpt_stream_read:0000000000000000 tu_edpt_stream_read
 
 UNDEFINED SYMBOLS
 tud_init

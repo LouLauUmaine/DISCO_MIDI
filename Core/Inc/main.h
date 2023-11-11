@@ -75,12 +75,6 @@ void Error_Handler(void);
 #define MAG_DRDY_GPIO_Port GPIOC
 #define VLCD_Pin GPIO_PIN_3
 #define VLCD_GPIO_Port GPIOC
-#define JOY_CENTER_Pin GPIO_PIN_0
-#define JOY_CENTER_GPIO_Port GPIOA
-#define JOY_LEFT_Pin GPIO_PIN_1
-#define JOY_LEFT_GPIO_Port GPIOA
-#define JOY_RIGHT_Pin GPIO_PIN_2
-#define JOY_RIGHT_GPIO_Port GPIOA
 #define JOY_UP_Pin GPIO_PIN_3
 #define JOY_UP_GPIO_Port GPIOA
 #define MFX_WAKEUP_Pin GPIO_PIN_4
@@ -97,8 +91,6 @@ void Error_Handler(void);
 #define LD_R_GPIO_Port GPIOB
 #define AUDIO_DIN_Pin GPIO_PIN_7
 #define AUDIO_DIN_GPIO_Port GPIOE
-#define LD_G_Pin GPIO_PIN_8
-#define LD_G_GPIO_Port GPIOE
 #define MFX_I2C_SLC_Pin GPIO_PIN_10
 #define MFX_I2C_SLC_GPIO_Port GPIOB
 #define MFX_I2C_SDA_Pin GPIO_PIN_11

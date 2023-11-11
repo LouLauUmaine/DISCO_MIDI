@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccG1XUuv.s 			page 1
+ARM GAS  /tmp/ccY8dcoa.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   28:tinyusb/src/class/midi/midi_device.c **** 
   29:tinyusb/src/class/midi/midi_device.c **** #if (CFG_TUD_ENABLED && CFG_TUD_MIDI)
   30:tinyusb/src/class/midi/midi_device.c **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 2
+ARM GAS  /tmp/ccY8dcoa.s 			page 2
 
 
   31:tinyusb/src/class/midi/midi_device.c **** //--------------------------------------------------------------------+
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   85:tinyusb/src/class/midi/midi_device.c **** CFG_TUD_MEM_SECTION midid_interface_t _midid_itf[CFG_TUD_MIDI];
   86:tinyusb/src/class/midi/midi_device.c **** 
   87:tinyusb/src/class/midi/midi_device.c **** bool tud_midi_n_mounted (uint8_t itf)
-ARM GAS  /tmp/ccG1XUuv.s 			page 3
+ARM GAS  /tmp/ccY8dcoa.s 			page 3
 
 
   88:tinyusb/src/class/midi/midi_device.c **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  113:tinyusb/src/class/midi/midi_device.c ****   {
  114:tinyusb/src/class/midi/midi_device.c ****     // Release endpoint since we don't make any transfer
  115:tinyusb/src/class/midi/midi_device.c ****     usbd_edpt_release(rhport, p_midi->ep_out);
-ARM GAS  /tmp/ccG1XUuv.s 			page 4
+ARM GAS  /tmp/ccY8dcoa.s 			page 4
 
 
  116:tinyusb/src/class/midi/midi_device.c ****   }
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   98              	.LVL12:
  115:tinyusb/src/class/midi/midi_device.c ****   }
   99              		.loc 1 115 5 is_stmt 0 view .LVU21
-ARM GAS  /tmp/ccG1XUuv.s 			page 5
+ARM GAS  /tmp/ccY8dcoa.s 			page 5
 
 
  100 003e FFF7FEFF 		bl	usbd_edpt_release
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  158:tinyusb/src/class/midi/midi_device.c ****         case MIDI_CIN_CABLE_EVENT:
  159:tinyusb/src/class/midi/midi_device.c ****           // These are reserved and unused, possibly issue somewhere, skip this packet
  160:tinyusb/src/class/midi/midi_device.c ****           return 0;
-ARM GAS  /tmp/ccG1XUuv.s 			page 6
+ARM GAS  /tmp/ccY8dcoa.s 			page 6
 
 
  161:tinyusb/src/class/midi/midi_device.c ****         break;
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  215:tinyusb/src/class/midi/midi_device.c **** //--------------------------------------------------------------------+
  216:tinyusb/src/class/midi/midi_device.c **** 
  217:tinyusb/src/class/midi/midi_device.c **** static uint32_t write_flush(midid_interface_t* midi)
-ARM GAS  /tmp/ccG1XUuv.s 			page 7
+ARM GAS  /tmp/ccY8dcoa.s 			page 7
 
 
  218:tinyusb/src/class/midi/midi_device.c **** {
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  225:tinyusb/src/class/midi/midi_device.c **** 
  147              		.loc 1 225 3 view .LVU31
  225:tinyusb/src/class/midi/midi_device.c **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 8
+ARM GAS  /tmp/ccY8dcoa.s 			page 8
 
 
  148              		.loc 1 225 3 view .LVU32
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  188              	.LVL22:
  231:tinyusb/src/class/midi/midi_device.c ****     return count;
  189              		.loc 1 231 5 discriminator 1 view .LVU47
-ARM GAS  /tmp/ccG1XUuv.s 			page 9
+ARM GAS  /tmp/ccY8dcoa.s 			page 9
 
 
  190 0042 4FF0E023 		mov	r3, #-536813568
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  235              		.thumb
  236              		.thumb_func
  237              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/ccG1XUuv.s 			page 10
+ARM GAS  /tmp/ccY8dcoa.s 			page 10
 
 
  239              	tud_midi_n_mounted:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  281 0024 00000000 		.word	.LANCHOR0
  282              		.cfi_endproc
  283              	.LFE71:
-ARM GAS  /tmp/ccG1XUuv.s 			page 11
+ARM GAS  /tmp/ccY8dcoa.s 			page 11
 
 
  285              		.section	.text.tud_midi_n_available,"ax",%progbits
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  329 001c 9B1A     		subs	r3, r3, r2
  131:tinyusb/src/class/midi/midi_device.c **** 
  330              		.loc 1 131 1 view .LVU81
-ARM GAS  /tmp/ccG1XUuv.s 			page 12
+ARM GAS  /tmp/ccY8dcoa.s 			page 12
 
 
  331 001e 50FA83F0 		uxtab	r0, r0, r3
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  206:tinyusb/src/class/midi/midi_device.c **** 
  380              		.loc 1 206 3 is_stmt 1 discriminator 2 view .LVU89
  208:tinyusb/src/class/midi/midi_device.c ****   _prep_out_transaction(midi);
-ARM GAS  /tmp/ccG1XUuv.s 			page 13
+ARM GAS  /tmp/ccY8dcoa.s 			page 13
 
 
  381              		.loc 1 208 3 discriminator 2 view .LVU90
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  429              		.loc 1 134 1 is_stmt 0 view .LVU98
  430 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
  431              	.LCFI4:
-ARM GAS  /tmp/ccG1XUuv.s 			page 14
+ARM GAS  /tmp/ccY8dcoa.s 			page 14
 
 
  432              		.cfi_def_cfa_offset 24
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  471              		.loc 1 182 5 is_stmt 1 view .LVU113
  182:tinyusb/src/class/midi/midi_device.c **** 
  472              		.loc 1 182 52 is_stmt 0 view .LVU114
-ARM GAS  /tmp/ccG1XUuv.s 			page 15
+ARM GAS  /tmp/ccY8dcoa.s 			page 15
 
 
  473 0024 3849     		ldr	r1, .L48
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   40:tinyusb/src/common/tusb_common.h **** 
   41:tinyusb/src/common/tusb_common.h **** #define TU_U16(_high, _low)   ((uint16_t) (((_high) << 8) | (_low)))
   42:tinyusb/src/common/tusb_common.h **** #define TU_U16_HIGH(_u16)     ((uint8_t) (((_u16) >> 8) & 0x00ff))
-ARM GAS  /tmp/ccG1XUuv.s 			page 16
+ARM GAS  /tmp/ccY8dcoa.s 			page 16
 
 
   43:tinyusb/src/common/tusb_common.h **** #define TU_U16_LOW(_u16)      ((uint8_t) ((_u16)       & 0x00ff))
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   97:tinyusb/src/common/tusb_common.h **** //------------- Mem -------------//
   98:tinyusb/src/common/tusb_common.h **** #define tu_memclr(buffer, size)  memset((buffer), 0, (size))
   99:tinyusb/src/common/tusb_common.h **** #define tu_varclr(_var)          tu_memclr(_var, sizeof(*(_var)))
-ARM GAS  /tmp/ccG1XUuv.s 			page 17
+ARM GAS  /tmp/ccY8dcoa.s 			page 17
 
 
  100:tinyusb/src/common/tusb_common.h **** 
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  489              		.loc 2 150 101 is_stmt 0 view .LVU119
  490 0036 B442     		cmp	r4, r6
  491 0038 28BF     		it	cs
-ARM GAS  /tmp/ccG1XUuv.s 			page 18
+ARM GAS  /tmp/ccY8dcoa.s 			page 18
 
 
  492 003a 3446     		movcs	r4, r6
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  532 0056 2C4A     		ldr	r2, .L48
  533 0058 4FF49473 		mov	r3, #296
  534 005c 03FB0522 		mla	r2, r3, r5, r2
-ARM GAS  /tmp/ccG1XUuv.s 			page 19
+ARM GAS  /tmp/ccY8dcoa.s 			page 19
 
 
  535 0060 537B     		ldrb	r3, [r2, #13]	@ zero_extendqisi2
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  575 0090 0131     		adds	r1, r1, #1
  576 0092 2846     		mov	r0, r5
  577 0094 FFF7FEFF 		bl	tud_midi_n_packet_read
-ARM GAS  /tmp/ccG1XUuv.s 			page 20
+ARM GAS  /tmp/ccY8dcoa.s 			page 20
 
 
  578              	.LVL55:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  622              		.loc 1 165 25 view .LVU158
  623 00cc 0122     		movs	r2, #1
  624 00ce 9A73     		strb	r2, [r3, #14]
-ARM GAS  /tmp/ccG1XUuv.s 			page 21
+ARM GAS  /tmp/ccY8dcoa.s 			page 21
 
 
  166:tinyusb/src/class/midi/midi_device.c **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  201:tinyusb/src/class/midi/midi_device.c **** 
  666              		.loc 1 201 1 view .LVU172
  667 00f4 4046     		mov	r0, r8
-ARM GAS  /tmp/ccG1XUuv.s 			page 22
+ARM GAS  /tmp/ccY8dcoa.s 			page 22
 
 
  668 00f6 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  716              		.cfi_offset 5, -32
  717              		.cfi_offset 6, -28
  718              		.cfi_offset 7, -24
-ARM GAS  /tmp/ccG1XUuv.s 			page 23
+ARM GAS  /tmp/ccY8dcoa.s 			page 23
 
 
  719              		.cfi_offset 8, -20
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  749              		.loc 1 266 12 is_stmt 0 view .LVU187
  750 0024 F72A     		cmp	r2, #247
  751 0026 07D0     		beq	.L76
-ARM GAS  /tmp/ccG1XUuv.s 			page 24
+ARM GAS  /tmp/ccY8dcoa.s 			page 24
 
 
  267:tinyusb/src/class/midi/midi_device.c ****         {
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  790              	.L57:
  274:tinyusb/src/class/midi/midi_device.c ****         }
  275:tinyusb/src/class/midi/midi_device.c ****       }
-ARM GAS  /tmp/ccG1XUuv.s 			page 25
+ARM GAS  /tmp/ccY8dcoa.s 			page 25
 
 
  276:tinyusb/src/class/midi/midi_device.c ****       else if ( (msg >= 0x8 && msg <= 0xB) || msg == 0xE )
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  834              	.L83:
  287:tinyusb/src/class/midi/midi_device.c ****       }
  288:tinyusb/src/class/midi/midi_device.c ****       else if ( msg == 0xf )
-ARM GAS  /tmp/ccG1XUuv.s 			page 26
+ARM GAS  /tmp/ccY8dcoa.s 			page 26
 
 
  289:tinyusb/src/class/midi/midi_device.c ****       {
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  868              	.LVL97:
  869              	.L77:
  293:tinyusb/src/class/midi/midi_device.c ****           stream->total = 4;
-ARM GAS  /tmp/ccG1XUuv.s 			page 27
+ARM GAS  /tmp/ccY8dcoa.s 			page 27
 
 
  870              		.loc 1 293 11 is_stmt 1 view .LVU232
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  909 00c4 4FEA0913 		lsl	r3, r9, #4
  910 00c8 DBB2     		uxtb	r3, r3
  911              		.loc 1 311 27 view .LVU248
-ARM GAS  /tmp/ccG1XUuv.s 			page 28
+ARM GAS  /tmp/ccY8dcoa.s 			page 28
 
 
  912 00ca 604A     		ldr	r2, .L84
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  319:tinyusb/src/class/midi/midi_device.c ****         stream->index = 2;
  320:tinyusb/src/class/midi/midi_device.c ****         stream->total = 2;
  321:tinyusb/src/class/midi/midi_device.c ****       }
-ARM GAS  /tmp/ccG1XUuv.s 			page 29
+ARM GAS  /tmp/ccY8dcoa.s 			page 29
 
 
  322:tinyusb/src/class/midi/midi_device.c ****     }
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  986 0120 9A42     		cmp	r2, r3
  987 0122 6CD0     		beq	.L68
  988              	.LVL115:
-ARM GAS  /tmp/ccG1XUuv.s 			page 30
+ARM GAS  /tmp/ccY8dcoa.s 			page 30
 
 
  989              	.L52:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1023 0150 01FB0533 		mla	r3, r1, r5, r3
  1024 0154 DB79     		ldrb	r3, [r3, #7]	@ zero_extendqisi2
  254:tinyusb/src/class/midi/midi_device.c ****     {
-ARM GAS  /tmp/ccG1XUuv.s 			page 31
+ARM GAS  /tmp/ccY8dcoa.s 			page 31
 
 
  1025              		.loc 1 254 8 view .LVU285
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  282:tinyusb/src/class/midi/midi_device.c ****       {
  1064              		.loc 1 282 15 view .LVU301
  1065 0190 012B     		cmp	r3, #1
-ARM GAS  /tmp/ccG1XUuv.s 			page 32
+ARM GAS  /tmp/ccY8dcoa.s 			page 32
 
 
  1066 0192 7FF668AF 		bls	.L82
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1103              		.loc 1 320 23 view .LVU318
  1104              	.LBE54:
  327:tinyusb/src/class/midi/midi_device.c ****       stream->buffer[stream->index] = data;
-ARM GAS  /tmp/ccG1XUuv.s 			page 33
+ARM GAS  /tmp/ccY8dcoa.s 			page 33
 
 
  1105              		.loc 1 327 7 is_stmt 1 discriminator 1 view .LVU319
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  334:tinyusb/src/class/midi/midi_device.c ****         stream->total = stream->index;
  1145              		.loc 1 334 27 view .LVU334
  1146 01e0 00FB0511 		mla	r1, r0, r5, r1
-ARM GAS  /tmp/ccG1XUuv.s 			page 34
+ARM GAS  /tmp/ccY8dcoa.s 			page 34
 
 
  334:tinyusb/src/class/midi/midi_device.c ****         stream->total = stream->index;
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1187 020e 0BF10301 		add	r1, fp, #3
  1188 0212 2046     		mov	r0, r4
  1189 0214 FFF7FEFF 		bl	tu_fifo_write_n
-ARM GAS  /tmp/ccG1XUuv.s 			page 35
+ARM GAS  /tmp/ccY8dcoa.s 			page 35
 
 
  1190              	.LVL132:
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1235              	.L50:
  358:tinyusb/src/class/midi/midi_device.c **** }
  1236              		.loc 1 358 1 is_stmt 0 view .LVU366
-ARM GAS  /tmp/ccG1XUuv.s 			page 36
+ARM GAS  /tmp/ccY8dcoa.s 			page 36
 
 
  1237 0240 3046     		mov	r0, r6
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  364:tinyusb/src/class/midi/midi_device.c **** 
  365:tinyusb/src/class/midi/midi_device.c ****   if (tu_fifo_remaining(&midi->tx_ff) < 4) return false;
  366:tinyusb/src/class/midi/midi_device.c **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 37
+ARM GAS  /tmp/ccY8dcoa.s 			page 37
 
 
  367:tinyusb/src/class/midi/midi_device.c ****   tu_fifo_write_n(&midi->tx_ff, packet, 4);
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1326 0044 0120     		movs	r0, #1
  1327 0046 E4E7     		b	.L87
  1328              	.L94:
-ARM GAS  /tmp/ccG1XUuv.s 			page 38
+ARM GAS  /tmp/ccY8dcoa.s 			page 38
 
 
  1329              		.align	2
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1376              	.LBE58:
  381:tinyusb/src/class/midi/midi_device.c ****   {
  382:tinyusb/src/class/midi/midi_device.c ****     midid_interface_t* midi = &_midid_itf[i];
-ARM GAS  /tmp/ccG1XUuv.s 			page 39
+ARM GAS  /tmp/ccY8dcoa.s 			page 39
 
 
  383:tinyusb/src/class/midi/midi_device.c **** 
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1413 0044 0096     		str	r6, [sp]
  1414 0046 0123     		movs	r3, #1
  1415 0048 4022     		movs	r2, #64
-ARM GAS  /tmp/ccG1XUuv.s 			page 40
+ARM GAS  /tmp/ccY8dcoa.s 			page 40
 
 
  1416 004a 3944     		add	r1, r1, r7
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1462              		.loc 1 399 3 view .LVU408
  1463              	.LBB61:
  1464              		.loc 1 399 7 view .LVU409
-ARM GAS  /tmp/ccG1XUuv.s 			page 41
+ARM GAS  /tmp/ccY8dcoa.s 			page 41
 
 
  1465              	.LVL153:
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1505 002c 201D     		adds	r0, r4, #4
  1506 002e FFF7FEFF 		bl	tu_fifo_clear
  1507              	.LVL160:
-ARM GAS  /tmp/ccG1XUuv.s 			page 42
+ARM GAS  /tmp/ccY8dcoa.s 			page 42
 
 
  1508              	.LBE62:
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1555 0004 4B79     		ldrb	r3, [r1, #5]	@ zero_extendqisi2
  1556 0006 012B     		cmp	r3, #1
  1557 0008 40F08680 		bne	.L126
-ARM GAS  /tmp/ccG1XUuv.s 			page 43
+ARM GAS  /tmp/ccY8dcoa.s 			page 43
 
 
  1558 000c 0646     		mov	r6, r0
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   35:tinyusb/src/common/tusb_types.h **** #include <stdint.h>
   36:tinyusb/src/common/tusb_types.h **** #include "tusb_compiler.h"
   37:tinyusb/src/common/tusb_types.h **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 44
+ARM GAS  /tmp/ccY8dcoa.s 			page 44
 
 
   38:tinyusb/src/common/tusb_types.h **** #ifdef __cplusplus
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
   92:tinyusb/src/common/tusb_types.h **** 
   93:tinyusb/src/common/tusb_types.h **** /// USB Descriptor Types
   94:tinyusb/src/common/tusb_types.h **** typedef enum
-ARM GAS  /tmp/ccG1XUuv.s 			page 45
+ARM GAS  /tmp/ccY8dcoa.s 			page 45
 
 
   95:tinyusb/src/common/tusb_types.h **** {
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  149:tinyusb/src/common/tusb_types.h **** {
  150:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_STANDARD = 0,
  151:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_CLASS,
-ARM GAS  /tmp/ccG1XUuv.s 			page 46
+ARM GAS  /tmp/ccY8dcoa.s 			page 46
 
 
  152:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_TYPE_VENDOR,
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  206:tinyusb/src/common/tusb_types.h **** } app_subclass_type_t;
  207:tinyusb/src/common/tusb_types.h **** 
  208:tinyusb/src/common/tusb_types.h **** typedef enum
-ARM GAS  /tmp/ccG1XUuv.s 			page 47
+ARM GAS  /tmp/ccY8dcoa.s 			page 47
 
 
  209:tinyusb/src/common/tusb_types.h **** {
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  263:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_COMPATBLE_ID        = 0x03,
  264:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_REG_PROPERTY        = 0x04,
  265:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_MIN_RESUME_TIME     = 0x05,
-ARM GAS  /tmp/ccG1XUuv.s 			page 48
+ARM GAS  /tmp/ccY8dcoa.s 			page 48
 
 
  266:tinyusb/src/common/tusb_types.h ****   MS_OS_20_FEATURE_MODEL_ID            = 0x06,
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  320:tinyusb/src/common/tusb_types.h ****   uint8_t  bDescriptorType ; ///< CONFIGURATION Descriptor Type
  321:tinyusb/src/common/tusb_types.h ****   uint16_t wTotalLength    ; ///< Total length of data returned for this descriptor
  322:tinyusb/src/common/tusb_types.h ****   uint8_t  bNumDeviceCaps  ; ///< Number of device capability descriptors in the BOS
-ARM GAS  /tmp/ccG1XUuv.s 			page 49
+ARM GAS  /tmp/ccY8dcoa.s 			page 49
 
 
  323:tinyusb/src/common/tusb_types.h **** } tusb_desc_bos_t;
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  377:tinyusb/src/common/tusb_types.h **** } tusb_desc_endpoint_t;
  378:tinyusb/src/common/tusb_types.h **** 
  379:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_endpoint_t) == 7, "size is not correct");
-ARM GAS  /tmp/ccG1XUuv.s 			page 50
+ARM GAS  /tmp/ccY8dcoa.s 			page 50
 
 
  380:tinyusb/src/common/tusb_types.h **** 
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  434:tinyusb/src/common/tusb_types.h ****   uint16_t unicode_string[];
  435:tinyusb/src/common/tusb_types.h **** } tusb_desc_string_t;
  436:tinyusb/src/common/tusb_types.h **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 51
+ARM GAS  /tmp/ccY8dcoa.s 			page 51
 
 
  437:tinyusb/src/common/tusb_types.h **** // USB Binary Device Object Store (BOS)
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  491:tinyusb/src/common/tusb_types.h **** 
  492:tinyusb/src/common/tusb_types.h ****     uint8_t bmRequestType;
  493:tinyusb/src/common/tusb_types.h ****   };
-ARM GAS  /tmp/ccG1XUuv.s 			page 52
+ARM GAS  /tmp/ccY8dcoa.s 			page 52
 
 
  494:tinyusb/src/common/tusb_types.h **** 
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  548:tinyusb/src/common/tusb_types.h **** // Descriptor helper
  549:tinyusb/src/common/tusb_types.h **** //--------------------------------------------------------------------+
  550:tinyusb/src/common/tusb_types.h **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 53
+ARM GAS  /tmp/ccY8dcoa.s 			page 53
 
 
  551:tinyusb/src/common/tusb_types.h **** // return next descriptor
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1602              	.LBB68:
  1603              	.LBI68:
  559:tinyusb/src/common/tusb_types.h **** {
-ARM GAS  /tmp/ccG1XUuv.s 			page 54
+ARM GAS  /tmp/ccY8dcoa.s 			page 54
 
 
  1604              		.loc 3 559 45 view .LVU446
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1647              	.LVL173:
  555:tinyusb/src/common/tusb_types.h **** }
  1648              		.loc 3 555 16 view .LVU464
-ARM GAS  /tmp/ccG1XUuv.s 			page 55
+ARM GAS  /tmp/ccY8dcoa.s 			page 55
 
 
  1649 0038 F5E7     		b	.L109
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1687              	.LVL177:
  1688              	.L114:
  436:tinyusb/src/class/midi/midi_device.c ****   {
-ARM GAS  /tmp/ccG1XUuv.s 			page 56
+ARM GAS  /tmp/ccY8dcoa.s 			page 56
 
 
  437:tinyusb/src/class/midi/midi_device.c ****     if ( _midid_itf[i].ep_in == 0 && _midid_itf[i].ep_out == 0 )
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1725              		.loc 3 555 3 discriminator 2 view .LVU496
  555:tinyusb/src/common/tusb_types.h **** }
  1726              		.loc 3 555 16 is_stmt 0 discriminator 2 view .LVU497
-ARM GAS  /tmp/ccG1XUuv.s 			page 57
+ARM GAS  /tmp/ccY8dcoa.s 			page 57
 
 
  1727 0070 A244     		add	r10, r10, r4
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  439:tinyusb/src/class/midi/midi_device.c ****       break;
  1766              		.loc 1 439 14 is_stmt 0 view .LVU512
  1767 0094 284A     		ldr	r2, .L138
-ARM GAS  /tmp/ccG1XUuv.s 			page 58
+ARM GAS  /tmp/ccY8dcoa.s 			page 58
 
 
  1768              	.LVL186:
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  456:tinyusb/src/class/midi/midi_device.c ****     if ( TUSB_DESC_ENDPOINT == tu_desc_type(p_desc) )
  457:tinyusb/src/class/midi/midi_device.c ****     {
  458:tinyusb/src/class/midi/midi_device.c ****       TU_ASSERT(usbd_edpt_open(rhport, (tusb_desc_endpoint_t const *) p_desc), 0);
-ARM GAS  /tmp/ccG1XUuv.s 			page 59
+ARM GAS  /tmp/ccY8dcoa.s 			page 59
 
 
  1808              		.loc 1 458 7 discriminator 1 view .LVU526
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1850              	.LVL194:
  1851              		.loc 3 567 33 view .LVU542
  1852              	.LBE84:
-ARM GAS  /tmp/ccG1XUuv.s 			page 60
+ARM GAS  /tmp/ccY8dcoa.s 			page 60
 
 
  1853              	.LBE83:
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1895              		.loc 1 475 13 view .LVU560
  1896 00de D319     		adds	r3, r2, r7
  1897 00e0 9FB2     		uxth	r7, r3
-ARM GAS  /tmp/ccG1XUuv.s 			page 61
+ARM GAS  /tmp/ccY8dcoa.s 			page 61
 
 
  1898              	.LVL201:
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  1936 00f2 052B     		cmp	r3, #5
  1937 00f4 F1D1     		bne	.L119
  1938              	.LBB95:
-ARM GAS  /tmp/ccG1XUuv.s 			page 62
+ARM GAS  /tmp/ccY8dcoa.s 			page 62
 
 
  458:tinyusb/src/class/midi/midi_device.c ****       uint8_t ep_addr = ((tusb_desc_endpoint_t const *) p_desc)->bEndpointAddress;
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  481:tinyusb/src/class/midi/midi_device.c **** 
  482:tinyusb/src/class/midi/midi_device.c ****   return drv_len;
  1976              		.loc 1 482 3 view .LVU591
-ARM GAS  /tmp/ccG1XUuv.s 			page 63
+ARM GAS  /tmp/ccY8dcoa.s 			page 63
 
 
  1977              		.loc 1 482 10 is_stmt 0 view .LVU592
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2028              	.LVL214:
  2029              	.LFB82:
  484:tinyusb/src/class/midi/midi_device.c **** 
-ARM GAS  /tmp/ccG1XUuv.s 			page 64
+ARM GAS  /tmp/ccY8dcoa.s 			page 64
 
 
  485:tinyusb/src/class/midi/midi_device.c **** // Invoked when a control transfer occurred on an interface of this class
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2071              		.cfi_offset 14, -4
  2072 0002 0646     		mov	r6, r0
  2073 0004 1F46     		mov	r7, r3
-ARM GAS  /tmp/ccG1XUuv.s 			page 65
+ARM GAS  /tmp/ccY8dcoa.s 			page 65
 
 
  500:tinyusb/src/class/midi/midi_device.c ****   (void) result;
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2100 0012 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
  2101              		.loc 1 527 11 view .LVU623
  2102 0014 8B42     		cmp	r3, r1
-ARM GAS  /tmp/ccG1XUuv.s 			page 66
+ARM GAS  /tmp/ccY8dcoa.s 			page 66
 
 
  2103 0016 2BD0     		beq	.L159
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  507:tinyusb/src/class/midi/midi_device.c ****   {
  2132              		.loc 1 507 37 is_stmt 1 discriminator 2 view .LVU634
  507:tinyusb/src/class/midi/midi_device.c ****   {
-ARM GAS  /tmp/ccG1XUuv.s 			page 67
+ARM GAS  /tmp/ccY8dcoa.s 			page 67
 
 
  2133              		.loc 1 507 40 is_stmt 0 discriminator 2 view .LVU635
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2174              	.LVL228:
  517:tinyusb/src/class/midi/midi_device.c **** 
  2175              		.loc 1 517 5 is_stmt 0 view .LVU649
-ARM GAS  /tmp/ccG1XUuv.s 			page 68
+ARM GAS  /tmp/ccY8dcoa.s 			page 68
 
 
  2176 0050 05F1A801 		add	r1, r5, #168
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2216              		.loc 1 543 10 view .LVU663
  2217 007a CEE7     		b	.L147
  2218              	.LVL239:
-ARM GAS  /tmp/ccG1XUuv.s 			page 69
+ARM GAS  /tmp/ccY8dcoa.s 			page 69
 
 
  2219              	.L160:
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2260              	.LVL245:
  2261 00ae B4E7     		b	.L147
  2262              	.LVL246:
-ARM GAS  /tmp/ccG1XUuv.s 			page 70
+ARM GAS  /tmp/ccY8dcoa.s 			page 70
 
 
  2263              	.L152:
@@ -4186,51 +4186,51 @@ ARM GAS  /tmp/ccG1XUuv.s 			page 1
  2300              		.file 9 "tinyusb/src/class/midi/midi_device.h"
  2301              		.file 10 "tinyusb/src/device/usbd_pvt.h"
  2302              		.file 11 "<built-in>"
-ARM GAS  /tmp/ccG1XUuv.s 			page 71
+ARM GAS  /tmp/ccY8dcoa.s 			page 71
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 midi_device.c
-     /tmp/ccG1XUuv.s:18     .text._prep_out_transaction:0000000000000000 $t
-     /tmp/ccG1XUuv.s:25     .text._prep_out_transaction:0000000000000000 _prep_out_transaction
-     /tmp/ccG1XUuv.s:107    .text.write_flush:0000000000000000 $t
-     /tmp/ccG1XUuv.s:113    .text.write_flush:0000000000000000 write_flush
-     /tmp/ccG1XUuv.s:232    .text.tud_midi_n_mounted:0000000000000000 $t
-     /tmp/ccG1XUuv.s:239    .text.tud_midi_n_mounted:0000000000000000 tud_midi_n_mounted
-     /tmp/ccG1XUuv.s:281    .text.tud_midi_n_mounted:0000000000000024 $d
-     /tmp/ccG1XUuv.s:286    .text.tud_midi_n_available:0000000000000000 $t
-     /tmp/ccG1XUuv.s:293    .text.tud_midi_n_available:0000000000000000 tud_midi_n_available
-     /tmp/ccG1XUuv.s:336    .text.tud_midi_n_available:0000000000000024 $d
-     /tmp/ccG1XUuv.s:341    .text.tud_midi_n_packet_read:0000000000000000 $t
-     /tmp/ccG1XUuv.s:348    .text.tud_midi_n_packet_read:0000000000000000 tud_midi_n_packet_read
-     /tmp/ccG1XUuv.s:410    .text.tud_midi_n_packet_read:000000000000003c $d
-     /tmp/ccG1XUuv.s:415    .text.tud_midi_n_stream_read:0000000000000000 $t
-     /tmp/ccG1XUuv.s:422    .text.tud_midi_n_stream_read:0000000000000000 tud_midi_n_stream_read
-     /tmp/ccG1XUuv.s:595    .text.tud_midi_n_stream_read:00000000000000b2 $d
-     /tmp/ccG1XUuv.s:611    .text.tud_midi_n_stream_read:00000000000000c2 $t
-     /tmp/ccG1XUuv.s:690    .text.tud_midi_n_stream_read:0000000000000108 $d
-     /tmp/ccG1XUuv.s:696    .text.tud_midi_n_stream_write:0000000000000000 $t
-     /tmp/ccG1XUuv.s:703    .text.tud_midi_n_stream_write:0000000000000000 tud_midi_n_stream_write
-     /tmp/ccG1XUuv.s:1247   .text.tud_midi_n_stream_write:000000000000024c $d
-     /tmp/ccG1XUuv.s:1252   .text.tud_midi_n_packet_write:0000000000000000 $t
-     /tmp/ccG1XUuv.s:1259   .text.tud_midi_n_packet_write:0000000000000000 tud_midi_n_packet_write
-     /tmp/ccG1XUuv.s:1331   .text.tud_midi_n_packet_write:0000000000000048 $d
-     /tmp/ccG1XUuv.s:1336   .text.midid_init:0000000000000000 $t
-     /tmp/ccG1XUuv.s:1343   .text.midid_init:0000000000000000 midid_init
-     /tmp/ccG1XUuv.s:1433   .text.midid_init:0000000000000058 $d
-     /tmp/ccG1XUuv.s:1439   .text.midid_reset:0000000000000000 $t
-     /tmp/ccG1XUuv.s:1446   .text.midid_reset:0000000000000000 midid_reset
-     /tmp/ccG1XUuv.s:1521   .text.midid_reset:0000000000000038 $d
-     /tmp/ccG1XUuv.s:1527   .text.midid_open:0000000000000000 $t
-     /tmp/ccG1XUuv.s:1534   .text.midid_open:0000000000000000 midid_open
-     /tmp/ccG1XUuv.s:2015   .text.midid_open:0000000000000138 $d
-     /tmp/ccG1XUuv.s:2020   .text.midid_control_xfer_cb:0000000000000000 $t
-     /tmp/ccG1XUuv.s:2027   .text.midid_control_xfer_cb:0000000000000000 midid_control_xfer_cb
-     /tmp/ccG1XUuv.s:2048   .text.midid_xfer_cb:0000000000000000 $t
-     /tmp/ccG1XUuv.s:2055   .text.midid_xfer_cb:0000000000000000 midid_xfer_cb
-     /tmp/ccG1XUuv.s:2279   .text.midid_xfer_cb:00000000000000b8 $d
-     /tmp/ccG1XUuv.s:2290   .bss._midid_itf:0000000000000000 _midid_itf
-     /tmp/ccG1XUuv.s:2286   .bss._midid_itf:0000000000000000 $d
+     /tmp/ccY8dcoa.s:18     .text._prep_out_transaction:0000000000000000 $t
+     /tmp/ccY8dcoa.s:25     .text._prep_out_transaction:0000000000000000 _prep_out_transaction
+     /tmp/ccY8dcoa.s:107    .text.write_flush:0000000000000000 $t
+     /tmp/ccY8dcoa.s:113    .text.write_flush:0000000000000000 write_flush
+     /tmp/ccY8dcoa.s:232    .text.tud_midi_n_mounted:0000000000000000 $t
+     /tmp/ccY8dcoa.s:239    .text.tud_midi_n_mounted:0000000000000000 tud_midi_n_mounted
+     /tmp/ccY8dcoa.s:281    .text.tud_midi_n_mounted:0000000000000024 $d
+     /tmp/ccY8dcoa.s:286    .text.tud_midi_n_available:0000000000000000 $t
+     /tmp/ccY8dcoa.s:293    .text.tud_midi_n_available:0000000000000000 tud_midi_n_available
+     /tmp/ccY8dcoa.s:336    .text.tud_midi_n_available:0000000000000024 $d
+     /tmp/ccY8dcoa.s:341    .text.tud_midi_n_packet_read:0000000000000000 $t
+     /tmp/ccY8dcoa.s:348    .text.tud_midi_n_packet_read:0000000000000000 tud_midi_n_packet_read
+     /tmp/ccY8dcoa.s:410    .text.tud_midi_n_packet_read:000000000000003c $d
+     /tmp/ccY8dcoa.s:415    .text.tud_midi_n_stream_read:0000000000000000 $t
+     /tmp/ccY8dcoa.s:422    .text.tud_midi_n_stream_read:0000000000000000 tud_midi_n_stream_read
+     /tmp/ccY8dcoa.s:595    .text.tud_midi_n_stream_read:00000000000000b2 $d
+     /tmp/ccY8dcoa.s:611    .text.tud_midi_n_stream_read:00000000000000c2 $t
+     /tmp/ccY8dcoa.s:690    .text.tud_midi_n_stream_read:0000000000000108 $d
+     /tmp/ccY8dcoa.s:696    .text.tud_midi_n_stream_write:0000000000000000 $t
+     /tmp/ccY8dcoa.s:703    .text.tud_midi_n_stream_write:0000000000000000 tud_midi_n_stream_write
+     /tmp/ccY8dcoa.s:1247   .text.tud_midi_n_stream_write:000000000000024c $d
+     /tmp/ccY8dcoa.s:1252   .text.tud_midi_n_packet_write:0000000000000000 $t
+     /tmp/ccY8dcoa.s:1259   .text.tud_midi_n_packet_write:0000000000000000 tud_midi_n_packet_write
+     /tmp/ccY8dcoa.s:1331   .text.tud_midi_n_packet_write:0000000000000048 $d
+     /tmp/ccY8dcoa.s:1336   .text.midid_init:0000000000000000 $t
+     /tmp/ccY8dcoa.s:1343   .text.midid_init:0000000000000000 midid_init
+     /tmp/ccY8dcoa.s:1433   .text.midid_init:0000000000000058 $d
+     /tmp/ccY8dcoa.s:1439   .text.midid_reset:0000000000000000 $t
+     /tmp/ccY8dcoa.s:1446   .text.midid_reset:0000000000000000 midid_reset
+     /tmp/ccY8dcoa.s:1521   .text.midid_reset:0000000000000038 $d
+     /tmp/ccY8dcoa.s:1527   .text.midid_open:0000000000000000 $t
+     /tmp/ccY8dcoa.s:1534   .text.midid_open:0000000000000000 midid_open
+     /tmp/ccY8dcoa.s:2015   .text.midid_open:0000000000000138 $d
+     /tmp/ccY8dcoa.s:2020   .text.midid_control_xfer_cb:0000000000000000 $t
+     /tmp/ccY8dcoa.s:2027   .text.midid_control_xfer_cb:0000000000000000 midid_control_xfer_cb
+     /tmp/ccY8dcoa.s:2048   .text.midid_xfer_cb:0000000000000000 $t
+     /tmp/ccY8dcoa.s:2055   .text.midid_xfer_cb:0000000000000000 midid_xfer_cb
+     /tmp/ccY8dcoa.s:2279   .text.midid_xfer_cb:00000000000000b8 $d
+     /tmp/ccY8dcoa.s:2290   .bss._midid_itf:0000000000000000 _midid_itf
+     /tmp/ccY8dcoa.s:2286   .bss._midid_itf:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 tu_fifo_remaining
@@ -4246,6 +4246,6 @@ tu_fifo_config
 tu_fifo_clear
 usbd_edpt_open
 tud_midi_rx_cb
-ARM GAS  /tmp/ccG1XUuv.s 			page 72
+ARM GAS  /tmp/ccY8dcoa.s 			page 72
 
 
