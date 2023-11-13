@@ -24,6 +24,9 @@
 #include "tusb.h"
 #include "tusb_config.h"
 #include "board_api.h"
+//#include "../../tinyusb/hw/bsp/board_api.h"
+//#include "family.c"
+//#include "tinyusb/bsp/stm32l4/family" this isnt valid but find way to include this file
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -91,12 +94,10 @@ uint8_t SPI_RX_Buffer[ SPI_LENGTH ];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void PeriphCommonClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_I2C1_Init(void);
-static void MX_USB_OTG_FS_USB_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
@@ -131,13 +132,12 @@ int main(void)
   /* USER CODE END Init */
 
   /* Configure the system clock */
-  SystemClock_Config();
-
-/* Configure the peripherals common clocks */
-  PeriphCommonClock_Config();
+  //SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  /* INITIALIZE TINYUSB */
+  board_init();
+  //tusb_init();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -145,13 +145,12 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   MX_I2C1_Init();
-  MX_USB_OTG_FS_USB_Init();
   MX_SPI2_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* INITIALIZE TINYUSB */
-  board_init();
+  //board_init();
   tusb_init();
   //tud_init(BOARD_TUD_RHPORT);
 
@@ -278,7 +277,7 @@ int main(void)
     
     tud_task(); // tinyusb device task
     midi_task();
-    HAL_Delay(1000);
+    //HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
@@ -332,31 +331,6 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-}
-
-/**
-  * @brief Peripherals Common Clock Configuration
-  * @retval None
-  */
-void PeriphCommonClock_Config(void)
-{
-  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-
-  /** Initializes the peripherals clock
-  */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
-  PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLLSAI1;
-  PeriphClkInit.PLLSAI1.PLLSAI1Source = RCC_PLLSOURCE_MSI;
-  PeriphClkInit.PLLSAI1.PLLSAI1M = 1;
-  PeriphClkInit.PLLSAI1.PLLSAI1N = 24;
-  PeriphClkInit.PLLSAI1.PLLSAI1P = RCC_PLLP_DIV7;
-  PeriphClkInit.PLLSAI1.PLLSAI1Q = RCC_PLLQ_DIV2;
-  PeriphClkInit.PLLSAI1.PLLSAI1R = RCC_PLLR_DIV2;
-  PeriphClkInit.PLLSAI1.PLLSAI1ClockOut = RCC_PLLSAI1_48M2CLK;
-  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }
@@ -522,27 +496,6 @@ static void MX_USART2_UART_Init(void)
   /* USER CODE BEGIN USART2_Init 2 */
 
   /* USER CODE END USART2_Init 2 */
-
-}
-
-/**
-  * @brief USB_OTG_FS Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_USB_OTG_FS_USB_Init(void)
-{
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 0 */
-
-  /* USER CODE END USB_OTG_FS_Init 0 */
-
-  /* USER CODE BEGIN USB_OTG_FS_Init 1 */
-
-  /* USER CODE END USB_OTG_FS_Init 1 */
-  /* USER CODE BEGIN USB_OTG_FS_Init 2 */
-
-  /* USER CODE END USB_OTG_FS_Init 2 */
 
 }
 
@@ -831,7 +784,9 @@ void midi_task(void)
   // send note periodically
   /* CONSIDER USING DELAY WITH SYSTICK HANDLER*/
   
-  /*BELOW IS OLD IMPLEMENTATION USING INTERRUPT*/
+  HAL_Delay(286);
+
+  /*BELOW IS TINYUSB IMPLEMENTATION USING INTERRUPT*/
   /*
   if (board_millis() - start_ms < 286) return; // not enough time
   start_ms += 286;

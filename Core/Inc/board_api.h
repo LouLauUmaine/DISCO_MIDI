@@ -36,10 +36,13 @@ extern "C" {
 
 #include "tusb.h"
 
+/* COMMENTED OUT BY LOUIS */
 // Define the default baudrate
+/*
 #ifndef CFG_BOARD_UART_BAUDRATE
 #define CFG_BOARD_UART_BAUDRATE 115200   ///< Default baud rate
 #endif
+*/
 
 //--------------------------------------------------------------------+
 // Board Porting API

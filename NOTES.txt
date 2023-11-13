@@ -40,6 +40,10 @@ TODO: ADD DEBOUNCING FOR OCTAVE SELECT
 https://community.st.com/t5/stm32-mcus-products/help-with-integrating-tinyusb-in-stm32cubeide/td-p/593695
 https://github.com/hathach/tinyusb/issues/1612
 
+// NEW ATTEMPT (11.13.23)
+- copy in USB init code from tinyusb/hw/bsp/stm32l4/family.c
+- try removing all USB code from CubeMX
+
 FOR TINYUSB INTEGRATION:
     generate code for usb_otg_fs
     make sure no middleware options are selected
