@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "tusb.h"
 #include "tusb_config.h"
+#include "board_api.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -150,7 +151,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /* INITIALIZE TINYUSB */
-  //tusb_init();
+  board_init();
+  tusb_init();
   //tud_init(BOARD_TUD_RHPORT);
 
   // initialize transmit buffer for test case
@@ -274,9 +276,9 @@ int main(void)
     //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
     //HAL_Delay(1000);
     
-    //tud_task(); // tinyusb device task
-    //midi_task();
-    //HAL_Delay(1000);
+    tud_task(); // tinyusb device task
+    midi_task();
+    HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
@@ -715,16 +717,22 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Alternate = GPIO_AF11_LCD;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : COM0_Pin COM1_Pin SEG10_Pin */
-  GPIO_InitStruct.Pin = COM0_Pin|COM1_Pin|SEG10_Pin;
+  /*Configure GPIO pins : COM0_Pin SEG10_Pin */
+  GPIO_InitStruct.Pin = COM0_Pin|SEG10_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF11_LCD;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA10 OTG_FS_DM_Pin OTG_FS_DP_Pin */
-  GPIO_InitStruct.Pin = GPIO_PIN_10|OTG_FS_DM_Pin|OTG_FS_DP_Pin;
+  /*Configure GPIO pin : PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA10 PA11 PA12 */
+  GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;

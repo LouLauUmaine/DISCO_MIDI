@@ -33,6 +33,8 @@ TODO: ADD DEBOUNCING FOR OCTAVE SELECT
 - PA1 and PA2 for octave switch
 - PE11(ADC1) and PE12(ADC2) chip select 
 
+// CUBEMX MODIFICATIONS
+- disabled PA9 as LCD_COM1
 
 // HELPFUL LINKS
 https://community.st.com/t5/stm32-mcus-products/help-with-integrating-tinyusb-in-stm32cubeide/td-p/593695

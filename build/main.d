@@ -37,7 +37,7 @@ build/main.o: Core/Src/main.c Core/Inc/main.h \
  tinyusb/src/osal/osal.h tinyusb/src/common/tusb_fifo.h \
  tinyusb/src/class/hid/hid.h tinyusb/src/device/usbd.h \
  tinyusb/src/class/midi/midi_device.h tinyusb/src/class/audio/audio.h \
- tinyusb/src/class/midi/midi.h
+ tinyusb/src/class/midi/midi.h Core/Inc/board_api.h
 Core/Inc/main.h:
 Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 Core/Inc/stm32l4xx_hal_conf.h:
@@ -90,3 +90,4 @@ tinyusb/src/device/usbd.h:
 tinyusb/src/class/midi/midi_device.h:
 tinyusb/src/class/audio/audio.h:
 tinyusb/src/class/midi/midi.h:
+Core/Inc/board_api.h:

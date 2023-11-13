@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccPeuGm4.s 			page 1
+ARM GAS  /tmp/ccE6OpgT.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   28:tinyusb/src/device/usbd.c **** 
   29:tinyusb/src/device/usbd.c **** #if CFG_TUD_ENABLED
   30:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 2
+ARM GAS  /tmp/ccE6OpgT.s 			page 2
 
 
   31:tinyusb/src/device/usbd.c **** #include "device/dcd.h"
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   85:tinyusb/src/device/usbd.c **** #endif
   86:tinyusb/src/device/usbd.c **** 
   87:tinyusb/src/device/usbd.c **** // Built-in class drivers
-ARM GAS  /tmp/ccPeuGm4.s 			page 3
+ARM GAS  /tmp/ccE6OpgT.s 			page 3
 
 
   88:tinyusb/src/device/usbd.c **** tu_static usbd_class_driver_t const _usbd_driver[] =
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  142:tinyusb/src/device/usbd.c ****     .reset            = videod_reset,
  143:tinyusb/src/device/usbd.c ****     .open             = videod_open,
  144:tinyusb/src/device/usbd.c ****     .control_xfer_cb  = videod_control_xfer_cb,
-ARM GAS  /tmp/ccPeuGm4.s 			page 4
+ARM GAS  /tmp/ccE6OpgT.s 			page 4
 
 
  145:tinyusb/src/device/usbd.c ****     .xfer_cb          = videod_xfer_cb,
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  199:tinyusb/src/device/usbd.c ****   {
  200:tinyusb/src/device/usbd.c ****     DRIVER_NAME("DFU")
  201:tinyusb/src/device/usbd.c ****     .init             = dfu_moded_init,
-ARM GAS  /tmp/ccPeuGm4.s 			page 5
+ARM GAS  /tmp/ccE6OpgT.s 			page 5
 
 
  202:tinyusb/src/device/usbd.c ****     .reset            = dfu_moded_reset,
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  256:tinyusb/src/device/usbd.c ****   return driver;
  257:tinyusb/src/device/usbd.c **** }
  258:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 6
+ARM GAS  /tmp/ccE6OpgT.s 			page 6
 
 
  259:tinyusb/src/device/usbd.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  313:tinyusb/src/device/usbd.c **** // for usbd_control to print the name of control complete driver
  314:tinyusb/src/device/usbd.c **** void usbd_driver_print_control_complete_name(usbd_control_xfer_cb_t callback)
  315:tinyusb/src/device/usbd.c **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 7
+ARM GAS  /tmp/ccE6OpgT.s 			page 7
 
 
  316:tinyusb/src/device/usbd.c ****   for (uint8_t i = 0; i < TOTAL_DRIVER_COUNT; i++)
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  370:tinyusb/src/device/usbd.c ****   dcd_connect(_usbd_rhport);
  371:tinyusb/src/device/usbd.c ****   return true;
  372:tinyusb/src/device/usbd.c **** }
-ARM GAS  /tmp/ccPeuGm4.s 			page 8
+ARM GAS  /tmp/ccE6OpgT.s 			page 8
 
 
  373:tinyusb/src/device/usbd.c **** 
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  427:tinyusb/src/device/usbd.c **** 
  428:tinyusb/src/device/usbd.c **** static void configuration_reset(uint8_t rhport)
  429:tinyusb/src/device/usbd.c **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 9
+ARM GAS  /tmp/ccE6OpgT.s 			page 9
 
 
   29              		.loc 1 429 1 view -0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  434:tinyusb/src/device/usbd.c ****     driver->reset(rhport);
   73              		.loc 1 434 5 discriminator 2 view .LVU15
   74              		.loc 1 434 11 is_stmt 0 discriminator 2 view .LVU16
-ARM GAS  /tmp/ccPeuGm4.s 			page 10
+ARM GAS  /tmp/ccE6OpgT.s 			page 10
 
 
   75 0016 5B68     		ldr	r3, [r3, #4]
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  251:tinyusb/src/device/usbd.c ****   } else if ( drvid < TOTAL_DRIVER_COUNT && BUILTIN_DRIVER_COUNT > 0 ){
  115              		.loc 1 251 12 view .LVU32
  116 0034 03EBC203 		add	r3, r3, r2, lsl #3
-ARM GAS  /tmp/ccPeuGm4.s 			page 11
+ARM GAS  /tmp/ccE6OpgT.s 			page 11
 
 
  117              	.LVL9:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  155              		.loc 1 437 3 is_stmt 1 view .LVU46
  156 004c 0E4C     		ldr	r4, .L12+12
  157              	.LVL13:
-ARM GAS  /tmp/ccPeuGm4.s 			page 12
+ARM GAS  /tmp/ccE6OpgT.s 			page 12
 
 
  158              		.loc 1 437 3 is_stmt 0 view .LVU47
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  207              		.loc 1 444 3 is_stmt 1 view .LVU53
  208 0002 FFF7FEFF 		bl	configuration_reset
  209              	.LVL16:
-ARM GAS  /tmp/ccPeuGm4.s 			page 13
+ARM GAS  /tmp/ccE6OpgT.s 			page 13
 
 
  445:tinyusb/src/device/usbd.c ****   usbd_control_reset();
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  483:tinyusb/src/device/usbd.c ****   {
  484:tinyusb/src/device/usbd.c ****     dcd_event_t event;
  485:tinyusb/src/device/usbd.c ****     if ( !osal_queue_receive(_usbd_q, &event, timeout_ms) ) return;
-ARM GAS  /tmp/ccPeuGm4.s 			page 14
+ARM GAS  /tmp/ccE6OpgT.s 			page 14
 
 
  486:tinyusb/src/device/usbd.c **** 
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  540:tinyusb/src/device/usbd.c **** 
  541:tinyusb/src/device/usbd.c ****         _usbd_dev.ep_status[epnum][ep_dir].busy = 0;
  542:tinyusb/src/device/usbd.c ****         _usbd_dev.ep_status[epnum][ep_dir].claimed = 0;
-ARM GAS  /tmp/ccPeuGm4.s 			page 15
+ARM GAS  /tmp/ccE6OpgT.s 			page 15
 
 
  543:tinyusb/src/device/usbd.c **** 
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  597:tinyusb/src/device/usbd.c ****     // return if there is no more events, for application to run other background
  598:tinyusb/src/device/usbd.c ****     if (osal_queue_empty(_usbd_q)) return;
  599:tinyusb/src/device/usbd.c **** #endif
-ARM GAS  /tmp/ccPeuGm4.s 			page 16
+ARM GAS  /tmp/ccE6OpgT.s 			page 16
 
 
  600:tinyusb/src/device/usbd.c ****   }
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  269              		.thumb_func
  270              		.fpu fpv4-sp-d16
  272              	process_set_config:
-ARM GAS  /tmp/ccPeuGm4.s 			page 17
+ARM GAS  /tmp/ccE6OpgT.s 			page 17
 
 
  273              	.LVL22:
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  666:tinyusb/src/device/usbd.c ****           // Depending on mcu, status phase could be sent either before or after changing device ad
  667:tinyusb/src/device/usbd.c ****           // or even require stack to not response with status at all
  668:tinyusb/src/device/usbd.c ****           // Therefore DCD must take full responsibility to response and include zlp status packet 
-ARM GAS  /tmp/ccPeuGm4.s 			page 18
+ARM GAS  /tmp/ccE6OpgT.s 			page 18
 
 
  669:tinyusb/src/device/usbd.c ****           usbd_control_set_request(p_request); // set request since DCD has no access to tud_contro
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  723:tinyusb/src/device/usbd.c ****         case TUSB_REQ_GET_DESCRIPTOR:
  724:tinyusb/src/device/usbd.c ****           TU_VERIFY( process_get_descriptor(rhport, p_request) );
  725:tinyusb/src/device/usbd.c ****         break;
-ARM GAS  /tmp/ccPeuGm4.s 			page 19
+ARM GAS  /tmp/ccE6OpgT.s 			page 19
 
 
  726:tinyusb/src/device/usbd.c **** 
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  780:tinyusb/src/device/usbd.c **** 
  781:tinyusb/src/device/usbd.c ****         switch(p_request->bRequest)
  782:tinyusb/src/device/usbd.c ****         {
-ARM GAS  /tmp/ccPeuGm4.s 			page 20
+ARM GAS  /tmp/ccE6OpgT.s 			page 20
 
 
  783:tinyusb/src/device/usbd.c ****           case TUSB_REQ_GET_INTERFACE:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  837:tinyusb/src/device/usbd.c ****             {
  838:tinyusb/src/device/usbd.c ****               if ( TUSB_REQ_CLEAR_FEATURE ==  p_request->bRequest )
  839:tinyusb/src/device/usbd.c ****               {
-ARM GAS  /tmp/ccPeuGm4.s 			page 21
+ARM GAS  /tmp/ccE6OpgT.s 			page 21
 
 
  840:tinyusb/src/device/usbd.c ****                 usbd_edpt_clear_stall(rhport, ep_addr);
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  288              		.cfi_offset 9, -16
  289              		.cfi_offset 10, -12
  290              		.cfi_offset 11, -8
-ARM GAS  /tmp/ccPeuGm4.s 			page 22
+ARM GAS  /tmp/ccE6OpgT.s 			page 22
 
 
  291              		.cfi_offset 14, -4
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  885:tinyusb/src/device/usbd.c ****   // Parse configuration descriptor
  886:tinyusb/src/device/usbd.c ****   _usbd_dev.remote_wakeup_support = (desc_cfg->bmAttributes & TUSB_DESC_CONFIG_ATT_REMOTE_WAKEUP) ?
  887:tinyusb/src/device/usbd.c ****   _usbd_dev.self_powered          = (desc_cfg->bmAttributes & TUSB_DESC_CONFIG_ATT_SELF_POWERED ) ?
-ARM GAS  /tmp/ccPeuGm4.s 			page 23
+ARM GAS  /tmp/ccE6OpgT.s 			page 23
 
 
  888:tinyusb/src/device/usbd.c **** 
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  942:tinyusb/src/device/usbd.c ****         }
  943:tinyusb/src/device/usbd.c **** 
  944:tinyusb/src/device/usbd.c ****         // bind (associated) interfaces to found driver
-ARM GAS  /tmp/ccPeuGm4.s 			page 24
+ARM GAS  /tmp/ccE6OpgT.s 			page 24
 
 
  945:tinyusb/src/device/usbd.c ****         for(uint8_t i=0; i<assoc_itf_count; i++)
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  364              		.loc 1 887 3 is_stmt 1 discriminator 4 view .LVU89
  887:tinyusb/src/device/usbd.c **** 
  365              		.loc 1 887 104 is_stmt 0 discriminator 4 view .LVU90
-ARM GAS  /tmp/ccPeuGm4.s 			page 25
+ARM GAS  /tmp/ccE6OpgT.s 			page 25
 
 
  366 0044 C2F38012 		ubfx	r2, r2, #6, #1
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   14:tinyusb/src/common/tusb_types.h ****  * all copies or substantial portions of the Software.
   15:tinyusb/src/common/tusb_types.h ****  *
   16:tinyusb/src/common/tusb_types.h ****  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-ARM GAS  /tmp/ccPeuGm4.s 			page 26
+ARM GAS  /tmp/ccE6OpgT.s 			page 26
 
 
   17:tinyusb/src/common/tusb_types.h ****  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   71:tinyusb/src/common/tusb_types.h **** 
   72:tinyusb/src/common/tusb_types.h **** enum
   73:tinyusb/src/common/tusb_types.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 27
+ARM GAS  /tmp/ccE6OpgT.s 			page 27
 
 
   74:tinyusb/src/common/tusb_types.h ****   TUSB_EPSIZE_BULK_FS = 64,
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  128:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RESERVED          = 2  ,
  129:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_FEATURE       = 3  ,
  130:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_RESERVED2         = 4  ,
-ARM GAS  /tmp/ccPeuGm4.s 			page 28
+ARM GAS  /tmp/ccE6OpgT.s 			page 28
 
 
  131:tinyusb/src/common/tusb_types.h ****   TUSB_REQ_SET_ADDRESS       = 5  ,
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  185:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_DIAGNOSTIC           = 0xDC ,
  186:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_WIRELESS_CONTROLLER  = 0xE0 ,
  187:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_MISC                 = 0xEF ,
-ARM GAS  /tmp/ccPeuGm4.s 			page 29
+ARM GAS  /tmp/ccE6OpgT.s 			page 29
 
 
  188:tinyusb/src/common/tusb_types.h ****   TUSB_CLASS_APPLICATION_SPECIFIC = 0xFE ,
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  242:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_STALLED,
  243:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_TIMEOUT,
  244:tinyusb/src/common/tusb_types.h ****   XFER_RESULT_INVALID
-ARM GAS  /tmp/ccPeuGm4.s 			page 30
+ARM GAS  /tmp/ccE6OpgT.s 			page 30
 
 
  245:tinyusb/src/common/tusb_types.h **** }xfer_result_t;
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  299:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceClass       ; ///< Class code (assigned by the USB-IF). \li If this field is rese
  300:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceSubClass    ; ///< Subclass code (assigned by the USB-IF). These codes are qualif
  301:tinyusb/src/common/tusb_types.h ****   uint8_t  bDeviceProtocol    ; ///< Protocol code (assigned by the USB-IF). These codes are qualif
-ARM GAS  /tmp/ccPeuGm4.s 			page 31
+ARM GAS  /tmp/ccE6OpgT.s 			page 31
 
 
  302:tinyusb/src/common/tusb_types.h ****   uint8_t  bMaxPacketSize0    ; ///< Maximum packet size for endpoint zero (only 8, 16, 32, or 64 a
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  356:tinyusb/src/common/tusb_types.h **** } tusb_desc_interface_t;
  357:tinyusb/src/common/tusb_types.h **** 
  358:tinyusb/src/common/tusb_types.h **** TU_VERIFY_STATIC( sizeof(tusb_desc_interface_t) == 9, "size is not correct");
-ARM GAS  /tmp/ccPeuGm4.s 			page 32
+ARM GAS  /tmp/ccE6OpgT.s 			page 32
 
 
  359:tinyusb/src/common/tusb_types.h **** 
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  413:tinyusb/src/common/tusb_types.h **** /// USB Interface Association Descriptor (IAD ECN)
  414:tinyusb/src/common/tusb_types.h **** typedef struct TU_ATTR_PACKED
  415:tinyusb/src/common/tusb_types.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 33
+ARM GAS  /tmp/ccE6OpgT.s 			page 33
 
 
  416:tinyusb/src/common/tusb_types.h ****   uint8_t bLength           ; ///< Size of descriptor
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  470:tinyusb/src/common/tusb_types.h ****     } bmAttributes;
  471:tinyusb/src/common/tusb_types.h **** 
  472:tinyusb/src/common/tusb_types.h ****     uint8_t bAttributes;
-ARM GAS  /tmp/ccPeuGm4.s 			page 34
+ARM GAS  /tmp/ccE6OpgT.s 			page 34
 
 
  473:tinyusb/src/common/tusb_types.h ****   };
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  527:tinyusb/src/common/tusb_types.h **** 
  528:tinyusb/src/common/tusb_types.h **** TU_ATTR_ALWAYS_INLINE static inline uint16_t tu_edpt_packet_size(tusb_desc_endpoint_t const* desc_e
  529:tinyusb/src/common/tusb_types.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 35
+ARM GAS  /tmp/ccE6OpgT.s 			page 35
 
 
  530:tinyusb/src/common/tusb_types.h ****   return tu_le16toh(desc_ep->wMaxPacketSize) & TU_GENMASK(10, 0);
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  414              	.LBB329:
  415              	.LBI329:
  559:tinyusb/src/common/tusb_types.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 36
+ARM GAS  /tmp/ccE6OpgT.s 			page 36
 
 
  416              		.loc 2 559 45 view .LVU110
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  455              	.LBB333:
  554:tinyusb/src/common/tusb_types.h ****   return desc8 + desc8[DESC_OFFSET_LEN];
  456              		.loc 2 554 3 view .LVU129
-ARM GAS  /tmp/ccPeuGm4.s 			page 37
+ARM GAS  /tmp/ccE6OpgT.s 			page 37
 
 
  555:tinyusb/src/common/tusb_types.h **** }
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  497              	.L28:
  498              	.LBB335:
  499              	.LBB336:
-ARM GAS  /tmp/ccPeuGm4.s 			page 38
+ARM GAS  /tmp/ccE6OpgT.s 			page 38
 
 
  500              	.LBB337:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  539              		.loc 1 919 7 discriminator 5 view .LVU158
  540 00bc 0020     		movs	r0, #0
  541 00be B6E7     		b	.L22
-ARM GAS  /tmp/ccPeuGm4.s 			page 39
+ARM GAS  /tmp/ccE6OpgT.s 			page 39
 
 
  542              	.LVL44:
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  582              		.loc 1 950 11 discriminator 5 view .LVU172
  583 00de 0020     		movs	r0, #0
  584              	.LVL47:
-ARM GAS  /tmp/ccPeuGm4.s 			page 40
+ARM GAS  /tmp/ccE6OpgT.s 			page 40
 
 
  950:tinyusb/src/device/usbd.c ****           _usbd_dev.itf2drv[itf_num] = drv_id;
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  623              	.LVL53:
  965:tinyusb/src/device/usbd.c ****   }
  624              		.loc 1 965 5 discriminator 1 view .LVU189
-ARM GAS  /tmp/ccPeuGm4.s 			page 41
+ARM GAS  /tmp/ccE6OpgT.s 			page 41
 
 
  625 00f8 4FF0E023 		mov	r3, #-536813568
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  667              		.loc 1 247 3 view .LVU201
  249:tinyusb/src/device/usbd.c ****     // Application drivers
  668              		.loc 1 249 3 view .LVU202
-ARM GAS  /tmp/ccPeuGm4.s 			page 42
+ARM GAS  /tmp/ccE6OpgT.s 			page 42
 
 
  249:tinyusb/src/device/usbd.c ****     // Application drivers
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  707 013c 8742     		cmp	r7, r0
  708 013e E5D3     		bcc	.L32
  925:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 43
+ARM GAS  /tmp/ccE6OpgT.s 			page 43
 
 
  709              		.loc 1 925 53 is_stmt 1 view .LVU219
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  945:tinyusb/src/device/usbd.c ****         {
  748              		.loc 1 945 45 is_stmt 1 discriminator 2 view .LVU235
  945:tinyusb/src/device/usbd.c ****         {
-ARM GAS  /tmp/ccPeuGm4.s 			page 44
+ARM GAS  /tmp/ccE6OpgT.s 			page 44
 
 
  749              		.loc 1 945 46 is_stmt 0 discriminator 2 view .LVU236
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  797              		.cfi_offset 4, -12
  798              		.cfi_offset 5, -8
  799              		.cfi_offset 14, -4
-ARM GAS  /tmp/ccPeuGm4.s 			page 45
+ARM GAS  /tmp/ccE6OpgT.s 			page 45
 
 
  800 0002 0546     		mov	r5, r0
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   45:tinyusb/src/common/tusb_common.h **** #define U16_TO_U8S_LE(_u16)   TU_U16_LOW(_u16), TU_U16_HIGH(_u16)
   46:tinyusb/src/common/tusb_common.h **** 
   47:tinyusb/src/common/tusb_common.h **** #define TU_U32_BYTE3(_u32)    ((uint8_t) ((((uint32_t) _u32) >> 24) & 0x000000ff)) // MSB
-ARM GAS  /tmp/ccPeuGm4.s 			page 46
+ARM GAS  /tmp/ccE6OpgT.s 			page 46
 
 
   48:tinyusb/src/common/tusb_common.h **** #define TU_U32_BYTE2(_u32)    ((uint8_t) ((((uint32_t) _u32) >> 16) & 0x000000ff))
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  102:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline int tu_memset_s(void *dest, size_t destsz, int ch, size_t count
  103:tinyusb/src/common/tusb_common.h ****   // TODO may check if desst and src is not NULL
  104:tinyusb/src/common/tusb_common.h ****   if ( count > destsz ) {
-ARM GAS  /tmp/ccPeuGm4.s 			page 47
+ARM GAS  /tmp/ccE6OpgT.s 			page 47
 
 
  105:tinyusb/src/common/tusb_common.h ****     return -1;
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  826              	.LVL69:
  827              		.loc 3 140 81 view .LVU253
  828              	.LBE352:
-ARM GAS  /tmp/ccPeuGm4.s 			page 48
+ARM GAS  /tmp/ccE6OpgT.s 			page 48
 
 
  829              	.LBE351:
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  995:tinyusb/src/device/usbd.c ****         return tud_control_xfer(rhport, &mod_request, desc_device, CFG_TUD_ENDPOINT0_SIZE);
  996:tinyusb/src/device/usbd.c ****       }else
  997:tinyusb/src/device/usbd.c ****       {
-ARM GAS  /tmp/ccPeuGm4.s 			page 49
+ARM GAS  /tmp/ccE6OpgT.s 			page 49
 
 
  998:tinyusb/src/device/usbd.c ****         return tud_control_xfer(rhport, p_request, desc_device, sizeof(tusb_desc_device_t));
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  143:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint32_t tu_bit_set  (uint32_t value, uint8_t pos) { return val
  144:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint32_t tu_bit_clear(uint32_t value, uint8_t pos) { return val
  145:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline bool     tu_bit_test (uint32_t value, uint8_t pos) { return (va
-ARM GAS  /tmp/ccPeuGm4.s 			page 50
+ARM GAS  /tmp/ccE6OpgT.s 			page 50
 
 
  146:tinyusb/src/common/tusb_common.h **** 
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  200:tinyusb/src/common/tusb_common.h **** 
  201:tinyusb/src/common/tusb_common.h **** TU_ATTR_ALWAYS_INLINE static inline uint32_t tu_unaligned_read32(const void* mem)
  202:tinyusb/src/common/tusb_common.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 51
+ARM GAS  /tmp/ccE6OpgT.s 			page 51
 
 
  203:tinyusb/src/common/tusb_common.h ****   tu_unaligned_uint32_t const* ua32 = (tu_unaligned_uint32_t const*) mem;
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  257:tinyusb/src/common/tusb_common.h **** }
  258:tinyusb/src/common/tusb_common.h **** 
  259:tinyusb/src/common/tusb_common.h **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 52
+ARM GAS  /tmp/ccE6OpgT.s 			page 52
 
 
  260:tinyusb/src/common/tusb_common.h **** #else
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  935              		.thumb
  936              		.syntax unified
  937              	.L63:
-ARM GAS  /tmp/ccPeuGm4.s 			page 53
+ARM GAS  /tmp/ccE6OpgT.s 			page 53
 
 
  938              	.LBE357:
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  967              		.loc 1 1037 7 view .LVU302
  968 0072 60B9     		cbnz	r0, .L66
  969              		.loc 1 1037 7 discriminator 1 view .LVU303
-ARM GAS  /tmp/ccPeuGm4.s 			page 54
+ARM GAS  /tmp/ccE6OpgT.s 			page 54
 
 
  970              		.loc 1 1037 7 discriminator 1 view .LVU304
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1016              	.LBE361:
  1017              	.LBE360:
 1041:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 55
+ARM GAS  /tmp/ccE6OpgT.s 			page 55
 
 
 1042:tinyusb/src/device/usbd.c ****       return tud_control_xfer(rhport, p_request, (void*) desc_config, total_len);
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1052              		.loc 2 567 3 view .LVU335
  1053              		.loc 2 567 3 is_stmt 0 view .LVU336
  1054              	.LBE364:
-ARM GAS  /tmp/ccPeuGm4.s 			page 56
+ARM GAS  /tmp/ccE6OpgT.s 			page 56
 
 
  1055              	.LBE363:
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1094              	.LBE367:
  1095              	.LBE366:
  1096              		.loc 1 1069 14 view .LVU354
-ARM GAS  /tmp/ccPeuGm4.s 			page 57
+ARM GAS  /tmp/ccE6OpgT.s 			page 57
 
 
  1097 00be 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1138              	.LBB370:
 1052:tinyusb/src/device/usbd.c **** 
  1139              		.loc 1 1052 7 view .LVU366
-ARM GAS  /tmp/ccPeuGm4.s 			page 58
+ARM GAS  /tmp/ccE6OpgT.s 			page 58
 
 
  1140 00d6 0020     		movs	r0, #0
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1084:tinyusb/src/device/usbd.c ****     case DCD_EVENT_UNPLUGGED:
 1085:tinyusb/src/device/usbd.c ****       _usbd_dev.connected  = 0;
 1086:tinyusb/src/device/usbd.c ****       _usbd_dev.addressed  = 0;
-ARM GAS  /tmp/ccPeuGm4.s 			page 59
+ARM GAS  /tmp/ccE6OpgT.s 			page 59
 
 
 1087:tinyusb/src/device/usbd.c ****       _usbd_dev.cfg_num    = 0;
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1141:tinyusb/src/device/usbd.c **** }
 1142:tinyusb/src/device/usbd.c **** 
 1143:tinyusb/src/device/usbd.c **** //--------------------------------------------------------------------+
-ARM GAS  /tmp/ccPeuGm4.s 			page 60
+ARM GAS  /tmp/ccE6OpgT.s 			page 60
 
 
 1144:tinyusb/src/device/usbd.c **** // USBD API For Class Driver
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1221              	.LFE103:
  1223              		.section	.text.tud_speed_get,"ax",%progbits
  1224              		.align	1
-ARM GAS  /tmp/ccPeuGm4.s 			page 61
+ARM GAS  /tmp/ccE6OpgT.s 			page 61
 
 
  1225              		.global	tud_speed_get
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1275 000c 00000000 		.word	.LANCHOR3
  1276              		.cfi_endproc
  1277              	.LFE86:
-ARM GAS  /tmp/ccPeuGm4.s 			page 62
+ARM GAS  /tmp/ccE6OpgT.s 			page 62
 
 
  1279              		.section	.text.tud_mounted,"ax",%progbits
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  350:tinyusb/src/device/usbd.c **** 
  1329              		.loc 1 350 1 view .LVU397
  1330 0004 C0F38000 		ubfx	r0, r0, #2, #1
-ARM GAS  /tmp/ccPeuGm4.s 			page 63
+ARM GAS  /tmp/ccE6OpgT.s 			page 63
 
 
  1331 0008 7047     		bx	lr
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1379              		.loc 1 356 3 discriminator 4 view .LVU405
  1380 0022 034B     		ldr	r3, .L102+4
  1381 0024 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
-ARM GAS  /tmp/ccPeuGm4.s 			page 64
+ARM GAS  /tmp/ccE6OpgT.s 			page 64
 
 
  1382 0026 FFF7FEFF 		bl	dcd_remote_wakeup
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1428              		.loc 1 365 1 view .LVU415
  1429 0010 08BD     		pop	{r3, pc}
  1430              	.L106:
-ARM GAS  /tmp/ccPeuGm4.s 			page 65
+ARM GAS  /tmp/ccE6OpgT.s 			page 65
 
 
  362:tinyusb/src/device/usbd.c ****   dcd_disconnect(_usbd_rhport);
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  369:tinyusb/src/device/usbd.c ****   dcd_connect(_usbd_rhport);
  1478              		.loc 1 369 3 view .LVU425
  1479 0012 0020     		movs	r0, #0
-ARM GAS  /tmp/ccPeuGm4.s 			page 66
+ARM GAS  /tmp/ccE6OpgT.s 			page 66
 
 
  1480 0014 FCE7     		b	.L111
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1533              		@ args = 0, pretend = 0, frame = 0
  1534              		@ frame_needed = 0, uses_anonymous_args = 0
  383:tinyusb/src/device/usbd.c ****   // skip if already initialized
-ARM GAS  /tmp/ccPeuGm4.s 			page 67
+ARM GAS  /tmp/ccE6OpgT.s 			page 67
 
 
  1535              		.loc 1 383 1 is_stmt 0 view .LVU431
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   10:tinyusb/src/osal/osal_none.h ****  * copies of the Software, and to permit persons to whom the Software is
   11:tinyusb/src/osal/osal_none.h ****  * furnished to do so, subject to the following conditions:
   12:tinyusb/src/osal/osal_none.h ****  *
-ARM GAS  /tmp/ccPeuGm4.s 			page 68
+ARM GAS  /tmp/ccE6OpgT.s 			page 68
 
 
   13:tinyusb/src/osal/osal_none.h ****  * The above copyright notice and this permission notice shall be included in
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
   67:tinyusb/src/osal/osal_none.h **** TU_ATTR_ALWAYS_INLINE static inline bool osal_semaphore_wait (osal_semaphore_t sem_hdl, uint32_t ms
   68:tinyusb/src/osal/osal_none.h **** {
   69:tinyusb/src/osal/osal_none.h ****   (void) msec;
-ARM GAS  /tmp/ccPeuGm4.s 			page 69
+ARM GAS  /tmp/ccE6OpgT.s 			page 69
 
 
   70:tinyusb/src/osal/osal_none.h **** 
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  124:tinyusb/src/osal/osal_none.h ****   void (*interrupt_set)(bool);
  125:tinyusb/src/osal/osal_none.h ****   tu_fifo_t ff;
  126:tinyusb/src/osal/osal_none.h **** }osal_queue_def_t;
-ARM GAS  /tmp/ccPeuGm4.s 			page 70
+ARM GAS  /tmp/ccE6OpgT.s 			page 70
 
 
  127:tinyusb/src/osal/osal_none.h **** 
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1589 0026 1D4B     		ldr	r3, .L132+12
  1590 0028 23B1     		cbz	r3, .L121
  407:tinyusb/src/device/usbd.c ****   }
-ARM GAS  /tmp/ccPeuGm4.s 			page 71
+ARM GAS  /tmp/ccE6OpgT.s 			page 71
 
 
  1591              		.loc 1 407 5 is_stmt 1 view .LVU452
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1630 0046 1B68     		ldr	r3, [r3]
  1631              	.LVL129:
  416:tinyusb/src/device/usbd.c ****   }
-ARM GAS  /tmp/ccPeuGm4.s 			page 72
+ARM GAS  /tmp/ccE6OpgT.s 			page 72
 
 
  1632              		.loc 1 416 5 discriminator 2 view .LVU468
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1671              	.LVL134:
  251:tinyusb/src/device/usbd.c ****   } else if ( drvid < TOTAL_DRIVER_COUNT && BUILTIN_DRIVER_COUNT > 0 ){
  1672              		.loc 1 251 12 view .LVU484
-ARM GAS  /tmp/ccPeuGm4.s 			page 73
+ARM GAS  /tmp/ccE6OpgT.s 			page 73
 
 
  1673 0066 EDE7     		b	.L124
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  422:tinyusb/src/device/usbd.c ****   dcd_int_enable(rhport);
  1713              		.loc 1 422 3 is_stmt 1 view .LVU499
  1714 007e 2846     		mov	r0, r5
-ARM GAS  /tmp/ccPeuGm4.s 			page 74
+ARM GAS  /tmp/ccE6OpgT.s 			page 74
 
 
  1715 0080 FFF7FEFF 		bl	dcd_init
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1764              	.L135:
  454:tinyusb/src/device/usbd.c **** 
  1765              		.loc 1 454 1 view .LVU507
-ARM GAS  /tmp/ccPeuGm4.s 			page 75
+ARM GAS  /tmp/ccE6OpgT.s 			page 75
 
 
  1766 0008 08BD     		pop	{r3, pc}
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1783              	.LVL143:
  1784              		.loc 4 190 10 view .LVU514
  1785              	.LBE383:
-ARM GAS  /tmp/ccPeuGm4.s 			page 76
+ARM GAS  /tmp/ccE6OpgT.s 			page 76
 
 
  1786              	.LBE382:
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1835 0012 DFE803F0 		tbb	[pc, r3]
  1836              	.L143:
  1837 0016 02       		.byte	(.L146-.L143)/2
-ARM GAS  /tmp/ccPeuGm4.s 			page 77
+ARM GAS  /tmp/ccE6OpgT.s 			page 77
 
 
  1838 0017 92       		.byte	(.L163-.L143)/2
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1878              	.LBB386:
  1879              	.LBI386:
  139:tinyusb/src/osal/osal_none.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 78
+ARM GAS  /tmp/ccE6OpgT.s 			page 78
 
 
  1880              		.loc 4 139 42 view .LVU536
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  149:tinyusb/src/osal/osal_none.h **** }
  1920              		.loc 4 149 3 view .LVU551
  1921              	.LBE389:
-ARM GAS  /tmp/ccPeuGm4.s 			page 79
+ARM GAS  /tmp/ccE6OpgT.s 			page 79
 
 
  1922              	.LBE388:
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  1965              	.L144:
  181:tinyusb/src/osal/osal_none.h **** 
  1966              		.loc 4 181 3 is_stmt 0 view .LVU563
-ARM GAS  /tmp/ccPeuGm4.s 			page 80
+ARM GAS  /tmp/ccE6OpgT.s 			page 80
 
 
  1967              	.LBE390:
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2006              		.loc 4 142 3 view .LVU578
  2007 008c 9847     		blx	r3
  2008              	.LVL160:
-ARM GAS  /tmp/ccPeuGm4.s 			page 81
+ARM GAS  /tmp/ccE6OpgT.s 			page 81
 
 
  2009              	.L150:
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2047              		.loc 4 181 3 view .LVU594
  181:tinyusb/src/osal/osal_none.h **** 
  2048              		.loc 4 181 3 view .LVU595
-ARM GAS  /tmp/ccPeuGm4.s 			page 82
+ARM GAS  /tmp/ccE6OpgT.s 			page 82
 
 
  2049              	.LBB399:
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2092              	.LBB401:
  171:tinyusb/src/osal/osal_none.h ****     _osal_q_lock(qhdl);
  2093              		.loc 4 171 3 view .LVU607
-ARM GAS  /tmp/ccPeuGm4.s 			page 83
+ARM GAS  /tmp/ccE6OpgT.s 			page 83
 
 
  171:tinyusb/src/osal/osal_none.h ****     _osal_q_lock(qhdl);
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  149:tinyusb/src/osal/osal_none.h **** }
  2133              		.loc 4 149 7 is_stmt 0 view .LVU623
  2134 00e2 3B68     		ldr	r3, [r7]
-ARM GAS  /tmp/ccPeuGm4.s 			page 84
+ARM GAS  /tmp/ccE6OpgT.s 			page 84
 
 
  149:tinyusb/src/osal/osal_none.h **** }
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2177              	.LBB410:
  252:tinyusb/src/device/usbd.c ****     driver = &_usbd_driver[drvid - _app_driver_count];
  2178              		.loc 1 252 10 is_stmt 1 view .LVU636
-ARM GAS  /tmp/ccPeuGm4.s 			page 85
+ARM GAS  /tmp/ccE6OpgT.s 			page 85
 
 
  253:tinyusb/src/device/usbd.c ****   }
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2218              		.loc 1 249 3 view .LVU651
  249:tinyusb/src/device/usbd.c ****     // Application drivers
  2219              		.loc 1 249 6 is_stmt 0 view .LVU652
-ARM GAS  /tmp/ccPeuGm4.s 			page 86
+ARM GAS  /tmp/ccE6OpgT.s 			page 86
 
 
  2220 0118 A342     		cmp	r3, r4
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2261              	.L166:
 1126:tinyusb/src/device/usbd.c ****       {
  2262              		.loc 1 1126 7 is_stmt 1 view .LVU666
-ARM GAS  /tmp/ccPeuGm4.s 			page 87
+ARM GAS  /tmp/ccE6OpgT.s 			page 87
 
 
 1126:tinyusb/src/device/usbd.c ****       {
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2303              		.loc 4 139 42 view .LVU680
  2304              	.LBB418:
  142:tinyusb/src/osal/osal_none.h **** }
-ARM GAS  /tmp/ccPeuGm4.s 			page 88
+ARM GAS  /tmp/ccE6OpgT.s 			page 88
 
 
  2305              		.loc 4 142 3 view .LVU681
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2344              		.loc 4 149 3 view .LVU696
  2345              	.LBE420:
  2346              	.LBE419:
-ARM GAS  /tmp/ccPeuGm4.s 			page 89
+ARM GAS  /tmp/ccE6OpgT.s 			page 89
 
 
  181:tinyusb/src/osal/osal_none.h **** 
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2388              	.LBB423:
  171:tinyusb/src/osal/osal_none.h ****     _osal_q_lock(qhdl);
  2389              		.loc 4 171 3 view .LVU710
-ARM GAS  /tmp/ccPeuGm4.s 			page 90
+ARM GAS  /tmp/ccE6OpgT.s 			page 90
 
 
  171:tinyusb/src/osal/osal_none.h ****     _osal_q_lock(qhdl);
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  149:tinyusb/src/osal/osal_none.h **** }
  2429              		.loc 4 149 7 is_stmt 0 view .LVU726
  2430 01b6 3B68     		ldr	r3, [r7]
-ARM GAS  /tmp/ccPeuGm4.s 			page 91
+ARM GAS  /tmp/ccE6OpgT.s 			page 91
 
 
  149:tinyusb/src/osal/osal_none.h **** }
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2472              	.L167:
  2473 01d8 00000000 		.word	.LANCHOR3
  2474 01dc 00000000 		.word	.LANCHOR6
-ARM GAS  /tmp/ccPeuGm4.s 			page 92
+ARM GAS  /tmp/ccE6OpgT.s 			page 92
 
 
  2475 01e0 00000000 		.word	.LANCHOR1
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2503              		.cfi_def_cfa_offset 24
 1185:tinyusb/src/device/usbd.c ****   dcd_event_t event =
  2504              		.loc 1 1185 3 is_stmt 1 view .LVU742
-ARM GAS  /tmp/ccPeuGm4.s 			page 93
+ARM GAS  /tmp/ccE6OpgT.s 			page 93
 
 
  2505              		.loc 1 1185 15 is_stmt 0 view .LVU743
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1200:tinyusb/src/device/usbd.c **** 
 1201:tinyusb/src/device/usbd.c **** bool usbd_edpt_open(uint8_t rhport, tusb_desc_endpoint_t const * desc_ep)
 1202:tinyusb/src/device/usbd.c **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 94
+ARM GAS  /tmp/ccE6OpgT.s 			page 94
 
 
  2547              		.loc 1 1202 1 is_stmt 1 view -0
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2594              		.loc 1 1205 3 discriminator 3 view .LVU769
  2595              		.syntax unified
  2596              	@ 1205 "tinyusb/src/device/usbd.c" 1
-ARM GAS  /tmp/ccPeuGm4.s 			page 95
+ARM GAS  /tmp/ccE6OpgT.s 			page 95
 
 
  2597 001e 00BE     		BKPT #0
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2637 003e F0D0     		beq	.L174
 1206:tinyusb/src/device/usbd.c ****   TU_ASSERT(tu_edpt_validate(desc_ep, (tusb_speed_t) _usbd_dev.speed));
  2638              		.loc 1 1206 3 discriminator 3 view .LVU784
-ARM GAS  /tmp/ccPeuGm4.s 			page 96
+ARM GAS  /tmp/ccE6OpgT.s 			page 96
 
 
  2639              		.syntax unified
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2688              		.cfi_offset 5, -28
  2689              		.cfi_offset 6, -24
  2690              		.cfi_offset 7, -20
-ARM GAS  /tmp/ccPeuGm4.s 			page 97
+ARM GAS  /tmp/ccE6OpgT.s 			page 97
 
 
  2691              		.cfi_offset 8, -16
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2733              		.loc 1 1165 5 discriminator 7 view .LVU803
 1165:tinyusb/src/device/usbd.c ****     TU_ASSERT(usbd_edpt_open(rhport, desc_ep));
  2734              		.loc 1 1165 5 discriminator 7 view .LVU804
-ARM GAS  /tmp/ccPeuGm4.s 			page 98
+ARM GAS  /tmp/ccE6OpgT.s 			page 98
 
 
  2735 0028 0023     		movs	r3, #0
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2776              	.L189:
 1176:tinyusb/src/device/usbd.c ****   }
  2777              		.loc 1 1176 5 is_stmt 1 discriminator 2 view .LVU818
-ARM GAS  /tmp/ccPeuGm4.s 			page 99
+ARM GAS  /tmp/ccE6OpgT.s 			page 99
 
 
  2778              	.LVL230:
@@ -5938,7 +5938,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1166:tinyusb/src/device/usbd.c **** 
  2817              		.loc 1 1166 5 discriminator 4 view .LVU834
 1166:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 100
+ARM GAS  /tmp/ccE6OpgT.s 			page 100
 
 
  2818              		.loc 1 1166 5 discriminator 4 view .LVU835
@@ -5998,7 +5998,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2862              		.thumb_func
  2863              		.fpu fpv4-sp-d16
  2865              	usbd_edpt_claim:
-ARM GAS  /tmp/ccPeuGm4.s 			page 101
+ARM GAS  /tmp/ccE6OpgT.s 			page 101
 
 
  2866              	.LVL237:
@@ -6058,7 +6058,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2902              		.loc 1 1220 20 is_stmt 0 view .LVU860
  2903 0006 4000     		lsls	r0, r0, #1
  2904              	.LVL240:
-ARM GAS  /tmp/ccPeuGm4.s 			page 102
+ARM GAS  /tmp/ccE6OpgT.s 			page 102
 
 
  2905              		.loc 1 1220 20 view .LVU861
@@ -6118,7 +6118,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2952              		.loc 1 1229 3 view .LVU870
  2953              	.LVL246:
  2954              	.LBB448:
-ARM GAS  /tmp/ccPeuGm4.s 			page 103
+ARM GAS  /tmp/ccE6OpgT.s 			page 103
 
 
  2955              	.LBI448:
@@ -6178,7 +6178,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  2997              		.align	2
  2998              	.L201:
  2999 001c 00000000 		.word	.LANCHOR3
-ARM GAS  /tmp/ccPeuGm4.s 			page 104
+ARM GAS  /tmp/ccE6OpgT.s 			page 104
 
 
  3000              		.cfi_endproc
@@ -6238,7 +6238,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3045              		.loc 1 1241 3 is_stmt 1 view .LVU897
  3046              	.LBB454:
  3047              	.LBI454:
-ARM GAS  /tmp/ccPeuGm4.s 			page 105
+ARM GAS  /tmp/ccE6OpgT.s 			page 105
 
 
  512:tinyusb/src/common/tusb_types.h **** {
@@ -6298,7 +6298,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3091              	.L206:
 1250:tinyusb/src/device/usbd.c **** 
 1251:tinyusb/src/device/usbd.c ****   // Set busy first since the actual transfer can be complete before dcd_edpt_xfer()
-ARM GAS  /tmp/ccPeuGm4.s 			page 106
+ARM GAS  /tmp/ccE6OpgT.s 			page 106
 
 
 1252:tinyusb/src/device/usbd.c ****   // could return and USBD task can preempt and clear the busy
@@ -6358,7 +6358,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1262:tinyusb/src/device/usbd.c ****     TU_LOG_USBD("FAILED\r\n");
  3121              		.loc 1 1262 45 is_stmt 0 view .LVU925
  3122 005a E379     		ldrb	r3, [r4, #7]	@ zero_extendqisi2
-ARM GAS  /tmp/ccPeuGm4.s 			page 107
+ARM GAS  /tmp/ccE6OpgT.s 			page 107
 
 
  3123 005c 6FF38203 		bfc	r3, #2, #1
@@ -6418,7 +6418,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1272:tinyusb/src/device/usbd.c **** // into the USB buffer!
 1273:tinyusb/src/device/usbd.c **** bool usbd_edpt_xfer_fifo(uint8_t rhport, uint8_t ep_addr, tu_fifo_t * ff, uint16_t total_bytes)
 1274:tinyusb/src/device/usbd.c **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 108
+ARM GAS  /tmp/ccE6OpgT.s 			page 108
 
 
  3167              		.loc 1 1274 1 is_stmt 1 view -0
@@ -6478,7 +6478,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1281:tinyusb/src/device/usbd.c **** 
 1282:tinyusb/src/device/usbd.c ****   // Attempt to transfer on a busy endpoint, sound like an race condition !
 1283:tinyusb/src/device/usbd.c ****   TU_ASSERT(_usbd_dev.ep_status[epnum][dir].busy == 0);
-ARM GAS  /tmp/ccPeuGm4.s 			page 109
+ARM GAS  /tmp/ccE6OpgT.s 			page 109
 
 
  3208              		.loc 1 1283 3 view .LVU949
@@ -6538,7 +6538,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1301:tinyusb/src/device/usbd.c ****   }
 1302:tinyusb/src/device/usbd.c **** }
  3245              		.loc 1 1302 1 is_stmt 0 view .LVU961
-ARM GAS  /tmp/ccPeuGm4.s 			page 110
+ARM GAS  /tmp/ccE6OpgT.s 			page 110
 
 
  3246 0030 70BD     		pop	{r4, r5, r6, pc}
@@ -6598,7 +6598,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3286 006a 13F0010F 		tst	r3, #1
  3287 006e DFD0     		beq	.L214
 1299:tinyusb/src/device/usbd.c ****     return false;
-ARM GAS  /tmp/ccPeuGm4.s 			page 111
+ARM GAS  /tmp/ccE6OpgT.s 			page 111
 
 
  3288              		.loc 1 1299 5 discriminator 1 view .LVU977
@@ -6658,7 +6658,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3332              		.loc 2 520 10 is_stmt 0 view .LVU986
  3333 0000 01F07F02 		and	r2, r1, #127
  3334              	.LVL274:
-ARM GAS  /tmp/ccPeuGm4.s 			page 112
+ARM GAS  /tmp/ccE6OpgT.s 			page 112
 
 
  520:tinyusb/src/common/tusb_types.h **** }
@@ -6718,7 +6718,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3380              		@ frame_needed = 0, uses_anonymous_args = 0
  3381              		.loc 1 1315 1 is_stmt 0 view .LVU997
  3382 0000 38B5     		push	{r3, r4, r5, lr}
-ARM GAS  /tmp/ccPeuGm4.s 			page 113
+ARM GAS  /tmp/ccE6OpgT.s 			page 113
 
 
  3383              	.LCFI27:
@@ -6778,7 +6778,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3423 0018 13F0020F 		tst	r3, #2
  3424 001c 00D0     		beq	.L225
  3425              	.LVL280:
-ARM GAS  /tmp/ccPeuGm4.s 			page 114
+ARM GAS  /tmp/ccE6OpgT.s 			page 114
 
 
  3426              	.L222:
@@ -6838,7 +6838,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3469              	.LVL283:
  3470              	.LFB113:
 1330:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 115
+ARM GAS  /tmp/ccE6OpgT.s 			page 115
 
 
 1331:tinyusb/src/device/usbd.c **** void usbd_edpt_clear_stall(uint8_t rhport, uint8_t ep_addr)
@@ -6898,7 +6898,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3509              		.loc 1 1339 3 is_stmt 1 view .LVU1034
  3510              		.loc 1 1339 39 is_stmt 0 view .LVU1035
  3511 000a 0E4B     		ldr	r3, .L232+4
-ARM GAS  /tmp/ccPeuGm4.s 			page 116
+ARM GAS  /tmp/ccE6OpgT.s 			page 116
 
 
  3512 000c 03EB4503 		add	r3, r3, r5, lsl #1
@@ -6958,7 +6958,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3554              		.section	.text.usbd_edpt_stalled,"ax",%progbits
  3555              		.align	1
  3556              		.global	usbd_edpt_stalled
-ARM GAS  /tmp/ccPeuGm4.s 			page 117
+ARM GAS  /tmp/ccE6OpgT.s 			page 117
 
 
  3557              		.syntax unified
@@ -7018,7 +7018,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3596 000a 03EBD111 		add	r1, r3, r1, lsr #7
  3597              	.LVL291:
  3598              		.loc 1 1355 41 view .LVU1059
-ARM GAS  /tmp/ccPeuGm4.s 			page 118
+ARM GAS  /tmp/ccE6OpgT.s 			page 118
 
 
  3599 000e C87F     		ldrb	r0, [r1, #31]	@ zero_extendqisi2
@@ -7078,7 +7078,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3648 0010 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
  3649 0012 03F06003 		and	r3, r3, #96
  3650 0016 602B     		cmp	r3, #96
-ARM GAS  /tmp/ccPeuGm4.s 			page 119
+ARM GAS  /tmp/ccE6OpgT.s 			page 119
 
 
  3651 0018 16D0     		beq	.L292
@@ -7138,7 +7138,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  621:tinyusb/src/device/usbd.c **** 
  3692              		.loc 1 621 3 discriminator 1 view .LVU1080
  621:tinyusb/src/device/usbd.c **** 
-ARM GAS  /tmp/ccPeuGm4.s 			page 120
+ARM GAS  /tmp/ccE6OpgT.s 			page 120
 
 
  3693              		.loc 1 621 3 discriminator 1 view .LVU1081
@@ -7198,7 +7198,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  629:tinyusb/src/device/usbd.c ****   }
  3737              		.loc 1 629 5 discriminator 2 view .LVU1092
  629:tinyusb/src/device/usbd.c ****   }
-ARM GAS  /tmp/ccPeuGm4.s 			page 121
+ARM GAS  /tmp/ccE6OpgT.s 			page 121
 
 
  3738              		.loc 1 629 12 is_stmt 0 discriminator 2 view .LVU1093
@@ -7258,7 +7258,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  140:tinyusb/src/common/tusb_common.h **** 
  3782              		.loc 3 140 81 is_stmt 0 view .LVU1104
  3783 0098 DBB2     		uxtb	r3, r3
-ARM GAS  /tmp/ccPeuGm4.s 			page 122
+ARM GAS  /tmp/ccE6OpgT.s 			page 122
 
 
  3784              	.LVL303:
@@ -7318,7 +7318,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3822              	.LVL307:
  3823              	.L247:
  256:tinyusb/src/device/usbd.c **** }
-ARM GAS  /tmp/ccPeuGm4.s 			page 123
+ARM GAS  /tmp/ccE6OpgT.s 			page 123
 
 
  3824              		.loc 1 256 3 is_stmt 1 view .LVU1121
@@ -7378,7 +7378,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3864              	.LBE488:
  3865              	.LBE482:
  659:tinyusb/src/device/usbd.c ****         return false;
-ARM GAS  /tmp/ccPeuGm4.s 			page 124
+ARM GAS  /tmp/ccE6OpgT.s 			page 124
 
 
  3866              		.loc 1 659 9 is_stmt 1 view .LVU1136
@@ -7438,7 +7438,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3908 010a 1370     		strb	r3, [r2]
  673:tinyusb/src/device/usbd.c **** 
  3909              		.loc 1 673 9 is_stmt 1 view .LVU1149
-ARM GAS  /tmp/ccPeuGm4.s 			page 125
+ARM GAS  /tmp/ccE6OpgT.s 			page 125
 
 
  874:tinyusb/src/device/usbd.c **** }
@@ -7498,7 +7498,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3949 0134 B342     		cmp	r3, r6
  3950 0136 07D0     		beq	.L259
  689:tinyusb/src/device/usbd.c ****             {
-ARM GAS  /tmp/ccPeuGm4.s 			page 126
+ARM GAS  /tmp/ccE6OpgT.s 			page 126
 
 
  3951              		.loc 1 689 13 is_stmt 1 view .LVU1165
@@ -7558,7 +7558,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  3990 015a FFF7FEFF 		bl	dcd_edpt_close_all
  3991              	.LVL320:
  698:tinyusb/src/device/usbd.c ****               configuration_reset(rhport);
-ARM GAS  /tmp/ccPeuGm4.s 			page 127
+ARM GAS  /tmp/ccE6OpgT.s 			page 127
 
 
  3992              		.loc 1 698 15 view .LVU1181
@@ -7618,7 +7618,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4031              	.LBB493:
  708:tinyusb/src/device/usbd.c **** 
  4032              		.loc 1 708 15 discriminator 1 view .LVU1197
-ARM GAS  /tmp/ccPeuGm4.s 			page 128
+ARM GAS  /tmp/ccE6OpgT.s 			page 128
 
 
  4033              	.LVL326:
@@ -7678,7 +7678,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4074              		.loc 1 734 38 is_stmt 0 discriminator 2 view .LVU1210
  4075 01ae 574A     		ldr	r2, .L306+4
  4076 01b0 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-ARM GAS  /tmp/ccPeuGm4.s 			page 129
+ARM GAS  /tmp/ccE6OpgT.s 			page 129
 
 
  4077 01b2 43F00803 		orr	r3, r3, #8
@@ -7738,7 +7738,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4117              	.LBB495:
  754:tinyusb/src/device/usbd.c ****           tud_control_xfer(rhport, p_request, &status, 2);
  4118              		.loc 1 754 11 is_stmt 1 discriminator 1 view .LVU1225
-ARM GAS  /tmp/ccPeuGm4.s 			page 130
+ARM GAS  /tmp/ccE6OpgT.s 			page 130
 
 
  754:tinyusb/src/device/usbd.c ****           tud_control_xfer(rhport, p_request, &status, 2);
@@ -7798,7 +7798,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4161              		.loc 1 760 42 is_stmt 0 discriminator 1 view .LVU1237
  4162 021c 0020     		movs	r0, #0
  4163 021e 1CE7     		b	.L240
-ARM GAS  /tmp/ccPeuGm4.s 			page 131
+ARM GAS  /tmp/ccE6OpgT.s 			page 131
 
 
  4164              	.LVL333:
@@ -7858,7 +7858,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4202 0230 374A     		ldr	r2, .L306+8
  4203 0232 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
  249:tinyusb/src/device/usbd.c ****     // Application drivers
-ARM GAS  /tmp/ccPeuGm4.s 			page 132
+ARM GAS  /tmp/ccE6OpgT.s 			page 132
 
 
  4204              		.loc 1 249 6 discriminator 2 view .LVU1254
@@ -7918,7 +7918,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4242              		.loc 1 781 9 discriminator 2 view .LVU1270
  781:tinyusb/src/device/usbd.c ****         {
  4243              		.loc 1 781 25 is_stmt 0 discriminator 2 view .LVU1271
-ARM GAS  /tmp/ccPeuGm4.s 			page 133
+ARM GAS  /tmp/ccE6OpgT.s 			page 133
 
 
  4244 0262 6378     		ldrb	r3, [r4, #1]	@ zero_extendqisi2
@@ -7978,7 +7978,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4286 0296 D5E7     		b	.L265
  4287              	.LVL346:
  4288              	.L302:
-ARM GAS  /tmp/ccPeuGm4.s 			page 134
+ARM GAS  /tmp/ccE6OpgT.s 			page 134
 
 
  253:tinyusb/src/device/usbd.c ****   }
@@ -8038,7 +8038,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4330              	.LBB510:
  4331              	.LBI510:
  518:tinyusb/src/common/tusb_types.h **** {
-ARM GAS  /tmp/ccPeuGm4.s 			page 135
+ARM GAS  /tmp/ccE6OpgT.s 			page 135
 
 
  4332              		.loc 2 518 45 view .LVU1297
@@ -8098,7 +8098,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  247:tinyusb/src/device/usbd.c **** 
  4371              		.loc 1 247 3 discriminator 2 view .LVU1313
  249:tinyusb/src/device/usbd.c ****     // Application drivers
-ARM GAS  /tmp/ccPeuGm4.s 			page 136
+ARM GAS  /tmp/ccE6OpgT.s 			page 136
 
 
  4372              		.loc 1 249 3 discriminator 2 view .LVU1314
@@ -8158,7 +8158,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4410              	.LVL357:
  819:tinyusb/src/device/usbd.c ****       }
  4411              		.loc 1 819 16 discriminator 2 view .LVU1331
-ARM GAS  /tmp/ccPeuGm4.s 			page 137
+ARM GAS  /tmp/ccE6OpgT.s 			page 137
 
 
  4412 02f0 B3E6     		b	.L240
@@ -8218,7 +8218,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4455              		.loc 1 252 13 is_stmt 0 view .LVU1342
  4456 0324 8242     		cmp	r2, r0
  4457 0326 06D8     		bhi	.L287
-ARM GAS  /tmp/ccPeuGm4.s 			page 138
+ARM GAS  /tmp/ccE6OpgT.s 			page 138
 
 
  253:tinyusb/src/device/usbd.c ****   }
@@ -8278,7 +8278,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4500              	
  4501              	@ 0 "" 2
  4502              		.thumb
-ARM GAS  /tmp/ccPeuGm4.s 			page 139
+ARM GAS  /tmp/ccE6OpgT.s 			page 139
 
 
  4503              		.syntax unified
@@ -8338,7 +8338,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4543              		.loc 1 838 15 is_stmt 1 view .LVU1368
  838:tinyusb/src/device/usbd.c ****               {
  4544              		.loc 1 838 18 is_stmt 0 view .LVU1369
-ARM GAS  /tmp/ccPeuGm4.s 			page 140
+ARM GAS  /tmp/ccE6OpgT.s 			page 140
 
 
  4545 037a 012B     		cmp	r3, #1
@@ -8398,7 +8398,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4587 03b2 FFF7FEFF 		bl	usbd_edpt_clear_stall
  4588              	.LVL374:
  840:tinyusb/src/device/usbd.c ****               }else
-ARM GAS  /tmp/ccPeuGm4.s 			page 141
+ARM GAS  /tmp/ccE6OpgT.s 			page 141
 
 
  4589              		.loc 1 840 17 is_stmt 0 view .LVU1382
@@ -8458,7 +8458,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  771:tinyusb/src/device/usbd.c **** 
  4634              		.loc 1 771 7 view .LVU1392
  4635 03d4 0020     		movs	r0, #0
-ARM GAS  /tmp/ccPeuGm4.s 			page 142
+ARM GAS  /tmp/ccE6OpgT.s 			page 142
 
 
  4636 03d6 40E6     		b	.L240
@@ -8518,7 +8518,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4685              		.cfi_offset 5, -8
  4686              		.cfi_offset 14, -4
  4687 0002 85B0     		sub	sp, sp, #20
-ARM GAS  /tmp/ccPeuGm4.s 			page 143
+ARM GAS  /tmp/ccE6OpgT.s 			page 143
 
 
  4688              	.LCFI34:
@@ -8578,7 +8578,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4727              		.loc 1 485 11 is_stmt 0 view .LVU1414
  4728 001e 6B4B     		ldr	r3, .L332+4
  4729 0020 1D68     		ldr	r5, [r3]
-ARM GAS  /tmp/ccPeuGm4.s 			page 144
+ARM GAS  /tmp/ccE6OpgT.s 			page 144
 
 
  4730              	.LVL389:
@@ -8638,7 +8638,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  149:tinyusb/src/osal/osal_none.h **** }
  4769              		.loc 4 149 7 is_stmt 0 view .LVU1430
  4770 0036 2B68     		ldr	r3, [r5]
-ARM GAS  /tmp/ccPeuGm4.s 			page 145
+ARM GAS  /tmp/ccE6OpgT.s 			page 145
 
 
  149:tinyusb/src/osal/osal_none.h **** }
@@ -8698,7 +8698,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4813 007c 544B     		ldr	r3, .L332+8
  4814 007e 002B     		cmp	r3, #0
  4815 0080 CDD0     		beq	.L329
-ARM GAS  /tmp/ccPeuGm4.s 			page 146
+ARM GAS  /tmp/ccE6OpgT.s 			page 146
 
 
  505:tinyusb/src/device/usbd.c ****       break;
@@ -8758,7 +8758,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  523:tinyusb/src/device/usbd.c ****         {
  4855              		.loc 1 523 12 view .LVU1458
  4856 00c4 0028     		cmp	r0, #0
-ARM GAS  /tmp/ccPeuGm4.s 			page 147
+ARM GAS  /tmp/ccE6OpgT.s 			page 147
 
 
  4857 00c6 AAD1     		bne	.L329
@@ -8818,7 +8818,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  514:tinyusb/src/common/tusb_types.h **** }
  4897              		.loc 2 514 50 view .LVU1473
  4898              	.LBE537:
-ARM GAS  /tmp/ccPeuGm4.s 			page 148
+ARM GAS  /tmp/ccE6OpgT.s 			page 148
 
 
  4899              	.LBE536:
@@ -8878,7 +8878,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  251:tinyusb/src/device/usbd.c ****   } else if ( drvid < TOTAL_DRIVER_COUNT && BUILTIN_DRIVER_COUNT > 0 ){
  4938              		.loc 1 251 14 is_stmt 0 view .LVU1489
  4939 0116 304A     		ldr	r2, .L332+16
-ARM GAS  /tmp/ccPeuGm4.s 			page 149
+ARM GAS  /tmp/ccE6OpgT.s 			page 149
 
 
  4940 0118 1268     		ldr	r2, [r2]
@@ -8938,7 +8938,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  4978 0134 039B     		ldr	r3, [sp, #12]
  4979 0136 9DF80920 		ldrb	r2, [sp, #9]	@ zero_extendqisi2
  4980 013a 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
-ARM GAS  /tmp/ccPeuGm4.s 			page 150
+ARM GAS  /tmp/ccE6OpgT.s 			page 150
 
 
  4981              	.LVL411:
@@ -8998,7 +8998,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5020 015a D3F8F03D 		ldr	r3, [r3, #3568]
  5021 015e 13F0010F 		tst	r3, #1
  5022 0162 3FF452AF 		beq	.L310
-ARM GAS  /tmp/ccPeuGm4.s 			page 151
+ARM GAS  /tmp/ccE6OpgT.s 			page 151
 
 
  552:tinyusb/src/device/usbd.c **** 
@@ -9058,7 +9058,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5063              		.loc 1 575 9 is_stmt 1 view .LVU1534
  575:tinyusb/src/device/usbd.c ****         {
  5064              		.loc 1 575 23 is_stmt 0 view .LVU1535
-ARM GAS  /tmp/ccPeuGm4.s 			page 152
+ARM GAS  /tmp/ccE6OpgT.s 			page 152
 
 
  5065 018c 0E4B     		ldr	r3, .L332
@@ -9118,7 +9118,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5105              	@ 592 "tinyusb/src/device/usbd.c" 1
  5106 01c4 00BE     		BKPT #0
  5107              	
-ARM GAS  /tmp/ccPeuGm4.s 			page 153
+ARM GAS  /tmp/ccE6OpgT.s 			page 153
 
 
  5108              	@ 0 "" 2
@@ -9178,7 +9178,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1366:tinyusb/src/device/usbd.c ****   rhport = _usbd_rhport;
  5153              		.loc 1 1366 3 is_stmt 1 view .LVU1554
  5154              		.loc 1 1366 10 is_stmt 0 view .LVU1555
-ARM GAS  /tmp/ccPeuGm4.s 			page 154
+ARM GAS  /tmp/ccE6OpgT.s 			page 154
 
 
  5155 0002 114B     		ldr	r3, .L340
@@ -9238,7 +9238,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5192              		.loc 1 1375 3 view .LVU1571
  5193              		.loc 1 1375 43 is_stmt 0 view .LVU1572
  5194 0014 0E4B     		ldr	r3, .L340+8
-ARM GAS  /tmp/ccPeuGm4.s 			page 155
+ARM GAS  /tmp/ccE6OpgT.s 			page 155
 
 
  5195 0016 03EB4503 		add	r3, r3, r5, lsl #1
@@ -9298,7 +9298,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1368:tinyusb/src/device/usbd.c ****   TU_LOG_USBD("  CLOSING Endpoint: 0x%02X\r\n", ep_addr);
  5237              		.loc 1 1368 3 discriminator 3 view .LVU1586
 1368:tinyusb/src/device/usbd.c ****   TU_LOG_USBD("  CLOSING Endpoint: 0x%02X\r\n", ep_addr);
-ARM GAS  /tmp/ccPeuGm4.s 			page 156
+ARM GAS  /tmp/ccE6OpgT.s 			page 156
 
 
  5238              		.loc 1 1368 3 discriminator 3 view .LVU1587
@@ -9358,7 +9358,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5286              		.section	.text.usbd_edpt_iso_alloc,"ax",%progbits
  5287              		.align	1
  5288              		.global	usbd_edpt_iso_alloc
-ARM GAS  /tmp/ccPeuGm4.s 			page 157
+ARM GAS  /tmp/ccE6OpgT.s 			page 157
 
 
  5289              		.syntax unified
@@ -9418,7 +9418,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5333 0010 13D9     		bls	.L350
  5334              		.loc 1 1396 3 is_stmt 1 discriminator 1 view .LVU1607
  5335              		.loc 1 1396 3 discriminator 1 view .LVU1608
-ARM GAS  /tmp/ccPeuGm4.s 			page 158
+ARM GAS  /tmp/ccE6OpgT.s 			page 158
 
 
  5336              		.loc 1 1396 3 discriminator 1 view .LVU1609
@@ -9478,7 +9478,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5380              	
  5381              	@ 0 "" 2
  5382              		.thumb
-ARM GAS  /tmp/ccPeuGm4.s 			page 159
+ARM GAS  /tmp/ccE6OpgT.s 			page 159
 
 
  5383              		.syntax unified
@@ -9538,7 +9538,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5429              		.cfi_offset 4, -20
  5430              		.cfi_offset 5, -16
  5431              		.cfi_offset 6, -12
-ARM GAS  /tmp/ccPeuGm4.s 			page 160
+ARM GAS  /tmp/ccE6OpgT.s 			page 160
 
 
  5432              		.cfi_offset 7, -8
@@ -9598,7 +9598,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
 1409:tinyusb/src/device/usbd.c ****   TU_ASSERT(epnum < CFG_TUD_ENDPPOINT_MAX);
  5472              		.loc 1 1409 3 discriminator 2 view .LVU1649
  5473              		.loc 1 1409 3 discriminator 2 view .LVU1650
-ARM GAS  /tmp/ccPeuGm4.s 			page 161
+ARM GAS  /tmp/ccE6OpgT.s 			page 161
 
 
  5474 0014 052F     		cmp	r7, #5
@@ -9658,7 +9658,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5515 0030 D3F8F03D 		ldr	r3, [r3, #3568]
  5516 0034 13F0010F 		tst	r3, #1
  5517 0038 00D0     		beq	.L358
-ARM GAS  /tmp/ccPeuGm4.s 			page 162
+ARM GAS  /tmp/ccE6OpgT.s 			page 162
 
 
 1408:tinyusb/src/device/usbd.c ****   TU_ASSERT(epnum < CFG_TUD_ENDPPOINT_MAX);
@@ -9718,7 +9718,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5558              		.syntax unified
  5559              	@ 1410 "tinyusb/src/device/usbd.c" 1
  5560 005a 00BE     		BKPT #0
-ARM GAS  /tmp/ccPeuGm4.s 			page 163
+ARM GAS  /tmp/ccE6OpgT.s 			page 163
 
 
  5561              	
@@ -9778,7 +9778,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5604              	.LFE118:
  5606              		.global	_usbd_qdef
  5607              		.global	_usbd_qdef_buf
-ARM GAS  /tmp/ccPeuGm4.s 			page 164
+ARM GAS  /tmp/ccE6OpgT.s 			page 164
 
 
  5608              		.section	.bss._app_driver,"aw",%nobits
@@ -9838,7 +9838,7 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5670 0014 00000000 		.word	0
  5671              		.weak	dcd_edpt_iso_activate
  5672              		.weak	dcd_edpt_iso_alloc
-ARM GAS  /tmp/ccPeuGm4.s 			page 165
+ARM GAS  /tmp/ccE6OpgT.s 			page 165
 
 
  5673              		.weak	dcd_edpt_close
@@ -9864,141 +9864,141 @@ ARM GAS  /tmp/ccPeuGm4.s 			page 1
  5693              		.file 10 "tinyusb/src/device/usbd_pvt.h"
  5694              		.file 11 "tinyusb/src/device/usbd.h"
  5695              		.file 12 "<built-in>"
-ARM GAS  /tmp/ccPeuGm4.s 			page 166
+ARM GAS  /tmp/ccE6OpgT.s 			page 166
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usbd.c
-     /tmp/ccPeuGm4.s:18     .text.configuration_reset:0000000000000000 $t
-     /tmp/ccPeuGm4.s:25     .text.configuration_reset:0000000000000000 configuration_reset
-     /tmp/ccPeuGm4.s:180    .text.configuration_reset:000000000000007c $d
-     /tmp/ccPeuGm4.s:188    .text.usbd_reset:0000000000000000 $t
-     /tmp/ccPeuGm4.s:194    .text.usbd_reset:0000000000000000 usbd_reset
-     /tmp/ccPeuGm4.s:219    .text.invoke_class_control:0000000000000000 $t
-     /tmp/ccPeuGm4.s:225    .text.invoke_class_control:0000000000000000 invoke_class_control
-     /tmp/ccPeuGm4.s:266    .text.process_set_config:0000000000000000 $t
-     /tmp/ccPeuGm4.s:272    .text.process_set_config:0000000000000000 process_set_config
-     /tmp/ccPeuGm4.s:769    .text.process_set_config:0000000000000170 $d
-     /tmp/ccPeuGm4.s:779    .text.process_get_descriptor:0000000000000000 $t
-     /tmp/ccPeuGm4.s:785    .text.process_get_descriptor:0000000000000000 process_get_descriptor
-     /tmp/ccPeuGm4.s:837    .text.process_get_descriptor:0000000000000016 $d
-     /tmp/ccPeuGm4.s:1164   .text.process_get_descriptor:00000000000000e4 $d
-     /tmp/ccPeuGm4.s:1172   .text.usbd_int_set:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1179   .text.usbd_int_set:0000000000000000 usbd_int_set
-     /tmp/ccPeuGm4.s:1219   .text.usbd_int_set:0000000000000018 $d
-     /tmp/ccPeuGm4.s:1224   .text.tud_speed_get:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1231   .text.tud_speed_get:0000000000000000 tud_speed_get
-     /tmp/ccPeuGm4.s:1246   .text.tud_speed_get:0000000000000008 $d
-     /tmp/ccPeuGm4.s:1251   .text.tud_connected:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1258   .text.tud_connected:0000000000000000 tud_connected
-     /tmp/ccPeuGm4.s:1275   .text.tud_connected:000000000000000c $d
-     /tmp/ccPeuGm4.s:1280   .text.tud_mounted:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1287   .text.tud_mounted:0000000000000000 tud_mounted
-     /tmp/ccPeuGm4.s:1306   .text.tud_mounted:000000000000000c $d
-     /tmp/ccPeuGm4.s:1311   .text.tud_suspended:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1318   .text.tud_suspended:0000000000000000 tud_suspended
-     /tmp/ccPeuGm4.s:1335   .text.tud_suspended:000000000000000c $d
-     /tmp/ccPeuGm4.s:1340   .text.tud_remote_wakeup:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1347   .text.tud_remote_wakeup:0000000000000000 tud_remote_wakeup
-     /tmp/ccPeuGm4.s:1390   .text.tud_remote_wakeup:000000000000002c $d
-     /tmp/ccPeuGm4.s:1396   .text.tud_disconnect:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1403   .text.tud_disconnect:0000000000000000 tud_disconnect
-     /tmp/ccPeuGm4.s:1437   .text.tud_disconnect:0000000000000018 $d
-     /tmp/ccPeuGm4.s:1443   .text.tud_connect:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1450   .text.tud_connect:0000000000000000 tud_connect
-     /tmp/ccPeuGm4.s:1484   .text.tud_connect:0000000000000018 $d
-     /tmp/ccPeuGm4.s:1490   .text.tud_inited:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1497   .text.tud_inited:0000000000000000 tud_inited
-     /tmp/ccPeuGm4.s:1516   .text.tud_inited:000000000000000c $d
-     /tmp/ccPeuGm4.s:1521   .text.tud_init:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1528   .text.tud_init:0000000000000000 tud_init
-     /tmp/ccPeuGm4.s:1728   .text.tud_init:0000000000000090 $d
-     /tmp/ccPeuGm4.s:1740   .text.tud_task_event_ready:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1747   .text.tud_task_event_ready:0000000000000000 tud_task_event_ready
-     /tmp/ccPeuGm4.s:1795   .text.tud_task_event_ready:000000000000001c $d
-     /tmp/ccPeuGm4.s:1800   .text.dcd_event_handler:0000000000000000 $t
-     /tmp/ccPeuGm4.s:1807   .text.dcd_event_handler:0000000000000000 dcd_event_handler
-     /tmp/ccPeuGm4.s:1837   .text.dcd_event_handler:0000000000000016 $d
-     /tmp/ccPeuGm4.s:1841   .text.dcd_event_handler:000000000000001a $t
-     /tmp/ccPeuGm4.s:2473   .text.dcd_event_handler:00000000000001d8 $d
-     /tmp/ccPeuGm4.s:2482   .text.usbd_defer_func:0000000000000000 $t
-     /tmp/ccPeuGm4.s:2489   .text.usbd_defer_func:0000000000000000 usbd_defer_func
-     /tmp/ccPeuGm4.s:2537   .text.usbd_edpt_open:0000000000000000 $t
-ARM GAS  /tmp/ccPeuGm4.s 			page 167
+     /tmp/ccE6OpgT.s:18     .text.configuration_reset:0000000000000000 $t
+     /tmp/ccE6OpgT.s:25     .text.configuration_reset:0000000000000000 configuration_reset
+     /tmp/ccE6OpgT.s:180    .text.configuration_reset:000000000000007c $d
+     /tmp/ccE6OpgT.s:188    .text.usbd_reset:0000000000000000 $t
+     /tmp/ccE6OpgT.s:194    .text.usbd_reset:0000000000000000 usbd_reset
+     /tmp/ccE6OpgT.s:219    .text.invoke_class_control:0000000000000000 $t
+     /tmp/ccE6OpgT.s:225    .text.invoke_class_control:0000000000000000 invoke_class_control
+     /tmp/ccE6OpgT.s:266    .text.process_set_config:0000000000000000 $t
+     /tmp/ccE6OpgT.s:272    .text.process_set_config:0000000000000000 process_set_config
+     /tmp/ccE6OpgT.s:769    .text.process_set_config:0000000000000170 $d
+     /tmp/ccE6OpgT.s:779    .text.process_get_descriptor:0000000000000000 $t
+     /tmp/ccE6OpgT.s:785    .text.process_get_descriptor:0000000000000000 process_get_descriptor
+     /tmp/ccE6OpgT.s:837    .text.process_get_descriptor:0000000000000016 $d
+     /tmp/ccE6OpgT.s:1164   .text.process_get_descriptor:00000000000000e4 $d
+     /tmp/ccE6OpgT.s:1172   .text.usbd_int_set:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1179   .text.usbd_int_set:0000000000000000 usbd_int_set
+     /tmp/ccE6OpgT.s:1219   .text.usbd_int_set:0000000000000018 $d
+     /tmp/ccE6OpgT.s:1224   .text.tud_speed_get:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1231   .text.tud_speed_get:0000000000000000 tud_speed_get
+     /tmp/ccE6OpgT.s:1246   .text.tud_speed_get:0000000000000008 $d
+     /tmp/ccE6OpgT.s:1251   .text.tud_connected:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1258   .text.tud_connected:0000000000000000 tud_connected
+     /tmp/ccE6OpgT.s:1275   .text.tud_connected:000000000000000c $d
+     /tmp/ccE6OpgT.s:1280   .text.tud_mounted:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1287   .text.tud_mounted:0000000000000000 tud_mounted
+     /tmp/ccE6OpgT.s:1306   .text.tud_mounted:000000000000000c $d
+     /tmp/ccE6OpgT.s:1311   .text.tud_suspended:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1318   .text.tud_suspended:0000000000000000 tud_suspended
+     /tmp/ccE6OpgT.s:1335   .text.tud_suspended:000000000000000c $d
+     /tmp/ccE6OpgT.s:1340   .text.tud_remote_wakeup:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1347   .text.tud_remote_wakeup:0000000000000000 tud_remote_wakeup
+     /tmp/ccE6OpgT.s:1390   .text.tud_remote_wakeup:000000000000002c $d
+     /tmp/ccE6OpgT.s:1396   .text.tud_disconnect:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1403   .text.tud_disconnect:0000000000000000 tud_disconnect
+     /tmp/ccE6OpgT.s:1437   .text.tud_disconnect:0000000000000018 $d
+     /tmp/ccE6OpgT.s:1443   .text.tud_connect:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1450   .text.tud_connect:0000000000000000 tud_connect
+     /tmp/ccE6OpgT.s:1484   .text.tud_connect:0000000000000018 $d
+     /tmp/ccE6OpgT.s:1490   .text.tud_inited:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1497   .text.tud_inited:0000000000000000 tud_inited
+     /tmp/ccE6OpgT.s:1516   .text.tud_inited:000000000000000c $d
+     /tmp/ccE6OpgT.s:1521   .text.tud_init:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1528   .text.tud_init:0000000000000000 tud_init
+     /tmp/ccE6OpgT.s:1728   .text.tud_init:0000000000000090 $d
+     /tmp/ccE6OpgT.s:1740   .text.tud_task_event_ready:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1747   .text.tud_task_event_ready:0000000000000000 tud_task_event_ready
+     /tmp/ccE6OpgT.s:1795   .text.tud_task_event_ready:000000000000001c $d
+     /tmp/ccE6OpgT.s:1800   .text.dcd_event_handler:0000000000000000 $t
+     /tmp/ccE6OpgT.s:1807   .text.dcd_event_handler:0000000000000000 dcd_event_handler
+     /tmp/ccE6OpgT.s:1837   .text.dcd_event_handler:0000000000000016 $d
+     /tmp/ccE6OpgT.s:1841   .text.dcd_event_handler:000000000000001a $t
+     /tmp/ccE6OpgT.s:2473   .text.dcd_event_handler:00000000000001d8 $d
+     /tmp/ccE6OpgT.s:2482   .text.usbd_defer_func:0000000000000000 $t
+     /tmp/ccE6OpgT.s:2489   .text.usbd_defer_func:0000000000000000 usbd_defer_func
+     /tmp/ccE6OpgT.s:2537   .text.usbd_edpt_open:0000000000000000 $t
+ARM GAS  /tmp/ccE6OpgT.s 			page 167
 
 
-     /tmp/ccPeuGm4.s:2544   .text.usbd_edpt_open:0000000000000000 usbd_edpt_open
-     /tmp/ccPeuGm4.s:2663   .text.usbd_edpt_open:0000000000000050 $d
-     /tmp/ccPeuGm4.s:2669   .text.usbd_open_edpt_pair:0000000000000000 $t
-     /tmp/ccPeuGm4.s:2676   .text.usbd_open_edpt_pair:0000000000000000 usbd_open_edpt_pair
-     /tmp/ccPeuGm4.s:2858   .text.usbd_edpt_claim:0000000000000000 $t
-     /tmp/ccPeuGm4.s:2865   .text.usbd_edpt_claim:0000000000000000 usbd_edpt_claim
-     /tmp/ccPeuGm4.s:2926   .text.usbd_edpt_claim:000000000000001c $d
-     /tmp/ccPeuGm4.s:2931   .text.usbd_edpt_release:0000000000000000 $t
-     /tmp/ccPeuGm4.s:2938   .text.usbd_edpt_release:0000000000000000 usbd_edpt_release
-     /tmp/ccPeuGm4.s:2999   .text.usbd_edpt_release:000000000000001c $d
-     /tmp/ccPeuGm4.s:3004   .text.usbd_edpt_xfer:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3011   .text.usbd_edpt_xfer:0000000000000000 usbd_edpt_xfer
-     /tmp/ccPeuGm4.s:3151   .text.usbd_edpt_xfer:0000000000000074 $d
-     /tmp/ccPeuGm4.s:3157   .text.usbd_edpt_xfer_fifo:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3164   .text.usbd_edpt_xfer_fifo:0000000000000000 usbd_edpt_xfer_fifo
-     /tmp/ccPeuGm4.s:3304   .text.usbd_edpt_xfer_fifo:0000000000000074 $d
-     /tmp/ccPeuGm4.s:3310   .text.usbd_edpt_busy:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3317   .text.usbd_edpt_busy:0000000000000000 usbd_edpt_busy
-     /tmp/ccPeuGm4.s:3362   .text.usbd_edpt_busy:0000000000000018 $d
-     /tmp/ccPeuGm4.s:3367   .text.usbd_edpt_stall:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3374   .text.usbd_edpt_stall:0000000000000000 usbd_edpt_stall
-     /tmp/ccPeuGm4.s:3455   .text.usbd_edpt_stall:0000000000000040 $d
-     /tmp/ccPeuGm4.s:3461   .text.usbd_edpt_clear_stall:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3468   .text.usbd_edpt_clear_stall:0000000000000000 usbd_edpt_clear_stall
-     /tmp/ccPeuGm4.s:3549   .text.usbd_edpt_clear_stall:0000000000000040 $d
-     /tmp/ccPeuGm4.s:3555   .text.usbd_edpt_stalled:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3562   .text.usbd_edpt_stalled:0000000000000000 usbd_edpt_stalled
-     /tmp/ccPeuGm4.s:3607   .text.usbd_edpt_stalled:0000000000000018 $d
-     /tmp/ccPeuGm4.s:3612   .text.process_control_request:0000000000000000 $t
-     /tmp/ccPeuGm4.s:3618   .text.process_control_request:0000000000000000 process_control_request
-     /tmp/ccPeuGm4.s:3760   .text.process_control_request:000000000000008c $d
-     /tmp/ccPeuGm4.s:3770   .text.process_control_request:0000000000000096 $t
-     /tmp/ccPeuGm4.s:4443   .text.process_control_request:0000000000000308 $d
-     /tmp/ccPeuGm4.s:4456   .text.process_control_request:0000000000000324 $t
-     /tmp/ccPeuGm4.s:4660   .text.process_control_request:00000000000003e4 $d
-     /tmp/ccPeuGm4.s:4666   .text.tud_task_ext:0000000000000000 $t
-     /tmp/ccPeuGm4.s:4673   .text.tud_task_ext:0000000000000000 tud_task_ext
-     /tmp/ccPeuGm4.s:4796   .text.tud_task_ext:0000000000000054 $d
-     /tmp/ccPeuGm4.s:4804   .text.tud_task_ext:0000000000000074 $t
-     /tmp/ccPeuGm4.s:5119   .text.tud_task_ext:00000000000001c8 $d
-     /tmp/ccPeuGm4.s:5131   .text.usbd_edpt_close:0000000000000000 $t
-     /tmp/ccPeuGm4.s:5138   .text.usbd_edpt_close:0000000000000000 usbd_edpt_close
-     /tmp/ccPeuGm4.s:5243   .text.usbd_edpt_close:0000000000000048 $d
-     /tmp/ccPeuGm4.s:5250   .text.usbd_sof_enable:0000000000000000 $t
-     /tmp/ccPeuGm4.s:5257   .text.usbd_sof_enable:0000000000000000 usbd_sof_enable
-     /tmp/ccPeuGm4.s:5282   .text.usbd_sof_enable:000000000000000c $d
-     /tmp/ccPeuGm4.s:5287   .text.usbd_edpt_iso_alloc:0000000000000000 $t
-     /tmp/ccPeuGm4.s:5294   .text.usbd_edpt_iso_alloc:0000000000000000 usbd_edpt_iso_alloc
-     /tmp/ccPeuGm4.s:5404   .text.usbd_edpt_iso_alloc:0000000000000040 $d
-     /tmp/ccPeuGm4.s:5410   .text.usbd_edpt_iso_activate:0000000000000000 $t
-     /tmp/ccPeuGm4.s:5417   .text.usbd_edpt_iso_activate:0000000000000000 usbd_edpt_iso_activate
-     /tmp/ccPeuGm4.s:5600   .text.usbd_edpt_iso_activate:0000000000000088 $d
-     /tmp/ccPeuGm4.s:5646   .data._usbd_qdef:0000000000000000 _usbd_qdef
-     /tmp/ccPeuGm4.s:5639   .bss._usbd_qdef_buf:0000000000000000 _usbd_qdef_buf
-     /tmp/ccPeuGm4.s:5609   .bss._app_driver:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5613   .bss._app_driver:0000000000000000 _app_driver
-     /tmp/ccPeuGm4.s:5619   .bss._app_driver_count:0000000000000000 _app_driver_count
-ARM GAS  /tmp/ccPeuGm4.s 			page 168
+     /tmp/ccE6OpgT.s:2544   .text.usbd_edpt_open:0000000000000000 usbd_edpt_open
+     /tmp/ccE6OpgT.s:2663   .text.usbd_edpt_open:0000000000000050 $d
+     /tmp/ccE6OpgT.s:2669   .text.usbd_open_edpt_pair:0000000000000000 $t
+     /tmp/ccE6OpgT.s:2676   .text.usbd_open_edpt_pair:0000000000000000 usbd_open_edpt_pair
+     /tmp/ccE6OpgT.s:2858   .text.usbd_edpt_claim:0000000000000000 $t
+     /tmp/ccE6OpgT.s:2865   .text.usbd_edpt_claim:0000000000000000 usbd_edpt_claim
+     /tmp/ccE6OpgT.s:2926   .text.usbd_edpt_claim:000000000000001c $d
+     /tmp/ccE6OpgT.s:2931   .text.usbd_edpt_release:0000000000000000 $t
+     /tmp/ccE6OpgT.s:2938   .text.usbd_edpt_release:0000000000000000 usbd_edpt_release
+     /tmp/ccE6OpgT.s:2999   .text.usbd_edpt_release:000000000000001c $d
+     /tmp/ccE6OpgT.s:3004   .text.usbd_edpt_xfer:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3011   .text.usbd_edpt_xfer:0000000000000000 usbd_edpt_xfer
+     /tmp/ccE6OpgT.s:3151   .text.usbd_edpt_xfer:0000000000000074 $d
+     /tmp/ccE6OpgT.s:3157   .text.usbd_edpt_xfer_fifo:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3164   .text.usbd_edpt_xfer_fifo:0000000000000000 usbd_edpt_xfer_fifo
+     /tmp/ccE6OpgT.s:3304   .text.usbd_edpt_xfer_fifo:0000000000000074 $d
+     /tmp/ccE6OpgT.s:3310   .text.usbd_edpt_busy:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3317   .text.usbd_edpt_busy:0000000000000000 usbd_edpt_busy
+     /tmp/ccE6OpgT.s:3362   .text.usbd_edpt_busy:0000000000000018 $d
+     /tmp/ccE6OpgT.s:3367   .text.usbd_edpt_stall:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3374   .text.usbd_edpt_stall:0000000000000000 usbd_edpt_stall
+     /tmp/ccE6OpgT.s:3455   .text.usbd_edpt_stall:0000000000000040 $d
+     /tmp/ccE6OpgT.s:3461   .text.usbd_edpt_clear_stall:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3468   .text.usbd_edpt_clear_stall:0000000000000000 usbd_edpt_clear_stall
+     /tmp/ccE6OpgT.s:3549   .text.usbd_edpt_clear_stall:0000000000000040 $d
+     /tmp/ccE6OpgT.s:3555   .text.usbd_edpt_stalled:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3562   .text.usbd_edpt_stalled:0000000000000000 usbd_edpt_stalled
+     /tmp/ccE6OpgT.s:3607   .text.usbd_edpt_stalled:0000000000000018 $d
+     /tmp/ccE6OpgT.s:3612   .text.process_control_request:0000000000000000 $t
+     /tmp/ccE6OpgT.s:3618   .text.process_control_request:0000000000000000 process_control_request
+     /tmp/ccE6OpgT.s:3760   .text.process_control_request:000000000000008c $d
+     /tmp/ccE6OpgT.s:3770   .text.process_control_request:0000000000000096 $t
+     /tmp/ccE6OpgT.s:4443   .text.process_control_request:0000000000000308 $d
+     /tmp/ccE6OpgT.s:4456   .text.process_control_request:0000000000000324 $t
+     /tmp/ccE6OpgT.s:4660   .text.process_control_request:00000000000003e4 $d
+     /tmp/ccE6OpgT.s:4666   .text.tud_task_ext:0000000000000000 $t
+     /tmp/ccE6OpgT.s:4673   .text.tud_task_ext:0000000000000000 tud_task_ext
+     /tmp/ccE6OpgT.s:4796   .text.tud_task_ext:0000000000000054 $d
+     /tmp/ccE6OpgT.s:4804   .text.tud_task_ext:0000000000000074 $t
+     /tmp/ccE6OpgT.s:5119   .text.tud_task_ext:00000000000001c8 $d
+     /tmp/ccE6OpgT.s:5131   .text.usbd_edpt_close:0000000000000000 $t
+     /tmp/ccE6OpgT.s:5138   .text.usbd_edpt_close:0000000000000000 usbd_edpt_close
+     /tmp/ccE6OpgT.s:5243   .text.usbd_edpt_close:0000000000000048 $d
+     /tmp/ccE6OpgT.s:5250   .text.usbd_sof_enable:0000000000000000 $t
+     /tmp/ccE6OpgT.s:5257   .text.usbd_sof_enable:0000000000000000 usbd_sof_enable
+     /tmp/ccE6OpgT.s:5282   .text.usbd_sof_enable:000000000000000c $d
+     /tmp/ccE6OpgT.s:5287   .text.usbd_edpt_iso_alloc:0000000000000000 $t
+     /tmp/ccE6OpgT.s:5294   .text.usbd_edpt_iso_alloc:0000000000000000 usbd_edpt_iso_alloc
+     /tmp/ccE6OpgT.s:5404   .text.usbd_edpt_iso_alloc:0000000000000040 $d
+     /tmp/ccE6OpgT.s:5410   .text.usbd_edpt_iso_activate:0000000000000000 $t
+     /tmp/ccE6OpgT.s:5417   .text.usbd_edpt_iso_activate:0000000000000000 usbd_edpt_iso_activate
+     /tmp/ccE6OpgT.s:5600   .text.usbd_edpt_iso_activate:0000000000000088 $d
+     /tmp/ccE6OpgT.s:5646   .data._usbd_qdef:0000000000000000 _usbd_qdef
+     /tmp/ccE6OpgT.s:5639   .bss._usbd_qdef_buf:0000000000000000 _usbd_qdef_buf
+     /tmp/ccE6OpgT.s:5609   .bss._app_driver:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5613   .bss._app_driver:0000000000000000 _app_driver
+     /tmp/ccE6OpgT.s:5619   .bss._app_driver_count:0000000000000000 _app_driver_count
+ARM GAS  /tmp/ccE6OpgT.s 			page 168
 
 
-     /tmp/ccPeuGm4.s:5620   .bss._app_driver_count:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5622   .bss._usbd_dev:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5626   .bss._usbd_dev:0000000000000000 _usbd_dev
-     /tmp/ccPeuGm4.s:5629   .bss._usbd_q:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5633   .bss._usbd_q:0000000000000000 _usbd_q
-     /tmp/ccPeuGm4.s:5636   .bss._usbd_qdef_buf:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5642   .data._usbd_qdef:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5657   .data._usbd_rhport:0000000000000000 _usbd_rhport
-     /tmp/ccPeuGm4.s:5660   .rodata._usbd_driver:0000000000000000 $d
-     /tmp/ccPeuGm4.s:5664   .rodata._usbd_driver:0000000000000000 _usbd_driver
-     /tmp/ccPeuGm4.s:852    .text.process_get_descriptor:0000000000000025 $d
-     /tmp/ccPeuGm4.s:852    .text.process_get_descriptor:0000000000000026 $t
+     /tmp/ccE6OpgT.s:5620   .bss._app_driver_count:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5622   .bss._usbd_dev:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5626   .bss._usbd_dev:0000000000000000 _usbd_dev
+     /tmp/ccE6OpgT.s:5629   .bss._usbd_q:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5633   .bss._usbd_q:0000000000000000 _usbd_q
+     /tmp/ccE6OpgT.s:5636   .bss._usbd_qdef_buf:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5642   .data._usbd_qdef:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5657   .data._usbd_rhport:0000000000000000 _usbd_rhport
+     /tmp/ccE6OpgT.s:5660   .rodata._usbd_driver:0000000000000000 $d
+     /tmp/ccE6OpgT.s:5664   .rodata._usbd_driver:0000000000000000 _usbd_driver
+     /tmp/ccE6OpgT.s:852    .text.process_get_descriptor:0000000000000025 $d
+     /tmp/ccE6OpgT.s:852    .text.process_get_descriptor:0000000000000026 $t
 
 UNDEFINED SYMBOLS
 memset
@@ -10044,7 +10044,7 @@ tud_suspend_cb
 tud_resume_cb
 dcd_edpt_close
 dcd_sof_enable
-ARM GAS  /tmp/ccPeuGm4.s 			page 169
+ARM GAS  /tmp/ccE6OpgT.s 			page 169
 
 
 dcd_edpt_iso_alloc
