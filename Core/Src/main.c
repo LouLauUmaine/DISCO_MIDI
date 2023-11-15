@@ -86,6 +86,10 @@ uint8_t I2C_TX_Buffer[ 2 ]; //buffer for i2c data
 
 uint32_t ADC1_VAL[ 8 ]; // one element for each ADC channel (one device)
 uint32_t ADC2_VAL[ 8 ]; // one element for each ADC channel (one device)
+
+
+uint32_t ADC1_VAL_TEST[ 8 ]; // one element for each ADC channel (one device)
+uint32_t ADC2_VAL_TEST[ 8 ]; // one element for each ADC channel (one device)
 //uint32_t adc_val;
 
 uint8_t SPI_TX_Buffer[ SPI_LENGTH ];
@@ -109,7 +113,7 @@ void midi_task(void);
 void READ_KEYPRESS(uint32_t adc1_val[], uint32_t adc2_val[]);
 uint8_t HALL_TO_DAC(uint32_t adc1_val[], uint32_t adc2_val[], int octave_num);
 uint8_t DAC_TO_MIDI(uint8_t val);
-void MIDI_TASK(octave_num);
+void MIDI_TASK(int octave_num);
 
 /* USER CODE END PFP */
 
@@ -198,12 +202,43 @@ int main(void)
   //HAL_Delay(100);
 
   //int i = 0;
+
+  /* TEST CODE FOR MIDI INTERFACE*/
+  //zero out test ADC buffers
+  for(int i = 0;i<12;i++){
+    ADC1_VAL_TEST[i] = 0x0;
+    ADC2_VAL_TEST[i] = 0x0;
+  }
+
+  int j = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) 
   {
+
+    // TEST CODE, SET EACH VALUE IN BUFFER ABOVE THRESHOLD FOR NOTE ON
+
+    if(j > 7) j = 0;
+    if(j == 0) {
+      ADC1_VAL_TEST[j] = 650;
+      ADC1_VAL_TEST[j+1] = 650;
+      ADC1_VAL_TEST[7] = 0;
+    }
+    else {
+      ADC1_VAL_TEST[j] = 650;
+      ADC1_VAL_TEST[j+1] = 650;
+      ADC1_VAL_TEST[j-1] = 0;
+    }
+    j = j+1;
+
+    READ_KEYPRESS(ADC1_VAL_TEST,ADC2_VAL_TEST);
+    tud_task(); // tinyusb device task
+    MIDI_TASK(octave_num);
+
+    HAL_Delay(1000);
 
     //PA_1_VAL = HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1);
     //PA_2_VAL = HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_2);
@@ -263,9 +298,10 @@ int main(void)
       I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
       I2C_TX_Buffer[1] = 0x0; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
       HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
-      READ_KEYPRESS(ADC1_VAL,ADC2_VAL);
-      tud_task(); // tinyusb device task
-      MIDI_TASK(octave_num);
+      /* CODE BELOW SHOULD BE GOOD, JUST COMMENTED OUT FOR TESTING PURPOSES */
+      //READ_KEYPRESS(ADC1_VAL,ADC2_VAL);
+      //tud_task(); // tinyusb device task
+      //MIDI_TASK(octave_num);
     }
     /* I2C protocol test -- move test cases to auxiliary files */
     
@@ -777,7 +813,7 @@ void tud_resume_cb(void)
 }
 
 /* LOUIS IMPLEMENTATION OF MIDI TASK*/
-void MIDI_TASK(octave_num){
+void MIDI_TASK(int octave_num){
   uint8_t const cable_num = 0; // MIDI jack associated with USB endpoint
   uint8_t const channel   = 0; // 0 for channel 1
 
@@ -794,12 +830,16 @@ void MIDI_TASK(octave_num){
   uint8_t note_off[3];
 
   for(int i=0;i<12;i++){
-    if (KEYPRESS >> i & 0x1 == 1){
-      uint8_t note_on[3] = { 0x90 | channel, 12*i + 24, 127 };
+    if (((KEYPRESS >> i) & 0x1) == 1){
+      note_on[0] = 0x90 | channel;
+      note_on[1] = (12*octave_num + 24 + i);
+      note_on[2] = 127;
       tud_midi_stream_write(cable_num, note_on, 3);
     }
     else {
-      uint8_t note_off[3] = { 0x80 | channel, (12*i + 24), 0};
+      note_off[0] = 0x80 | channel;
+      note_off[1] = (12*octave_num + 24 + i);
+      note_off[2] = 0;
       tud_midi_stream_write(cable_num, note_off, 3);
     }
   }
