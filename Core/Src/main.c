@@ -60,6 +60,7 @@ uint8_t note_sequence[] =
 
 // tracks which keys are pressed
 uint16_t KEYPRESS = 0;
+uint16_t KEYPRESSED = 0;
 
 /* USER CODE END PD */
 
@@ -205,12 +206,14 @@ int main(void)
 
   /* TEST CODE FOR MIDI INTERFACE*/
   //zero out test ADC buffers
+  /*
   for(int i = 0;i<12;i++){
     ADC1_VAL_TEST[i] = 0x0;
     ADC2_VAL_TEST[i] = 0x0;
   }
+  */
 
-  int j = 0;
+  tud_task();
 
   /* USER CODE END 2 */
 
@@ -220,7 +223,7 @@ int main(void)
   {
 
     // TEST CODE, SET EACH VALUE IN BUFFER ABOVE THRESHOLD FOR NOTE ON
-
+    /*
     if(j > 7) j = 0;
     if(j == 0) {
       ADC1_VAL_TEST[j] = 650;
@@ -237,11 +240,13 @@ int main(void)
     READ_KEYPRESS(ADC1_VAL_TEST,ADC2_VAL_TEST);
     tud_task(); // tinyusb device task
     MIDI_TASK(octave_num);
-
-    HAL_Delay(1000);
+    */
+    //HAL_Delay(1000);
 
     //PA_1_VAL = HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_1);
     //PA_2_VAL = HAL_GPIO_ReadPin (GPIOA, GPIO_PIN_2);
+
+    tud_task(); // tinyusb device task
 
     if (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) && !flag1){
       octave_num = octave_num + 1;
@@ -299,9 +304,8 @@ int main(void)
       I2C_TX_Buffer[1] = 0x0; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
       HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
       /* CODE BELOW SHOULD BE GOOD, JUST COMMENTED OUT FOR TESTING PURPOSES */
-      //READ_KEYPRESS(ADC1_VAL,ADC2_VAL);
-      //tud_task(); // tinyusb device task
-      //MIDI_TASK(octave_num);
+      READ_KEYPRESS(ADC1_VAL,ADC2_VAL);
+      MIDI_TASK(octave_num);
     }
     /* I2C protocol test -- move test cases to auxiliary files */
     
@@ -824,26 +828,59 @@ void MIDI_TASK(int octave_num){
   while ( tud_midi_available() ) tud_midi_packet_read(packet);
 
   // delay necessary?
-  //HAL_Delay(286);
+  //HAL_Delay(20);
+  static int octave_history;
 
   uint8_t note_on[3];
   uint8_t note_off[3];
 
+  //note_on[0] = 0x90 | channel;
+  //note_on[1] = (42);
+  //note_on[2] = 127;
+  //tud_midi_stream_write(cable_num, note_on, 3);
+
+  
   for(int i=0;i<12;i++){
-    if (((KEYPRESS >> i) & 0x1) == 1){
+    if ((((KEYPRESS >> i) & 0x1) == 1) && ((KEYPRESSED >> i) == 0)){
+      KEYPRESSED = KEYPRESSED | (0x1 << i);
       note_on[0] = 0x90 | channel;
       note_on[1] = (12*octave_num + 24 + i);
       note_on[2] = 127;
       tud_midi_stream_write(cable_num, note_on, 3);
     }
-    else {
+    else if((((KEYPRESS >> i) & 0x1) == 1) && ((KEYPRESSED >> i) == 1)){
+      if(octave_history == octave_num) continue;
+      else {
+        note_off[0] = 0x80 | channel;
+        note_off[1] = (12*octave_history + 24 + i);
+        note_off[2] = 0;
+        tud_midi_stream_write(cable_num, note_off, 3);
+
+        KEYPRESSED = KEYPRESSED | (0x1 << i);
+        note_on[0] = 0x90 | channel;
+        note_on[1] = (12*octave_num + 24 + i);
+        note_on[2] = 127;
+        tud_midi_stream_write(cable_num, note_on, 3);
+      }
+    }
+    else if((((KEYPRESS >> i) & 0x1) == 0) && ((KEYPRESSED >> i) == 1)){
+      KEYPRESSED = KEYPRESSED & (0x0 << i);
       note_off[0] = 0x80 | channel;
       note_off[1] = (12*octave_num + 24 + i);
       note_off[2] = 0;
       tud_midi_stream_write(cable_num, note_off, 3);
     }
+    else {
+      if(octave_history == octave_num) continue;
+      else {
+        note_off[0] = 0x80 | channel;
+        note_off[1] = (12*octave_history + 24 + i);
+        note_off[2] = 0;
+        tud_midi_stream_write(cable_num, note_off, 3);
+      }
+    }
   }
-
+  octave_history = octave_num;  
 }
 
 // MIDI TASK-- SEPARATE FILE
@@ -1054,7 +1091,7 @@ uint8_t HALL_TO_DAC(uint32_t adc1_val[], uint32_t adc2_val[], int octave_num) {
             return 247;
         } else if (channel_num == 11) {
             return 251;
-        }
+        } 
     }
     return 0x0;
 }
