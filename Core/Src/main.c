@@ -58,6 +58,9 @@ uint8_t note_sequence[] =
   56,61,64,68,74,78,81,86,90,93,98,102
 };
 
+// tracks which keys are pressed
+uint16_t KEYPRESS = 0;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -103,7 +106,10 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 void midi_task(void);
+void READ_KEYPRESS(uint32_t adc1_val[], uint32_t adc2_val[]);
 uint8_t HALL_TO_DAC(uint32_t adc1_val[], uint32_t adc2_val[], int octave_num);
+uint8_t DAC_TO_MIDI(uint8_t val);
+void MIDI_TASK(octave_num);
 
 /* USER CODE END PFP */
 
@@ -222,13 +228,13 @@ int main(void)
     for (int i = 0; i < 8; i++) {
     SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
     // pull CS low for selecting device (only using one ADC right now)
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);
     // one full duplex interaction
     HAL_SPI_TransmitReceive (&hspi1, SPI_TX_Buffer, SPI_RX_Buffer, 3, 1000);
     // now need to parse data
     ADC1_VAL[i] = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
     // default CS to be high
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
     //if(i == 7) i = 0;
     //else i++; 
     }
@@ -236,13 +242,13 @@ int main(void)
     for (int i = 0; i < 8; i++) {
     SPI_TX_Buffer[1] = 0b10000000 | (i<<4); // single ended, bits 6-4 specify channel (top 4 bits)
     // pull CS low for selecting device (only using one ADC right now)
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_RESET);
     // one full duplex interaction
     HAL_SPI_TransmitReceive (&hspi1, SPI_TX_Buffer, SPI_RX_Buffer, 3, 1000);
     // now need to parse data
     ADC2_VAL[i] = (((SPI_RX_Buffer[1]&0x03)<<8)|SPI_RX_Buffer[2]);
     // default CS to be high
-    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_11, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(GPIOE, GPIO_PIN_12, GPIO_PIN_SET);
     }
 
     /* CHECK OUTPUT SWITCH, SEND 0x00 from DAC if in MIDI mode*/
@@ -252,11 +258,14 @@ int main(void)
       I2C_TX_Buffer[1] = HALL_TO_DAC(ADC1_VAL,ADC2_VAL,octave_num); // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
       HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
     }
-    /* EVENTUALLY should send DAC = 0 (set gate also eventually) AND midi signal */
+    /* EVENTUALLY should send DAC = 0 (SET GATE also eventually) AND midi signal */
     else{
       I2C_TX_Buffer[0] = 0x0; // command byte, select OUT0
       I2C_TX_Buffer[1] = 0x0; // data byte, corresponds to each channel of one 8 channel DAC (eventually need 2 DACs)
       HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
+      READ_KEYPRESS(ADC1_VAL,ADC2_VAL);
+      tud_task(); // tinyusb device task
+      MIDI_TASK(octave_num);
     }
     /* I2C protocol test -- move test cases to auxiliary files */
     
@@ -275,8 +284,9 @@ int main(void)
     //HAL_I2C_Master_Transmit(&hi2c1,slave_address,I2C_TX_Buffer,2,1000); //Sending in Blocking mode
     //HAL_Delay(1000);
     
-    tud_task(); // tinyusb device task
-    midi_task();
+    //tud_task(); // tinyusb device task
+    //MIDI_TASK();
+    //midi_task();
     //HAL_Delay(1000);
 
     /* USER CODE END WHILE */
@@ -766,6 +776,36 @@ void tud_resume_cb(void)
   blink_interval_ms = tud_mounted() ? BLINK_MOUNTED : BLINK_NOT_MOUNTED;
 }
 
+/* LOUIS IMPLEMENTATION OF MIDI TASK*/
+void MIDI_TASK(octave_num){
+  uint8_t const cable_num = 0; // MIDI jack associated with USB endpoint
+  uint8_t const channel   = 0; // 0 for channel 1
+
+  // The MIDI interface always creates input and output port/jack descriptors
+  // regardless of these being used or not. Therefore incoming traffic should be read
+  // (possibly just discarded) to avoid the sender blocking in IO
+  uint8_t packet[4];
+  while ( tud_midi_available() ) tud_midi_packet_read(packet);
+
+  // delay necessary?
+  //HAL_Delay(286);
+
+  uint8_t note_on[3];
+  uint8_t note_off[3];
+
+  for(int i=0;i<12;i++){
+    if (KEYPRESS >> i & 0x1 == 1){
+      uint8_t note_on[3] = { 0x90 | channel, 12*i + 24, 127 };
+      tud_midi_stream_write(cable_num, note_on, 3);
+    }
+    else {
+      uint8_t note_off[3] = { 0x80 | channel, (12*i + 24), 0};
+      tud_midi_stream_write(cable_num, note_off, 3);
+    }
+  }
+
+}
+
 // MIDI TASK-- SEPARATE FILE
 
 void midi_task(void)
@@ -812,6 +852,18 @@ void midi_task(void)
 
   // If we are at the end of the sequence, start over.
   if (note_pos >= sizeof(note_sequence)) note_pos = 0;
+}
+
+/* READ ALL CURRENTLY PRESSED KEYS */
+void READ_KEYPRESS(uint32_t adc1_val[], uint32_t adc2_val[]) {
+   KEYPRESS = 0x0;
+   for (int i = 0; i < 12; i++) {
+        if (i < 6) {
+            if (adc1_val[i] > 600) KEYPRESS |= 0b1 << i;
+        } else {
+            if (adc2_val[i - 6] > 600) KEYPRESS |= 0b1 << i;
+        }
+    }
 }
 
 /* HALL EFFECT TO DAC OUTPUT CONVERSION */
@@ -964,7 +1016,16 @@ uint8_t HALL_TO_DAC(uint32_t adc1_val[], uint32_t adc2_val[], int octave_num) {
             return 251;
         }
     }
-    return 0;
+    return 0x0;
+}
+
+// need to also set variable for NOTE ON and NOTE OFF (elsewhere likely, global variable)
+uint8_t DAC_TO_MIDI(uint8_t val){
+  uint8_t midi = 0;
+  if((val > 0) && (val < 48)) midi = val/4;
+  else midi = (val/4) - 1;
+
+  return midi;
 }
 
 
